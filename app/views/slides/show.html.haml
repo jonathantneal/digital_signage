@@ -1,0 +1,22 @@
+%h1=@slide.title + ' Slide'
+%dl
+  %dt Uri
+  %dd=@slide.uri
+  %dt Delay
+  %dd=@slide.delay
+  %dt Color
+  %dd=@slide.color
+  %dt Published
+  %dd=@slide.published
+  %dt Start Date
+  %dd
+    =@slide.start_date
+    =@slide.start_time
+  %dt End Date
+  %dd
+    =@slide.end_date
+    =@slide.end_time
+  %dt Owner
+  %dd=@slide.user.name
+=link_to 'Edit', edit_slide_path(@slide)
+=link_to 'Delete', @slide, :confirm => 'Are you sure?', :method => :delete

@@ -1,0 +1,10 @@
+.DS_Store
+.htaccess
+*~
+*.cache
+*.log
+*.pid
+config/database.yml
+config/authlogic_netid.yml
+db/*.sqlite3
+tmp/**/*

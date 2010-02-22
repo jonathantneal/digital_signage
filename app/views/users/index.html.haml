@@ -1,0 +1,14 @@
+%h1 Users
+%table
+  %tr
+    %th Name
+    %th Email
+    %th Slides
+    %th Last Login
+  -@users.each do |user|
+    %tr
+      %td=link_to user.name, user
+      %td=user.email
+      %td
+      %td=user.last_login_at
+=link_to 'New user', new_user_path

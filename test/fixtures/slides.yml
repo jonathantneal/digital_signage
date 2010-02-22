@@ -1,0 +1,23 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  title: MyString
+  delay: 1
+  color: MyString
+  published: false
+  start_date: 2010-02-18
+  start_time: 2010-02-18 09:46:18
+  end_date: 2010-02-18
+  end_time: 2010-02-18 09:46:18
+  user_id: 
+
+two:
+  title: MyString
+  delay: 1
+  color: MyString
+  published: false
+  start_date: 2010-02-18
+  start_time: 2010-02-18 09:46:18
+  end_date: 2010-02-18
+  end_time: 2010-02-18 09:46:18
+  user_id: 

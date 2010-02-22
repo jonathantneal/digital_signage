@@ -1,0 +1,31 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  username: 
+  first_name: 
+  last_name: 
+  email: 
+  roles_mask: 
+  persistence_token: 
+  login_count: 
+  failed_login_count: 
+  last_request_at: 
+  current_login_at: 
+  last_login_at: 
+  current_login_ip: 
+  last_login_ip: MyString
+
+two:
+  username: 
+  first_name: 
+  last_name: 
+  email: 
+  roles_mask: 
+  persistence_token: 
+  login_count: 
+  failed_login_count: 
+  last_request_at: 
+  current_login_at: 
+  last_login_at: 
+  current_login_ip: 
+  last_login_ip: MyString

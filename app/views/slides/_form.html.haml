@@ -1,0 +1,26 @@
+-form_for(@slide) do |f|
+  =f.error_messages
+  %dl
+    %dt=f.label :title
+    %dd=f.text_field :title
+    %dt=f.label :uri
+    %dd
+      =f.text_field :uri
+      %a(href="http://dropbox.biola.edu") dropbox.biola.edu
+    %dt=f.label :delay
+    %dd=f.text_field :delay
+    %dt=f.label :color
+    %dd=f.text_field :color
+    %dt=f.label :published
+    %dd=f.check_box :published
+    %dt=f.label :start_date
+    %dd=f.text_field :start_date
+    %dt=f.label :start_time
+    %dd=f.text_field :start_time
+    %dt=f.label :end_date
+    %dd=f.text_field :end_date
+    %dt=f.label :end_time
+    %dd=f.text_field :end_time
+    %dt=f.label :user_id
+    %dd=f.collection_select(:user_id, User.all, :id, :name)
+  .buttons=f.submit 'Save'

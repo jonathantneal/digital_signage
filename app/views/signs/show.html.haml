@@ -1,0 +1,20 @@
+%h1=@sign.title + ' Sign'
+%dl
+  %dt Name
+  %dd=@sign.name
+  %dt Size
+  %dd
+    =@sign.width
+    x
+    =@sign.height
+  %dt Video
+  %dd=@sign.video
+  %dt Audio
+  %dd=@sign.audio
+  %dt On From
+  %dd
+    =@sign.on
+    to
+    =@sign.off
+=link_to 'Edit', edit_sign_path(@sign)
+=link_to 'Delete', @sign, :confirm => 'Are you sure?', :method => :delete
