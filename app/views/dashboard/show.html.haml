@@ -1,0 +1,40 @@
+%table
+  %caption Recent Slides
+  %tr
+    %th Slide
+    %th Created
+  -@recent_slides.each do |slide|
+    %tr
+      %td=link_to(slide.title, slide_path(slide))
+      %td&=slide.created_at.to_s(:short)
+%table
+  %caption Expired Slides
+  %tr
+    %th Slide
+    %th Expired On
+  -Slide::expired_slides.each do |slide|
+    %tr
+      %td=link_to(slide.title, slide_path(slide))
+      %td&=slide.expired_at.to_s(:short)
+%table
+  %caption Signs
+  %tr
+    %th Sign
+    %th Active Slides
+    %th Content Time
+  -Sign.all.each do |sign|
+    %tr
+      %td=link_to(sign.title, sign_path(sign))
+      %td&=sign.active_slides.length
+      %td&=seconds_to_time(sign.active_slides_time)
+%table
+  %caption Users
+  %tr
+    %th User
+    %th Active Slides
+    %th Content Time
+  -User.all.each do |user|
+    %tr
+      %td=link_to(user.name, user_path(user))
+      %td&=user.active_slides.length
+      %td&=seconds_to_time(user.active_slides_time)

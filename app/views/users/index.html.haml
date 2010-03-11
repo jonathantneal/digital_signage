@@ -7,8 +7,8 @@
     %th Last Login
   -@users.each do |user|
     %tr
-      %td=link_to user.name, user
-      %td=user.email
-      %td
-      %td=user.last_login_at
-=link_to 'New user', new_user_path
+      %td=link_to(user.name, user)
+      %td=mail_to(user.email)
+      %td&=user.slides.length
+      %td&=user.last_login_at.to_s(:long)
+=link_to('New user', new_user_path)

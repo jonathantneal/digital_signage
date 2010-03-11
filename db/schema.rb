@@ -9,7 +9,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100218175326) do
+ActiveRecord::Schema.define(:version => 20100223010111) do
+
+  create_table "schedules", :force => true do |t|
+    t.integer  "slide_id",                      :null => false
+    t.string   "when",                          :null => false
+    t.boolean  "active",     :default => false, :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "signs", :force => true do |t|
     t.string   "name",          :limit => 20,                    :null => false
@@ -27,14 +35,10 @@ ActiveRecord::Schema.define(:version => 20100218175326) do
 
   create_table "slides", :force => true do |t|
     t.string   "title",      :limit => 50,                       :null => false
-    t.text     "uri",                      :default => "",       :null => false
+    t.text     "uri",                                            :null => false
     t.integer  "delay",                    :default => 5,        :null => false
     t.string   "color",      :limit => 6,  :default => "000000", :null => false
     t.boolean  "published",                :default => false,    :null => false
-    t.date     "start_date"
-    t.time     "start_time"
-    t.date     "end_date"
-    t.time     "end_time"
     t.integer  "user_id",                                        :null => false
     t.datetime "created_at"
     t.datetime "updated_at"

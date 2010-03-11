@@ -1,26 +1,33 @@
 -form_for(@slide) do |f|
   =f.error_messages
   %dl
-    %dt=f.label :title
-    %dd=f.text_field :title
-    %dt=f.label :uri
+    %dt=f.label(:title)
+    %dd=f.text_field(:title)
+    %dt=f.label(:uri, 'URL')
     %dd
-      =f.text_field :uri
+      =f.text_field(:uri)
       %a(href="http://dropbox.biola.edu") dropbox.biola.edu
-    %dt=f.label :delay
-    %dd=f.text_field :delay
-    %dt=f.label :color
-    %dd=f.text_field :color
-    %dt=f.label :published
-    %dd=f.check_box :published
-    %dt=f.label :start_date
-    %dd=f.text_field :start_date
-    %dt=f.label :start_time
-    %dd=f.text_field :start_time
-    %dt=f.label :end_date
-    %dd=f.text_field :end_date
-    %dt=f.label :end_time
-    %dd=f.text_field :end_time
-    %dt=f.label :user_id
+    %dt=f.label(:delay)
+    %dd=f.text_field(:delay)
+    %dt=f.label(:color)
+    %dd=f.text_field(:color)
+    %dt=f.label(:published)
+    %dd=f.check_box(:published)
+    %dt=f.label(:user_id)
     %dd=f.collection_select(:user_id, User.all, :id, :name)
-  .buttons=f.submit 'Save'
+  %h2 Signs
+  %ul
+    -Sign.all.each do |sign|
+      %li
+        =check_box_tag(:sign_ids, sign.id, @slide.signs.include?(sign), :name => 'slide[sign_ids][]')
+        =label_tag(:sign_ids, sign.name)
+  %h2 Schedule
+  %table#schedules
+    %tr
+      %th Time
+      %th Visible
+      %th Remove
+    -f.fields_for(:schedules, @slide.sorted_schedules) do |f2|
+      =render('schedule_fields', :f => f2)
+  =link_to_add_fields('Add Schedule', f, :schedules)
+  .buttons=f.submit('Save')

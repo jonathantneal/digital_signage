@@ -1,0 +1,10 @@
+-form_for(@slot) do |f|
+  =f.error_messages
+  %dl
+    %dt Sign
+    %dd=f.collection_select(:sign, Sign.all, :id, :title)
+    %dt Slide
+    %dd=f.collection_select(:slide, Slide.all, :id, :title)
+    %dt Order
+    %dd=f.text_field(:order)
+  .buttons=f.submit('Update')

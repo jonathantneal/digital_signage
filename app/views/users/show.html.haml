@@ -1,8 +1,12 @@
-%h1=@user.name
+%h1&=@user.name
 %dl
   %dt Username
-  %dd=@user.username
+  %dd&=@user.username
   %dt Email
-  %dd=mail_to @user.email
-=link_to 'Edit', edit_user_path(@user)
-=link_to 'Delete', @user, :confirm => 'Are you sure?', :method => :delete
+  %dd=mail_to(@user.email)
+%h2 Slides
+%ul
+  -@user.slides.each do |slide|
+    %li=link_to(slide.title, slide_path(slide))
+=link_to('Edit', edit_user_path(@user))
+=link_to('Delete', @user, :confirm => 'Are you sure?', :method => :delete)

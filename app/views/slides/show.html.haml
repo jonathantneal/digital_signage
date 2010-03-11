@@ -1,22 +1,22 @@
-%h1=@slide.title + ' Slide'
+%h1&=@slide.title + ' Slide'
 %dl
   %dt Uri
-  %dd=@slide.uri
+  %dd=link_to(@slide.uri, @slide.uri)
   %dt Delay
-  %dd=@slide.delay
+  %dd&=@slide.delay
   %dt Color
-  %dd=@slide.color
+  %dd{:style => "background-color:##{@slide.color}"}=@slide.color
   %dt Published
-  %dd=@slide.published
-  %dt Start Date
-  %dd
-    =@slide.start_date
-    =@slide.start_time
-  %dt End Date
-  %dd
-    =@slide.end_date
-    =@slide.end_time
+  %dd&=@slide.published
   %dt Owner
-  %dd=@slide.user.name
-=link_to 'Edit', edit_slide_path(@slide)
-=link_to 'Delete', @slide, :confirm => 'Are you sure?', :method => :delete
+  %dd&=@slide.user.name
+%h2 Signs
+%ul
+  -@slide.signs.each do |sign|
+    %li=link_to(sign.name, sign_path(sign))
+%h2 Schedule
+%ul
+  -@slide.sorted_schedules.each do |schedule|
+    %li&=schedule
+=link_to('Edit', edit_slide_path(@slide))
+=link_to('Delete', @slide, :confirm => 'Are you sure?', :method => :delete)

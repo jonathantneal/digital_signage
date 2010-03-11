@@ -7,8 +7,8 @@
     %th Owner
   -@slides.each do |slide|
     %tr
-      %td=link_to slide.title, slide
-      %td=slide.filename
-      %td
-      %td=link_to slide.user.name, slide.user
+      %td=link_to(slide.title, slide)
+      %td&=slide.filename
+      %td&=(slide.active? ? 'active' : 'inactive')
+      %td=link_to(slide.user.name, slide.user)
 =link_to 'New slide', new_slide_path

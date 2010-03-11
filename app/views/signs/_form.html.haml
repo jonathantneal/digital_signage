@@ -1,22 +1,22 @@
 -form_for(@sign) do |f|
   =f.error_messages
   %dl
-    %dt=f.label :name
-    %dd=f.text_field :name
-    %dt=f.label :title
-    %dd=f.text_field :title
+    %dt=f.label(:name)
+    %dd=f.text_field(:name)
+    %dt=f.label(:title)
+    %dd=f.text_field(:title)
     %dt Size
     %dd
-      =f.text_field :width
+      =f.text_field(:width)
       x
-      =f.text_field :height
-    %dt=f.label :video
-    %dd=f.check_box :video
-    %dt=f.label :audio
-    %dd=f.check_box :audio
+      =f.text_field(:height)
+    %dt=f.label(:video)
+    %dd=f.check_box(:video)
+    %dt=f.label(:audio)
+    %dd=f.check_box(:audio)
     %dt On From
     %dd
-      =f.text_field :on
+      =f.text_field(:on)
       to
-      =f.text_field :off
-  .buttons= f.submit 'Save'
+      =f.text_field(:off)
+  .buttons= f.submit('Save')

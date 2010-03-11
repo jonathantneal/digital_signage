@@ -1,0 +1,12 @@
+:ruby
+  object_name = object.class.to_s.underscore.humanize.downcase
+  controller_name = object.class.to_s.underscore.pluralize
+  except = [] if except.nil?
+  except = [except] if except.class != Array
+%span(class='actions')
+  -if can?(:read, object) and !except.include?(:view)
+    =link_to('View', { :controller => controller_name, :action => :show, :id => object.id }, { :class => 'view', :title => "View #{object_name}" })
+  -if can?(:edit, object) and !except.include?(:edit)
+    =link_to('Edit', { :controller => controller_name, :action => :edit, :id => object.id }, { :class => 'edit', :title => "Edit #{object_name}" })
+  -if can?(:delete, object) and !except.include?(:delete)
+    =link_to('Delete', object, { :confirm => 'Are you sure?', :class => 'delete', :title => "Delete #{object_name}", :method => :delete })

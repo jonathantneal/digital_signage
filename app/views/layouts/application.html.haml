@@ -35,9 +35,9 @@
       #branding
         #siteTitle
           = link_to "THI Student Evaluations", root_path
-      -# if logged_in?
+      - if !current_user.nil?
         #logout
-          -#= link_to "Logout", logout_path
+          =link_to "Logout", logout_path
         #profile
           #profile_photo
             %img{:src => "https://wisdom2.biola.edu/portal_graphics/photos/#{current_user.username}.jpg", :alt => "profile photo"}

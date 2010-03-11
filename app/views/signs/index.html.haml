@@ -6,7 +6,7 @@
     %th Last Check In
   -@signs.each do |sign|
     %tr
-      %td=link_to sign.title, sign
-      %td
-      %td=sign.last_check_in
-=link_to 'New sign', new_sign_path
+      %td=link_to(sign.title, sign)
+      %td&=sign.active_slides.length
+      %td&=sign.last_check_in.to_s(:long) if sign.checked_in?
+=link_to('New sign', new_sign_path)

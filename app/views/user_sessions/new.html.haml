@@ -1,0 +1,11 @@
+-form_for(@user_session) do |f|
+  %p Please enter your NetID and Portal password to access this page. 
+  .field.odd
+    =f.label(:username)
+    =f.text_field(:username, { :class => 'text' })
+  .field.even
+    =f.label(:password)
+    =f.password_field(:password, { :class => 'password' })
+  .field.full
+  #submit
+    =f.submit('Log In', { :class => 'bigbutton' })

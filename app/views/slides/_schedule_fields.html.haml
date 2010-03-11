@@ -1,0 +1,4 @@
+%tr
+  %td=f.text_field(:when)
+  %td=f.select(:active, Schedule::ACTIVE_OPTIONS)
+  %td=f.check_box(:_destroy)

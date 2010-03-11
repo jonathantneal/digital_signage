@@ -8,6 +8,12 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :signs
 
   map.resources :users
+  
+  map.resources :dashboard
+
+  map.resources :user_sessions
+  map.login 'login', :controller => 'user_sessions', :action => 'new'
+  map.logout 'logout', :controller => 'user_sessions', :action => 'destroy'
 
   # The priority is based upon order of creation: first created -> highest priority.
 
@@ -51,6 +57,6 @@ ActionController::Routing::Routes.draw do |map|
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'
 
-  map.root :slides
+  map.root :dashboard
 
 end

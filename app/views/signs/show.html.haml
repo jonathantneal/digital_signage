@@ -1,20 +1,20 @@
-%h1=@sign.title + ' Sign'
+%h1&=@sign.title + ' Sign'
 %dl
   %dt Name
-  %dd=@sign.name
+  %dd&=@sign.name
   %dt Size
   %dd
-    =@sign.width
+    &=@sign.width
     x
-    =@sign.height
+    &=@sign.height
   %dt Video
-  %dd=@sign.video
+  %dd&=@sign.video
   %dt Audio
-  %dd=@sign.audio
+  %dd&=@sign.audio
   %dt On From
   %dd
-    =@sign.on
+    &=@sign.on.to_s(:time)
     to
-    =@sign.off
-=link_to 'Edit', edit_sign_path(@sign)
-=link_to 'Delete', @sign, :confirm => 'Are you sure?', :method => :delete
+    &=@sign.off.to_s(:time)
+=link_to('Edit', edit_sign_path(@sign))
+=link_to('Delete', @sign, :confirm => 'Are you sure?', :method => :delete)

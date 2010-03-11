@@ -1,0 +1,14 @@
+%h1 Listing slots
+%table
+  %tr
+    %th Order
+    %th Sign
+    %th Slide
+    %th.actions Actions
+  -@slots.each do |slot|
+    %tr
+      %td&=slot.order
+      %td=link_to(slot.sign.title, sign_path(slot.sign))
+      %td=link_to(slot.slide.title, slide_path(slot.slide))
+      %td=render(:partial => 'shared/action_links', :locals=>{:object=>slot})
+= link_to('New slot', new_slot_path)
