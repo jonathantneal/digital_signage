@@ -4,6 +4,6 @@ class UserSession < Authlogic::Session::Base
   ssl_key_path AUTHLOGIC_NETID_CONFIG['ssl_key_path']
   ssl_key_password AUTHLOGIC_NETID_CONFIG['ssl_key_password']
   ssl_cert_path AUTHLOGIC_NETID_CONFIG['ssl_cert_path']
-  find_by_netid_username_method :find_by_username
+  find_by_netid_login_method :find_by_username
 
 end

@@ -8,8 +8,8 @@ class User < ActiveRecord::Base
   ROLES = ['admin','content_admin', 'contributor']
 
   # PLUGIN: authlogic
-  acts_as_authentic do |config|
-    config.validate_netid_username false
+  acts_as_authentic do |c|
+    c.validate_netid_login = false
   end
   
   def name
