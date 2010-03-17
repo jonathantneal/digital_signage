@@ -1,0 +1,20 @@
+!!! XML
+%sign{:name=>@sign.name,
+      :title=>@sign.title,
+      :width=>@sign.width,
+      :height=>@sign.height,
+      :video=>to_yn(@sign.video),
+      :last_check_in=>@sign.last_check_in.try(:to_s, :rfc822),
+      :lastupdate=>DateTime.now.to_s(:rfc822)}
+  %slides
+    -@sign.slides.each do |slide|
+      -# TODO change starttime and endtime
+      %slide{:id=>slide.id,
+             :title=>slide.title,
+             :uri=>slide.uri,
+             :content_type=>slide.type,
+             :delay=>slide.delay,
+             :color=>'#'+slide.color,
+             :published=>to_yn(slide.published),
+             :starttime=>'',
+             :endtime=>''}

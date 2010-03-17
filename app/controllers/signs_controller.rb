@@ -8,7 +8,12 @@ class SignsController < ApplicationController
   end
 
   # GET /signs/1
+  # GET /signs/1.xml
   def show
+    respond_to do |format|
+      format.html
+      format.xml
+    end
   end
 
   # GET /signs/new

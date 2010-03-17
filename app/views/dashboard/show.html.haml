@@ -15,7 +15,7 @@
   -Slide::expired_slides.each do |slide|
     %tr
       %td=link_to(slide.title, slide_path(slide))
-      %td&=slide.expired_at.to_s(:short)
+      %td&=slide.expired_at.try(:to_s, :short)
 %table
   %caption Signs
   %tr

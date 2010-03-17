@@ -29,6 +29,7 @@ class Slide < ActiveRecord::Base
   end
   
   def hidden?(time=Time.now)
+    return false if self.schedules.empty?
     return !self.previous_schedule.active unless self.previous_schedule.nil?
     return self.next_schedule.active unless self.next_schedule.nil?
     return true
@@ -39,7 +40,7 @@ class Slide < ActiveRecord::Base
   end
 
   def expired_at
-    return self.previous_schedule.time unless !self.expired?
+    return self.previous_schedule.try(:time) unless !self.expired?
   end
 
   def sorted_schedules
