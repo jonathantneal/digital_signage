@@ -1,12 +1,12 @@
 -form_for(@user) do |f|
   =f.error_messages
   %dl
-    %dt=f.label(:username)
-    %dl=f.text_field(:username)
-    %dt=f.label(:first_name)
-    %dl=f.text_field(:first_name)
-    %dt=f.label(:last_name)
-    %dl=f.text_field(:last_name)
-    %dt=f.label(:email)
-    %dl=f.text_field(:email)
+    %dt.username=f.label(:username)
+    %dl.username=f.text_field(:username)
+    %dt.first_name=f.label(:first_name)
+    %dl.first_name=f.text_field(:first_name)
+    %dt.last_name=f.label(:last_name)
+    %dl.last_name=f.text_field(:last_name)
+    %dt.email=f.label(:email)
+    %dl.email=f.text_field(:email)
   .buttons=f.submit('Save')

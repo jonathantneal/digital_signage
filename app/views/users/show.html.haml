@@ -8,5 +8,4 @@
 %ul
   -@user.slides.each do |slide|
     %li=link_to(slide.title, slide_path(slide))
-=link_to('Edit', edit_user_path(@user))
-=link_to('Delete', @user, :confirm => 'Are you sure?', :method => :delete)
+=render(:partial=>'shared/action_links', :locals=>{:object=>@user, :except=>:view})

@@ -16,5 +16,4 @@
     &=@sign.on.to_s(:time)
     to
     &=@sign.off.to_s(:time)
-=link_to('Edit', edit_sign_path(@sign))
-=link_to('Delete', @sign, :confirm => 'Are you sure?', :method => :delete)
+=render(:partial=>'shared/action_links', :locals=>{:object=>@sign, :except=>:view})

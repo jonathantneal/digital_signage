@@ -2,13 +2,13 @@
 %table
   %tr
     %th Title
-    %th File
     %th Status
     %th Owner
+    %th.actions Actions
   -@slides.each do |slide|
     %tr
       %td=link_to(slide.title, slide)
-      %td&=slide.filename
       %td&=(slide.active? ? 'active' : 'inactive')
       %td=link_to(slide.user.name, slide.user)
+      %td=render(:partial => 'shared/action_links', :locals=>{:object=>slide})
 =link_to 'New slide', new_slide_path

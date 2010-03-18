@@ -1,32 +1,34 @@
 -form_for(@slide) do |f|
   =f.error_messages
   %dl
-    %dt=f.label(:title)
-    %dd=f.text_field(:title)
-    %dt=f.label(:uri, 'URL')
-    %dd
+    %dt.title.title=f.label(:title)
+    %dd.title=f.text_field(:title)
+    %dt.url=f.label(:uri, 'URL')
+    %dd.url
       =f.text_field(:uri)
       %a(href="http://dropbox.biola.edu") dropbox.biola.edu
-    %dt=f.label(:delay)
-    %dd=f.text_field(:delay)
-    %dt=f.label(:color)
-    %dd=f.text_field(:color)
-    %dt=f.label(:published)
-    %dd=f.check_box(:published)
-    %dt=f.label(:user_id)
+    %dt.delay
+      =f.label(:delay)
+      %small in seconds
+    %dd.delay=f.text_field(:delay)
+    %dt.color=f.label(:color)
+    %dd.color=f.text_field(:color)
+    %dt.published=f.label(:published)
+    %dd.published=f.check_box(:published)
+    %dt.owner=f.label(:user_id, 'Owner')
     %dd=f.collection_select(:user_id, User.all, :id, :name)
   %h2 Signs
-  %ul
+  %ul.signs
     -Sign.all.each do |sign|
       %li
         =check_box_tag(:sign_ids, sign.id, @slide.signs.include?(sign), :name => 'slide[sign_ids][]')
         =label_tag(:sign_ids, sign.name)
   %h2 Schedule
-  %table#schedules
+  %table.schedules
     %tr
-      %th Time
-      %th Visible
-      %th Remove
+      %th.time Time
+      %th.action Action
+      %th.remove Remove
     -f.fields_for(:schedules, @slide.sorted_schedules) do |f2|
       =render('schedule_fields', :f => f2)
   =link_to_add_fields('Add Schedule', f, :schedules)

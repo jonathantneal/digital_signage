@@ -20,4 +20,11 @@ module ApplicationHelper
     bit ? 'yes' : 'no'
   end
 
+  # Used to automatically include a stylesheet
+  def controller_stylesheet_link_tag
+    if File.exists?("#{Rails.root}/public/stylesheets/#{controller.controller_name}.css")
+      stylesheet_link_tag(controller.controller_name)
+    end
+  end
+
 end

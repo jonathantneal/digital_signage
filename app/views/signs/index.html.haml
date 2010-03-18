@@ -4,9 +4,11 @@
     %th Title
     %th Active Slides
     %th Last Check In
+    %th.actions Actions
   -@signs.each do |sign|
     %tr
       %td=link_to(sign.title, sign)
       %td&=sign.active_slides.length
       %td&=sign.last_check_in.to_s(:long) if sign.checked_in?
+      %td=render(:partial=>'shared/action_links', :locals=>{:object=>sign})
 =link_to('New sign', new_sign_path)

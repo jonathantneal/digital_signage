@@ -18,5 +18,4 @@
 %ul
   -@slide.sorted_schedules.each do |schedule|
     %li&=schedule
-=link_to('Edit', edit_slide_path(@slide))
-=link_to('Delete', @slide, :confirm => 'Are you sure?', :method => :delete)
+=render(:partial=>'shared/action_links', :locals=>{:object=>@slide, :except=>:view})
