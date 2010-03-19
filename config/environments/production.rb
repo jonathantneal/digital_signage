@@ -28,4 +28,4 @@ config.action_view.cache_template_loading            = true
 # config.threadsafe!
 
 # Specify the base directory of the app URI
-config.action_controller.relative_url_root = "/sign-manager"
+config.action_controller.relative_url_root = "/signage"

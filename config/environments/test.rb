@@ -28,4 +28,4 @@ config.action_mailer.delivery_method = :test
 # config.active_record.schema_format = :sql
 
 # Specify the base directory of the app URI
-config.action_controller.relative_url_root = "/sign-manager"
+config.action_controller.relative_url_root = "/signage"
