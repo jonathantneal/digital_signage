@@ -8,7 +8,7 @@
       :lastupdate=>DateTime.now.to_s(:rfc822)}
   %slides
     -@sign.slides.each do |slide|
-      -if !slide.expired?
+      -if !slide.expired? && slide.published
         %slide{:id=>slide.id,
                :title=>slide.title,
                :uri=>slide.uri,
