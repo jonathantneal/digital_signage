@@ -9,6 +9,14 @@ class Slide < ActiveRecord::Base
   has_many :signs, :through => :slots
   accepts_nested_attributes_for :schedules, :allow_destroy => true
 
+  def published?
+    return self.published
+  end
+
+  def unpublished?
+    return !self.published
+  end
+
   def filename
     File.basename URI.parse(self.uri).path
   end
@@ -28,11 +36,19 @@ class Slide < ActiveRecord::Base
     return !self.hidden?
   end
   
+  def inactive?(time=Time.now)
+    return !self.active?(time)
+  end
+  
+  def showing?(time=Time.now)
+    return true if self.schedules.empty?
+    return self.previous_schedule.activate? unless self.previous_schedule.nil?
+    return self.next_schedule.deactivate? unless self.next_schedule.nil?
+    return false  
+  end
+  
   def hidden?(time=Time.now)
-    return false if self.schedules.empty?
-    return !self.previous_schedule.active unless self.previous_schedule.nil?
-    return self.next_schedule.active unless self.next_schedule.nil?
-    return true
+    return !self.showing?
   end
 
   def expired?

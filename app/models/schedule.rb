@@ -7,6 +7,14 @@ class Schedule < ActiveRecord::Base
   
   ACTIVE_OPTIONS = [['hide',false], ['show',true]]
 
+  def activate?
+    return self.active
+  end
+  
+  def deactivate?
+    return !self.active
+  end
+
   def action
     Schedule::ACTIVE_OPTIONS[self.active ? 1 : 0][0]    
   end
