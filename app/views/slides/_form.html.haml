@@ -1,3 +1,6 @@
+-content_for(:head) do
+  =javascript_include_tag('colorpicker')
+  =stylesheet_link_tag('colorpicker')
 -form_for(@slide) do |f|
   =f.error_messages
   %dl
@@ -12,7 +15,7 @@
       %small in seconds
     %dd.delay=f.text_field(:delay)
     %dt.color=f.label(:color)
-    %dd.color=f.text_field(:color)
+    %dd.color=f.text_field(:color, {:style=>"color:##{@slide.color}; background-color:##{@slide.color};"})
     %dt.published=f.label(:published)
     %dd.published=f.check_box(:published)
     %dt.owner=f.label(:user_id, 'Owner')
@@ -22,7 +25,7 @@
     -Sign.all.each do |sign|
       %li
         =check_box_tag(:sign_ids, sign.id, @slide.signs.include?(sign), :name => 'slide[sign_ids][]')
-        =label_tag(:sign_ids, sign.name)
+        =label_tag(:sign_ids, sign.title)
   %h2 Schedule
   %table#schedules.schedules
     %tr

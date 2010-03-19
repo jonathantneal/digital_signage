@@ -27,4 +27,11 @@ module ApplicationHelper
     end
   end
 
+  # Used to automatically include a javascript file
+  def controller_javascript_include_tag
+    if File.exists?("#{Rails.root}/public/javascripts/#{controller.controller_name}.js")
+      javascript_include_tag(controller.controller_name)
+    end
+  end
+
 end

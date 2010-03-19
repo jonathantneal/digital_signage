@@ -1,21 +1,21 @@
 %h1&=@slide.title + ' Slide'
 %dl
-  %dt Uri
-  %dd=link_to(@slide.uri, @slide.uri)
-  %dt Delay
-  %dd&=@slide.delay
-  %dt Color
-  %dd{:style => "background-color:##{@slide.color}"}=@slide.color
-  %dt Published
-  %dd&=@slide.published
-  %dt Owner
-  %dd&=@slide.user.name
-%h2 Signs
-%ul
+  %dt.uri Uri
+  %dd.uri=link_to(@slide.uri, @slide.uri)
+  %dt.delay Delay
+  %dd.delay&=@slide.delay
+  %dt.color Color
+  %dd.color{:style => "color:##{@slide.color}; background-color:##{@slide.color};"}=@slide.color
+  %dt.published Published
+  %dd.published&=@slide.published
+  %dt.owner Owner
+  %dd.owner&=@slide.user.name
+%h2.signs Signs
+%ul.signs
   -@slide.signs.each do |sign|
-    %li=link_to(sign.name, sign_path(sign))
-%h2 Schedule
-%ul
+    %li=link_to(sign.title, sign_path(sign))
+%h2.schedule Schedule
+%ul.schedule
   -@slide.sorted_schedules.each do |schedule|
     %li&=schedule
 =render(:partial=>'shared/action_links', :locals=>{:object=>@slide, :except=>:view})

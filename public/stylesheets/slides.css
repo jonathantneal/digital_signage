@@ -4,6 +4,17 @@ dd.url a {
 dd.delay input, dd.color input {
   width: 75px; }
 
+dd.color, dd.color input {
+  display: block;
+  width: 75px;
+  height: 30px;
+  border: solid 1px #666;
+  cursor: pointer; }
+
+form dd.color {
+  border: none;
+  cursor: default; }
+
 ul.signs {
   margin: 0;
   padding-left: 10px;
