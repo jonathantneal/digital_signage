@@ -24,7 +24,7 @@
         =check_box_tag(:sign_ids, sign.id, @slide.signs.include?(sign), :name => 'slide[sign_ids][]')
         =label_tag(:sign_ids, sign.name)
   %h2 Schedule
-  %table.schedules
+  %table#schedules.schedules
     %tr
       %th.time Time
       %th.action Action
