@@ -3,6 +3,7 @@ class Slide < ActiveRecord::Base
   attr_accessible :title, :uri, :delay, :color, :published, :user_id, :created_at, :updated_at, :sign_ids, :schedules_attributes
   validates_presence_of :title, :uri, :delay, :color, :user_id
   validates_uniqueness_of :title
+  validates_uri_existence_of :uri
   belongs_to :user
   has_many :schedules
   has_many :slots
@@ -22,13 +23,29 @@ class Slide < ActiveRecord::Base
   end
 
   def type
-    require 'net/http'
-    url = URI.parse(self.uri)
-    request = Net::HTTP::Head.new(url.path)
-    response = Net::HTTP.start(url.host, url.port) do |http|
-      http.request(request)
+    begin
+      require 'net/http'
+      url = URI.parse(self.uri)
+      request = Net::HTTP::Head.new(url.path)
+      response = Net::HTTP.start(url.host, url.port) do |http|
+        http.request(request)
+      end
+      return response['Content-Type']
+    rescue
+      return 'application/x-unknown-content-type'
     end
-    return response['Content-Type']
+  end
+  
+  def image?
+    return !self.type['image/'].nil?
+  end
+  
+  def video?
+    return !self.type['video/'].nil?
+  end
+  
+  def swf?
+    return self.type == 'application/x-shockwave-flash'
   end
   
   def active?(time=Time.now)
