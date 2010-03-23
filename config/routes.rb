@@ -6,6 +6,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :slides
 
   map.resources :signs
+  map.check_in 'signs/:id/check_in', :controller => 'signs', :action => 'check_in'
 
   map.resources :users
   

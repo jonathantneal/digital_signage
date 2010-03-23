@@ -1,9 +1,8 @@
 !!! XML
 %sign{:name=>@sign.name,
       :title=>@sign.title,
-      :width=>@sign.width,
-      :height=>@sign.height,
       :video=>to_yn(@sign.video),
+      :check_in_url=>check_in_url,
       :last_check_in=>@sign.last_check_in.try(:to_s, :rfc822),
       :lastupdate=>DateTime.now.to_s(:rfc822)}
   %slides

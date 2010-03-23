@@ -52,4 +52,10 @@ class SignsController < ApplicationController
     redirect_to(signs_url)
   end
   
+  # GET /signs/1/checkin
+  def check_in
+    @sign.last_check_in = DateTime.now
+    @sign.save
+  end
+  
 end

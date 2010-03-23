@@ -13,7 +13,7 @@ class Ability
 
   def universal
     can [:create, :destroy], UserSession
-    can :show, Sign
+    can [:show, :check_in], Sign
   end
   
 end
