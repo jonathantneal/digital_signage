@@ -1,14 +1,22 @@
 %h1 Slides
+-form_for @search do |f|
+  =f.label :signs_id_eq, 'Sign'
+  =f.collection_select :signs_id_eq, Sign.all, :id, :title, {:include_blank=>true}
+  =f.label :user_id, 'Owner'
+  =f.collection_select :user_id, User.all, :id, :name, {:include_blank=>true}
+  =f.label :published
+  =f.select :published, [['Published', true], ['Unpublished', false]], {:include_blank=>true}
+  =f.submit 'Filter'
 %table
   %tr
-    %th Title
+    %th=order(@search, :by=>:title)
+    %th=order(@search, :by=>:user_id, :as=>'Owner')
     %th Status
-    %th Owner
     %th.actions Actions
   -@slides.each do |slide|
     %tr
       %td=link_to(slide.title, slide)
-      %td&=slide_status(slide)
       %td=link_to(slide.user.name, slide.user)
+      %td&=slide_status(slide)
       %td=render(:partial => 'shared/action_links', :locals=>{:object=>slide})
 =link_to 'New slide', new_slide_path

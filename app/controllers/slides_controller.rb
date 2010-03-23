@@ -5,7 +5,8 @@ class SlidesController < ApplicationController
   # GET /slides
   # GET /slides.xml
   def index
-    @slides = Slide.all
+    @search = Slide.search(params[:search])
+    @slides = @search.all
     respond_to do |format|
       format.html
       format.xml
