@@ -13,7 +13,7 @@
   %dd&=@sign.audio
   %dt On From
   %dd
-    &=@sign.on.to_s(:time)
+    &=@sign.on.try(:to_s,:time) || '?'
     to
-    &=@sign.off.to_s(:time)
+    &=@sign.off.try(:to_s,:time) || '?'
 =render(:partial=>'shared/action_links', :locals=>{:object=>@sign, :except=>:view})
