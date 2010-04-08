@@ -26,10 +26,8 @@ class Slide < ActiveRecord::Base
     begin
       require 'net/http'
       url = URI.parse(self.uri)
-      request = Net::HTTP::Head.new(url.path)
-      response = Net::HTTP.start(url.host, url.port) do |http|
-        http.request(request)
-      end
+      request = Net::HTTP.new(url.host, url.port)
+      response = request.request_head(url.path)
       return response['Content-Type']
     rescue
       return 'application/x-unknown-content-type'

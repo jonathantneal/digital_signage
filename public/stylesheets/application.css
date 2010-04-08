@@ -24,6 +24,12 @@ border-top:solid 1px #a2a2a2;
 white-space:nowrap;
 }
 
+dd.updated{
+padding-left:20px;
+font-style:italic;
+background:url(../images/new.png) no-repeat left center;
+}
+
 /* HEADER */
 #content_header{
 color:#333;
@@ -87,6 +93,21 @@ border-collapse:collapse;
 width:100%;
 clear:both;
 color:#333;
+}
+
+table tfoot{
+border-top:1px solid #BBB;
+border-bottom:1px solid #BBB;
+}
+
+table tfoot th, table tfoot td{
+padding-top:8px;
+}
+
+table tfoot th{
+color:#000;
+text-transform:none;
+border:none;
 }
 
 td, th{
@@ -243,6 +264,37 @@ background-image:url(../images/message_block/vals_m.gif);
 background-image:url(../images/message_block/error_m.gif);
 }
 
+/* COMMENTS */
+td.comment{
+position:absolute;
+}
+
+td.comment p{
+position:relative;
+width:50px;
+margin:0;
+padding:0 0 0 20px;
+font-size:9pt;
+white-space:nowrap;
+background:url(../images/comment.png) no-repeat;
+overflow:hidden;
+}
+
+td.comment p:hover{
+position:absolute;
+z-index:100;
+top:-6px;
+left:-2px;
+width:200px;
+margin:0;
+padding:10px 10px 10px 30px;
+background:url(../images/comment.png) no-repeat 10px 10px;
+background-color:#FDFD9F;
+cursor:default;
+white-space:normal;
+-webkit-border-radius: 8px; -moz-border-radius: 8px;
+}
+
 /* BUTTONS */
 #contentExtra .button{
 display:block;
@@ -324,7 +376,6 @@ background-repeat:no-repeat;
 }
 
 td span.actions, .small span.actions{
-float:right;
 clear:none;
 margin:0;
 padding:0;
@@ -334,7 +385,7 @@ border-top:none;
 td a.view, td a.edit, td a.delete, td a.evaluate,
 .small a.view, .small a.edit, .small a.delete, .small a.evaluate{
 display:block;
-float:left;
+float:right;
 width:16px;
 height:16px;
 margin:0 5px;
@@ -413,6 +464,7 @@ width:225px;
 }
 
 #contentExtra div.buttons{
+text-align:left;
 border-top:none;
 }
 

@@ -1,5 +1,5 @@
 .size input {
-  width: 50px; }
+  width: 50px !important; }
 
 .on_off input {
-  width: 80px; }
+  width: 80px !important; }

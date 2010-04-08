@@ -1,0 +1,7 @@
+-@user = User.new
+-content_for(:extra)do
+  %h2 Actions
+  -if can?(:create, @user)
+    .box
+      %h3.add New user
+      =render(:partial => 'form')

@@ -13,4 +13,4 @@
       %td&=user.slides.length
       %td&=user.last_login_at.try(:to_s, :long)
       %td=render(:partial=>'shared/action_links', :locals=>{:object=>user})
-=link_to('New user', new_user_path)
+=render('index_aside')
