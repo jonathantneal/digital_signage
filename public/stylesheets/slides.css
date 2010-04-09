@@ -1,3 +1,51 @@
+ul.slides {
+  margin: 0;
+  padding: 0;
+  list-style-type: none; }
+  ul.slides li {
+    position: relative;
+    min-height: 149px;
+    margin: 20px 0;
+    padding: 20px;
+    text-align: right;
+    border: solid 1px #123357;
+    background: #D3E1F0;
+    border-radius: 0 5px 5px 0;
+    -moz-border-radius: 0 5px 5px 0;
+    -webkit-border-radius: 0 5px 5px 0; }
+  ul.slides dl {
+    margin: 0;
+    padding: 0; }
+  ul.slides dt.title, ul.slides dt.thumbnail, ul.slides dt.actions {
+    display: none !important; }
+  ul.slides dd.title a {
+    font-size: 18pt;
+    font-weight: bold;
+    text-decoration: none; }
+  ul.slides dd.title a:hover {
+    text-decoration: underline; }
+  ul.slides dd.thumbnail {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    top: 0;
+    left: 0;
+    width: 336px;
+    height: 189px;
+    text-align: center;
+    border-right: solid 1px #123357; }
+  ul.slides dd.thumbnail img, ul.slides dd.thumbnail .swf {
+    width: auto;
+    height: auto;
+    max-width: 336px;
+    max-height: 189px;
+    border: none; }
+  ul.slides dd.actions span.actions {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    border: none; }
+
 dt.thumbnail {
   display: block;
   float: right !important;
@@ -9,7 +57,7 @@ dd.thumbnail img, dd.thumbnail .swf {
   width: 300px;
   margin: 0 0 10px 10px;
   padding: 1px;
-  border: solid 1px #666; }
+  border: solid 1px #123357; }
 
 dd.url a {
   display: block; }

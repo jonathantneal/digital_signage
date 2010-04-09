@@ -7,16 +7,24 @@
   =f.label :published
   =f.select :published, [['Published', true], ['Unpublished', false]], {:include_blank=>true}
   =f.submit 'Filter'
-%table
-  %tr
-    %th=order(@search, :by=>:title)
-    %th=order(@search, :by=>:user_id, :as=>'Owner')
-    %th Status
-    %th.actions Actions
+%ul.slides
   -@slides.each do |slide|
-    %tr
-      %td=link_to(slide.title, slide)
-      %td=link_to(slide.user.name, slide.user)
-      %td&=slide_status(slide)
-      %td=render(:partial => 'shared/action_links', :locals=>{:object=>slide})
+    %li
+      %dl
+        %dt.title Title
+        %dd.title=link_to(slide.title, slide)
+        %dt.thumbnail Preview
+        %dd.thumbnail{:style=>"background-color:##{slide.color};"}
+          -if slide.image?
+            %img{:src=>slide.uri, :alt=>slide.title+' thumbnail'}
+          -if slide.swf?
+            .swf
+              %object{:type=>'application/x-shockwave-flash', :data=>slide.uri, :width=>336, :height=>189}
+                %param{:name=>'movie', :value=>slide.uri}
+        %dt.status Status
+        %dd.status{:class=>slide_status(slide)}&=slide_status(slide)
+        %dt.owner Owner
+        %dd.owner=link_to(slide.user.name, slide.user)
+        %dt.actions Actions
+        %dd.actions=render(:partial => 'shared/action_links', :locals=>{:object=>slide})
 =render('index_aside')
