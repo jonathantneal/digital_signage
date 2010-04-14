@@ -6,7 +6,7 @@ ul.slides {
     position: relative;
     min-height: 149px;
     margin: 20px 0;
-    padding: 20px;
+    padding: 20px 20px 20px 336px;
     text-align: right;
     border: solid 1px #123357;
     background: #D3E1F0;
@@ -19,7 +19,7 @@ ul.slides {
   ul.slides dt.title, ul.slides dt.thumbnail, ul.slides dt.actions {
     display: none !important; }
   ul.slides dd.title a {
-    font-size: 18pt;
+    font-size: 14pt;
     font-weight: bold;
     text-decoration: none; }
   ul.slides dd.title a:hover {
@@ -34,6 +34,8 @@ ul.slides {
     height: 189px;
     text-align: center;
     border-right: solid 1px #123357; }
+  ul.slides dd.thumbnail.video {
+    background-image: url(../images/video_thumbnail.jpg); }
   ul.slides dd.thumbnail img, ul.slides dd.thumbnail .swf {
     width: auto;
     height: auto;

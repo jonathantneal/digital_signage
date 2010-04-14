@@ -14,7 +14,7 @@
         %dt.title Title
         %dd.title=link_to(slide.title, slide)
         %dt.thumbnail Preview
-        %dd.thumbnail{:style=>"background-color:##{slide.color};"}
+        %dd{:class=>"thumbnail #{slide_type(slide)}", :style=>"background-color:##{slide.color};"}
           -if slide.image?
             %img{:src=>slide.uri, :alt=>slide.title+' thumbnail'}
           -if slide.swf?
