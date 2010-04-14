@@ -1,5 +1,4 @@
 -form_for(@slot) do |f|
-  =f.error_messages
   %dl
     %dt.sign Sign
     %dd.sign=f.collection_select(:sign, Sign.all, :id, :title)

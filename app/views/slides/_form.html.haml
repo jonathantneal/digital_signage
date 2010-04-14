@@ -2,7 +2,6 @@
   =javascript_include_tag('colorpicker')
   =stylesheet_link_tag('colorpicker')
 -form_for(@slide) do |f|
-  =f.error_messages
   %dl
     %dt.title.title=f.label(:title)
     %dd.title=f.text_field(:title)
