@@ -13,12 +13,14 @@
       =f.label(:delay)
       %small in seconds
     %dd.delay=f.text_field(:delay)
+    %dt.resize=f.label(:resize)
+    %dd.resize=f.select(:resize, Slide::RESIZE_OPTIONS)
     %dt.color=f.label(:color)
     %dd.color=f.text_field(:color, {:style=>"color:##{@slide.color}; background-color:##{@slide.color};"})
     %dt.published=f.label(:published)
     %dd.published=f.check_box(:published)
     %dt.owner=f.label(:user_id, 'Owner')
-    %dd=f.collection_select(:user_id, User.all, :id, :name)
+    %dd.owner=f.collection_select(:user_id, User.all, :id, :name)
   %h2 Signs
   %ul.signs
     -Sign.all.each do |sign|

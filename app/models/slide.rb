@@ -1,9 +1,12 @@
 class Slide < ActiveRecord::Base
 
-  attr_accessible :title, :uri, :delay, :color, :published, :user_id, :created_at, :updated_at, :sign_ids, :schedules_attributes
+  RESIZE_OPTIONS = ['none', 'zoom', 'zoom & crop', 'stretch']
+
+  attr_accessible :title, :uri, :delay, :color, :published, :user_id, :created_at, :updated_at, :sign_ids, :schedules_attributes, :resize
   validates_presence_of :title, :uri, :delay, :color, :user_id
   validates_uniqueness_of :title
   validates_uri_existence_of :uri
+  validates_inclusion_of :resize, :in => self::RESIZE_OPTIONS
   belongs_to :user
   has_many :schedules
   has_many :slots
