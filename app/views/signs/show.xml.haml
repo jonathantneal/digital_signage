@@ -13,7 +13,7 @@
                :uri=>slide.uri,
                :content_type=>slide.type,
                :delay=>slide.delay,
-               :resize=>slide.resize
+               :resize=>slide.resize,
                :color=>'#'+slide.color,
                :lastupdate=>(slide.updated_at || slide.created_at).to_s(:rfc822)}
           %schedules
