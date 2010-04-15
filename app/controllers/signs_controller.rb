@@ -56,6 +56,9 @@ class SignsController < ApplicationController
   def check_in
     @sign.last_check_in = DateTime.now
     @sign.save
+    respond_to do |format|
+      format.xml
+    end
   end
   
 end
