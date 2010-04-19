@@ -7,6 +7,10 @@ class Sign < ActiveRecord::Base
   has_many :slots
   has_many :slides, :through => :slots
 
+  def to_param
+    self.name
+  end
+
   def checked_in?
     return !self.last_check_in.nil?
   end

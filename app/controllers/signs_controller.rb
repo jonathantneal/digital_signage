@@ -1,6 +1,7 @@
 class SignsController < ApplicationController
 
-  load_and_authorize_resource
+  authorize_resource
+  # we're not calling load_resource because we want to support names as well as IDs
 
   # GET /signs
   def index
@@ -10,6 +11,7 @@ class SignsController < ApplicationController
   # GET /signs/1
   # GET /signs/1.xml
   def show
+    @sign = Sign.find_by_id(params[:id]) || Sign.find_by_name(params[:id])
     respond_to do |format|
       format.html
       format.xml
@@ -18,14 +20,17 @@ class SignsController < ApplicationController
 
   # GET /signs/new
   def new
+    @sign = Sign.new
   end
 
   # GET /signs/1/edit
   def edit
+    @sign = Sign.find_by_id(params[:id]) || Sign.find_by_name(params[:id])
   end
 
   # POST /signs
   def create
+    @sign = Sign.new(params[:sign])
     if @sign.save
       flash[:notice] = 'Sign created'
       redirect_to(@sign)
@@ -36,6 +41,7 @@ class SignsController < ApplicationController
 
   # PUT /signs/1
   def update
+    @sign = Sign.find_by_id(params[:id]) || Sign.find_by_name(params[:id])
     if @sign.update_attributes(params[:sign])
       flash[:notice] = 'Sign updated'
       redirect_to(@sign)
@@ -46,6 +52,7 @@ class SignsController < ApplicationController
 
   # DELETE /signs/1
   def destroy
+    @sign = Sign.find_by_id(params[:id]) || Sign.find_by_name(params[:id])
     if @sign.destroy
       flash[:notice] = 'Sign deleted'
     end
@@ -54,6 +61,7 @@ class SignsController < ApplicationController
   
   # GET /signs/1/checkin
   def check_in
+    @sign = Sign.find_by_id(params[:id]) || Sign.find_by_name(params[:id])
     @sign.last_check_in = DateTime.now
     @sign.save
     respond_to do |format|
