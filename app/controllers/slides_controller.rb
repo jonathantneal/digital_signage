@@ -6,7 +6,7 @@ class SlidesController < ApplicationController
   # GET /slides.xml
   def index
     @search = Slide.search(params[:search])
-    @slides = @search.all
+    @slides, @slides_count = @search.all.paginate(:page=>params[:page], :per_page=>10), @search.count
     respond_to do |format|
       format.html
       format.xml

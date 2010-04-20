@@ -22,4 +22,5 @@
         %dd.owner=link_to(slide.user.name, slide.user)
         %dt.actions Actions
         %dd.actions=render(:partial => 'shared/action_links', :locals=>{:object=>slide})
+=will_paginate(@slides) unless @slides.empty?
 =render('index_aside')
