@@ -45,11 +45,6 @@
             %img{:src => "https://wisdom2.biola.edu/portal_graphics/photos/#{current_user.username}.jpg", :alt => "profile photo"}
           #profile_name 
             = link_to "#{current_user.first_name} #{current_user.last_name}", current_user
-        %ul#navExtra
-          %li
-            = link_to "Feedback", "feedback_path", :id => "nav_feedback"
-          %li
-            = link_to "Documentation", "documentation_path", :id => "nav_doc"
     #messages
       = render :partial => 'layouts/messages'
     #wrapperContent
