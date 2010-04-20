@@ -4,11 +4,11 @@
   except = [] if except.nil?
   except = [except] if except.class != Array
 %span(class='actions')
+  -if can?(:read, object) and !except.include?(:view)
+    =link_to('View', { :controller => controller_name, :action => :show, :id => object.id }, { :class => 'view', :title => "View #{object_name}" })
   -if object.class == Sign
     -if can?(:edit, object) and !except.include?(:sort)
       =link_to('Sort', sign_slots_path(object), { :class => 'sort', :title => "Sort #{object_name}" })
-  -if can?(:read, object) and !except.include?(:view)
-    =link_to('View', { :controller => controller_name, :action => :show, :id => object.id }, { :class => 'view', :title => "View #{object_name}" })
   -if can?(:edit, object) and !except.include?(:edit)
     =link_to('Edit', { :controller => controller_name, :action => :edit, :id => object.id }, { :class => 'edit', :title => "Edit #{object_name}" })
   -if can?(:delete, object) and !except.include?(:delete)

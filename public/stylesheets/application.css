@@ -376,6 +376,7 @@ background-repeat:no-repeat;
 }
 
 td span.actions, .small span.actions{
+float:right;
 clear:none;
 margin:0;
 padding:0;
@@ -385,7 +386,7 @@ border-top:none;
 td a.view, td a.edit, td a.delete, td a.sort,
 .small a.view, .small a.edit, .small a.delete, .small a.sort{
 display:block;
-float:right;
+float:left;
 width:16px;
 height:16px;
 margin:0 5px;
