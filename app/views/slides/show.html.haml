@@ -1,14 +1,9 @@
 %h1&=@slide.title + ' Slide'
-%dl
+%dl.slide
   -if @slide.image? || @slide.swf?
     %dt.thumbnail Preview
     %dd.thumbnail
-      -if @slide.image?
-        %img{:src=>@slide.uri, :width=>200, :alt=>@slide.title+' thumbnail'}
-      -if @slide.swf?
-        .swf
-          %object{:type=>'application/x-shockwave-flash', :data=>@slide.uri, :width=>300, :height=>169}
-            %param{:name=>'movie', :value=>@slide.uri}
+      =render(:partial=>'shared/thumbnail', :locals=>{:slide=>@slide})
   %dt.uri Uri
   %dd.uri=link_to(@slide.uri, @slide.uri)
   %dt.delay Delay

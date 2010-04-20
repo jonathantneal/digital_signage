@@ -366,7 +366,7 @@ text-align:right;
 border-top:solid 1px #a2a2a2;
 }
 
-a.view, a.edit, a.delete, a.evaluate{
+a.view, a.edit, a.delete, a.sort{
 padding:0 10px 0 20px;
 font-weight:bold;
 text-decoration:none;
@@ -382,8 +382,8 @@ padding:0;
 border-top:none;
 }
 
-td a.view, td a.edit, td a.delete, td a.evaluate,
-.small a.view, .small a.edit, .small a.delete, .small a.evaluate{
+td a.view, td a.edit, td a.delete, td a.sort,
+.small a.view, .small a.edit, .small a.delete, .small a.sort{
 display:block;
 float:right;
 width:16px;
@@ -406,8 +406,8 @@ a.delete{
 background-image:url(../images/delete.png);
 }
 
-a.evaluate{
-background-image:url(../images/evaluate.png);
+a.sort{
+background-image:url(../images/sort.png);
 }
 
 /* SIDEBAR */

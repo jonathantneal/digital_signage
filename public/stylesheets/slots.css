@@ -1,0 +1,66 @@
+div.thumbnail {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  top: 0;
+  left: 0;
+  width: 336px;
+  height: 189px;
+  text-align: center;
+  border: solid 1px #123357; }
+
+div.thumbnail.video {
+  background-image: url(../images/video_thumbnail.jpg); }
+
+div.thumbnail img, div.thumbnail .swf {
+  width: auto;
+  height: auto;
+  max-width: 336px;
+  max-height: 189px;
+  border: none; }
+
+ol.slots {
+  margin: 0;
+  padding: 5px 0;
+  list-style-type: none; }
+  ol.slots li {
+    position: relative;
+    min-height: 149px;
+    margin: 20px 0;
+    padding: 20px 20px 20px 396px;
+    text-align: right;
+    border: solid 1px #123357;
+    background: url(../images/sort-up-down.png) no-repeat left center #D3E1F0;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    cursor: move; }
+  ol.slots li:first-child {
+    background-image: url(../images/sort-down.png); }
+  ol.slots li:last-child {
+    background-image: url(../images/sort-up.png); }
+  ol.slots dl, ol.slots dd {
+    margin: 0;
+    padding: 0; }
+  ol.slots dt.title, ol.slots dt.thumbnail, ol.slots dt.actions {
+    display: none !important; }
+  ol.slots dd.title a {
+    font-size: 14pt;
+    font-weight: bold;
+    text-decoration: none; }
+  ol.slots dd.title a:hover {
+    text-decoration: underline; }
+  ol.slots div.thumbnail {
+    left: 48px;
+    width: 336px;
+    height: 189px;
+    border-top: none;
+    border-bottom: none; }
+  ol.slots div.thumbnail img, ol.slots div.thumbnail .swf {
+    max-width: 336px;
+    max-height: 189px; }
+  ol.slots dd.actions span.actions {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    border: none; }

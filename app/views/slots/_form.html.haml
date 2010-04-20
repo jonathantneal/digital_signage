@@ -1,9 +1,0 @@
--form_for(@slot) do |f|
-  %dl
-    %dt.sign Sign
-    %dd.sign=f.collection_select(:sign, Sign.all, :id, :title)
-    %dt.slide Slide
-    %dd.slide=f.collection_select(:slide, Slide.all, :id, :title)
-    %dt.order Order
-    %dd.order=f.text_field(:order)
-  .buttons=f.submit('Update')

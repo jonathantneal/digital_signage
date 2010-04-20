@@ -1,11 +1,10 @@
 ActionController::Routing::Routes.draw do |map|
   map.resources :users
 
-  map.resources :slots
-
   map.resources :slides
 
-  map.resources :signs
+  map.resources :signs, :has_many => :slots, :shallow => true
+  map.resources :slots, :collection => {:sort=>:post}
   map.check_in 'signs/:id/check_in', :controller => 'signs', :action => 'check_in'
 
   map.resources :users

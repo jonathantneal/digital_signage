@@ -14,13 +14,8 @@
         %dt.title Title
         %dd.title=link_to(slide.title, slide)
         %dt.thumbnail Preview
-        %dd{:class=>"thumbnail #{slide_type(slide)}", :style=>"background-color:##{slide.color};"}
-          -if slide.image?
-            %img{:src=>slide.uri, :alt=>slide.title+' thumbnail'}
-          -if slide.swf?
-            .swf
-              %object{:type=>'application/x-shockwave-flash', :data=>slide.uri, :width=>336, :height=>189}
-                %param{:name=>'movie', :value=>slide.uri}
+        %dd.thumbnail
+          =render(:partial=>'shared/thumbnail', :locals=>{:slide=>slide})
         %dt.status Status
         %dd.status{:class=>slide_status(slide)}&=slide_status(slide)
         %dt.owner Owner

@@ -1,6 +1,6 @@
-!preview_width = 300px
-!default_border = solid 1px #123357
-!default_border_radius = 0 5px 5px 0
+@import settings.sass
+
+@import thumbnails.sass
 
 ul.slides
   margin: 0
@@ -9,17 +9,18 @@ ul.slides
   
   li
     position: relative
-    min-height: 149px
-    margin: 20px 0
-    padding: 20px 20px 20px 336px
+    min-height= !thumbnail_height - (!default_padding * 2)
+    margin= !default_padding 0
+    padding= !default_padding
+    padding-left= !thumbnail_width
     text-align: right
     border= !default_border
     background: #D3E1F0
-    border-radius= !default_border_radius
-    -moz-border-radius= !default_border_radius
-    -webkit-border-radius= !default_border_radius
+    border-radius= !default_border_radius_right
+    -moz-border-radius= !default_border_radius_right
+    -webkit-border-radius= !default_border_radius_right
     
-  dl
+  dl, dd
     margin: 0
     padding: 0
     
@@ -34,26 +35,10 @@ ul.slides
   dd.title a:hover
     text-decoration: underline
 
-  dd.thumbnail
-    position: absolute
-    margin: 0
-    padding: 0
-    top: 0
-    left: 0
-    width: 336px
-    height: 189px
-    text-align: center
-    border-right= !default_border
-  
-  dd.thumbnail.video
-    background-image: url(../images/video_thumbnail.jpg)
-
-  dd.thumbnail img, dd.thumbnail .swf
-    width: auto
-    height: auto
-    max-width: 336px
-    max-height: 189px
-    border: none
+  div.thumbnail
+    border-top: none
+    border-bottom: none
+    border-left: none
 
   dd.actions span.actions
     position: absolute
@@ -61,18 +46,20 @@ ul.slides
     bottom: 10px
     border: none
 
-dt.thumbnail
-  display: block
-  float: right !important
-  width= !preview_width
+dl.slide
 
-dd.thumbnail img, dd.thumbnail .swf
-  float: right
-  clear: right
-  width= !preview_width
-  margin: 0 0 10px 10px
-  padding: 1px
-  border= !default_border
+  dt.thumbnail
+    display: block
+    position: absolute
+    top= 60px
+    right= !default_padding
+    width= !thumbnail_width
+
+  dd.thumbnail
+    position: absolute
+    top= 90px
+    right= !default_padding    
+    width= !thumbnail_width
 
 dd.url a
   display: block
