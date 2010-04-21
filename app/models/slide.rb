@@ -8,8 +8,8 @@ class Slide < ActiveRecord::Base
   validates_uri_existence_of :uri
   validates_inclusion_of :resize, :in => self::RESIZE_OPTIONS
   belongs_to :user
-  has_many :schedules
-  has_many :slots
+  has_many :schedules, {:dependent=>:destroy}
+  has_many :slots, {:dependent=>:destroy}
   has_many :signs, :through => :slots
   accepts_nested_attributes_for :schedules, :allow_destroy => true
 
