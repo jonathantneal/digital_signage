@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100414185905) do
+ActiveRecord::Schema.define(:version => 20100421181900) do
 
   create_table "schedules", :force => true do |t|
     t.integer  "slide_id",                      :null => false
@@ -20,17 +20,19 @@ ActiveRecord::Schema.define(:version => 20100414185905) do
   end
 
   create_table "signs", :force => true do |t|
-    t.string   "name",          :limit => 20,                    :null => false
-    t.string   "title",         :limit => 50,                    :null => false
-    t.integer  "width",                                          :null => false
-    t.integer  "height",                                         :null => false
-    t.boolean  "video",                       :default => false, :null => false
-    t.boolean  "audio",                       :default => false, :null => false
+    t.string   "name",                :limit => 20,                           :null => false
+    t.string   "title",               :limit => 50,                           :null => false
+    t.boolean  "video",                             :default => false,        :null => false
+    t.boolean  "audio",                             :default => false,        :null => false
     t.time     "on"
     t.time     "off"
     t.datetime "last_check_in"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "full_screen_mode",                  :default => "fullscreen"
+    t.float    "transition_duration",               :default => 1.0
+    t.integer  "reload_interval",                   :default => 300
+    t.integer  "check_in_interval",                 :default => 180
   end
 
   create_table "slides", :force => true do |t|

@@ -2,9 +2,12 @@
 %sign{:name=>@sign.name,
       :title=>@sign.title,
       :video=>to_yn(@sign.video),
+      :audio=>to_yn(@sign.audio),
+      :transition_duration=>@sign.transition_duration,
+      :reload_interval=>@sign.reload_interval,
       :check_in_url=>check_in_url,
-      :last_check_in=>@sign.last_check_in.try(:to_s, :rfc822),
-      :lastupdate=>DateTime.now.to_s(:rfc822)}
+      :check_in_interval=>@sign.check_in_interval,
+      :last_check_in=>@sign.last_check_in.try(:to_s, :rfc822)}
   %slides
     -@sign.slides.each do |slide|
       -if !slide.expired? && slide.published

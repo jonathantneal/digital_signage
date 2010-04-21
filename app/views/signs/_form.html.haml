@@ -4,11 +4,20 @@
     %dd.name=f.text_field(:name)
     %dt.title=f.label(:title)
     %dd.title=f.text_field(:title)
-    %dt.size Size
-    %dd.size
-      =f.text_field(:width)
-      x
-      =f.text_field(:height)
+    %dt.full_screen_mode=f.label(:full_screen_mode)
+    %dd.full_screen_mode=f.select(:full_screen_mode, Sign::FULL_SCREEN_MODES)
+    %dt.transition.seconds=f.label(:transition_duration)
+    %dd.transition.seconds
+      =f.text_field(:transition_duration)
+      seconds
+    %dt.reload.seconds=f.label(:reload_interval)
+    %dd.reload.seconds
+      =f.text_field(:reload_interval)
+      seconds
+    %dt.check_in.seconds=f.label(:check_in_interval)
+    %dd.check_in.seconds
+      =f.text_field(:check_in_interval)
+      seconds
     %dt.video=f.label(:video)
     %dd.video=f.check_box(:video)
     %dt.audio=f.label(:audio)
