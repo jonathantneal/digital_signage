@@ -62,7 +62,7 @@ module AuthlogicNetID
           UserSession::netid_service_uri,
           :ssl_client_key => OpenSSL::PKey::RSA.new(File.read(UserSession::ssl_key_path), UserSession::ssl_key_password),
           :ssl_client_cert => OpenSSL::X509::Certificate.new(File.read(UserSession::ssl_cert_path)),
-          :verify_ssl => OpenSSL::SSL::VERIFY_NONE
+          :verify_ssl => false
         )
 
         valid = (dirsvc['CheckCredentials'].post(:netid => send(netid_login_field), :password => password || send(netid_password_field)) == 'true')
