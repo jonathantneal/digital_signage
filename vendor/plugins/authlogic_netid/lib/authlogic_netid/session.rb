@@ -106,7 +106,7 @@ module AuthlogicNetID
           netid_service_uri,
           :ssl_client_key => OpenSSL::PKey::RSA.new(File.read(ssl_key_path), ssl_key_password),
           :ssl_client_cert => OpenSSL::X509::Certificate.new(File.read(ssl_cert_path)),
-          :verify_ssl => OpenSSL::SSL::VERIFY_NONE
+          :verify_ssl => false
         )
 
         valid = (dirsvc['CheckCredentials'].post(:netid => netid_login, :password => netid_password) == 'true')
