@@ -13,7 +13,7 @@ class SlotsController < ApplicationController
     if @slot.destroy
       flash[:notice] = 'Slot deleted'
     end
-    redirect_to(slots_url)
+    redirect_to(sign_slots_url(@slot.sign))
   end
 
   def sort
