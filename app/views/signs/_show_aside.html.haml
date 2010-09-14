@@ -1,9 +1,13 @@
 -content_for(:extra)do
-  %h2 Last Check-In
-  %ul.stacked
-    %li
-      &=time_ago_in_words(@sign.last_check_in)
-      ago
+  -if @sign.checked_in?
+    %h2 Last Check-In
+    %ul.stacked
+      %li
+        &=time_ago_in_words(@sign.last_check_in)
+        ago
+      %li
+        from
+        &=@sign.last_ip
       
   %h2 Content
   %ul.stacked
