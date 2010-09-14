@@ -64,7 +64,7 @@ class SignsController < ApplicationController
     @sign = Sign.find_by_id(params[:id]) || Sign.find_by_name(params[:id])
     @sign.last_check_in = DateTime.now
     @sign.last_ip = request.remote_ip
-    @sign.save
+    @sign.save(false)
     respond_to do |format|
       format.xml
     end

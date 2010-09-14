@@ -9,7 +9,7 @@ class Sign < ActiveRecord::Base
   validates_numericality_of :reload_interval, :only_integer => true, :greater_than => 0
   validates_numericality_of :check_in_interval, :only_integer => true, :greater_than => 0
   validates_inclusion_of :full_screen_mode, :in => FULL_SCREEN_MODES
-  validates_format_of :name, :with => /^[a-zA-Z0-9-]+$/
+  validates_format_of :name, :with => /^[a-zA-Z0-9_-]+$/
   has_many :slots, {:dependent=>:destroy}
   has_many :slides, :through => :slots
 
