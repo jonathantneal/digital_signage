@@ -1,0 +1,18 @@
+-content_for(:extra)do
+  %h2 Last Check-In
+  %ul.stacked
+    %li
+      &=time_ago_in_words(@sign.last_check_in)
+      ago
+      
+  %h2 Content
+  %ul.stacked
+    %li
+      %em.number=@sign.active_slides.length
+      active slides
+    %li
+      %em.number=@sign.expired_slides.length
+      expired slides
+    %li
+      %em.number=(@sign.active_slides_time / 60)
+      minutes of content

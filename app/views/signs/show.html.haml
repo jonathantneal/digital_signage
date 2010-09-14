@@ -17,7 +17,7 @@
   %dt Check-In Interval
   %dd
     &=@sign.check_in_interval
-    seconds    
+    seconds
   %dt Video
   %dd&=@sign.video
   %dt Audio
@@ -27,4 +27,6 @@
     &=@sign.on.try(:to_s,:time) || '?'
     to
     &=@sign.off.try(:to_s,:time) || '?'
-=render(:partial=>'shared/action_links', :locals=>{:object=>@sign, :except=>:view})
+=render('shared/action_links', :object=>@sign, :except=>:view)
+
+=render('show_aside')

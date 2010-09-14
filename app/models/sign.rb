@@ -26,7 +26,7 @@ class Sign < ActiveRecord::Base
   end
   
   def expired_slides
-    self.slides.reject { |s| s.expired? }
+    self.slides.reject { |s| !s.expired? }
   end
 
   def active_slides_time
@@ -34,7 +34,7 @@ class Sign < ActiveRecord::Base
   end
   
   def loop_time # alias
-    active_content_time
+    active_slides_time
   end
 
 end
