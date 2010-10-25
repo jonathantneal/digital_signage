@@ -59,6 +59,7 @@ class Schedule < ActiveRecord::Base
   end
   
   def same_day?(time1, time2)
+    return false if time1.nil? || time2.nil?
     return time1.year == time2.year && time1.yday == time2.yday
   end
   
