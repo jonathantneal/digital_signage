@@ -23,44 +23,38 @@ class Schedule < ActiveRecord::Base
     @now = Time.now
   end
   
-  def time
-    if self.really_today?
-      return self.parse.advance(:weeks => -1)
+  def time(now=@now)
+    if self.really_today?(now)
+      return self.parse(now).advance(:weeks => -1)
     else
-      return self.parse
+      return self.parse(now)
     end
   end
   
   protected
   def parse(now=@now)
-    return Chronic.parse(self.when, { :now => now })
+    return Chronic.parse(self.when, :now => now)
   end
   
   # If today is Monday and the string to parse is 'Monday' Chronic will assume
-  # it's next Monday, rather than today. This code get's around that
-  def really_today?
+  # it's next Monday, rather than today. This code detects that
+  def really_today?(now=@now)
   
     parsed_time = self.parse
-    one_week = @now.advance(:weeks => 1)
+    next_week = now.advance(:weeks => 1)
     
     # If the parsed date is one week from today
-    if self.same_day?(parsed_time, one_week)
+    if parsed_time.same_day?(next_week)
       
-      one_week_parsed_time = self.parse(one_week)
-      two_weeks = @now.advance(:weeks => 2)
+      last_week_parsed_time = self.parse(now.advance(:weeks => -1))
     
-      # If parsing the date one week from now gives us two weeks from now
-      return true if self.same_day?(one_week_parsed_time, two_weeks)
+      # If parsing the date one week ago gives us today
+      return true if last_week_parsed_time.same_day?(now)
       
     end
     
     return false
     
-  end
-  
-  def same_day?(time1, time2)
-    return false if time1.nil? || time2.nil?
-    return time1.year == time2.year && time1.yday == time2.yday
   end
   
   public

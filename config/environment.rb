@@ -8,16 +8,17 @@ require File.join(File.dirname(__FILE__), 'boot')
 
 Rails::Initializer.run do |config|
 
-  config.gem 'authlogic', :version => '2.1.3'
-  config.gem 'cancan', :version => '1.0.2'
-  config.gem 'chronic', :version => '0.2.3'
-  config.gem 'haml', :version => '2.2.17'
-  config.gem 'highline', :version => '1.5.2'
-  config.gem 'jrails', :version => '0.6.0'
-  config.gem 'mysql', :version => '2.8.1'
-  config.gem 'searchlogic', :version => '2.4.2'
-  config.gem 'ssl_requirement', :version => '0.1.0'
-  config.gem 'will_paginate', :version => '2.3.12'
+  config.gem 'authlogic', :version => '~>2.1.3'
+  config.gem 'cancan', :version => '~>1.0.2'
+  config.gem 'chronic', :version => '~>0.3.0'
+  config.gem 'haml', :version => '~>2.2.17'
+  config.gem 'highline', :version => '~>1.5.2'
+  config.gem 'jrails', :version => '~>0.6.0'
+  config.gem 'mysql', :version => '~>2.8.1'
+  config.gem 'searchlogic', :version => '~>2.4.2'
+  config.gem 'tickle', :version => '~>0.1.7'
+  config.gem 'ssl_requirement', :version => '~>0.1.0'
+  config.gem 'will_paginate', :version => '~>2.3.12'
 
   config.time_zone = 'Pacific Time (US & Canada)'
 

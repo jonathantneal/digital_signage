@@ -49,56 +49,56 @@ class Slide < ActiveRecord::Base
     return self.type == 'application/x-shockwave-flash'
   end
   
-  def active?(time=Time.now)
+  def active?(now=Time.now)
     return false if !self.published
-    return !self.hidden?
+    return !self.hidden?(now)
   end
   
-  def inactive?(time=Time.now)
-    return !self.active?(time)
+  def inactive?(now=Time.now)
+    return !self.active?(now)
   end
   
-  def showing?(time=Time.now)
+  def showing?(now=Time.now)
     return true if self.schedules.empty?
-    return self.previous_schedule.activate? unless self.previous_schedule.nil?
-    return self.next_schedule.deactivate? unless self.next_schedule.nil?
+    return self.previous_schedule(now).activate? unless self.previous_schedule(now).nil?
+    return self.next_schedule(now).deactivate? unless self.next_schedule(now).nil?
     return false  
   end
   
-  def hidden?(time=Time.now)
-    return !self.showing?
+  def hidden?(now=Time.now)
+    return !self.showing?(now)
   end
 
-  def expired?
-    return self.hidden? && self.future_schedules.empty?
+  def expired?(now=Time.now)
+    return self.hidden?(now) && self.future_schedules(now).empty?
   end
 
-  def expired_at
-    return self.previous_schedule.try(:time) unless !self.expired?
+  def expired_at(now=Time.now)
+    return self.previous_schedule(now).try(:time) if self.expired?(now)
   end
 
-  def sorted_schedules
-    self.schedules.sort! { |a,b| a.time <=> b.time }
+  def sorted_schedules(now=Time.now)
+    self.schedules.sort! { |a,b| a.time(now) <=> b.time(now) }
   end
   
-  def previous_schedule
-    self.past_schedules.last unless self.past_schedules.empty?
+  def previous_schedule(now=Time.now)
+    self.past_schedules(now).last unless self.past_schedules(now).empty?
   end
   
-  def past_schedules
-    self.sorted_schedules.reject { |s| s.time > Time.now }
+  def past_schedules(now=Time.now)
+    self.sorted_schedules(now).reject { |s| s.time(now) > now }
   end
 
-  def next_schedule
-    self.future_schedules.first unless self.future_schedules.empty?
+  def next_schedule(now=Time.now)
+    self.future_schedules(now).first unless self.future_schedules(now).empty?
   end
   
-  def future_schedules
-    self.sorted_schedules.reject { |s| s.time < Time.now }  
+  def future_schedules(now=Time.now)
+    self.sorted_schedules(now).reject { |s| s.time(now) < now }  
   end
   
-  def self.expired_slides
-    Slide.all.reject { |s| !s.expired? }
+  def self.expired_slides(now=Time.now)
+    Slide.all.reject { |s| !s.expired?(now) }
   end
   
   def self.total_time(slides)
