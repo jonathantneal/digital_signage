@@ -1,0 +1,8 @@
+%h2&=@document.name
+.content!=@document.content
+.tags
+  %h3 Tags
+  %ul.tags
+    -@document.tag_array.each do |tag|
+      %li!=link_to(tag, {:controller=>'documents', :tag=>tag})
+!=render('shared/action_links', :object=>@document, :except=>:view)

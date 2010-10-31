@@ -1,0 +1,5 @@
+newrelic:
+  monitor_mode: false
+  
+google_analytics:
+  enabled: false

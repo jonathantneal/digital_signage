@@ -1,0 +1,17 @@
+%ul.slides
+  -@slides.each do |slide|
+    %li
+      %dl
+        %dt.title Title
+        %dd.title=link_to(slide.title, slide)
+        %dt.thumbnail Preview
+        %dd.thumbnail
+          =render(:partial=>'shared/thumbnail', :locals=>{:slide=>slide})
+        %dt.status Status
+        %dd.status{:class=>slide_status(slide)}&=slide_status(slide)
+        %dt.owner Owner
+        %dd.owner=link_to(slide.user.name, slide.user)
+        %dt.actions Actions
+        %dd.actions=render(:partial => 'shared/action_links', :locals=>{:object=>slide})
+
+=will_paginate(@slides) unless @slides.empty?

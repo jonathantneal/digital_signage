@@ -1,0 +1,17 @@
+.search.summary!=page_entries_info(users, :entry_name=>'user')
+%table
+  %tr
+    %th Name
+    %th Email
+    %th Roles
+    %th Last login
+    %th.actions Actions
+  -users.each do |user|
+    %tr
+      %td!=link_to(user.name, user_path(user))
+      %td!=mail_to(user.email, user.email)
+      %td&=user.roles.join(', ')
+      %td&=time_ago_in_words(user.last_sign_in_at) unless user.last_sign_in_at.nil?
+      %td!=render('shared/action_links', :object=>user)
+      
+!=will_paginate(users)

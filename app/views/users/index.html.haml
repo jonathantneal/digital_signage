@@ -1,16 +1,9 @@
-%h1 Users
-%table
-  %tr
-    %th Name
-    %th Email
-    %th Slides
-    %th Last Login
-    %th.actions Actions
-  -@users.each do |user|
-    %tr
-      %td=link_to(user.name, user)
-      %td=mail_to(user.email)
-      %td&=user.slides.length
-      %td&=user.last_login_at.try(:to_s, :long)
-      %td=render(:partial=>'shared/action_links', :locals=>{:object=>user})
-=render('index_aside')
+-form_for(@search, :html=>{:class=>'search'}) do |f|
+  !=f.label :username_or_first_name_or_last_name_like, 'Search'
+  !=f.text_field :username_or_first_name_or_last_name_like
+  !=f.submit 'Search'
+
+.search_results
+  !=render('users', :users=>@users)
+      
+!=render('index_aside')

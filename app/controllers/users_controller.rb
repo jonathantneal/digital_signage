@@ -1,10 +1,21 @@
 class UsersController < ApplicationController
 
-  load_and_authorize_resource
+  before_filter :authenticate_user!
+  filter_resource_access
 
   # GET /users
   def index
-    @users = User.all
+
+    @search = User.with_permissions_to(:index).search(params[:search])
+    @users = @search.paginate(:page => params[:page])
+
+    @user = User.new
+
+    respond_to do |format|
+      format.html # index.html.haml
+      format.js { render :partial => 'users' }
+    end
+
   end
 
   # GET /users/1
@@ -13,10 +24,6 @@ class UsersController < ApplicationController
 
   # GET /users/new
   def new
-  end
-
-  # GET /users/1/edit
-  def edit
   end
 
   # POST /users
@@ -29,14 +36,16 @@ class UsersController < ApplicationController
     end
   end
 
-  # PUT /users/1
-  def update
-    if @user.update_attributes(params[:user])
+  # GET /users/1/auto_update
+  def auto_update
+  
+    # @user.update_from_directory should be triggered automatically
+    
+    if @user.save
       flash[:notice] = 'User updated'
-      redirect_to(@user)
-    else
-      render :action => 'edit'
     end
+    redirect_to(@user)
+    
   end
 
   # DELETE /users/1

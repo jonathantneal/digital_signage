@@ -1,0 +1,11 @@
+security:
+  login:
+    allow_bypass: false
+  https_available: false
+    
+newrelic:
+  monitor_mode: false  
+  developer_mode: true
+  
+google_analytics:
+  enabled: false

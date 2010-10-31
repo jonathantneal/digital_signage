@@ -1,0 +1,11 @@
+-content_for(:aside) do
+  #gsfn_list_widget
+    %h2
+      %a.widget_title(href="http://#{@config.domain}/#{@config.company}") Active Discussions
+    #gsfn_content Loading...
+    .powered_by
+      %a(href="http://#{@config.domain}/")
+        %img(alt="Favicon" src="http://getsatisfaction.com/favicon.gif" style="vertical-align: middle;")
+      %a(href="http://#{@config.domain}/") Get Satisfaction support network
+  %script(src="http://#{@config.domain}/#{@config.company}/widgets/javascripts/#{@config.widget_id}/widgets.js" type="text/javascript")
+  %script(src="http://#{@config.domain}/#{@config.company}/topics.widget?callback=gsfnTopicsCallback&amp;length=0&amp;limit=10&amp;sort=recently_active" type="text/javascript")

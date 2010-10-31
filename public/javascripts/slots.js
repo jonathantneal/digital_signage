@@ -5,7 +5,7 @@ $(document).ready(function() {
     containment: 'parent',
     axis:'y',
     update: function() {
-      $.post('../../slots/sort', $(this).sortable('serialize'));
+      $.post(ROOT_URL+'slots/sort', $(this).sortable('serialize'));
     }
   });
 

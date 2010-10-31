@@ -1,11 +1,27 @@
-%h1&=@user.name
+%h2.name&=@user.name
+
 %dl
-  %dt Username
-  %dd&=@user.username
-  %dt Email
-  %dd=mail_to(@user.email)
-%h2 Slides
-%ul
-  -@user.slides.each do |slide|
-    %li=link_to(slide.title, slide_path(slide))
-=render(:partial=>'shared/action_links', :locals=>{:object=>@user, :except=>:view})
+
+  %dt.title Title
+  %dd.title&=@user.title
+
+  %dt.department Department
+  %dd.department&=@user.department
+
+  %dt.photo Photo
+  %dd.photo
+    %img{:src=>@user.photo_url, :alt=>@user.name}
+
+  %dt.username Net ID
+  %dd.username&=@user.username
+
+  %dt.email Email
+  %dd.email!=mail_to @user.email, @user.email
+
+  %dt.roles Roles
+  -@user.roles.each do |role|
+    %dd.role&=role
+
+!=render('shared/action_links', :object=>@user, :exclude=>:view, :include=>:auto_update)
+
+!=render('show_aside')

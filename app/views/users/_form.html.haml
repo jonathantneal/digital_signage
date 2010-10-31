@@ -1,11 +1,8 @@
 -form_for(@user) do |f|
+
   %dl
-    %dt.username=f.label(:username)
-    %dl.username=f.text_field(:username)
-    %dt.first_name=f.label(:first_name)
-    %dl.first_name=f.text_field(:first_name)
-    %dt.last_name=f.label(:last_name)
-    %dl.last_name=f.text_field(:last_name)
-    %dt.email=f.label(:email)
-    %dl.email=f.text_field(:email)
-  .buttons=f.submit('Save')
+
+    %dt.username!=f.label :username, 'Net ID'
+    %dd.username!=f.text_field :username
+
+  .buttons!=f.submit 'Save'

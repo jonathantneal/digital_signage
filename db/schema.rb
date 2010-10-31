@@ -9,7 +9,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100914191127) do
+ActiveRecord::Schema.define(:version => 20101030231207) do
+
+  create_table "announcements", :force => true do |t|
+    t.datetime "show_at"
+    t.text     "announcement"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "documents", :force => true do |t|
+    t.string   "name"
+    t.text     "content"
+    t.string   "slug"
+    t.string   "tags"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "schedules", :force => true do |t|
     t.integer  "slide_id",                      :null => false
@@ -18,6 +34,16 @@ ActiveRecord::Schema.define(:version => 20100914191127) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "sessions", :force => true do |t|
+    t.string   "session_id", :null => false
+    t.text     "data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
+  add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
 
   create_table "signs", :force => true do |t|
     t.string   "name",                :limit => 20,                           :null => false
@@ -57,21 +83,24 @@ ActiveRecord::Schema.define(:version => 20100914191127) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "username",           :limit => 20,                  :null => false
-    t.string   "first_name",         :limit => 20,  :default => "", :null => false
-    t.string   "last_name",          :limit => 20,  :default => "", :null => false
-    t.string   "email",              :limit => 50,  :default => "", :null => false
-    t.integer  "roles_mask",                        :default => 0,  :null => false
-    t.string   "persistence_token",  :limit => 128, :default => "", :null => false
-    t.integer  "login_count",                       :default => 0,  :null => false
-    t.integer  "failed_login_count",                :default => 0,  :null => false
-    t.datetime "last_request_at"
-    t.datetime "current_login_at"
-    t.datetime "last_login_at"
-    t.string   "current_login_ip",   :limit => 15,  :default => "", :null => false
-    t.string   "last_login_ip",      :limit => 15,  :default => "", :null => false
+    t.string   "username",            :limit => 20,                  :null => false
+    t.string   "first_name",          :limit => 20,  :default => "", :null => false
+    t.string   "last_name",           :limit => 20,  :default => "", :null => false
+    t.string   "email",               :limit => 50,  :default => "", :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "title",               :limit => 50,  :default => "", :null => false
+    t.string   "department",          :limit => 50,  :default => "", :null => false
+    t.string   "photo_url",           :limit => 200, :default => "", :null => false
+    t.string   "affiliations",        :limit => 100, :default => "", :null => false
+    t.string   "entitlements",        :limit => 500, :default => "", :null => false
+    t.string   "remember_token"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count"
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
   end
 
 end

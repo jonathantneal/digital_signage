@@ -1,0 +1,26 @@
+-@config = AppConfig.feedback
+-if current_user
+  -require 'ruby/fastpass'
+  -FastPass.domain = @config.domain
+  !=FastPass.script(@config.fastpass.key, @config.fastpass.secret, current_user.email, current_user.name, current_user.username)
+
+:javascript
+  var is_ssl = ("https:" == document.location.protocol);
+  var asset_host = is_ssl ? "https://s3.amazonaws.com/getsatisfaction.com/" : "http://s3.amazonaws.com/getsatisfaction.com/";
+  document.write(unescape("%3Cscript src='" + asset_host + "javascripts/feedback-v2.js' type='text/javascript'%3E%3C/script%3E"));
+
+:javascript
+  var feedback_widget_options = {};
+  feedback_widget_options.display = "inline";
+  feedback_widget_options.company = "#{@config.company}";
+  feedback_widget_options.product = "#{@config.product}";
+  feedback_widget_options.style = "#{@config.default_tab}";
+  feedback_widget_options.custom_css = "#{@config.custom_css}";
+  feedback_widget_options.limit = "#{@config.question_limit}";
+  
+  GSFN.feedback_widget.prototype.local_base_url = "http://#{@config.domain}";
+  GSFN.feedback_widget.prototype.local_ssl_base_url = "http://#{@config.domain}";
+  
+  var feedback_widget = new GSFN.feedback_widget(feedback_widget_options);
+
+!=render('feedback_aside')

@@ -2,61 +2,30 @@
 !!!
 %html{:xmlns => "http://www.w3.org/1999/xhtml", "xml:lang" => "en", :lang => "en"}
   %head
-    %title= h(yield(:title) || "Sign Manager")
-    %meta{"http-equiv"=>"Content-Type", :content=>"text/html; charset=utf-8"}/
-    %link{"rel"=>"icon", "type"=>"image/png", "href"=>"http://media1.biola.edu/biola/img/biola-icon.png"}
-    = stylesheet_link_tag 'main'
-    = stylesheet_link_tag 'application'
-    = controller_stylesheet_link_tag
-    = javascript_include_tag :defaults
-    = controller_javascript_include_tag
-    = yield(:head)
+    !=render('layouts/head')
   %body
-    #wrapperHeader
-      #header
-        #brandingBiola
-          %a#logo(href="http://www.biola.edu") Biola University
-        %ul#navMain
-          %li
-            %a(href="http://www.biola.edu/about")About
-          %li
-            %a(href="http://www.biola.edu/academics")Academics
-          %li
-            %a(href="http://www.biola.edu/admissions")Admissions
-          %li
-            %a(href="http://www.biola.edu/athletics")Athletics
-          %li
-            %a(href="http://www.biola.edu/news")News &amp; Events
-          %li
-            %a(href="http://www.biola.edu/resources")Resources
-          %li
-            %a(href="http://www.biola.edu/offices")Offices
-          %li
-            %a(href="http://www.biola.edu/find/")Search
-    #wrapperTitle
-      #branding
-        #siteTitle
-          = link_to "THI Student Evaluations", root_path
-      - if !current_user.nil?
-        #logout
-          =link_to "Logout", logout_path
-        #profile
-          #profile_photo
-            %img{:src => "https://wisdom2.biola.edu/portal_graphics/photos/#{current_user.username}.jpg", :alt => "profile photo"}
-          #profile_name 
-            = link_to "#{current_user.first_name} #{current_user.last_name}", current_user
-    #messages
-      = render :partial => 'layouts/messages'
-    #wrapperContent
-      #content
-        = tabnav :main
-        #contentMain
-          = yield
-        #contentExtra
-          = yield :extra || ""
-    #wrapperFooter
-      #footer
-      %p#legal
-        &copy;2009 Biola University
-        %a(href="terms-of-service")Terms of Service
-        %a#ithelpdesk(href="http://offices.biola.edu/it/")IT Helpdesk
+    !=admin_menu
+    #wrapper
+      !=render('layouts/biola_header')
+      #wrapperTitle
+        #branding
+          #siteTitle!=link_to('Application Name', root_path)
+        -unless current_user.nil?
+          !=render('layouts/profile')
+        !=render('layouts/navigation_aside')
+      #wrapperPage
+        #page{:class=>"#{controller_name} #{action_name}"}
+          !=render('layouts/navigation')
+          #wrapperContent
+            !=render('layouts/messages')
+            #content!=yield
+          #contentAside
+            !=yield(:aside || '')
+            -documents = Document.tagged(controller.controller_name)
+            -unless documents.empty?
+              %h2 Documentation
+              %ul.documents
+                -documents.each do |doc|
+                  %li!=link_to(doc.name, document_path(doc))
+        #pageFooter
+      !=render('layouts/biola_footer')

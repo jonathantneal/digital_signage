@@ -1,7 +1,7 @@
 -@slide = Slide.new
--content_for(:extra)do
+-content_for(:aside) do
   %h2 Actions
-  -if can?(:create, @slide)
+  -if permitted_to?(:create, :slides)
     .box
       %h3.add New slide
       =render(:partial => 'form')

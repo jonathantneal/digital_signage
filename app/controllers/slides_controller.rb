@@ -1,6 +1,7 @@
 class SlidesController < ApplicationController
 
-  load_and_authorize_resource
+  before_filter :authenticate_user!
+  filter_resource_access
 
   # GET /slides
   # GET /slides.xml
@@ -9,6 +10,7 @@ class SlidesController < ApplicationController
     @slides, @slides_count = @search.all.paginate(:page=>params[:page], :per_page=>10), @search.count
     respond_to do |format|
       format.html
+      format.js { render :partial => 'slides' }
       format.xml
     end
   end

@@ -1,0 +1,12 @@
+td a.sort {
+  display: block;
+  float: left;
+  width: 16px;
+  height: 16px;
+  margin: 0 5px;
+  padding: 0 !important;
+  text-indent: 99999px;
+  overflow: hidden; }
+
+span.actions a.sort {
+  background-image: url(../images/sort.png); }

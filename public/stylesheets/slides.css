@@ -31,7 +31,7 @@ ul.slides {
     padding-left: 336px;
     text-align: right;
     border: solid 1px #123357;
-    background: #D3E1F0;
+    background: #d3e1f0;
     border-radius: 0 5px 5px 0;
     -moz-border-radius: 0 5px 5px 0;
     -webkit-border-radius: 0 5px 5px 0; }
@@ -78,7 +78,7 @@ dd.color, dd.color input {
   display: block;
   width: 75px !important;
   height: 30px;
-  border: solid 1px #666;
+  border: solid 1px #666666;
   cursor: pointer; }
 
 form dd.color {
@@ -90,7 +90,7 @@ ul.signs {
   padding-left: 10px;
   list-style-type: none; }
 
-#contentExtra .box h2 {
-  color: #000; }
-#contentExtra div.schedule {
+#contentAside .box h2 {
+  color: black; }
+#contentAside div.schedule {
   display: none; }

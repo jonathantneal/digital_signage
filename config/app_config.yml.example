@@ -1,0 +1,129 @@
+# Environment specific settings can be defined in /config/environments/[RAILS_ENV].yml
+
+app:
+  name: &app_name App Name
+
+security:
+  key_path: /path/to/key.pem
+  key_password: *****************
+  cert_path: /path/to/cert.pem
+  verify_ssl: true
+  https_available: true
+  
+  login:
+    required: true # for reporting only, doesn't turn authentication on or off
+    forgot_url: "https://www.example.com/forgot-password"
+    auto_create_users: true
+    allow_bypass: false # should only be usid in development
+    allowed_roles:
+    - employee
+    impersonation:
+      enable: false
+      allowed_groups:
+      - it
+      allowed_roles:
+      - admin
+      
+  users:
+    auto_update: true
+      
+  roles:
+    base_entitlement: "company:app:"
+    include_affiliations: true
+    
+  session:
+    key: _app_name_session
+    secret: 4e9495adc1372ca773fba4d2287153f84c93187367c33044bc55fc626177a34a8a8ca54da7c96132f3358c86aafeabbeb35a8b6547299118ce553272a543810d
+    # Run rake secret to generate a new secret string
+
+email:
+  from: no-reply@example.com
+  developer: developer@example.com
+  smtp:
+    server: smtp.example.com
+    domain: example.com # Used in HELO handshaking
+    port: 25
+    enable_tls: true
+    auth_type: login
+    username: user@example.com
+    password: ****************
+
+ui:
+  menu: # accepts text, url, controller, action and css_class
+  - controller: dashboard
+    action: show
+  - controller: users
+  menu_aside:
+  - controller: pages
+    action: feedback
+    text: Feedback
+    css_class: feedback
+  - controller: documents
+    css_class: documents
+  - controller: announcements
+    css_class: announcements
+  admin_menu:
+  - controller: users
+  - url: http://apps.biola.edu/access
+    text: Access
+    css_class: access
+  - url: https://www.google.com/analytics/reporting/
+    text: Analytics
+    css_class: analytics
+  - controller: info
+    action: performance
+    text: Performance
+  - controller: info
+    action: database
+    text: Database
+  - controller: info
+    action: config
+    text: Config
+  pagination:
+    per_page: 10
+
+feedback:
+  domain: getsatisfaction.example.com
+  fastpass:
+    key: **********
+    secret: ****************************
+  widget_id: 0000000000
+  company: company_name
+  product: product_name
+  custom_css: http://example.com/path/to/css/file.css
+  default_tab: idea
+  question_limit: 5
+  
+google_analytics:
+  enabled: true
+  web_property_id: XX-00000-00
+  
+routing:
+  default:
+    controller: dashboard
+    action: show
+    
+developer:
+  title: Example Company
+  homepage: http://example.com
+  
+# For more info: http://github.com/newrelic/rpm/blob/944dc0a6c9c8fe8fc2771e58d07aa8a30d00650d/newrelic.yml
+newrelic:
+  license_key: '***************************************'
+  app_name: *app_name
+  monitor_mode: true
+  developer_mode: false
+  log_level: info
+  ssl: false
+  apdex_t: 0.5 
+  capture_params: false
+  transaction_tracer:
+    enabled: true
+    transaction_threshold: apdex_f
+    record_sql: obfuscated
+    stack_trace_threshold: 0.500
+  error_collector:
+    enabled: true
+    capture_source: true    
+    ignore_errors: ActionController::RoutingError
+  link: http://rpm.newrelic.com

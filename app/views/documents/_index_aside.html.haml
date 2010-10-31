@@ -1,0 +1,5 @@
+-content_for(:aside) do
+  -if permitted_to? :create, :documents
+    %h2 Actions
+    .box
+      %h3.add!=link_to('New document', new_document_path)

@@ -1,0 +1,12 @@
+%h2 Documentation
+
+-form_for(@search, :html=>{:class=>'search'}) do |f|
+  !=hidden_field_tag(:tag, params[:tag])
+  !=f.label(:name_or_slug_or_tags_like, 'Search')
+  !=f.text_field(:name_or_slug_or_tags_like)
+  !=f.submit('Search')
+
+.search_results
+  !=render('documents', :documents=>@documents)
+            
+!=render('index_aside')

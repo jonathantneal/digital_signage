@@ -1,0 +1,2 @@
+newrelic:
+  monitor_mode: true

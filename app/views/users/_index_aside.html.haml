@@ -1,7 +1,6 @@
--@user = User.new
--content_for(:extra)do
+-content_for(:aside) do
   %h2 Actions
-  -if can?(:create, @user)
+  -if permitted_to? :create, :users
     .box
       %h3.add New user
-      =render(:partial => 'form')
+      !=render('form')

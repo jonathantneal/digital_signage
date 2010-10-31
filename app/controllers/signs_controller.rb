@@ -1,7 +1,7 @@
 class SignsController < ApplicationController
 
-  authorize_resource
-  # we're not calling load_resource because we want to support names as well as IDs
+  before_filter :authenticate_user!, :except=>[:show, :check_in]
+  filter_access_to :index, :new, :edit, :create, :update, :destroy
 
   # GET /signs
   def index
@@ -59,7 +59,7 @@ class SignsController < ApplicationController
     redirect_to(signs_url)
   end
   
-  # GET /signs/1/checkin
+  # GET /signs/1/check_in
   def check_in
     @sign = Sign.find_by_id(params[:id]) || Sign.find_by_name(params[:id])
     @sign.last_check_in = DateTime.now

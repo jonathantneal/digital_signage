@@ -1,62 +1,24 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :users
-
-  map.resources :slides
-
-  map.resources :signs, :has_many => :slots, :shallow => true
-  map.resources :slots, :collection => {:sort=>:post}
-  map.check_in 'signs/:id/check_in', :controller => 'signs', :action => 'check_in'
-
-  map.resources :users
-  
-  map.resources :dashboard
-
-  map.resources :user_sessions
-  map.login 'login', :controller => 'user_sessions', :action => 'new'
-  map.logout 'logout', :controller => 'user_sessions', :action => 'destroy'
 
   # The priority is based upon order of creation: first created -> highest priority.
 
-  # Sample of regular route:
-  #   map.connect 'products/:id', :controller => 'catalog', :action => 'view'
-  # Keep in mind you can assign values other than :controller and :action
+  map.devise_for :users, :path_names=>{ :sign_in=>'login', :sign_out=>'logout' }
 
-  # Sample of named route:
-  #   map.purchase 'products/:id/purchase', :controller => 'catalog', :action => 'purchase'
-  # This route can be invoked with purchase_url(:id => product.id)
+  map.resources :announcements
+  map.resource :dashboards, :only=>:show
+  map.resources :documents
+  map.resources :users, :except=>[:new, :edit, :update], :member=>{:auto_update=>:get}
+  map.resources :info, :only=>[], :collection=>{:performance=>:get, :database=>:get, :config=>:get, :reload_config=>:get, :appinfo=>:get}
+  map.resources :slides
+  map.resources :signs, :has_many => :slots, :shallow => true, :member=>{:check_in=>:get}
+  map.resources :slots, :collection=>{:sort=>:post}
 
-  # Sample resource route (maps HTTP verbs to controller actions automatically):
-  #   map.resources :products
+  # Named routes
+  map.connect 'appinfo', :controller=>:info, :action=>:appinfo
 
-  # Sample resource route with options:
-  #   map.resources :products, :member => { :short => :get, :toggle => :post }, :collection => { :sold => :get }
+  map.root :controller => AppConfig.routing.default.controller, :action => AppConfig.routing.default.action
 
-  # Sample resource route with sub-resources:
-  #   map.resources :products, :has_many => [ :comments, :sales ], :has_one => :seller
-  
-  # Sample resource route with more complex sub-resources
-  #   map.resources :products do |products|
-  #     products.resources :comments
-  #     products.resources :sales, :collection => { :recent => :get }
-  #   end
-
-  # Sample resource route within a namespace:
-  #   map.namespace :admin do |admin|
-  #     # Directs /admin/products/* to Admin::ProductsController (app/controllers/admin/products_controller.rb)
-  #     admin.resources :products
-  #   end
-
-  # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
-  # map.root :controller => "welcome"
-
-  # See how all your routes lay out with "rake routes"
-
-  # Install the default routes as the lowest priority.
-  # Note: These default routes make all actions in every controller accessible via GET requests. You should
-  # consider removing or commenting them out if you're using named routes and resources.
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'
-
-  map.root :dashboard
 
 end

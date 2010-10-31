@@ -1,7 +1,7 @@
 -@sign = Sign.new
--content_for(:extra)do
+-content_for(:aside)do
   %h2 Actions
-  -if can?(:create, @sign)
+  -if permitted_to?(:create, :signs)
     .box
       %h3.add New sign
       =render(:partial => 'form')

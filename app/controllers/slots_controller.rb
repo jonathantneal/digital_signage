@@ -1,11 +1,12 @@
 class SlotsController < ApplicationController
 
-  load_and_authorize_resource
+  #before_filter :authenticate_user!
+  #filter_access_to :index, :destroy, :sort
 
   # GET /slots
   def index
     @sign = Sign.find_by_id(params[:sign_id]) || Sign.find_by_name(params[:sign_id])
-    @slots = Slot.all(:conditions=>"sign_id=#{@sign.id}", :order=>'`order`')
+    @slots = Slot.all(:conditions=>"sign_id=#{@sign.try(:id)}", :order=>'`order`')
   end
 
   # DELETE /slots/1

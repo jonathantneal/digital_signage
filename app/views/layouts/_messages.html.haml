@@ -1,2 +1,4 @@
-=message_block(:id=>'wrapperMessage')
--flash.discard
+-unless (messages = all_messages).empty?
+  %ul#messages
+    -messages.each do |msg|
+      %li{:class=>msg[:type]}=msg[:message]
