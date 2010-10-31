@@ -4,7 +4,7 @@
 *.cache
 *.log
 *.pid
-config/database.yml
-config/authlogic_netid.yml
+config/*.yml
+db/schema.rb
 db/*.sqlite3
 tmp/**/*
