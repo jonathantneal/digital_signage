@@ -1,11 +1,21 @@
 class Schedule < ActiveRecord::Base
 
+  ACTIVE_OPTIONS = [['hide',false], ['show',true]]
+
   attr_accessible :slide, :when, :active
   belongs_to :slide
+  
   validates_presence_of :slide, :when
   validates_uniqueness_of :when, :scope => :slide_id
-  
-  ACTIVE_OPTIONS = [['hide',false], ['show',true]]
+  def validate
+    if self.parse.nil?
+      errors.add(:when, "\"#{self.when}\" cannot be converted to a time")
+    end
+  end
+
+  def after_initialize
+    @now = Time.now
+  end
 
   def activate?
     return self.active
@@ -17,10 +27,6 @@ class Schedule < ActiveRecord::Base
 
   def action
     Schedule::ACTIVE_OPTIONS[self.active ? 1 : 0][0]    
-  end
-  
-  def after_initialize
-    @now = Time.now
   end
   
   def time(now=@now)

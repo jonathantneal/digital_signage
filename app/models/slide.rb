@@ -13,8 +13,8 @@ class Slide < ActiveRecord::Base
   has_many :signs, :through => :slots
   accepts_nested_attributes_for :schedules, :allow_destroy => true
 
-  def valid_schedules
-    self.schedules.reject{ |s| s.time.nil? }
+  def valid_schedules(now=@now)
+    self.schedules.reject{ |s| s.time(now).nil? }
   end
 
   def published?
@@ -63,7 +63,7 @@ class Slide < ActiveRecord::Base
   end
   
   def showing?(now=Time.now)
-    return true if self.valid_schedules.empty?
+    return true if self.valid_schedules(now).empty?
     return self.previous_schedule(now).activate? unless self.previous_schedule(now).nil?
     return self.next_schedule(now).deactivate? unless self.next_schedule(now).nil?
     return false  
@@ -82,7 +82,21 @@ class Slide < ActiveRecord::Base
   end
 
   def sorted_schedules(now=Time.now)
-    self.valid_schedules.sort! { |a,b| a.time(now) <=> b.time(now) }
+    self.schedules.sort! do |a,b|
+      a_time = a.time(now)
+      b_time = b.time(now)
+      if a_time.nil?
+        -1
+      elsif b_time.nil?
+        1
+      else
+        a_time <=> b_time
+      end
+    end
+  end
+  
+  def sorted_valid_schedules(now=Time.now)
+    self.valid_schedules(now).sort! { |a,b| a.time(now) <=> b.time(now) }
   end
   
   def previous_schedule(now=Time.now)
@@ -90,7 +104,7 @@ class Slide < ActiveRecord::Base
   end
   
   def past_schedules(now=Time.now)
-    self.sorted_schedules(now).reject { |s| s.time(now) > now }
+    self.sorted_valid_schedules(now).reject { |s| s.time(now) > now }
   end
 
   def next_schedule(now=Time.now)
@@ -98,7 +112,7 @@ class Slide < ActiveRecord::Base
   end
   
   def future_schedules(now=Time.now)
-    self.sorted_schedules(now).reject { |s| s.time(now) < now }  
+    self.sorted_valid_schedules(now).reject { |s| s.time(now) < now }  
   end
   
   def self.expired_slides(now=Time.now)
