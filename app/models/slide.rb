@@ -13,6 +13,10 @@ class Slide < ActiveRecord::Base
   has_many :signs, :through => :slots
   accepts_nested_attributes_for :schedules, :allow_destroy => true
 
+  def valid_schedules
+    self.schedules.reject{ |s| s.time.nil? }
+  end
+
   def published?
     return self.published
   end
@@ -59,7 +63,7 @@ class Slide < ActiveRecord::Base
   end
   
   def showing?(now=Time.now)
-    return true if self.schedules.empty?
+    return true if self.valid_schedules.empty?
     return self.previous_schedule(now).activate? unless self.previous_schedule(now).nil?
     return self.next_schedule(now).deactivate? unless self.next_schedule(now).nil?
     return false  
@@ -78,7 +82,7 @@ class Slide < ActiveRecord::Base
   end
 
   def sorted_schedules(now=Time.now)
-    self.schedules.sort! { |a,b| a.time(now) <=> b.time(now) }
+    self.valid_schedules.sort! { |a,b| a.time(now) <=> b.time(now) }
   end
   
   def previous_schedule(now=Time.now)

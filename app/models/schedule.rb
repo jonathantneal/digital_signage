@@ -24,11 +24,19 @@ class Schedule < ActiveRecord::Base
   end
   
   def time(now=@now)
-    if self.really_today?(now)
-      return self.parse(now).advance(:weeks => -1)
-    else
-      return self.parse(now)
+  
+    if @time.nil?
+    
+      if self.really_today?(now)
+        @time = self.parse(now).advance(:weeks => -1)
+      else
+        @time = self.parse(now)
+      end
+      
     end
+    
+    return @time
+    
   end
   
   protected
@@ -41,16 +49,19 @@ class Schedule < ActiveRecord::Base
   def really_today?(now=@now)
   
     parsed_time = self.parse
-    next_week = now.advance(:weeks => 1)
     
-    # If the parsed date is one week from today
-    if parsed_time.same_day?(next_week)
+    unless now.nil? || parsed_time.nil?
       
-      last_week_parsed_time = self.parse(now.advance(:weeks => -1))
+      # If the parsed date is one week from today
+      if parsed_time.same_day?(now.advance(:weeks => 1))
+        
+        last_week_parsed_time = self.parse(now.advance(:weeks => -1))
+      
+        # If parsing the date one week ago gives us today
+        return true if last_week_parsed_time.same_day?(now)
+        
+      end
     
-      # If parsing the date one week ago gives us today
-      return true if last_week_parsed_time.same_day?(now)
-      
     end
     
     return false
