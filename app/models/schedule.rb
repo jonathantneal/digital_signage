@@ -64,7 +64,7 @@ class Schedule < ActiveRecord::Base
         last_week_parsed_time = self.parse(now.advance(:weeks => -1))
       
         # If parsing the date one week ago gives us today
-        return true if last_week_parsed_time.same_day?(now)
+        return true if last_week_parsed_time.try(:same_day?, now)
         
       end
     
