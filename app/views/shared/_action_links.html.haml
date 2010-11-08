@@ -11,7 +11,7 @@
   -if controller.respond_to?(:show) && permitted_to?(:read, object) && !exclude.include?(:view)
     !=link_to('View', { :controller=>controller_name, :action=>:show, :id=>object.id }, { :class=>'view', :title=>"View #{object_name}" })
   -if object.is_a?(Sign)
-    -if permitted_to?(:edit, object) && !exclude.include?(:sort)
+    -if permitted_to?(:sort, Slot.new) && !exclude.include?(:sort)
       =link_to('Sort', sign_slots_path(object), { :class => 'sort', :title => "Sort #{object_name}" })
   -if controller.respond_to?(:edit) && permitted_to?(:edit, object) && !exclude.include?(:edit)
     !=link_to('Edit', { :controller=>controller_name, :action=>:edit, :id=>object.id }, { :class=>'edit', :title=>"Edit #{object_name}" })
