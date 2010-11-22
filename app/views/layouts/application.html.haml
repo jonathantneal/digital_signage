@@ -9,7 +9,7 @@
       !=render('layouts/biola_header')
       #wrapperTitle
         #branding
-          #siteTitle!=link_to('Application Name', root_path)
+          #siteTitle!=link_to(AppConfig.app.name, root_path)
         -unless current_user.nil?
           !=render('layouts/profile')
         !=render('layouts/navigation_aside')
