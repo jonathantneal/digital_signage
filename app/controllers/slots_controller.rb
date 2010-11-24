@@ -1,7 +1,7 @@
 class SlotsController < ApplicationController
 
-  #before_filter :authenticate_user!
-  #filter_access_to :index, :destroy, :sort
+  before_filter :authenticate_user!
+  filter_access_to :index, :destroy, :sort
 
   # GET /slots
   def index
@@ -11,6 +11,7 @@ class SlotsController < ApplicationController
 
   # DELETE /slots/1
   def destroy
+    @slot = Slot.find(params[:id])
     if @slot.destroy
       flash[:notice] = 'Slot deleted'
     end
