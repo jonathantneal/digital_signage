@@ -16,10 +16,9 @@ class ApplicationController < ActionController::Base
   filter_parameter_logging :password, :password_confirmation
 
   def after_sign_in_path_for(resource)
-    if resource.is_a?(User)
-      resource.update_from_directory
-      resource.save
-      redirect_to stored_location_for(:user) || root_path
+    stored_location = stored_location_for(resource)
+    if resource.is_a?(User) && stored_location
+      redirect_to stored_location
     else
       super
     end
