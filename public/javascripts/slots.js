@@ -5,7 +5,12 @@ $(document).ready(function() {
     containment: 'parent',
     axis:'y',
     update: function() {
-      $.post(ROOT_URL+'slots/sort', $(this).sortable('serialize'));
+      $.ajax({
+        type: 'PUT',
+        url: ROOT_URL+'slots/sort',
+        data: $(this).sortable('serialize'),
+        dataType: 'script'
+      });
     }
   });
 

@@ -1,8 +1,8 @@
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
-  test "the truth" do
-    assert true
+  test "shouldnt save user who doesnt exist" do
+    AppConfig.security.validate_usernames = true
+    assert !User.new(:username => 'keysersoze').save
   end
 end

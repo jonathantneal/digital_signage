@@ -1,8 +1,8 @@
--form_for(@user) do |f|
+=form_for(@user) do |f|
 
   %dl
 
-    %dt.username!=f.label :username, 'Net ID'
-    %dd.username!=f.text_field :username
+    %dt.username=f.label :username, 'Net ID'
+    %dd.username=f.text_field :username
 
-  .buttons!=f.submit 'Save'
+  .buttons=f.submit 'Save'

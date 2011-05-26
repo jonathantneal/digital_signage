@@ -1,23 +1,19 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  title: MyString
-  delay: 1
-  color: MyString
-  published: false
-  start_date: 2010-02-18
-  start_time: 2010-02-18 09:46:18
-  end_date: 2010-02-18
-  end_time: 2010-02-18 09:46:18
-  user_id: 
+  title: Slide 1
+  uri: "http://lorempixum.com/400/200/"
+  delay: 5
+  color: 000000
+  published: true
+  user: manager
+  resize: "none"
 
 two:
-  title: MyString
-  delay: 1
-  color: MyString
+  title: Slide 2
+  uri: "http://lorempixum.com/400/200/"
+  delay: 10
+  color: 111111
   published: false
-  start_date: 2010-02-18
-  start_time: 2010-02-18 09:46:18
-  end_date: 2010-02-18
-  end_time: 2010-02-18 09:46:18
-  user_id: 
+  user: admin
+  resize: "none"

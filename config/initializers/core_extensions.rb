@@ -115,7 +115,7 @@ class Hash
       html
     end 
 
-    to_tag.call(self)
+    to_tag.call(self).html_safe
   
   end
 

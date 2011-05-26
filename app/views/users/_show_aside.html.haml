@@ -4,19 +4,19 @@
     %ul.stacked
       %li
         %em.number{:title=>@user.created_at.to_s(:long)}
-          &=((Time.now - @user.created_at) / 1.day).round
+          =((Time.now - @user.created_at) / 1.day).round
         Days since user created
       %li
-        %em.number&=@user.sign_in_count || 0
+        %em.number=@user.sign_in_count || 0
         Total Logins
       %li
         %em.number{:title=>@user.current_sign_in_at.try(:to_s, :long)}
           -if @user.current_sign_in_at.nil?
             &#8734;
           -else
-            &=((Time.now - (@user.current_sign_in_at || @user.last_sign_in_at)) / 1.day).round
+            =((Time.now - (@user.current_sign_in_at || @user.last_sign_in_at)) / 1.day).round
         Days Since Last Login
       -unless @user.current_sign_in_ip.nil?
         %li
           last login from
-          &=@user.current_sign_in_ip
+          =@user.current_sign_in_ip

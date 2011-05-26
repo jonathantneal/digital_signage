@@ -1,30 +1,30 @@
 class InfoController < ApplicationController
 
   before_filter :authenticate_user!, :except=>[:appinfo]
-  filter_access_to :performance, :database, :config, :reload_config
+  filter_access_to :performance, :database, :configuration, :reload_configuration
 
   ssl_required :config if AppConfig.security.https_available
 
   def performance
     if NewRelic::Control.instance.developer_mode?
-      redirect_to :controller=>'newrelic'
+      redirect_to AppConfig.newrelic.developer_link
     else
       redirect_to AppConfig.newrelic.link
     end
   end
 
   def database
-    redirect_to :controller=>'admin_data'
+    redirect_to admin_data_root_path
   end
 
-  def config
-    @config = AppConfig.deep_to_h
+  def configuration
+    @configuration = AppConfig.deep_to_h
   end
 
-  def reload_config
+  def reload_configuration
     AppConfig.reload!
     flash[:notice] = 'Application configuration reloaded'
-    redirect_to config_info_path
+    redirect_to configuration_info_index_path
   end
 
   # used by other sites to detecmine if a user has access to this site

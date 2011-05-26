@@ -2,7 +2,7 @@
 -if current_user
   -require 'ruby/fastpass'
   -FastPass.domain = @config.domain
-  !=FastPass.script(@config.fastpass.key, @config.fastpass.secret, current_user.email, current_user.name, current_user.username)
+  =raw FastPass.script(@config.fastpass.key, @config.fastpass.secret, current_user.email, current_user.name, current_user.username)
 
 :javascript
   var is_ssl = ("https:" == document.location.protocol);
@@ -23,4 +23,4 @@
   
   var feedback_widget = new GSFN.feedback_widget(feedback_widget_options);
 
-!=render('feedback_aside')
+=render('feedback_aside')

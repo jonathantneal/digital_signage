@@ -1,11 +1,11 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  sign: 
-  slide: 
+  sign: one
+  slide: one
   order: 1
 
 two:
-  sign: 
-  slide: 
-  order: 1
+  sign: two
+  slide: two
+  order: 2

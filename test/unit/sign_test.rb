@@ -1,8 +1,9 @@
 require 'test_helper'
 
 class SignTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
-  test "the truth" do
-    assert true
+  test "shouldn't save with weird name characters" do
+    sign = signs(:one)
+    sign.name = 'Son of a &@$*#!'
+    assert !sign.save
   end
 end

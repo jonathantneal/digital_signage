@@ -64,7 +64,7 @@ authorization do
       to :appinfo
     end
     
-    has_permission_on :sign do
+    has_permission_on :signs do
       to :show, :check_in
     end
     

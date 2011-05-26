@@ -7,15 +7,14 @@ class Document < ActiveRecord::Base
   before_validation :set_default_slug
   
   default_scope :order => 'name'
-  named_scope :tagged, lambda { |tags|
-    tags = [tags] unless tags.class == Array
-    concatenated_field = PortAQuery.concat(' ', :tags, ' ')
-    conditions = tags.map{|t| "#{concatenated_field} LIKE '%\ #{t}\ %'"}
-    { :conditions => conditions.join(' AND ')}
+  scope :tagged, lambda { |tags|
+    where(Array(tags).map { |tag|
+      "#{PortAQuery.concat(' ', :tags, ' ')} LIKE '%\ #{tag}\ %'"
+    }.join(' AND '))
   }
   
   def to_param
-    self.slug
+    self.slug.blank? ? self.id.to_s : self.slug
   end
   
   def text_content

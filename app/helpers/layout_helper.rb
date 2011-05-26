@@ -14,20 +14,27 @@ module LayoutHelper
     end
   end
 
-  def yield_or_default(name, &block)
-    name = name.kind_of?(Symbol) ? ":#{name}" : name
-    out = eval("yield #{name}", block.binding)
-    concat(out || capture(&block), block.binding)
+  def yield_or(name, or_content=nil, &block)
+    if content_for?(name)
+      content_for(name)
+    elsif or_content
+      or_content
+    elsif block_given?
+      yield(block)
+    else
+      ''
+    end
   end
 
   def google_analytics_script_tag
     
+    script_tag = ''
     config = AppConfig.google_analytics
     
     if config.enabled
     
-      <<-eos
-        <script type="text/javascript">
+      script_tag = <<-eos
+        <script type='text/javascript'>
 
           var _gaq = _gaq || [];
           _gaq.push(['_setAccount', '#{config.web_property_id}']);
@@ -43,6 +50,8 @@ module LayoutHelper
       eos
     
     end
+    
+    script_tag.html_safe
     
   end
 

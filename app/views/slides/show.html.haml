@@ -1,4 +1,4 @@
-%h1&=@slide.title + ' Slide'
+%h1=@slide.title + ' Slide'
 %dl.slide
   -if @slide.image? || @slide.swf?
     %dt.thumbnail Preview
@@ -7,15 +7,15 @@
   %dt.uri Uri
   %dd.uri=link_to(@slide.uri, @slide.uri)
   %dt.delay Delay
-  %dd.delay&=@slide.delay
+  %dd.delay=@slide.delay
   %dt.resize Resize
-  %dd.resize&=@slide.resize
+  %dd.resize=@slide.resize
   %dt.color Color
   %dd.color{:style => "color:##{@slide.color}; background-color:##{@slide.color};"}=@slide.color
   %dt.published Published
-  %dd.published&=@slide.published
+  %dd.published=@slide.published
   %dt.owner Owner
-  %dd.owner&=@slide.user.name
+  %dd.owner=@slide.user.name
 %h2.signs Signs
 %ul.signs
   -@slide.signs.each do |sign|
@@ -23,5 +23,5 @@
 %h2.schedule Schedule
 %ul.schedule
   -@slide.sorted_schedules.each do |schedule|
-    %li&=schedule
+    %li=schedule
 =render(:partial=>'shared/action_links', :locals=>{:object=>@slide, :except=>:view})

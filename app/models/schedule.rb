@@ -7,15 +7,9 @@ class Schedule < ActiveRecord::Base
   
   validates_presence_of :slide, :when
   validates_uniqueness_of :when, :scope => :slide_id
-  def validate
-    if self.parse.nil?
-      errors.add(:when, "\"#{self.when}\" cannot be converted to a time")
-    end
-  end
+  validates :when, :time_string => true
 
-  def after_initialize
-    @now = Time.now
-  end
+  after_initialize { @now = Time.now }
 
   def activate?
     return self.active

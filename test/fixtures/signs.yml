@@ -1,23 +1,29 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  name: MyString
-  title: MyString
-  width: 1
-  height: 1
+  name: sign1
+  title: Sign 1
   video: false
   audio: false
-  on: 2010-02-18 09:07:17
-  off: 2010-02-18 09:07:17
-  last_check_in: 2010-02-18 09:07:17
+  "on": 2010-01-01 00:00:00
+  "off": 2010-01-01 12:00:00
+  last_check_in: 2010-01-01 12:00:00
+  full_screen_mode: fullscreen
+  transition_duration: 1.0
+  reload_interval: 300
+  check_in_interval: 180
+  last_ip: 0.0.0.0
 
 two:
-  name: MyString
-  title: MyString
-  width: 1
-  height: 1
-  video: false
-  audio: false
-  on: 2010-02-18 09:07:17
-  off: 2010-02-18 09:07:17
-  last_check_in: 2010-02-18 09:07:17
+  name: sign2
+  title: Sign 2
+  video: true
+  audio: true
+  "on": 2000-01-01 00:00:00
+  "off": 2000-01-01 12:00:00
+  last_check_in: 2000-01-01 12:00:00
+  full_screen_mode: fullscreen
+  transition_duration: 1.0
+  reload_interval: 300
+  check_in_interval: 180
+  last_ip: 0.0.0.0

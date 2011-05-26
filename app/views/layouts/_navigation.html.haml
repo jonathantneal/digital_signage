@@ -1,4 +1,4 @@
 #navigation.tabnav
   %ul
     -AppConfig.ui.menu.each do |link_settings|
-      !=navigation_link(link_settings.to_h.merge({:wrapper=>'li'}))
+      =navigation_link(link_settings.to_h.merge({:wrapper=>'li'}))

@@ -1,9 +1,9 @@
--form_for(@search, :html=>{:class=>'search'}) do |f|
-  !=f.label :username_or_first_name_or_last_name_like, 'Search'
-  !=f.text_field :username_or_first_name_or_last_name_like
-  !=f.submit 'Search'
+=form_for(@search, :html=>{:class=>'search'}) do |f|
+  =f.label :username_or_first_name_or_last_name_like, 'Search'
+  =f.text_field :username_or_first_name_or_last_name_like
+  =f.submit 'Search'
 
 .search_results
-  !=render('users', :users=>@users)
+  =render('users', :users=>@users)
       
-!=render('index_aside')
+=render('index_aside')

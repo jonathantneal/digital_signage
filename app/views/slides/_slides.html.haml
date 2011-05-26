@@ -8,7 +8,7 @@
         %dd.thumbnail
           =render(:partial=>'shared/thumbnail', :locals=>{:slide=>slide})
         %dt.status Status
-        %dd.status{:class=>slide_status(slide)}&=slide_status(slide)
+        %dd.status{:class=>slide_status(slide)}=slide_status(slide)
         %dt.owner Owner
         %dd.owner=link_to(slide.user.name, slide.user)
         %dt.actions Actions

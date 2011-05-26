@@ -2,7 +2,7 @@ $(document).ready(function() {
 
   // Color Picker
   var colorBox = $('dd.color input');
-  if(colorBox) {
+  if(typeof(jQuery.fn.ColorPicker) != 'undefined' && colorBox.length) {
     colorBox.ColorPicker({
 	    color: colorBox.val(),
 	    onShow: function (colpkr) {

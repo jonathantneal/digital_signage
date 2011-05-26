@@ -2,30 +2,30 @@
 !!!
 %html{:xmlns => "http://www.w3.org/1999/xhtml", "xml:lang" => "en", :lang => "en"}
   %head
-    !=render('layouts/head')
+    =render('layouts/head')
   %body
-    !=admin_menu
+    =admin_menu
     #wrapper
-      !=render('layouts/biola_header')
+      =render('layouts/biola_header')
       #wrapperTitle
         #branding
-          #siteTitle!=link_to(AppConfig.app.name, root_path)
-        -unless current_user.nil?
-          !=render('layouts/profile')
-        !=render('layouts/navigation_aside')
+          #siteTitle=link_to(AppConfig.app.name, root_path)
+        -if user_signed_in?
+          =render('layouts/profile')
+        =render('layouts/navigation_aside')
       #wrapperPage
         #page{:class=>"#{controller_name} #{action_name}"}
-          !=render('layouts/navigation')
+          =render('layouts/navigation')
           #wrapperContent
-            !=render('layouts/messages')
-            #content!=yield
+            =render('layouts/messages')
+            #content=yield
           #contentAside
-            !=yield(:aside || '')
+            =yield_or(:aside, '')
             -documents = Document.tagged(controller.controller_name)
             -unless documents.empty?
               %h2 Documentation
               %ul.documents
                 -documents.each do |doc|
-                  %li!=link_to(doc.name, document_path(doc))
+                  %li=link_to(doc.name, document_path(doc))
         #pageFooter
-      !=render('layouts/biola_footer')
+      =render('layouts/biola_footer')

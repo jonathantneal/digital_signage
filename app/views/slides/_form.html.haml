@@ -1,7 +1,7 @@
 -content_for(:head) do
   =javascript_include_tag('colorpicker')
   =stylesheet_link_tag('colorpicker')
--form_for(@slide) do |f|
+=form_for(@slide) do |f|
   %dl
     %dt.title.title=f.label(:title)
     %dd.title=f.text_field(:title)
@@ -34,7 +34,7 @@
         %th.time Time
         %th.action Action
         %th.remove Remove
-      -f.fields_for(:schedules, @slide.sorted_schedules) do |f2|
+      =f.fields_for(:schedules, @slide.sorted_schedules) do |f2|
         =render('schedule_fields', :f => f2)
     =link_to_add_fields('Add Schedule', f, :schedules)
   .buttons=f.submit('Save')

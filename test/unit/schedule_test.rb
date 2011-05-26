@@ -1,8 +1,9 @@
 require 'test_helper'
 
 class ScheduleTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
-  test "the truth" do
-    assert true
+  test "shouldnt save schedule with bogus time" do
+    schedule = schedules(:one)
+    schedule.when = 'Moonday'
+    assert !schedule.save
   end
 end

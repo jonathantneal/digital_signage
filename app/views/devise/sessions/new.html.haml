@@ -1,0 +1,10 @@
+=form_for resource, :as => resource_name, :url => session_path(resource_name) do |f|
+  .field.odd
+    =f.label(:username, 'NetID')
+    =f.text_field(:username, { :class => 'text' })
+  .field.even
+    =f.label(:password)
+    =f.password_field(:password, { :class => 'password' })
+  .actions
+    =link_to('Forgot your password?', AppConfig.security.login.forgot_url, :class=>'forgot')
+    =f.submit('Log In')

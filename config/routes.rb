@@ -1,24 +1,43 @@
-ActionController::Routing::Routes.draw do |map|
+SignManager::Application.routes.draw do
 
-  # The priority is based upon order of creation: first created -> highest priority.
+  scope ENV['RAILS_RELATIVE_URL_ROOT'] || '/' do
 
-  map.devise_for :users, :path_names=>{ :sign_in=>'login', :sign_out=>'logout' }
+    # The priority is based upon order of creation: first created -> highest priority.
 
-  map.resources :announcements
-  map.resource :dashboards, :only=>:show
-  map.resources :documents
-  map.resources :users, :except=>[:new, :edit, :update], :member=>{:auto_update=>:get}
-  map.resources :info, :only=>[], :collection=>{:performance=>:get, :database=>:get, :config=>:get, :reload_config=>:get, :appinfo=>:get}
-  map.resources :slides
-  map.resources :signs, :has_many => :slots, :shallow => true, :member=>{:check_in=>:get}
-  map.resources :slots, :collection=>{:sort=>:post}
+    devise_for :users, :path_names => { :sign_in=>'login', :sign_out=>'logout' }
 
-  # Named routes
-  map.connect 'appinfo', :controller=>:info, :action=>:appinfo
+    resources :announcements
+    resource :dashboards, :only => :show
+    resources :documents
+    resources :pages, :only=>[] do
+      get 'feedback', :on=>:collection
+    end
+    resources :users, :except => [:new, :edit, :update] do
+      get :auto_update, :on => :member
+    end
+    resources :info, :only => [] do
+      collection do
+        get :performance
+        get :database
+        get :configuration
+        get :reload_configuration
+        get :appinfo
+      end
+    end
+    resources :slides
+    resources :signs, :shallow => true do
+      resources :slots, :only => [:index, :destroy]
+      get :check_in, :on => :member
+    end
+    resources :slots do
+      put :sort, :on=>:collection
+    end
 
-  map.root :controller => AppConfig.routing.default.controller, :action => AppConfig.routing.default.action
+    # Named routes
+    match 'appinfo' => 'info#appinfo'
 
-  map.connect ':controller/:action/:id'
-  map.connect ':controller/:action/:id.:format'
+    root :to=>"#{AppConfig.routing.default.controller}##{AppConfig.routing.default.action}"
+
+  end
 
 end

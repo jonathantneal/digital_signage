@@ -1,27 +1,27 @@
-%h2.name&=@user.name
+%h2.name=@user.name
 
 %dl
 
   %dt.title Title
-  %dd.title&=@user.title
+  %dd.title=@user.title
 
   %dt.department Department
-  %dd.department&=@user.department
+  %dd.department=@user.department
 
   %dt.photo Photo
   %dd.photo
     %img{:src=>@user.photo_url, :alt=>@user.name}
 
   %dt.username Net ID
-  %dd.username&=@user.username
+  %dd.username=@user.username
 
   %dt.email Email
-  %dd.email!=mail_to @user.email, @user.email
+  %dd.email=mail_to @user.email, @user.email
 
   %dt.roles Roles
   -@user.roles.each do |role|
-    %dd.role&=role
+    %dd.role=role
 
-!=render('shared/action_links', :object=>@user, :exclude=>:view, :include=>:auto_update)
+=render('shared/action_links', :object=>@user, :exclude=>:view, :include=>:auto_update)
 
-!=render('show_aside')
+=render('show_aside')

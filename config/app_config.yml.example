@@ -2,19 +2,24 @@
 
 app:
   name: &app_name App Name
+  host: your.server.tld
 
 security:
+  url: 'https://example.com/ws'
+  service_name: dirsvc
   key_path: /path/to/key.pem
   key_password: *****************
   cert_path: /path/to/cert.pem
   verify_ssl: true
   https_available: true
+  validate_usernames: true
   
   login:
     required: true # for reporting only, doesn't turn authentication on or off
     forgot_url: "https://www.example.com/forgot-password"
     auto_create_users: true
     allow_bypass: false # should only be usid in development
+    allow_local: false
     allowed_roles:
     - employee
     impersonation:
@@ -77,7 +82,7 @@ ui:
     action: database
     text: Database
   - controller: info
-    action: config
+    action: configuration
     text: Config
   pagination:
     per_page: 10
@@ -127,3 +132,4 @@ newrelic:
     capture_source: true    
     ignore_errors: ActionController::RoutingError
   link: http://rpm.newrelic.com
+  developer_link: /newrelic

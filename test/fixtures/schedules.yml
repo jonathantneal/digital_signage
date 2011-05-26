@@ -1,11 +1,11 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  slide: 
-  when: MyString
-  active: false
+  slide: one
+  when: 12:00 pm
+  active: true
 
 two:
-  slide: 
-  when: MyString
+  slide: two
+  when: 1:00 pm
   active: false

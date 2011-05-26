@@ -1,31 +1,23 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
-  username: 
-  first_name: 
-  last_name: 
-  email: 
-  roles_mask: 
-  persistence_token: 
-  login_count: 
-  failed_login_count: 
-  last_request_at: 
-  current_login_at: 
-  last_login_at: 
-  current_login_ip: 
-  last_login_ip: MyString
+manager:
+  username: johnd0
+  first_name: John
+  last_name: Doe
+  email: john.doe@example.com
+  title: Imaginary Man
+  department: Imaginary Services
+  photo_url: ""
+  affiliations: employee
+  entitlements: <%= AppConfig.security.roles.base_entitlement%>manager
 
-two:
-  username: 
-  first_name: 
-  last_name: 
-  email: 
-  roles_mask: 
-  persistence_token: 
-  login_count: 
-  failed_login_count: 
-  last_request_at: 
-  current_login_at: 
-  last_login_at: 
-  current_login_ip: 
-  last_login_ip: MyString
+admin:
+  username: janed0
+  first_name: Jane
+  last_name: Doe
+  email: jane.doe@example.com
+  title: Imaginary Lady
+  department: Office of Imagination
+  photo_url: ""
+  affiliations: employee,alumni
+  entitlements: <%= AppConfig.security.roles.base_entitlement%>admin

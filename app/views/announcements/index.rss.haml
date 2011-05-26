@@ -3,13 +3,13 @@
   %channel
     %title THI Eval Announcements
     %description Announcements for the THI Eval applicaton
-    %link&=announcements_url(:rss)  
+    %link=announcements_url(:rss)  
     -@announcements.each do |announcement|
       %item
-        %title&=truncate(announcement.announcement, { :length => 80 })
+        %title=truncate(announcement.announcement, { :length => 80 })
         %description
           :cdata
             #{markdown(announcement.announcement)}
-        %pubDate&=announcement.show_at.to_s(:rfc822)
-        %link&=announcement_url(announcement)
-        %guid&=announcement_url(announcement)
+        %pubDate=announcement.show_at.to_s(:rfc822)
+        %link=announcement_url(announcement)
+        %guid=announcement_url(announcement)

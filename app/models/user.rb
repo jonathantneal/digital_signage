@@ -6,26 +6,21 @@ class User < ActiveRecord::Base
 
   attr_accessible :username, :first_name, :last_name, :title, :email, :department, :photo_url, :password, :remember_me
   alias_attribute :netid, :username
-  has_many :slides
-  validates_presence_of :username
-  validates_uniqueness_of :username
-  def validate
-    self.errors.add(:username, "cannot be found") unless BiolaWebServices.dirsvc.user_exists?(:netid=>self.netid)
-  end
+  validates :username, :presence => true, :uniqueness => true, :user_exists => true
 
   before_save :update_from_directory
 
   default_scope :order => 'first_name, last_name'
   
-  named_scope :affiliation, lambda { |affiliation|
+  scope :affiliation, lambda { |affiliation|
     User.conditions_for_separated_fields(:affiliations=>affiliation)
   }
   
-  named_scope :entitlement, lambda { |entitlement|
+  scope :entitlement, lambda { |entitlement|
     User.conditions_for_separated_fields(:entitlements=>User.role_to_entitlement(entitlement))
   }
   
-  named_scope :role, lambda { |role|
+  scope :role, lambda { |role|
     User.conditions_for_separated_fields(
       :affiliations=>role,
       :entitlements=>User.role_to_entitlement(role)
@@ -34,18 +29,6 @@ class User < ActiveRecord::Base
   
   def name
     "#{self.first_name} #{self.last_name}".strip
-  end
-
-  def active_slides
-    self.slides.reject { |s| !s.active? }
-  end
-  
-  def expired_slides
-    self.slides.reject { |s| s.expired? }
-  end
-
-  def active_slides_time
-    Slide.total_time self.active_slides
   end
 
   def recent_sign_in_at

@@ -23,32 +23,37 @@ module ApplicationHelper
       content_tag(:ul, :class=>'admin menu') do
         AppConfig.ui.admin_menu.map do |link_settings|
           navigation_link(link_settings.to_h.merge({:wrapper=>'li'})).to_s
-        end
+        end.join("\n").html_safe
       end
     end
   end
 
   def navigation_link(settings)
+
+    # Get settings and set defaults
+    action = (settings[:action] || :index).to_sym
+    controller = settings[:controller]
+    controller = "/#{controller}" unless controller.blank? || controller.to_s[0] == ?/
+    controller_sym = controller.try(:parameterize,'_').try(:to_sym) 
+    controller_name = controller.try(:split,'/').try(:last).try(:downcase)
+    url =  settings[:url] || {:controller=>controller, :action=>action}
+    text = settings[:text] || controller_name.try(:humanize) 
+    css_class = settings[:css_class]
+    wrapper = settings[:wrapper]
   
-    if settings[:controller].blank? || permitted_to?((settings[:action] || 'index').to_sym, settings[:controller].to_sym)
-  
-      text = settings[:text] || settings[:controller].try(:humanize)    
-      url = settings[:url] || {:controller=>settings[:controller], :action=>settings[:action]}
+    # Check permissions
+    if controller.blank? || permitted_to?(action, controller_sym)
       
-      classes = []
-      classes << settings[:controller] unless settings[:controller].nil?
-      classes << settings[:action] unless settings[:action].nil?
-      classes << settings[:css_class] unless settings[:css_class].nil?
-      classes << 'active' if @controller.controller_name == settings[:controller].try(:downcase)
+      # HTML element classes
+      classes = [controller_name, action, css_class]
+      classes << 'active' if self.controller.controller_name == controller_name
       class_attr_val = classes.join(' ')
       
+      # Link tag
       link = link_to(text, url, :class=>class_attr_val, :title=>text)
       
-      if settings[:wrapper]
-        content_tag(settings[:wrapper], link, :class=>class_attr_val)
-      else
-        link
-      end
+      # Optional wrapper
+      wrapper ? content_tag(wrapper, link, :class=>class_attr_val) : link
     
     end
     
@@ -66,7 +71,7 @@ module ApplicationHelper
     fields = f.fields_for(association, new_object, :child_index => "new_#{association}") do |builder|
       render(association.to_s.singularize + "_fields", :f => builder)
     end
-    link_to_function(name, h("add_fields(this, '#{association}', '#{escape_javascript(fields)}')"))
+    link_to_function(name, "add_fields(this, '#{association}', '#{escape_javascript(fields)}')")
   end
 
   def to_yn(bit)

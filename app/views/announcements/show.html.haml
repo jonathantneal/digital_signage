@@ -1,7 +1,7 @@
 %h2 Announcement
 %dl
   %dt Show at
-  %dd&=@announcement.show_at.to_s(:long)
+  %dd=@announcement.show_at.to_s(:long)
   %dt Announcement
-  %dd!=@announcement.announcement
-!=render('shared/action_links', :object=>@announcement, :except=>:view)
+  %dd=@announcement.announcement
+=render('shared/action_links', :object=>@announcement, :except=>:view)

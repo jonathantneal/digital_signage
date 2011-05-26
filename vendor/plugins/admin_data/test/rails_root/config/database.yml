@@ -1,9 +1,0 @@
-development:
-  adapter: sqlite3
-  database: db/sqlite3.db
-  #:dbfile: ":memory:"
-
-test:
-  :adapter: sqlite3
-  database: ":memory:"
-

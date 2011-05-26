@@ -1,6 +1,9 @@
 require 'test_helper'
 
 class SlidesControllerTest < ActionController::TestCase
+  setup { sign_in @user = users(:manager) }
+  teardown { sign_out @user }
+
   test "should get index" do
     get :index
     assert_response :success
@@ -14,7 +17,7 @@ class SlidesControllerTest < ActionController::TestCase
 
   test "should create slide" do
     assert_difference('Slide.count') do
-      post :create, :slide => { }
+      post :create, :slide => { :title => 'JUST CREATED', :uri => slides(:one).uri, :resize => 'none', :user_id => users(:manager).id }
     end
 
     assert_redirected_to slide_path(assigns(:slide))
@@ -31,7 +34,7 @@ class SlidesControllerTest < ActionController::TestCase
   end
 
   test "should update slide" do
-    put :update, :id => slides(:one).to_param, :slide => { }
+    put :update, :id => slides(:one).to_param, :slide => { :title => 'UPDATED' }
     assert_redirected_to slide_path(assigns(:slide))
   end
 

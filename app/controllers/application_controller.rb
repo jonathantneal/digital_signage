@@ -5,24 +5,11 @@ class ApplicationController < ActionController::Base
 
   before_filter :set_current_user
 
-  include ExceptionNotifiable
-  include SslRequirement
+  include SslRequirement if defined? SslRequirement
 
   helper :all # include all helpers, all the time
 
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
-
-  # Scrub sensitive parameters from your log
-  filter_parameter_logging :password, :password_confirmation
-
-  def after_sign_in_path_for(resource)
-    stored_location = stored_location_for(resource)
-    if resource.is_a?(User) && stored_location
-      redirect_to stored_location
-    else
-      super
-    end
-  end
 
   def flash_announcements_for(user=nil)
     user ||= current_user
