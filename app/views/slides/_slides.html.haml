@@ -11,6 +11,6 @@
         %dt.owner Owner
         %dd.owner=link_to(slide.user.name, slide.user)
         %dt.actions Actions
-        %dd.actions=action_links(slide, :exclude=>:show)
+        %dd.actions=action_links(slide, :exclude=>:show, :remote=>:destroy)
 
 =will_paginate(@slides)

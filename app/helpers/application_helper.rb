@@ -83,6 +83,7 @@ module ApplicationHelper
       :actions => [:show, :edit, :destroy],
       :include => [],
       :exclude => [],
+      :remote => [],
       :list_wrapper => :ul,
       :list_wrapper_class => :actions,
       :link_wrapper => :li,
@@ -104,6 +105,7 @@ module ApplicationHelper
           title = I18n.t(action, :scope=>'action_links', :default=>action.to_s.humanize)
           url = { :controller=>controller_name, :action=>action, :id=>object.id }
           html_options = { :class=>action.to_s.parameterize, :title=>"#{title} #{object_name}" }
+          html_options[:remote] = true if options[:remote].include? action
           
           if action == :destroy
             html_options.merge! :method=>:delete, :confirm=>I18n.t(:confirm_delete, :scope=>'action_links', :default=>'Are you sure?')
