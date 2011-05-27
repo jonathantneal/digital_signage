@@ -140,11 +140,27 @@ Devise.setup do |config|
   #   manager.default_strategies(:scope => :user).unshift :twitter_oauth
   # end
   
-  # ==> Netid Authentication Settings
-  config.allow_authentication_bypass = AppConfig.security.login.allow_bypass
-  config.netid_auto_create_users = AppConfig.security.login.auto_create_users
-  config.netid_allow_impersonation = AppConfig.security.login.impersonation.enable
-  config.allow_local_authentication = AppConfig.security.login.allow_local
+  if (defined?(Devise::Models::NetidAuthenticatable))
+    # ==> Netid Authentication Settings
+    config.allow_authentication_bypass = AppConfig.security.login.allow_bypass
+    config.netid_auto_create_users = AppConfig.security.login.auto_create_users
+    config.netid_allow_impersonation = AppConfig.security.login.impersonation.enable
+    config.allow_local_authentication = AppConfig.security.login.allow_local
+    config.service_name = AppConfig.security.service_name
+  else
+    # ==> CAS Authentication Settings
+    config.cas_base_url = AppConfig.security.login.cas.url
+
+    # you can override these if you need to, but cas_base_url is usually enough
+    # config.cas_login_url = "https://cas.myorganization.com/login"
+    # config.cas_logout_url = "https://cas.myorganization.com/logout"
+    # config.cas_validate_url = "https://cas.myorganization.com/serviceValidate"
+
+    # By default, devise_cas_authenticatable will create users.  If you would rather
+    # require user records to already exist locally before they can authenticate via
+    # CAS, uncomment the following line.
+    # config.cas_create_user = false    
+  end
   
  end
 

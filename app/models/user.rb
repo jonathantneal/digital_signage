@@ -2,13 +2,16 @@ class User < ActiveRecord::Base
 
   STRING_SEPARATOR = ', '
 
-  devise :netid_authenticatable, :rememberable, :trackable, :timeoutable
+  if defined?(Devise::Models::NetidAuthenticatable)
+    devise :netid_authenticatable, :rememberable, :trackable, :timeoutable
+    before_save :update_from_directory
+  else
+    devise :cas_authenticatable, :rememberable, :trackable, :timeoutable
+  end
 
   attr_accessible :username, :first_name, :last_name, :title, :email, :department, :photo_url, :password, :remember_me
   alias_attribute :netid, :username
   validates :username, :presence => true, :uniqueness => true, :user_exists => true
-
-  before_save :update_from_directory
 
   default_scope :order => 'first_name, last_name'
   
@@ -50,6 +53,7 @@ class User < ActiveRecord::Base
 
   def entitlements=(entitlements)
     raise TypeError.new('entitlementes is not an array') unless entitlements.is_a?(Array)
+    entitlements.map! { |ent| ent.gsub(/^urn:/, '') }
     write_attribute(:entitlements, entitlements.join(STRING_SEPARATOR))
   end
   
@@ -114,6 +118,33 @@ class User < ActiveRecord::Base
     
     false
     
+  end
+
+  # Called by Devise CAS authenticatable plugin
+  def cas_extra_attributes=(extra_attributes)
+    
+    extra_attributes.each do |name, value|
+      case name.to_sym
+      when :cn
+        self.username = value.first
+      when :eduPersonEntitlement
+        self.entitlements = value
+      when :url
+        self.photo_url = value.first
+      when :department
+        self.department = value.first
+      when :title
+        self.title = value.first
+      when :eduPersonAffiliation
+        self.affiliations = value
+      when :mail
+        self.email = value.first
+      when :eduPersonNickname
+        self.first_name = value.first
+      when :sn
+        self.last_name = value.first
+      end
+    end
   end
 
   def self.entitlement_to_role(entitlement)

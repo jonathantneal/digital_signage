@@ -24,6 +24,8 @@ gem 'chronic', '~>0.3.0'
 gem 'declarative_authorization', '~>0.5.1'
 gem 'devise', '~>1.1.5'
 gem 'devise_netid_authenticatable', '~>0.3.2'
+# Use the following instead if using CAS:
+#gem 'devise_cas_authenticatable', '~>1.0.0.alpha8'
 gem 'haml', '~>3.0.22'
 gem 'highline', '~>1.6.1'
 gem 'httparty', '~>0.6.1'

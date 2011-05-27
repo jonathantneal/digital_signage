@@ -28,6 +28,8 @@ security:
       - it
       allowed_roles:
       - admin
+    cas:
+      url: 'https://auth.example.com/cas'
       
   users:
     auto_update: true
