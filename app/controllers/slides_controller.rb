@@ -3,7 +3,7 @@ class SlidesController < ApplicationController
   before_filter :authenticate_user!
   filter_resource_access
   respond_to :html
-  respond_to :js, :only => :index
+  respond_to :js, :only => [:index, :destroy]
 
   def index
     @search = Slide.search(params[:search])

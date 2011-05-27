@@ -91,6 +91,15 @@ function ajaxifySearchForm(form) {
 
 }
 
+function flashMessages(messages) {
+  if(!$('#messages').length) {
+    $('#messagesWrapper').html('<ul id="messages"/>');
+  }
+  for(var key in messages) {
+    $('#messages').append('<li class="'+key+'">'+messages[key]+'</li>');
+  }
+}
+
 function add_fields(link, association, content) {
 
  var new_id = new Date().getTime();

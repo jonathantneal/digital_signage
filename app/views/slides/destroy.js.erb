@@ -1,0 +1,5 @@
+<% if @slide.destroyed? %>
+  $('#<%= dom_id(@slide) %>').remove();
+<% end %>
+
+flashMessages(<%= raw flash.discard.to_json %>);
