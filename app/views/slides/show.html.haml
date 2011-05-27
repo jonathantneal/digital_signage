@@ -24,4 +24,4 @@
 %ul.schedule
   -@slide.sorted_schedules.each do |schedule|
     %li=schedule
-=render(:partial=>'shared/action_links', :locals=>{:object=>@slide, :except=>:view})
+=action_links(@slide)

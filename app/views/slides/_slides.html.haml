@@ -1,17 +1,16 @@
 %ul.slides
   -@slides.each do |slide|
-    %li
+    %li[slide]
       %dl
         %dt.title Title
         %dd.title=link_to(slide.title, slide)
         %dt.thumbnail Preview
-        %dd.thumbnail
-          =render(:partial=>'shared/thumbnail', :locals=>{:slide=>slide})
+        %dd.thumbnail=render(:partial=>'shared/thumbnail', :locals=>{:slide=>slide})
         %dt.status Status
         %dd.status{:class=>slide_status(slide)}=slide_status(slide)
         %dt.owner Owner
         %dd.owner=link_to(slide.user.name, slide.user)
         %dt.actions Actions
-        %dd.actions=render(:partial => 'shared/action_links', :locals=>{:object=>slide})
+        %dd.actions=action_links(slide, :exclude=>:show)
 
-=will_paginate(@slides) unless @slides.empty?
+=will_paginate(@slides)

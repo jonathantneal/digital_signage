@@ -27,6 +27,6 @@
     =@sign.on.try(:to_s,:time) || '?'
     to
     =@sign.off.try(:to_s,:time) || '?'
-=render('shared/action_links', :object=>@sign, :except=>:view)
+=action_links(@sign)
 
 =render('show_aside')

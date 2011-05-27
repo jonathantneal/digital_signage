@@ -8,7 +8,7 @@
     %tr
       %td=link_to(slide.title, slide_path(slide))
       %td=slide.created_at.to_s(:short)
-      %td=render(:partial=>'shared/action_links', :locals=>{:object=>slide})
+      %td=action_links(slide)
 
 -unless @expired_slides.empty?
   %table
@@ -21,4 +21,4 @@
       %tr
         %td=link_to(slide.title, slide_path(slide))
         %td=slide.expired_at.try(:to_s, :short)
-        %td=render(:partial=>'shared/action_links', :locals=>{:object=>slide})
+        %td=action_links(slide)

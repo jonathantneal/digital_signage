@@ -23,7 +23,7 @@ ul.slides {
   margin: 0;
   padding: 0;
   list-style-type: none; }
-  ul.slides li {
+  ul.slides > li {
     position: relative;
     min-height: 149px;
     margin: 20px 0;
@@ -50,7 +50,7 @@ ul.slides {
     border-top: none;
     border-bottom: none;
     border-left: none; }
-  ul.slides dd.actions span.actions {
+  ul.slides dd.actions ul.actions {
     position: absolute;
     right: 10px;
     bottom: 10px;

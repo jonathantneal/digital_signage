@@ -7,7 +7,7 @@ ol.slots
   padding: 5px 0
   list-style-type: none
 
-  li
+  >li
     position: relative
     min-height= !thumbnail_height - (!default_padding * 2)
     margin: 20px 0
@@ -20,11 +20,11 @@ ol.slots
     -webkit-border-radius= !default_border_radius
     cursor: move
 
-  li:first-child
-    background-image: url(../images/sort-down.png)
+    &:first-child
+      background-image: url(../images/sort-down.png)
 
-  li:last-child
-    background-image: url(../images/sort-up.png)
+    &:last-child
+      background-image: url(../images/sort-up.png)
     
   dl, dd
     margin: 0
@@ -52,7 +52,7 @@ ol.slots
     max-width= !thumbnail_width
     max-height= !thumbnail_height
 
-  dd.actions span.actions
+  dd.actions ul.actions
     position: absolute
     right: 10px
     bottom: 10px

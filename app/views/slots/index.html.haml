@@ -11,4 +11,4 @@
         %dt.status Status
         %dd.status{:class=>slide_status(slot.slide)}=slide_status(slot.slide)
         %dt.actions Actions
-        %dd.actions=render(:partial=>'shared/action_links', :locals=>{:object=>slot, :except=>[:view, :edit]})
+        %dd.actions=action_links(slot)

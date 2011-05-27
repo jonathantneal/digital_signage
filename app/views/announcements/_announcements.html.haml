@@ -6,6 +6,6 @@
       %li.announcement
         =announcement.announcement
         %span.date=announcement.show_at.to_s(:long)
-        %span.small=render('shared/action_links', :object=>announcement)
+        %span.small=action_links(announcement)
         
 =will_paginate(@announcements)

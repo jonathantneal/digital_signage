@@ -8,5 +8,5 @@ td a.sort {
   text-indent: 99999px;
   overflow: hidden; }
 
-span.actions a.sort {
+ul.actions a.sort {
   background-image: url(../images/sort.png); }

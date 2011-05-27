@@ -12,6 +12,6 @@
       %td=mail_to(user.email, user.email)
       %td=user.roles.join(', ')
       %td=time_ago_in_words(user.last_sign_in_at) unless user.last_sign_in_at.nil?
-      %td=render('shared/action_links', :object=>user)
+      %td=action_links(user)
       
 =will_paginate(users)

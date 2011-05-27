@@ -22,6 +22,6 @@
   -@user.roles.each do |role|
     %dd.role=role
 
-=render('shared/action_links', :object=>@user, :exclude=>:view, :include=>:auto_update)
+=action_links(@user, :include=>:auto_update)
 
 =render('show_aside')

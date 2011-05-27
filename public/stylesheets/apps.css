@@ -58,14 +58,14 @@ dd {
   margin: 0;
   padding: 0; }
 
-td span.actions, .small span.actions {
+td ul.actions, .small ul.actions {
   float: right;
   clear: none;
   margin: 0;
   padding: 0;
   border-top: none; }
 
-td a.view, td a.edit, td a.delete {
+td a.show, td a.edit, td a.destroy {
   display: block;
   float: left;
   width: 16px;
@@ -117,30 +117,33 @@ button, input[type=submit], a.button {
   button:active, input[type=submit]:active, a.button:active {
     top: 1px; }
 
-span.actions {
+ul.actions {
   display: block;
   clear: both;
   margin-top: 10px;
   padding-top: 10px;
   text-align: right;
+  list-style-type: none;
   border-top: solid 1px #a2a2a2; }
-  span.actions a {
+  ul.actions li {
+    display: inline; }
+  ul.actions a {
     padding: 0 10px 0 20px;
     font-weight: bold;
     text-decoration: none;
     line-height: 16px;
     background-position: top left;
     background-repeat: no-repeat; }
-    span.actions a.view {
+    ul.actions a.show {
       background-image: url(../images/view.png); }
-    span.actions a.edit {
+    ul.actions a.edit {
       background-image: url(../images/edit.png); }
-    span.actions a.delete {
+    ul.actions a.destroy {
       background-image: url(../images/delete.png); }
-    span.actions a.auto_update {
+    ul.actions a.auto_update {
       background-image: url(../images/reload.png); }
 
-.small a.view, .small a.edit, .small a.delete {
+.small ul.actions a.show, .small ul.actions a.edit, .small ul.actions a.destroy {
   display: block;
   float: left;
   width: 16px;

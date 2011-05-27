@@ -64,7 +64,7 @@ dd
   margin: 0
   padding: 0
 
-td span.actions, .small span.actions
+td ul.actions, .small ul.actions
   float: right
   clear: none
   margin: 0
@@ -73,7 +73,7 @@ td span.actions, .small span.actions
 
 
 td a
-  &.view, &.edit, &.delete
+  &.show, &.edit, &.destroy
     display: block
     float: left
     width: 16px
@@ -129,13 +129,17 @@ button, input[type=submit], a.button
     top: 1px
 
 
-span.actions
+ul.actions
   display: block
   clear: both
   margin-top: 10px
   padding-top: 10px
   text-align: right
+  list-style-type: none
   border-top: solid 1px #a2a2a2
+
+  li
+    display: inline
 
   a
     padding: 0 10px 0 20px
@@ -145,20 +149,20 @@ span.actions
     background-position: top left
     background-repeat: no-repeat
 
-    &.view
+    &.show
       background-image: url(../images/view.png)
 
     &.edit
       background-image: url(../images/edit.png)
 
-    &.delete
+    &.destroy
       background-image: url(../images/delete.png)
 
     &.auto_update
       background-image: url(../images/reload.png)
 
-.small a
-  &.view, &.edit, &.delete
+.small ul.actions a
+  &.show, &.edit, &.destroy
     display: block
     float: left
     width: 16px

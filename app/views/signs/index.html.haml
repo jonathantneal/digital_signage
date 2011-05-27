@@ -13,5 +13,8 @@
       %td=seconds_to_time(sign.active_slides_time)
       %td
         =time_ago_in_words(sign.last_check_in)+" ago" if sign.checked_in?
-      %td=render(:partial=>'shared/action_links', :locals=>{:object=>sign})
+      %td
+        =action_links(sign) do
+          =link_to('Sort', sign_slots_path(sign), :class=>:sort)
+
 =render('index_aside')

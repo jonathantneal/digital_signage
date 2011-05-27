@@ -23,7 +23,7 @@ ol.slots {
   margin: 0;
   padding: 5px 0;
   list-style-type: none; }
-  ol.slots li {
+  ol.slots > li {
     position: relative;
     min-height: 149px;
     margin: 20px 0;
@@ -35,10 +35,10 @@ ol.slots {
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     cursor: move; }
-  ol.slots li:first-child {
-    background-image: url(../images/sort-down.png); }
-  ol.slots li:last-child {
-    background-image: url(../images/sort-up.png); }
+    ol.slots > li:first-child {
+      background-image: url(../images/sort-down.png); }
+    ol.slots > li:last-child {
+      background-image: url(../images/sort-up.png); }
   ol.slots dl, ol.slots dd {
     margin: 0;
     padding: 0; }
@@ -59,7 +59,7 @@ ol.slots {
   ol.slots div.thumbnail img, ol.slots div.thumbnail .swf {
     max-width: 336px;
     max-height: 189px; }
-  ol.slots dd.actions span.actions {
+  ol.slots dd.actions ul.actions {
     position: absolute;
     right: 10px;
     bottom: 10px;

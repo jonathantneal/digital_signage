@@ -4,4 +4,4 @@
   %dd=@announcement.show_at.to_s(:long)
   %dt Announcement
   %dd=@announcement.announcement
-=render('shared/action_links', :object=>@announcement, :except=>:view)
+=action_links(@announcement)
