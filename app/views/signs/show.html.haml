@@ -27,6 +27,7 @@
     =@sign.on.try(:to_s,:time) || '?'
     to
     =@sign.off.try(:to_s,:time) || '?'
-=action_links(@sign)
+=action_links(@sign) do
+  =link_to('Sort', sign_slots_path(@sign), :class=>:sort)
 
 =render('show_aside')
