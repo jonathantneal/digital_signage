@@ -11,7 +11,7 @@ authorization do
     end
     
     has_permission_on :info do
-      to :performance, :database, :config, :reload_config, :appinfo
+      to :performance, :database, :configuration, :reload_configuration, :appinfo
     end
     
     includes :manager

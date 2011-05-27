@@ -218,7 +218,7 @@ ul.admin.menu {
       background-image: url(../images/time.png); }
     ul.admin.menu a.database {
       background-image: url(../images/database.png); }
-    ul.admin.menu a.config {
+    ul.admin.menu a.configuration {
       background-image: url(../images/settings.png); }
 
 #wrapper {
