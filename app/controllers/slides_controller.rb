@@ -7,7 +7,7 @@ class SlidesController < ApplicationController
 
   def index
     @search = Slide.search(params[:search])
-    @slides = @search.relation.page(params[:page]).per(params[:per] || 2)#Kaminari.config.default_per_page)
+    @slides = @search.relation.page(params[:page]).per(params[:per] || Kaminari.config.default_per_page)
     respond_with(@slides) do |format|
       format.js { render :partial => 'slides' }
     end
