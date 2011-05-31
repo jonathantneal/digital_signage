@@ -1,9 +1,9 @@
-.info.config #wrapperConfig {
+.info.configuration #wrapperConfig {
   padding-bottom: 20px;
   overflow: auto; }
-  .info.config #wrapperConfig dt, .info.config #wrapperConfig dd, .info.config #wrapperConfig li {
+  .info.configuration #wrapperConfig dt, .info.configuration #wrapperConfig dd, .info.configuration #wrapperConfig li {
     font-family: monospace; }
-  .info.config #wrapperConfig dt {
+  .info.configuration #wrapperConfig dt {
     margin: 0 !important; }
-  .info.config #wrapperConfig dd {
+  .info.configuration #wrapperConfig dd {
     padding-left: 20px; }
