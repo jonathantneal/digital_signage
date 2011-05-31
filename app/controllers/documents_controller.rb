@@ -6,7 +6,7 @@ class DocumentsController < ApplicationController
 
   def index
     @search = Document.tagged(params[:tag]).search(params[:search])
-    @documents = @search.paginate(:page => params[:page])
+    @documents = @search.relation.page(params[:page])
     flash.now[:warn] = 'No documents found' if @search.count.zero?
 
     respond_with(@documents) do |format|

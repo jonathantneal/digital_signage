@@ -14,4 +14,4 @@
       %td=time_ago_in_words(user.last_sign_in_at) unless user.last_sign_in_at.nil?
       %td=action_links(user)
       
-=will_paginate(users)
+=paginate(users)

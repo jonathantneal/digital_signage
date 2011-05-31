@@ -15,4 +15,4 @@
           -document.tag_array.each do |tag|
             %li=link_to(tag, {:controller=>'documents', :tag=>tag})
             
-=will_paginate(documents)
+=paginate(documents)

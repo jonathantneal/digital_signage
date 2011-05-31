@@ -6,7 +6,7 @@ class UsersController < ApplicationController
 
   def index
     @search = User.with_permissions_to(:index).metasearch(params[:search])
-    @users = @search.paginate(:page => params[:page])
+    @users = @search.relation.page(params[:page])
     @user = User.new
     respond_with @users
   end

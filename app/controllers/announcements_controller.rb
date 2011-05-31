@@ -7,7 +7,7 @@ class AnnouncementsController < ApplicationController
   
   def index
     @search = Announcement.search(params[:search])
-    @announcements = @search.all.paginate(:page => params[:page], :per_page => 10)
+    @announcements = @search.relation.page(params[:page])
     flash.now[:warn] = 'No documents found' if @search.count.zero?
 
     respond_with(@announcements) do |format|

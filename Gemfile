@@ -30,12 +30,12 @@ gem 'haml', '~>3.0.22'
 gem 'highline', '~>1.6.1'
 gem 'httparty', '~>0.6.1'
 gem 'jquery-rails', '~>0.2.6'
+gem 'kaminari', '~>0.12.4'
 gem 'meta_search', '~>0.9.10'
 gem 'newrelic_rpm', '~>2.13.2'
 gem 'oauth', '~>0.4.3'
 gem 'port-a-query', '~>0.1.0'
 gem 'viva-app_config', '~>1.2.0', :require=>'app_config'
-gem 'will_paginate', '~>3.0.pre2'
 gem 'yaml_db', '~>0.2.0'
 
 # Bundle gems for the local environment. Make sure to

@@ -125,4 +125,23 @@ module ApplicationHelper
     end
   end
 
+  def page_entries_info(collection, options = {})
+    entry_name = options[:entry_name] ||
+      (collection.empty?? 'entry' : collection.first.class.name.underscore.sub('_', ' '))
+    
+    if collection.num_pages < 2
+      case collection.total_count
+      when 0; "No #{entry_name.pluralize} found"
+      when 1; "<strong>1</strong> #{entry_name}"
+      else;   "<strong>All #{collection.size}</strong> #{entry_name.pluralize}"
+      end
+    else
+      %{<strong>%d - %d</strong> of <strong>%d</strong> #{entry_name.pluralize}} % [
+        collection.offset_value + 1,
+        collection.offset_value + collection.length,
+        collection.total_count
+      ]
+    end.html_safe
+  end
+
 end

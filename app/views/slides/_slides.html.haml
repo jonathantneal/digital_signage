@@ -1,3 +1,8 @@
+.search.summary
+  =page_entries_info(@slides, :entry_name => 'Slide')
+  -unless @slides.num_pages < 2
+    =link_to('View All', params.merge({:page=>1, :per=>1000}), :class=>:view_all)
+
 %ul.slides
   -@slides.each do |slide|
     %li[slide]
@@ -13,4 +18,4 @@
         %dt.actions Actions
         %dd.actions=action_links(slide, :exclude=>:show, :remote=>:destroy)
 
-=will_paginate(@slides)
+=paginate(@slides)
