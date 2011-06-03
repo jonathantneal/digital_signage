@@ -25,7 +25,7 @@ SignManager::Application.routes.draw do
       end
     end
     resources :slides
-    resources :signs, :shallow => true do
+    resources :signs do
       resources :slots, :only => [:index, :destroy]
       get :check_in, :on => :member
     end
