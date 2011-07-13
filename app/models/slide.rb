@@ -113,7 +113,7 @@ class Slide < ActiveRecord::Base
     sorted_valid_schedules(now).reject { |s| s.time(now) < now }  
   end
   
-  def expired_slides(now=Time.now)
+  def self.expired_slides(now=Time.now)
     Slide.all.reject { |s| !s.expired?(now) }
   end
   
