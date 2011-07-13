@@ -18,4 +18,14 @@ module SlidesHelper
   
   end
 
+  def slide_url(slide)
+    url = URI.parse(slide.url)
+    if defined? request
+      url.scheme = request.scheme
+      url.host = request.host
+      url.port = request.port
+    end
+    url.to_s
+  end
+
 end

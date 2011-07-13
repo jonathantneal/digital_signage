@@ -49,6 +49,8 @@ GEM
       json (~> 1.5.0)
       rest-client (~> 1.6.0)
     builder (2.1.2)
+    carrierwave (0.5.4)
+      activesupport (~> 3.0)
     chronic (0.3.0)
     crack (0.1.8)
     declarative_authorization (0.5.2)
@@ -128,6 +130,7 @@ PLATFORMS
 DEPENDENCIES
   admin_data!
   biola_web_services (~> 0.1.1)
+  carrierwave (~> 0.5.4)
   chronic (~> 0.3.0)
   declarative_authorization (~> 0.5.1)
   devise (~> 1.1.5)

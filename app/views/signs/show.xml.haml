@@ -14,7 +14,7 @@
       -if !slide.expired? && slide.published
         %slide{:id=>slide.id,
                :title=>slide.title,
-               :uri=>slide.uri,
+               :uri=>slide_url(slide),
                :content_type=>slide.type,
                :delay=>slide.delay,
                :resize=>slide.resize,

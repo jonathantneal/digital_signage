@@ -20,6 +20,7 @@ gem 'rake', '~> 0.8.7'
 # Bundle the extra gems:
 gem 'admin_data', :git => 'git://github.com/adamcrown/admin_data.git', :branch => 'my1.1.11' #'~>1.1.11'
 gem 'biola_web_services', '~>0.1.1'
+gem 'carrierwave', '~>0.5.4'
 gem 'chronic', '~>0.3.0'
 gem 'declarative_authorization', '~>0.5.1'
 gem 'devise', '~>1.1.5'

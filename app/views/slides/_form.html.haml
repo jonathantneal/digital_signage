@@ -1,14 +1,12 @@
 -content_for(:head) do
   =javascript_include_tag('colorpicker')
   =stylesheet_link_tag('colorpicker')
-=form_for(@slide) do |f|
+=form_for(@slide, :html => {:multipart => true}) do |f|
   %dl
     %dt.title.title=f.label(:title)
     %dd.title=f.text_field(:title)
-    %dt.url=f.label(:uri, 'URL')
-    %dd.url
-      =f.text_field(:uri)
-      %a(href="http://dropbox.biola.edu") dropbox.biola.edu
+    %dt.file=f.label(:content)
+    %dd.file=f.file_field(:content)
     %dt.delay
       =f.label(:delay)
       %small in seconds
