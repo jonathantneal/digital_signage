@@ -61,8 +61,8 @@ ui:
     action: show
   - controller: users
   menu_aside:
-  - controller: pages
-    action: feedback
+  - controller: feed_satisfaction/feedbacks
+    action: show
     text: Feedback
     css_class: feedback
   - controller: documents

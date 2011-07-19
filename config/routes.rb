@@ -9,9 +9,7 @@ SignManager::Application.routes.draw do
     resources :announcements
     resource :dashboards, :only => :show
     resources :documents
-    resources :pages, :only=>[] do
-      get 'feedback', :on=>:collection
-    end
+
     resources :users, :except => [:new, :edit, :update] do
       get :auto_update, :on => :member
     end
