@@ -10,4 +10,5 @@ db/schema.rb
 db/*.sqlite3
 public/uploads/*
 public/slide_content/*
+tmp/
 tmp/**/*

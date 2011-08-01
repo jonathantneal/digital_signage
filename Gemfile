@@ -36,6 +36,7 @@ gem 'meta_search', '~>0.9.10'
 gem 'newrelic_rpm', '~>2.13.2'
 gem 'oauth', '~>0.4.3'
 gem 'port-a-query', '~>0.1.0'
+gem 'turnout', '~>0.2.2'
 gem 'viva-app_config', '~>1.2.0', :require=>'app_config'
 gem 'yaml_db', '~>0.2.0'
 
