@@ -1,7 +1,7 @@
 %div{:class=>"thumbnail #{slide_type(slide)}", :style=>"background-color:##{slide.color};"}
   -if slide.image?
-    %img{:src=>slide.url, :alt=>"#{slide.title} thumbnail"}
+    %img{:src=>slide_url(slide), :alt=>"#{slide.title} thumbnail"}
   -if slide.swf?
     .swf
-      %object{:type=>'application/x-shockwave-flash', :data=>slide.url, :width=>336, :height=>189}
-        %param{:name=>'movie', :value=>slide.url}
+      %object{:type=>'application/x-shockwave-flash', :data=>slide_url(slide), :width=>336, :height=>189}
+        %param{:name=>'movie', :value=>slide_url(slide)}
