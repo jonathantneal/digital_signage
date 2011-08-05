@@ -19,6 +19,8 @@ module SlidesHelper
   end
 
   def slide_url(slide)
+    return nil if slide.nil?
+    
     url = URI.parse(path_to_image(slide.url))
     if defined? request
       url.scheme = request.scheme
