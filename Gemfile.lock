@@ -51,7 +51,7 @@ GEM
     builder (2.1.2)
     carrierwave (0.5.6)
       activesupport (~> 3.0)
-    chronic (0.3.0)
+    chronic (0.6.2)
     crack (0.1.8)
     declarative_authorization (0.5.3)
     devise (1.1.9)
@@ -135,7 +135,7 @@ DEPENDENCIES
   admin_data!
   biola_web_services (~> 0.1.1)
   carrierwave (~> 0.5.4)
-  chronic (~> 0.3.0)
+  chronic (~> 0.6.2)
   declarative_authorization (~> 0.5.1)
   devise (~> 1.1.5)
   devise_netid_authenticatable (~> 0.3.2)
