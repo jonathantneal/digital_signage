@@ -14,7 +14,7 @@ class SlotsController < ApplicationController
     if @slot.destroy
       flash[:notice] = 'Slot deleted'
     end
-    respond_with @slot
+    respond_with @slot.sign, :slots
   end
 
   def sort
