@@ -15,7 +15,7 @@ class SlotsControllerTest < ActionController::TestCase
       delete :destroy, :id => slots(:one).to_param, :sign_id => signs(:one).to_param
     end
 
-    assert_redirected_to slots_path
+    assert_redirected_to sign_slots_path(signs(:one))
   end
   
   test "should sort slots" do

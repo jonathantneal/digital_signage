@@ -2,7 +2,6 @@
 
 one:
   title: Slide 1
-  uri: "http://lorempixum.com/400/200/"
   delay: 5
   color: 000000
   published: true
@@ -11,7 +10,6 @@ one:
 
 two:
   title: Slide 2
-  uri: "http://lorempixum.com/400/200/"
   delay: 10
   color: 111111
   published: false

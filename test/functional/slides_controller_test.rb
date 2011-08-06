@@ -17,7 +17,7 @@ class SlidesControllerTest < ActionController::TestCase
 
   test "should create slide" do
     assert_difference('Slide.count') do
-      post :create, :slide => { :title => 'JUST CREATED', :uri => slides(:one).uri, :resize => 'none', :user_id => users(:manager).id }
+      post :create, :slide => { :title => 'JUST CREATED', :resize => 'none', :user_id => users(:manager).id }
     end
 
     assert_redirected_to slide_path(assigns(:slide))
