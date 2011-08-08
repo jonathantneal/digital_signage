@@ -32,8 +32,8 @@ class Slide < ActiveRecord::Base
     content.file.original_filename
   end
 
-  def url
-    content.url
+  def url(version=nil)
+    content.url(version)
   end
 
   def type
