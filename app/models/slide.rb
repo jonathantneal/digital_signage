@@ -12,7 +12,8 @@ class Slide < ActiveRecord::Base
 
   mount_uploader :content, ContentUploader
   
-  validates_presence_of :title, :delay, :color, :user_id#, :content
+  validates_presence_of :title, :delay, :color, :user_id
+  validates_presence_of :content, :on => :create
   validates :title, :uniqueness => true
   validates_inclusion_of :resize, :in => RESIZE_OPTIONS
   validates_integrity_of :content

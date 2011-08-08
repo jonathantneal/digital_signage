@@ -17,7 +17,8 @@ class SlidesControllerTest < ActionController::TestCase
 
   test "should create slide" do
     assert_difference('Slide.count') do
-      post :create, :slide => { :title => 'JUST CREATED', :resize => 'none', :user_id => users(:manager).id }
+      slide_file = fixture_file_upload('files/slide1.png', 'image/png')
+      post :create, :slide => { :title => 'JUST CREATED', :content => slide_file, :resize => 'none', :user_id => users(:manager).id }
     end
 
     assert_redirected_to slide_path(assigns(:slide))
