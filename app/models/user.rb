@@ -9,9 +9,11 @@ class User < ActiveRecord::Base
     devise :cas_authenticatable, :rememberable, :trackable, :timeoutable
   end
 
-  attr_accessible :username, :first_name, :last_name, :title, :email, :department, :photo_url, :password, :remember_me
+  attr_accessible :username, :first_name, :last_name, :title, :email, :department, :photo_url, :password, :remember_me, :department_ids
   alias_attribute :netid, :username
   validates :username, :presence => true, :uniqueness => true, :user_exists => true
+  has_many :department_users
+  has_many :departments, :through => :department_users
 
   default_scope :order => 'first_name, last_name'
   

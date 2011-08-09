@@ -23,11 +23,11 @@
     %dd.color=f.text_field(:color, {:style=>"color:##{@slide.color}; background-color:##{@slide.color};"})
     %dt.published=f.label(:published)
     %dd.published=f.check_box(:published)
-    %dt.owner=f.label(:user_id, 'Owner')
-    %dd.owner=f.collection_select(:user_id, User.all, :id, :name)
+    %dt.department=f.label(:department_id, 'Department')
+    %dd.department=f.collection_select(:department_id, Department.with_permissions_to(:show), :id, :title)
   %h2 Signs
   %ul.signs
-    -Sign.all.each do |sign|
+    -Sign.with_permissions_to(:edit).each do |sign|
       %li
         =check_box_tag(:sign_ids, sign.id, @slide.signs.include?(sign), :name => 'slide[sign_ids][]')
         =label_tag(:sign_ids, sign.title)

@@ -2,19 +2,7 @@ authorization do
 
   role :admin do
   
-    has_permission_on [:announcements, :documents, :users] do
-      to :administrate
-    end
-    
-    has_permission_on :signs do
-      to :administrate
-    end
-    
-    has_permission_on :info do
-      to :performance, :database, :configuration, :reload_configuration, :appinfo
-    end
-    
-    includes :manager
+    has_omnipotence
     
   end
   
@@ -34,16 +22,21 @@ authorization do
       if_attribute :id => is {user.id}
     end
    
-    has_permission_on :signs do
-      to :read
+    has_permission_on :signs, :to => [:read, :update] do
+      if_permitted_to :show, :department
     end
     
-    has_permission_on :slides do
-      to :administrate
+    has_permission_on :slides, :to => [:read, :create]
+    has_permission_on :slides, :to => :update do
+      if_permitted_to :show, :department
     end
     
-    has_permission_on :slots do
-      to :administrate, :sort
+    has_permission_on :slots, :to => [:administrate, :sort] do
+      if_permitted_to :update, :sign
+    end
+    
+    has_permission_on :departments, :to => :show do
+      if_attribute :users => contains {user}
     end
     
     includes :guest

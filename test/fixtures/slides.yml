@@ -5,7 +5,7 @@ one:
   delay: 5
   color: 000000
   published: true
-  user: manager
+  department: BonAppetit
   resize: "none"
 
 two:
@@ -13,5 +13,5 @@ two:
   delay: 10
   color: 111111
   published: false
-  user: admin
+  department: AS
   resize: "none"

@@ -2,9 +2,9 @@ class Slide < ActiveRecord::Base
 
   RESIZE_OPTIONS = ['none', 'zoom', 'zoom & crop', 'stretch']
 
-  attr_accessible :title, :delay, :color, :published, :user_id, :created_at, :updated_at, :sign_ids, :resize, :content, :schedules_attributes, :parameters_attributes
+  attr_accessible :title, :delay, :color, :published, :department_id, :created_at, :updated_at, :sign_id, :resize, :content, :schedules_attributes, :parameters_attributes
   
-  belongs_to :user
+  belongs_to :department
   has_many :schedules, :dependent => :destroy
   has_many :parameters, :dependent => :destroy
   has_many :slots, :dependent => :destroy
@@ -14,7 +14,7 @@ class Slide < ActiveRecord::Base
 
   mount_uploader :content, ContentUploader
   
-  validates_presence_of :title, :delay, :color, :user_id
+  validates_presence_of :title, :delay, :color, :department_id
   validates_presence_of :content, :on => :create
   validates :title, :uniqueness => true
   validates_inclusion_of :resize, :in => RESIZE_OPTIONS

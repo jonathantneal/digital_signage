@@ -1,4 +1,7 @@
-%h1 Signs
+%h1 Department "#{@department.title}"
+
+
+%h3 Signs
 %table
   %tr
     %th Title
@@ -15,6 +18,7 @@
         =time_ago_in_words(sign.last_check_in)+" ago" if sign.checked_in?
       %td
         =action_links(sign) do
-          =link_to('Sort', sign_slots_path(sign), :class=>:sort) if permitted_to? :edit, sign
+          =link_to('Sort', sign_slots_path(sign), :class=>:sort)       
 
-=render('index_aside')
+
+=action_links @department

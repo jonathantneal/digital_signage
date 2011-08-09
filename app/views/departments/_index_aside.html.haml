@@ -1,0 +1,7 @@
+-@department = Department.new
+-content_for(:aside)do
+  %h2 Actions
+  -if permitted_to?(:create, :departments)
+    .box
+      %h3.add New department
+      =render(:partial => 'form')

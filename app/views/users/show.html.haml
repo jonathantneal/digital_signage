@@ -19,9 +19,11 @@
   %dd.email=mail_to @user.email, @user.email
 
   %dt.roles Roles
-  -@user.roles.each do |role|
-    %dd.role=role
+  %dd.roles= @user.roles.join(", ")
+    
+  %dt.departments Signage Departments
+  %dd.departments= @user.departments.join(", ")
 
-=action_links(@user, :include=>:auto_update)
+=action_links @user, :include=>:auto_update
 
 =render('show_aside')

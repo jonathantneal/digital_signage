@@ -13,3 +13,6 @@ ul.actions a.sort {
 
 #wrapperPage #contentAside .box h2 {
   color: black; }
+
+ul.checkbox {
+  list-style: none; }

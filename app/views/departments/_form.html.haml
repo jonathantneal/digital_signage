@@ -1,0 +1,6 @@
+=form_for(@department) do |f|
+  %dl
+    %dt.title=f.label(:title)
+    %dd.title=f.text_field(:title)
+
+  .buttons= f.submit('Save')

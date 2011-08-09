@@ -14,8 +14,8 @@
   %dd.color{:style => "color:##{@slide.color}; background-color:##{@slide.color};"}=@slide.color
   %dt.published Published
   %dd.published=@slide.published
-  %dt.owner Owner
-  %dd.owner=@slide.user.name
+  %dt.department Department
+  %dd.department=@slide.department
 %h2.signs Signs
 %ul.signs
   -@slide.signs.each do |sign|
