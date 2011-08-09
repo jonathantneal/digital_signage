@@ -1,7 +1,6 @@
--@slide = Slide.new
 -content_for(:aside) do
   %h2 Actions
   -if permitted_to?(:create, :slides)
     .box
-      %h3.add New slide
-      =render(:partial => 'form')
+      %h3.add=link_to('New slide', new_slide_path)
+      
