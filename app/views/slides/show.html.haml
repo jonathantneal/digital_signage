@@ -5,7 +5,7 @@
     %dd.thumbnail
       =render(:partial=>'shared/thumbnail', :locals=>{:slide=>@slide})
   %dt.url URL
-  %dd.url=link_to(slide_url(@slide), slide_url(@slide))
+  %dd.url=link_to(short_slide_url(@slide), slide_url(@slide))
   %dt.delay Delay
   %dd.delay=@slide.delay
   %dt.resize Resize
