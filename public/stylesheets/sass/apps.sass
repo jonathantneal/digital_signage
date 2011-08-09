@@ -9,37 +9,43 @@ html, body
 
 body
   margin: 0
-  font: 9pt Helvetica, Arial, sans-serif
+  font: 9pt $sans_serif_font
   background: #81A0DF url(../images/contentbg.png) 0 0 repeat-x
 
 h1
   height: 1.6em
   margin: 0 0 22px
-  font: normal 2.8em/1.3 "Palatino", "Palatino Linotype", Georgia, serif
+  font: normal 2.8em/1.3 $serif_font
   letter-spacing: 0.05em
   word-spacing: 0.1em
-  color: #333
+  color: $lightish_text
   
 h2
   margin: 0.5em 0 0.4em 0
-  font: 2em/1.2 "Palatino", "Palatino Linotype", Georgia, sans-serif
-  color: #333
+  font: 2em/1.2 $serif_font
+  color: $lightish_text
   
 h3
   margin: 0 0 0.4em 0
-  font: 1.4em/1.2 Helvetica, Arial, sans-serif
-  color: #444
+  font: 1.4em/1.2 $sans_serif_font
+  color: $lightish_text
   
 h4
   margin: 0 0 0.4em 0
-  font: 1.3em/1.2 Helvetica, Arial, sans-serif
-  color: #666
+  font: 1.3em/1.2 $sans_serif_font
+  color: $light_text
 
 caption
   margin: 0 0 1px 0
   padding: 0.4em 0
-  font: 1.6em/1.4 "Palatino", "Palatino Linotype", Georgia, serif
+  font: 1.6em/1.4 $serif_font
   text-align: left
+
+hr
+  margin: 10px 0
+  border-style: solid none none none
+  border-color: $light_border
+  border-width: 1px
 
 img
   border: none
@@ -64,32 +70,24 @@ dd
   margin: 0
   padding: 0
 
-td ul.actions, .small ul.actions
-  float: right
-  clear: none
-  margin: 0
-  padding: 0
-  border-top: none
+fieldset
+  margin-bottom: 30px
+  padding: 20px
+  border: dashed 1px $light_border
+  @include border-radius
 
-
-td a
-  &.show, &.edit, &.destroy
-    display: block
-    float: left
-    width: 16px
-    height: 16px
-    margin: 0 5px
-    padding: 0 !important
-    text-indent: 99999px
-    overflow: hidden
+  legend
+    padding: 0 5px
+    color: #888
+    font-size: 13pt
+    text-align: right
 
 input[type=text], input[type=password], textarea
   color: #000
-  border: solid 1px #ccc
+  border: $default_border
   border-top-color: #666
   background-color: #fff
-  -webkit-box-shadow: inset 0 1px 0 rgba(0,0,0,0.2)
-  -moz-box-shadow: inset 0 1px 0 rgba(0,0,0,0.2)
+  @include inset-box-shadow(0, 1px, 0)
 
 .fieldWithErrors
   input[type=text], input[type=password], textarea
@@ -107,10 +105,6 @@ button, input[type=submit], a.button
   color: #fff
   text-align: left
   text-decoration: none
-  -moz-border-radius: 5px 
-  -webkit-border-radius: 5px
-  -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5)
-  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5)
   text-shadow: 0 -1px 1px rgba(0,0,0,0.25)
   border: 0 none
   border-bottom: 1px solid rgba(0,0,0,0.25)
@@ -119,7 +113,15 @@ button, input[type=submit], a.button
   font-size: 14px
   font-weight: bold
   line-height: 1
-  text-shadow: 0 -1px 1px rgba(0,0,0,0.25)
+  @include border-radius
+  @include box-shadow(0, 1px, 3px, 0.5)
+
+  &[disabled=disabled]
+    background-color: #999
+    
+    &:hover
+      background-color: #999
+      cursor: default
 
   &:hover
     background-color: #111
@@ -128,38 +130,38 @@ button, input[type=submit], a.button
   &:active
     top: 1px
 
-
+/* ACTIONS */
 ul.actions
   display: block
   clear: both
   margin-top: 10px
   padding-top: 10px
   text-align: right
-  list-style-type: none
   border-top: solid 1px #a2a2a2
+  list-style-type: none
 
   li
     display: inline
 
-  a
-    padding: 0 10px 0 20px
-    font-weight: bold
-    text-decoration: none
-    line-height: 16px
-    background-position: top left
-    background-repeat: no-repeat
+    a
+      padding: 0 10px 1px 20px
+      font-weight: bold
+      text-decoration: none
+      line-height: 16px
+      background-position: top left
+      background-repeat: no-repeat
 
-    &.show
-      background-image: url(../images/view.png)
+      &.show
+        background-image: url(../images/view.png)
 
-    &.edit
-      background-image: url(../images/edit.png)
+      &.edit
+        background-image: url(../images/edit.png)
 
-    &.destroy
-      background-image: url(../images/delete.png)
+      &.destroy
+        background-image: url(../images/delete.png)
 
-    &.auto_update
-      background-image: url(../images/reload.png)
+      &.auto_update
+        background-image: url(../images/reload.png)
 
 .small ul.actions a
   &.show, &.edit, &.destroy
@@ -172,6 +174,25 @@ ul.actions
     text-indent: 99999px
     overflow: hidden
 
+td ul.actions, .small ul.actions
+  float: right
+  clear: none
+  margin: 0
+  padding: 0
+  border-top: none
+  list-style-type: none
+
+
+td a
+  &.show, &.edit, &.destroy
+    display: block
+    float: left
+    width: 16px
+    height: 16px
+    margin: 0 5px
+    padding: 0 !important
+    text-indent: 99999px
+    overflow: hidden
 
 em.number
   color: #fff
@@ -179,23 +200,15 @@ em.number
   font-weight: bold
   font-style: normal
   padding: 2px 8px
-  -webkit-border-radius: 2px
-  -moz-border-radius: 2px
   background-color: #5596C4
   text-align: center
+  @include border-radius(2px)
 
 
 #contentAside em.number
   display: block
   float: left
   margin-right: 10px
-
-
-.shadowed
-  filter: Shadow(Color=#000000, Direction=135, Strength=3)
-  -moz-box-shadow: 0 3px 3px #000
-  -webkit-box-shadow: rgb(0, 0, 0) 0px 3px 3px
-
 
 .hidden
   display: none
@@ -219,9 +232,8 @@ ul.admin.menu
   padding: 4px 10px
   list-style-type: none
   background: rgba(0,0,0,0.7)
-  -webkit-border-radius: 0 0 6px 0
-  -moz-border-radius: 0 0 6px 0 
-  -webkit-box-shadow: 2px 2px 2px rgba(0,0,0,0.2)
+  @include border-radius(0 0 6px 0)
+  @include box-shadow(2px)
   
   li, a
     display: inline-block
@@ -267,8 +279,7 @@ ul.admin.menu
   border-top: 7px solid #1D1309
   border-bottom: 3px solid #141E36
   min-width: 940px
-  -webkit-box-shadow: 1px 3px 3px rgba(0,0,0,0.2)
-  -moz-box-shadow: 1px 3px 3px rgba(0,0,0,0.2)
+  @include box-shadow(1px, 3px, 3px)
 
   #siteTitle a
     display: block
@@ -296,10 +307,9 @@ ul.admin.menu
     right: 0
     bottom: 0
     padding: 0 20px
-    font: 12px/30px "Helvetica Neue",Arial,Helvetica,sans-serif
+    font: 12px/30px $sans_serif_font
     background-color: #141E36
-    -webkit-border-radius: 6px 0 0 0
-    -moz-border-radius: 6px 0 0 0
+    @include border-radius(6px 0 0 0)
 
     a
       padding: 0 5px
@@ -356,13 +366,12 @@ ul.admin.menu
 ul#messages
   margin: 20px 0 0 0
   padding: 5px 20px
-  border-top: dashed #ccc 1px
-  border-bottom: dashed #ccc 1px
+  border-top: dashed $light_border 1px
+  border-bottom: dashed $light_border 1px
   background-color: #eaeaea
-  -moz-box-shadow: inset 0 2px 2px rgba(0,0,0,0.12)
-  -webkit-box-shadow: inset 0 2px 2px rgba(0,0,0,0.12)
+  @include inset-box-shadow(0, 2px, 2px, 0.12)
 
-  li
+  >li
     position: relative
     display: inline-block
     margin: 5px
@@ -372,10 +381,8 @@ ul#messages
     border: solid 1px #F6A670
     background: #FFEFAA no-repeat 10px center
     background-image: url(../images/info.gif)
-    -moz-border-radius: 5px
-    -webkit-border-radius: 5px
-    -moz-box-shadow: 1px 2px 2px rgba(0,0,0,0.12)
-    -webkit-box-shadow: 1px 2px 2px rgba(0,0,0,0.12)
+    @include border-radius
+    @include box-shadow(1px, 2px, 2px, 0.12)
 
     &.notice
       background-image: url(../images/notice.gif)
@@ -426,8 +433,7 @@ ul#messages
         font-weight: bold
         color: #D2DBEC
         background-color: #21335A
-        -moz-box-shadow: 0 2px 2px rgba(0,0,0,0.2)
-        -webkit-box-shadow: 0 2px 2px rgba(0,0,0,0.2)
+        @include box-shadow
         
         &.actions
           text-indent: -9999px
@@ -442,7 +448,7 @@ ul#messages
           text-indent: -99999px
         
       td
-        font: 1.1em/1.2 Helvetica, Arial, sans-serif
+        font: 1.1em/1.2 $sans_serif_font
         vertical-align: top
         padding: 4px 8px
 
@@ -474,8 +480,7 @@ ul#messages
               background-color: #FDFD9F
               cursor: default
               white-space: normal
-              -webkit-border-radius: 8px
-              -moz-border-radius: 8px
+              @include border-radius(8px)
 
     tfoot
       border-top: 1px solid #BBB
@@ -507,7 +512,7 @@ ul#messages
         background: url(../images/navselect_white.png) 50% 100% no-repeat
 
     a
-      font: bold 15px "Helvetica Neue",Arial,Helvetica,sans-serif
+      font: bold 15px $sans_serif_font
       color: #fff
       display: block
       height: 40px
@@ -516,21 +521,19 @@ ul#messages
 
 
   #wrapperContent
-    background: #FFF
-    -webkit-border-radius: 8px
-    -moz-border-radius: 8px
-    -webkit-box-shadow: 1px 3px 3px rgba(0,0,0,0.5)
-    -moz-box-shadow: 1px 3px 3px rgba(0,0,0,0.5)
+    background: #fff
     float: left
     margin-right: 20px
     position: relative
     width: 660px
+    @include border-radius(8px)
+    @include box-shadow(1px, 3px, 3px, 0.5)
     
   #content
     padding: 20px
 
     a:hover
-      color: #8DC422
+      color: #8dc422
 
     dt
       margin-top: 10px
@@ -604,18 +607,17 @@ ul#messages
         width: 100%
         margin: 10px 0 10px -20px
         padding: 10px 20px
-        border: 1px #ccc
+        border: 1px $light_border
         border-style: dashed none
         background-color: #eaeaea
         overflow: hidden
-        -moz-box-shadow: inset 0 2px 2px rgba(0,0,0,0.12)
-        -webkit-box-shadow: inset 0 2px 2px rgba(0,0,0,0.12)
+        @include box-shadow(0, 2px, 2px, 0.12)
 
         legend
           position: absolute
           right: 20px
           bottom: -2px
-          color: #ccc
+          color: $lighter_text
           font-size: 14pt
           font-weight: bold
           line-height: 14pt
@@ -647,7 +649,7 @@ ul#messages
     width: 270px
 
     h2
-      font: bold 92% "Helvetica Neue",Arial,Helvetica,sans-serif
+      font: bold 92% $sans_serif_font
       color: #fff
       text-transform: uppercase
       margin-bottom: 10px
@@ -666,6 +668,9 @@ ul#messages
 
       &.add
         background-image: url(../images/add.gif)
+        
+      &.view
+        background-image: url(../images/view.png)
 
       a
         color: #444
@@ -677,10 +682,8 @@ ul#messages
       padding: 10px
       color: #000
       background: #fdfd9f
-      -webkit-border-radius: 8px
-      -moz-border-radius: 8px
-      -webkit-box-shadow: 1px 3px 3px rgba(0,0,0,0.5)
-      -moz-box-shadow: 1px 3px 3px rgba(0,0,0,0.5)
+      @include border-radius(8px)
+      @include box-shadow(1px, 3px, 3px, 0.5)
 
       a.cancel
         display: none
@@ -708,7 +711,7 @@ ul#messages
       padding: 0px
 
       li
-        border-top: 1px solid #ccc
+        border-top: $default_border
         position: relative
         padding: 8px
         color: #fff
@@ -744,7 +747,6 @@ ul#messages
     width: 99px
     height: 22px
     background: url(../images/it_logo_light.png) 0px 0px no-repeat
-    //display: inline-block
     text-indent: 500px
     line-height: 200px
     position: absolute

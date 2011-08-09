@@ -1,7 +1,37 @@
+// Images
 $logo_url: url(../images/apps-logo.png)
 
+// Fonts
+$serif_font: "Palatino", "Palatino Linotype", Georgia, serif
+$sans_serif_font: Helvetica, Arial, sans-serif
+
+// Colors
+$default_border: solid 1px #ccc
+$light_border: #ccc
+$lightish_text: #333
+$light_text: #666
+$lighter_text: #ccc
+
+// Border and Margins
 $default_border: solid 1px #123357
 $default_border_radius: 5px
 $default_border_radius_left: 5px 0 0 5px
 $default_border_radius_right: 0 5px 5px 0
 $default_padding: 20px
+
+
+// Mixins
+@mixin border-radius($width: 5px)
+  -moz-border-raidus: $width
+  -webkit-border-radius: $width
+  border-radius: $width
+
+@mixin box-shadow($x: 0, $y: 2px, $blur: 2px, $opacity: 0.2)
+  -moz-box-shadow: $x $y $blur rgba(0, 0, 0, $opacity)
+  -webkit-box-shadow: $x $y $blur rgba(0, 0, 0, $opacity)
+  box-shadow: $x $y $blur rgba(0, 0, 0, $opacity)
+  
+@mixin inset-box-shadow($x: 0, $y: 2px, $blur: 2px, $opacity: 0.2)
+  -moz-box-shadow: inset $x $y $blur rgba(0, 0, 0, $opacity)
+  -webkit-box-shadow: inset $x $y $blur rgba(0, 0, 0, $opacity)
+  box-shadow: inset $x $y $blur rgba(0, 0, 0, $opacity)
