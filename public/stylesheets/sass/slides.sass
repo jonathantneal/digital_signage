@@ -9,16 +9,16 @@ ul.slides
   
   >li
     position: relative
-    min-height= !thumbnail_height - (!default_padding * 2)
-    margin= !default_padding 0
-    padding= !default_padding
-    padding-left= !thumbnail_width
+    min-height: $thumbnail_height - ($default_padding * 2)
+    margin: $default_padding 0
+    padding: $default_padding
+    padding-left: $thumbnail_width
     text-align: right
-    border= !default_border
+    border: $default_border
     background: #D3E1F0
-    border-radius= !default_border_radius_right
-    -moz-border-radius= !default_border_radius_right
-    -webkit-border-radius= !default_border_radius_right
+    border-radius: $default_border_radius_right
+    -moz-border-radius: $default_border_radius_right
+    -webkit-border-radius: $default_border_radius_right
     
   dl, dd
     margin: 0
@@ -51,15 +51,15 @@ dl.slide
   dt.thumbnail
     display: block
     position: absolute
-    top= 60px
-    right= !default_padding
-    width= !thumbnail_width
+    top: 60px
+    right: $default_padding
+    width: $thumbnail_width
 
   dd.thumbnail
     position: absolute
-    top= 90px
-    right= !default_padding    
-    width= !thumbnail_width
+    top: 90px
+    right: $default_padding    
+    width: $thumbnail_width
 
 dd.url a
   display: block
@@ -73,15 +73,40 @@ dd.color, dd.color input
   height: 30px
   border: solid 1px #666
   cursor: pointer
-  
-form dd.color
-  border: none
-  cursor: default
-  
+
 ul.signs
   margin: 0
   padding-left: 10px
   list-style-type: none
+
+form
+  dd.parameters
+    li
+      margin: 5px 0
+      list-style-type: none
+      input[type=text]
+        width: 150px
+
+  input.delete
+    display: none
+  label.delete
+    display: inline-block
+    width: 16px
+    height: 16px
+    margin: 0 5px
+    padding: 0 !important
+    text-indent: 99999px
+    overflow: hidden
+    background-image: url(../images/delete.png)
+    cursor: pointer
+
+  dd.color
+    border: none
+    cursor: default
+  
+  a.add_fields
+    padding-left: 20px
+    background: url(../images/add.gif) no-repeat
   
 #contentAside
   .box h2

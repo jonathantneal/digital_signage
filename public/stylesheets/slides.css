@@ -81,14 +81,34 @@ dd.color, dd.color input {
   border: solid 1px #666666;
   cursor: pointer; }
 
-form dd.color {
-  border: none;
-  cursor: default; }
-
 ul.signs {
   margin: 0;
   padding-left: 10px;
   list-style-type: none; }
+
+form dd.parameters li {
+  margin: 5px 0;
+  list-style-type: none; }
+  form dd.parameters li input[type=text] {
+    width: 150px; }
+form input.delete {
+  display: none; }
+form label.delete {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin: 0 5px;
+  padding: 0 !important;
+  text-indent: 99999px;
+  overflow: hidden;
+  background-image: url(../images/delete.png);
+  cursor: pointer; }
+form dd.color {
+  border: none;
+  cursor: default; }
+form a.add_fields {
+  padding-left: 20px;
+  background: url(../images/add.gif) no-repeat; }
 
 #contentAside .box h2 {
   color: black; }

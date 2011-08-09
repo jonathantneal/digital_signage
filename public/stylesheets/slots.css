@@ -1,66 +1,110 @@
-div.thumbnail {
-  position: absolute;
-  margin: 0;
-  padding: 0;
-  top: 0;
-  left: 0;
-  width: 336px;
-  height: 189px;
-  text-align: center;
-  border: solid 1px #123357; }
+/*
+Syntax error: Invalid CSS after "min-height": expected selector, was "= !thumbnail_he..."
+        on line 12 of /home/anoble/Apps/signage/public/stylesheets/sass/slots.sass
 
-div.thumbnail.video {
-  background-image: url(../images/video_thumbnail.jpg); }
+7:   padding: 5px 0
+8:   list-style-type: none
+9: 
+10:   >li
+11:     position: relative
+12:     min-height= !thumbnail_height - (!default_padding * 2)
+13:     margin: 20px 0
+14:     padding: 20px 20px 20px 396px
+15:     text-align: right
+16:     border= !default_border
+17:     background: url(../images/sort-up-down.png) no-repeat left center #D3E1F0
 
-div.thumbnail img, div.thumbnail .swf {
-  width: auto;
-  height: auto;
-  max-width: 336px;
-  max-height: 189px;
-  border: none; }
-
-ol.slots {
-  margin: 0;
-  padding: 5px 0;
-  list-style-type: none; }
-  ol.slots > li {
-    position: relative;
-    min-height: 149px;
-    margin: 20px 0;
-    padding: 20px 20px 20px 396px;
-    text-align: right;
-    border: solid 1px #123357;
-    background: url(../images/sort-up-down.png) no-repeat left center #d3e1f0;
-    border-radius: 5px;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    cursor: move; }
-    ol.slots > li:first-child {
-      background-image: url(../images/sort-down.png); }
-    ol.slots > li:last-child {
-      background-image: url(../images/sort-up.png); }
-  ol.slots dl, ol.slots dd {
-    margin: 0;
-    padding: 0; }
-  ol.slots dt.title, ol.slots dt.thumbnail, ol.slots dt.actions {
-    display: none !important; }
-  ol.slots dd.title a {
-    font-size: 14pt;
-    font-weight: bold;
-    text-decoration: none; }
-  ol.slots dd.title a:hover {
-    text-decoration: underline; }
-  ol.slots div.thumbnail {
-    left: 48px;
-    width: 336px;
-    height: 189px;
-    border-top: none;
-    border-bottom: none; }
-  ol.slots div.thumbnail img, ol.slots div.thumbnail .swf {
-    max-width: 336px;
-    max-height: 189px; }
-  ol.slots dd.actions ul.actions {
-    position: absolute;
-    right: 10px;
-    bottom: 10px;
-    border: none; }
+Backtrace:
+/home/anoble/Apps/signage/public/stylesheets/sass/slots.sass:12
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/sass-3.1.7/lib/sass/scss/parser.rb:898:in `expected'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/sass-3.1.7/lib/sass/scss/parser.rb:841:in `expected'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/sass-3.1.7/lib/sass/scss/static_parser.rb:19:in `parse_selector'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/sass-3.1.7/lib/sass/tree/visitors/perform.rb:229:in `visit_rule'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/sass-3.1.7/lib/sass/tree/visitors/base.rb:37:in `visit'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/sass-3.1.7/lib/sass/tree/visitors/perform.rb:18:in `visit'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/sass-3.1.7/lib/sass/tree/visitors/base.rb:53:in `block in visit_children'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/sass-3.1.7/lib/sass/tree/visitors/base.rb:53:in `map'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/sass-3.1.7/lib/sass/tree/visitors/base.rb:53:in `visit_children'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/sass-3.1.7/lib/sass/tree/visitors/perform.rb:27:in `block in visit_children'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/sass-3.1.7/lib/sass/tree/visitors/perform.rb:39:in `with_environment'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/sass-3.1.7/lib/sass/tree/visitors/perform.rb:26:in `visit_children'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/sass-3.1.7/lib/sass/tree/visitors/base.rb:37:in `block in visit'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/sass-3.1.7/lib/sass/tree/visitors/perform.rb:235:in `visit_rule'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/sass-3.1.7/lib/sass/tree/visitors/base.rb:37:in `visit'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/sass-3.1.7/lib/sass/tree/visitors/perform.rb:18:in `visit'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/sass-3.1.7/lib/sass/tree/visitors/base.rb:53:in `block in visit_children'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/sass-3.1.7/lib/sass/tree/visitors/base.rb:53:in `map'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/sass-3.1.7/lib/sass/tree/visitors/base.rb:53:in `visit_children'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/sass-3.1.7/lib/sass/tree/visitors/perform.rb:27:in `block in visit_children'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/sass-3.1.7/lib/sass/tree/visitors/perform.rb:39:in `with_environment'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/sass-3.1.7/lib/sass/tree/visitors/perform.rb:26:in `visit_children'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/sass-3.1.7/lib/sass/tree/visitors/base.rb:37:in `block in visit'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/sass-3.1.7/lib/sass/tree/visitors/perform.rb:235:in `visit_rule'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/sass-3.1.7/lib/sass/tree/visitors/base.rb:37:in `visit'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/sass-3.1.7/lib/sass/tree/visitors/perform.rb:18:in `visit'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/sass-3.1.7/lib/sass/tree/visitors/base.rb:53:in `block in visit_children'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/sass-3.1.7/lib/sass/tree/visitors/base.rb:53:in `map'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/sass-3.1.7/lib/sass/tree/visitors/base.rb:53:in `visit_children'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/sass-3.1.7/lib/sass/tree/visitors/perform.rb:27:in `block in visit_children'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/sass-3.1.7/lib/sass/tree/visitors/perform.rb:39:in `with_environment'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/sass-3.1.7/lib/sass/tree/visitors/perform.rb:26:in `visit_children'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/sass-3.1.7/lib/sass/tree/visitors/base.rb:37:in `block in visit'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/sass-3.1.7/lib/sass/tree/visitors/perform.rb:47:in `visit_root'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/sass-3.1.7/lib/sass/tree/visitors/base.rb:37:in `visit'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/sass-3.1.7/lib/sass/tree/visitors/perform.rb:18:in `visit'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/sass-3.1.7/lib/sass/tree/visitors/perform.rb:7:in `visit'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/sass-3.1.7/lib/sass/tree/root_node.rb:20:in `render'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/sass-3.1.7/lib/sass/engine.rb:293:in `_render'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/sass-3.1.7/lib/sass/engine.rb:241:in `block in render'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/sass-3.1.7/lib/sass/util.rb:297:in `silence_sass_warnings'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/sass-3.1.7/lib/sass/engine.rb:241:in `render'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/sass-3.1.7/lib/sass/plugin/compiler.rb:319:in `update_stylesheet'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/sass-3.1.7/lib/sass/plugin/compiler.rb:181:in `block (2 levels) in update_stylesheets'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/sass-3.1.7/lib/sass/plugin/compiler.rb:175:in `each'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/sass-3.1.7/lib/sass/plugin/compiler.rb:175:in `block in update_stylesheets'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/sass-3.1.7/lib/sass/plugin/compiler.rb:173:in `each'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/sass-3.1.7/lib/sass/plugin/compiler.rb:173:in `update_stylesheets'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/sass-3.1.7/lib/sass/plugin.rb:81:in `update_stylesheets'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/sass-3.1.7/lib/sass/plugin.rb:54:in `check_for_updates'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/sass-3.1.7/lib/sass/plugin/rack.rb:51:in `call'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/warden-1.0.4/lib/warden/manager.rb:35:in `block in call'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/warden-1.0.4/lib/warden/manager.rb:34:in `catch'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/warden-1.0.4/lib/warden/manager.rb:34:in `call'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.0.9/lib/action_dispatch/middleware/best_standards_support.rb:17:in `call'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.0.9/lib/action_dispatch/middleware/head.rb:14:in `call'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/rack-1.2.3/lib/rack/methodoverride.rb:24:in `call'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.0.9/lib/action_dispatch/middleware/params_parser.rb:21:in `call'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.0.9/lib/action_dispatch/middleware/flash.rb:182:in `call'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.0.9/lib/action_dispatch/middleware/session/abstract_store.rb:149:in `call'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.0.9/lib/action_dispatch/middleware/cookies.rb:302:in `call'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/activerecord-3.0.9/lib/active_record/query_cache.rb:32:in `block in call'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/activerecord-3.0.9/lib/active_record/connection_adapters/abstract/query_cache.rb:28:in `cache'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/activerecord-3.0.9/lib/active_record/query_cache.rb:12:in `cache'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/activerecord-3.0.9/lib/active_record/query_cache.rb:31:in `call'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/activerecord-3.0.9/lib/active_record/connection_adapters/abstract/connection_pool.rb:354:in `call'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.0.9/lib/action_dispatch/middleware/callbacks.rb:46:in `block in call'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/activesupport-3.0.9/lib/active_support/callbacks.rb:416:in `_run_call_callbacks'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.0.9/lib/action_dispatch/middleware/callbacks.rb:44:in `call'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/rack-1.2.3/lib/rack/sendfile.rb:107:in `call'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.0.9/lib/action_dispatch/middleware/remote_ip.rb:48:in `call'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.0.9/lib/action_dispatch/middleware/show_exceptions.rb:47:in `call'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/railties-3.0.9/lib/rails/rack/logger.rb:13:in `call'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/rack-1.2.3/lib/rack/runtime.rb:17:in `call'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/activesupport-3.0.9/lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/rack-1.2.3/lib/rack/lock.rb:11:in `block in call'
+<internal:prelude>:10:in `synchronize'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/rack-1.2.3/lib/rack/lock.rb:11:in `call'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.0.9/lib/action_dispatch/middleware/static.rb:30:in `call'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/railties-3.0.9/lib/rails/application.rb:168:in `call'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/railties-3.0.9/lib/rails/application.rb:77:in `method_missing'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/railties-3.0.9/lib/rails/rack/log_tailer.rb:14:in `call'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/rack-1.2.3/lib/rack/content_length.rb:13:in `call'
+/home/anoble/.rvm/gems/ruby-1.9.2-p290/gems/rack-1.2.3/lib/rack/handler/webrick.rb:52:in `service'
+/home/anoble/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+/home/anoble/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+/home/anoble/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Syntax error: Invalid CSS after \"min-height\": expected selector, was \"= !thumbnail_he...\"\A         on line 12 of /home/anoble/Apps/signage/public/stylesheets/sass/slots.sass\A \A 7:   padding: 5px 0\A 8:   list-style-type: none\A 9: \A 10:   >li\A 11:     position: relative\A 12:     min-height= !thumbnail_height - (!default_padding * 2)\A 13:     margin: 20px 0\A 14:     padding: 20px 20px 20px 396px\A 15:     text-align: right\A 16:     border= !default_border\A 17:     background: url(../images/sort-up-down.png) no-repeat left center #D3E1F0"; }

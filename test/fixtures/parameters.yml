@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  slide: 
+  name: MyString
+  value: MyString
+
+two:
+  slide: 
+  name: MyString
+  value: MyString

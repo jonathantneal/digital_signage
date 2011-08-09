@@ -17,6 +17,7 @@ gem 'rails', '3.0.9'
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
 # Bundle the extra gems:
+gem 'addressable', '~>2.2.6'
 gem 'admin_data', '~>1.1.13'
 gem 'biola_web_services', '~>0.1.2'
 gem 'carrierwave', '~>0.5.4'

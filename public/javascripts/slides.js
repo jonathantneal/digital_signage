@@ -20,4 +20,8 @@ $(document).ready(function() {
     });
   }
 
+  $('input.delete[type=checkbox]').live('click', function(event) {
+    $(this).closest('li,tr').fadeOut();
+  });
+
 });

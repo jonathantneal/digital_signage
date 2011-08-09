@@ -7,6 +7,12 @@
     %dd.title=f.text_field(:title)
     %dt.file=f.label(:content)
     %dd.file=f.file_field(:content)
+    %dt.parameters Parameters
+    %dd.parameters
+      %ul#parameters.parameters
+        =f.fields_for(:parameters, @slide.parameters) do |f2|
+          =render('parameter_fields', :f => f2)
+      =link_to_add_fields('Add Parameter', f, :parameters)
     %dt.delay
       =f.label(:delay)
       %small in seconds

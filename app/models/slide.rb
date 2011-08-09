@@ -2,13 +2,15 @@ class Slide < ActiveRecord::Base
 
   RESIZE_OPTIONS = ['none', 'zoom', 'zoom & crop', 'stretch']
 
-  attr_accessible :title, :delay, :color, :published, :user_id, :created_at, :updated_at, :sign_ids, :schedules_attributes, :resize, :content
+  attr_accessible :title, :delay, :color, :published, :user_id, :created_at, :updated_at, :sign_ids, :resize, :content, :schedules_attributes, :parameters_attributes
   
   belongs_to :user
-  has_many :schedules, {:dependent=>:destroy}
-  has_many :slots, {:dependent=>:destroy}
+  has_many :schedules, :dependent => :destroy
+  has_many :parameters, :dependent => :destroy
+  has_many :slots, :dependent => :destroy
   has_many :signs, :through => :slots
   accepts_nested_attributes_for :schedules, :allow_destroy => true
+  accepts_nested_attributes_for :parameters, :allow_destroy => true
 
   mount_uploader :content, ContentUploader
   
@@ -112,6 +114,14 @@ class Slide < ActiveRecord::Base
   
   def future_schedules(now=Time.now)
     sorted_valid_schedules(now).reject { |s| s.time(now) < now }  
+  end
+  
+  def parameter_hash
+    params = {}
+    self.parameters.each do |param|
+      params[param.name] = param.value
+    end
+    params
   end
   
   def self.expired_slides(now=Time.now)
