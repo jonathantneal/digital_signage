@@ -7,7 +7,8 @@ class SlotsController < ApplicationController
 
   def index
     @sign = Sign.where('id = ? OR name = ?', params[:sign_id], params[:sign_id]).first
-    @slots = @sign.try(:slots)
+    raise ActiveRecord::RecordNotFound if @sign.nil?
+    @slots = @sign.slots.published
   end
 
   def destroy
