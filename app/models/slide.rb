@@ -1,4 +1,5 @@
 class Slide < ActiveRecord::Base
+  extend ActiveSupport::Memoizable
 
   RESIZE_OPTIONS = ['none', 'zoom', 'zoom & crop', 'stretch']
 
@@ -23,6 +24,7 @@ class Slide < ActiveRecord::Base
   before_save :set_content_type
 
   def valid_schedules(now=@now)
+    return [] if schedules.size.zero?
     schedules.reject{ |s| s.time(now).nil? }
   end
 
@@ -56,7 +58,7 @@ class Slide < ActiveRecord::Base
   
   def active?(now=Time.now)
     return false unless self.published
-    !hidden?(now)
+    showing?(now)
   end
   
   def inactive?(now=Time.now)
@@ -124,16 +126,23 @@ class Slide < ActiveRecord::Base
     params
   end
   
-  def self.expired_slides(now=Time.now)
-    Slide.all.reject { |s| !s.expired?(now) }
-  end
+  # Class Methods
+  class << self
+    extend ActiveSupport::Memoizable
   
-  def self.total_time(slides)
-    time = 0
-    slides.each do |slide|
-      time += slide.delay
+    def expired_slides(now=Time.now)
+      Slide.all.reject { |s| !s.expired?(now) }
     end
-    return time
+    
+    def total_time(slides)
+      time = 0
+      slides.each do |slide|
+        time += slide.delay
+      end
+      return time
+    end
+  
+    memoize :expired_slides, :total_time
   end
   
   private
@@ -146,4 +155,7 @@ class Slide < ActiveRecord::Base
     end
   end
   
-end 
+  memoize :sorted_schedules, :valid_schedules, :sorted_valid_schedules,
+    :previous_schedule, :past_schedules, :next_schedule, :future_schedules,
+    :parameter_hash
+end

@@ -1,4 +1,5 @@
 class Sign < ActiveRecord::Base
+  extend ActiveSupport::Memoizable  
 
   FULL_SCREEN_MODES = ['fullscreen', 'maximize']
 
@@ -11,8 +12,8 @@ class Sign < ActiveRecord::Base
   validates_inclusion_of :full_screen_mode, :in => FULL_SCREEN_MODES
   validates_format_of :name, :with => /^[a-zA-Z0-9_-]+$/
   belongs_to :department
-  has_many :slots, {:dependent=>:destroy}
-  has_many :slides, :through => :slots
+  has_many :slots, :dependent=>:destroy
+  has_many :slides, :through => :slots, :order=>'slots.order'
 
   def to_param
     self.name
@@ -23,19 +24,17 @@ class Sign < ActiveRecord::Base
   end
 
   def active_slides
-    self.slides.reject { |s| !s.active? }
+    self.slides.includes(:schedules).reject { |s| !s.active? }
   end
   
   def expired_slides
-    self.slides.reject { |s| !s.expired? }
+    self.slides.includes(:schedules).reject { |s| !s.expired? }
   end
 
   def active_slides_time
     Slide.total_time self.active_slides
   end
-  
-  def loop_time # alias
-    active_slides_time
-  end
+  alias :loop_time :active_slides_time
 
+  memoize :active_slides, :expired_slides, :active_slides_time
 end
