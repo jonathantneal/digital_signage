@@ -25,7 +25,7 @@ module SlidesHelper
       url.host = request.host
       url.port = request.port
     end
-    url.query_values = slide.parameter_hash unless slide.parameter_hash.empty?
+    url.query_values = slide.parameter_hash unless slide.parameters.size.zero?
     url.to_s
   end
 
@@ -35,7 +35,7 @@ module SlidesHelper
     return nil if slide.nil?
     
     url = Addressable::URI.parse(path_to_image(slide.url.to_s))
-    url.query_values = slide.parameter_hash.presence || nil
+    url.query_values = slide.parameter_hash unless slide.parameters.size.zero?
     url.to_s
   end
 
