@@ -5,7 +5,7 @@ one:
   delay: 5
   color: 000000
   published: true
-  department: BonAppetit
+  department: one
   resize: "none"
 
 two:
@@ -13,5 +13,5 @@ two:
   delay: 10
   color: 111111
   published: false
-  department: AS
+  department: two
   resize: "none"
