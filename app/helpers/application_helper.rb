@@ -19,7 +19,7 @@ module ApplicationHelper
   end
 
   def admin_menu
-    if(current_user.try(:is_admin?))
+    if(current_user.try(:is_admin?) || current_user.try(:is_developer?))
       content_tag(:ul, :class=>'admin menu') do
         AppConfig.ui.admin_menu.map do |link_settings|
           navigation_link(link_settings.to_h.merge({:wrapper=>'li'})).to_s

@@ -1,9 +1,21 @@
 authorization do
 
-  role :admin do
+  role :developer do
   
     has_omnipotence
     
+  end
+  
+  role :admin do
+    has_permission_on [:announcements, :documents, :users] do
+      to :administrate
+    end
+    
+    has_permission_on [:signs, :slides, :slots, :departments] do
+      to :administrate
+    end
+    
+    includes :manager
   end
   
   role :manager do

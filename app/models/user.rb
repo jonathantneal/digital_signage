@@ -90,6 +90,10 @@ class User < ActiveRecord::Base
   def is_admin?
     self.has_role?(:admin)
   end
+  
+  def is_developer?
+    self.has_role?(:developer)
+  end
 
   def groups
     BiolaWebServices.dirsvc.get_group_membership(:netid=>self.username)
