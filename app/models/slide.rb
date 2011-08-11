@@ -3,7 +3,7 @@ class Slide < ActiveRecord::Base
 
   RESIZE_OPTIONS = ['none', 'zoom', 'zoom & crop', 'stretch']
 
-  attr_accessible :title, :delay, :color, :published, :department_id, :created_at, :updated_at, :sign_id, :resize, :content, :schedules_attributes, :parameters_attributes
+  attr_accessible :title, :delay, :color, :published, :department_id, :created_at, :updated_at, :sign_id, :sign_ids, :resize, :content, :schedules_attributes, :parameters_attributes, :slots_attributes
   
   belongs_to :department
   has_many :schedules, :dependent => :destroy
@@ -12,6 +12,7 @@ class Slide < ActiveRecord::Base
   has_many :signs, :through => :slots
   accepts_nested_attributes_for :schedules, :allow_destroy => true
   accepts_nested_attributes_for :parameters, :allow_destroy => true
+  accepts_nested_attributes_for :slots, :allow_destroy => true
 
   mount_uploader :content, ContentUploader
   
@@ -22,6 +23,12 @@ class Slide < ActiveRecord::Base
   validates_integrity_of :content
 
   before_save :set_content_type
+  
+  scope :not_on_sign, lambda { |sign|
+    joins("LEFT JOIN slots ON (slides.id = slots.slide_id AND slots.sign_id = #{sign.id})").
+    group('slides.id').
+    where('slots.sign_id IS NULL')
+  }
 
   def valid_schedules(now=@now)
     return [] if schedules.size.zero?

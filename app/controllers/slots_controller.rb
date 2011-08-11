@@ -8,7 +8,15 @@ class SlotsController < ApplicationController
   def index
     @sign = Sign.where('id = ? OR name = ?', params[:sign_id], params[:sign_id]).first
     raise ActiveRecord::RecordNotFound if @sign.nil?
-    @slots = @sign.slots.published
+    @slots = @sign.slots.with_permissions_to(:index).published
+  end
+
+  def create
+    if @slot.save
+      flash[:notice] = 'Added  created'
+    end
+    
+    redirect_to :back
   end
 
   def destroy

@@ -3,7 +3,7 @@ class Sign < ActiveRecord::Base
 
   FULL_SCREEN_MODES = ['fullscreen', 'maximize']
 
-  attr_accessible :name, :title, :video, :audio, :on, :off, :full_screen_mode, :transition_duration, :reload_interval, :check_in_interval, :department_id
+  attr_accessible :name, :title, :video, :audio, :on, :off, :full_screen_mode, :transition_duration, :reload_interval, :check_in_interval, :department_id, :slide_id
   validates_presence_of :name, :title, :full_screen_mode, :transition_duration, :reload_interval, :check_in_interval, :department_id
   validates_uniqueness_of :name, :title
   validates_numericality_of :transition_duration, :greater_than => 0
@@ -13,7 +13,8 @@ class Sign < ActiveRecord::Base
   validates_format_of :name, :with => /^[a-zA-Z0-9_-]+$/
   belongs_to :department
   has_many :slots, :dependent=>:destroy
-  has_many :slides, :through => :slots, :order=>'slots.order'
+  has_many :slides, :through => :slots#, :order=>'slots.order'
+  
 
   def to_param
     self.name

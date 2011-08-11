@@ -114,3 +114,6 @@ form a.add_fields {
   color: black; }
 #contentAside div.schedule {
   display: none; }
+
+.details {
+  width: 280px; }

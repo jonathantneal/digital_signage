@@ -25,12 +25,16 @@
     %dd.published=f.check_box(:published)
     %dt.department=f.label(:department_id, 'Department')
     %dd.department=f.collection_select(:department_id, Department.with_permissions_to(:show), :id, :title)
-  %h2 Signs
-  %ul.signs
-    -Sign.with_permissions_to(:edit).each do |sign|
-      %li
-        =check_box_tag(:sign_ids, sign.id, @slide.signs.include?(sign), :name => 'slide[sign_ids][]')
-        =label_tag(:sign_ids, sign.title)
+  .slots
+    %h2 Slots
+    %table#slots.slots
+      %tr
+        %th.name Name
+        %th.remove Remove
+      =f.fields_for(:slots, @slide.slots) do |f2|
+        =render('slot_fields', :f => f2)
+    =link_to_add_fields('Add Slot', f, :slots)
+        
   .schedule
     %h2 Schedule
     %table#schedules.schedules

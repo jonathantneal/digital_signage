@@ -1,0 +1,12 @@
+-if permitted_to?(:edit, f.object.sign)
+  %tr
+    %td.slot=f.collection_select(:sign_id, Sign.with_permissions_to(:update), :id, :title)
+    %td.remove
+      =f.label(:_destroy, :class=>:delete)
+      =f.check_box(:_destroy, :class=>:delete)
+    
+-else
+  %tr
+    %td.slot= f.object.sign.title
+    =f.hidden_field :sign_id
+    %td Not Authorized

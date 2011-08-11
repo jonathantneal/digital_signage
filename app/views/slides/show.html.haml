@@ -4,22 +4,25 @@
     %dt.thumbnail Preview
     %dd.thumbnail
       =render(:partial=>'shared/thumbnail', :locals=>{:slide=>@slide})
-  %dt.url URL
-  %dd.url=link_to(short_slide_url(@slide), slide_url(@slide))
-  %dt.delay Delay
-  %dd.delay=@slide.delay
-  %dt.resize Resize
-  %dd.resize=@slide.resize
-  %dt.color Color
-  %dd.color{:style => "color:##{@slide.color}; background-color:##{@slide.color};"}=@slide.color
-  %dt.published Published
-  %dd.published=@slide.published
-  %dt.department Department
-  %dd.department=@slide.department
+  
+  .details 
+    /reduce width so that the content doesn't go behind the preview image
+    %dt.url URL
+    %dd.url=link_to(short_slide_url(@slide), slide_url(@slide))
+    %dt.delay Delay
+    %dd.delay=@slide.delay
+    %dt.resize Resize
+    %dd.resize=@slide.resize
+    %dt.color Color
+    %dd.color{:style => "color:##{@slide.color}; background-color:##{@slide.color};"}=@slide.color
+    %dt.published Published
+    %dd.published=@slide.published
+    %dt.department Department
+    %dd.department=@slide.department
 %h2.signs Signs
 %ul.signs
   -@slide.signs.each do |sign|
-    %li=link_to(sign.title, sign_path(sign))
+    %li=permitted_to?(:show, sign) ? link_to(sign.title, sign_path(sign)) : sign.title
 %h2.schedule Schedule
 %ul.schedule
   -@slide.sorted_schedules.each do |schedule|

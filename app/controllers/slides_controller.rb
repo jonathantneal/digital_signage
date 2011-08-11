@@ -30,8 +30,6 @@ class SlidesController < ApplicationController
   end
 
   def update
-    # Works around a checkbox list submitting nothing if all are unchecked
-    params[:slide][:sign_ids] ||= []
     if @slide.update_attributes(params[:slide])
       flash[:notice] = 'Slide updated'
     end

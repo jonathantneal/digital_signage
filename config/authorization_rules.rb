@@ -14,6 +14,7 @@ authorization do
     has_permission_on [:signs, :slides, :slots, :departments] do
       to :administrate
     end
+    has_permission_on :slots, :to => :sort
     
     includes :manager
   end
@@ -24,17 +25,15 @@ authorization do
       to :read
     end
     
-    has_permission_on :announcements do
-      to :read
+    has_permission_on :announcements, :to => :read do
       if_attribute :show? => is {true}
     end
     
-    has_permission_on :users do
-      to :show
+    has_permission_on :users, :to => :show do
       if_attribute :id => is {user.id}
     end
    
-    has_permission_on :signs, :to => [:read, :update] do
+    has_permission_on :signs, :to => [:read, :update, :check_in] do
       if_permitted_to :show, :department
     end
     
@@ -67,10 +66,6 @@ authorization do
     
     has_permission_on :info do
       to :appinfo
-    end
-    
-    has_permission_on :signs do
-      to :show, :check_in
     end
     
   end

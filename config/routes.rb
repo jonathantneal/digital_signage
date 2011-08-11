@@ -25,9 +25,11 @@ SignManager::Application.routes.draw do
     resources :slides
     resources :signs do
       resources :slots, :only => [:index, :destroy]
-      get :check_in, :on => :member
+      member do
+        get :check_in
+      end
     end
-    resources :slots do
+    resources :slots, :only => [:index, :create, :destroy] do
       put :sort, :on=>:collection
     end
     resources :departments
