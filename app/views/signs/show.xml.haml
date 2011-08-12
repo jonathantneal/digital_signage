@@ -10,18 +10,18 @@
       :check_in_interval=>@sign.check_in_interval,
       :last_check_in=>@sign.last_check_in.try(:to_s, :rfc822)}
   %slides
-    -Slide.belongs_to_sign(@sign).each do |slide|
-      -if !slide.expired? && slide.published
-        %slide{:id=>slide.id,
-               :title=>slide.title,
-               :uri=>slide_url(slide),
-               :content_type=>slide.type,
-               :delay=>slide.delay,
-               :resize=>slide.resize,
-               :color=>'#'+slide.color,
-               :lastupdate=>(slide.updated_at || slide.created_at).to_s(:rfc822)}
+    -@sign.slots.each do |slot|
+      -if !slot.slide.expired? && slot.slide.published
+        %slide{:id=>slot.slide.id,
+               :title=>slot.slide.title,
+               :uri=>slide_url(slot.slide),
+               :content_type=>slot.slide.type,
+               :delay=>slot.custom_delay,
+               :resize=>slot.slide.resize,
+               :color=>'#'+slot.slide.color,
+               :lastupdate=>(slot.slide.updated_at || slot.slide.created_at).to_s(:rfc822)}
           %schedules
-            -if !slide.previous_schedule.nil?
-              %schedule{:time=>slide.previous_schedule.time.to_s(:rfc822), :action=>slide.previous_schedule.action}
-            -if !slide.next_schedule.nil?
-              %schedule{:time=>slide.next_schedule.time.to_s(:rfc822), :action=>slide.next_schedule.action}
+            -if !slot.slide.previous_schedule.nil?
+              %schedule{:time=>slot.slide.previous_schedule.time.to_s(:rfc822), :action=>slot.slide.previous_schedule.action}
+            -if !slot.slide.next_schedule.nil?
+              %schedule{:time=>slot.slide.next_schedule.time.to_s(:rfc822), :action=>slot.slide.next_schedule.action}

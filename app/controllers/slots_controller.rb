@@ -10,6 +10,9 @@ class SlotsController < ApplicationController
     raise ActiveRecord::RecordNotFound if @sign.nil?
     @slots = @sign.slots.with_permissions_to(:index).published
   end
+  
+  def edit
+  end
 
   def create
     if @slot.save
@@ -17,6 +20,13 @@ class SlotsController < ApplicationController
     end
     
     redirect_to :back
+  end
+  
+  def update
+    if @slot.update_attributes(params[:slot])
+      flash[:notice] = 'Slot updated'
+    end
+    redirect_to sign_slots_path(@slot.sign)
   end
 
   def destroy

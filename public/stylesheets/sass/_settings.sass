@@ -35,3 +35,22 @@ $default_padding: 20px
   -moz-box-shadow: inset $x $y $blur rgba(0, 0, 0, $opacity)
   -webkit-box-shadow: inset $x $y $blur rgba(0, 0, 0, $opacity)
   box-shadow: inset $x $y $blur rgba(0, 0, 0, $opacity)
+  
+  
+@mixin transition($effect: opacity, $duration: 2s, $delay: 0s)
+  /* Firefox */
+  -moz-transition-property: $effect
+  -moz-transition-duration: $duration
+  -moz-transition-delay: $delay
+  /* WebKit */
+  -webkit-transition-property: $effect
+  -webkit-transition-duration: $duration
+  -webkit-transition-delay: $delay
+  /* Opera */
+  -o-transition-property: $effect
+  -o-transition-duration: $duration
+  -o-transition-delay: $delay
+  /* Standard */
+  transition-property: $effect
+  transition-duration: $duration
+  transition-delay: $delay

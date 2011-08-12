@@ -10,6 +10,8 @@
           =render(:partial=>'shared/thumbnail', :locals=>{:slide=>slot.slide})
         %dt.status Status
         %dd.status{:class=>slide_status(slot.slide)}=slide_status(slot.slide)
+        %dt.delay Delay
+        %dd.delay=slot.custom_delay
         %dt.actions Actions
         %dd.actions=action_links(slot)
         

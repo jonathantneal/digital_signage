@@ -143,5 +143,9 @@ module ApplicationHelper
       ]
     end.html_safe
   end
+  
+  def cancel_button
+    link_to 'Cancel', :back, :class => "cancel button"
+  end
 
 end
