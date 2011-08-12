@@ -29,6 +29,11 @@ class Slide < ActiveRecord::Base
     group('slides.id').
     where('slots.sign_id IS NULL')
   }
+  scope :belongs_to_sign, lambda { |sign|
+    joins("INNER JOIN slots ON (slides.id = slots.slide_id)").
+    where("slots.sign_id = #{sign.id}").
+    order("`order`")
+  }
 
   def valid_schedules(now=@now)
     return [] if schedules.size.zero?

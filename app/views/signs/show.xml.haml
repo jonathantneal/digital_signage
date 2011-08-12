@@ -10,7 +10,7 @@
       :check_in_interval=>@sign.check_in_interval,
       :last_check_in=>@sign.last_check_in.try(:to_s, :rfc822)}
   %slides
-    -@sign.slides.each do |slide|
+    -Slide.belongs_to_sign(@sign).each do |slide|
       -if !slide.expired? && slide.published
         %slide{:id=>slide.id,
                :title=>slide.title,
