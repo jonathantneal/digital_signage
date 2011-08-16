@@ -3,7 +3,7 @@ class Slide < ActiveRecord::Base
 
   RESIZE_OPTIONS = ['none', 'zoom', 'zoom & crop', 'stretch']
 
-  attr_accessible :title, :delay, :color, :published, :department_id, :created_at, :updated_at, :sign_id, :sign_ids, :resize, :content, :schedules_attributes, :parameters_attributes, :slots_attributes
+  attr_accessible :title, :delay, :color, :department_id, :publish_at, :unpublish_at, :created_at, :updated_at, :sign_id, :sign_ids, :resize, :content, :schedules_attributes, :parameters_attributes, :slots_attributes
   
   belongs_to :department
   has_many :schedules, :dependent => :destroy
@@ -21,9 +21,43 @@ class Slide < ActiveRecord::Base
   validates :title, :uniqueness => true
   validates_inclusion_of :resize, :in => RESIZE_OPTIONS
   validates_integrity_of :content
+  validates_each :unpublish_at, :allow_nil => true do |record, attr, value|
+    if record.publish_at.to_i > value.to_i
+      record.errors.add :publish_at, "can't be after the unpublish date"
+    end
+  end
 
   before_save :set_content_type
   
+  scope :published_eq, lambda{ |status|
+    # convert to nil or boolean
+    status = (status.to_s.blank?? nil : !['0', 'false'].include?(status.to_s.downcase.strip))
+    
+    if status.nil?
+      scoped
+    elsif status
+      published
+    else
+      unpublished
+    end
+  }
+  scope :published, lambda{
+    where(
+      '(slides.publish_at IS NULL AND slides.unpublish_at > ?)
+      OR (slides.unpublish_at IS NULL AND slides.publish_at < ?)
+      OR (? BETWEEN slides.publish_at AND slides.unpublish_at)',
+      *[DateTime.now]*3
+    )
+  }
+  scope :unpublished, lambda{
+    where(
+      '(slides.publish_at IS NULL AND slides.unpublish_at IS NULL)
+      OR (slides.publish_at IS NULL AND slides.unpublish_at < ?)
+      OR (slides.unpublish_at IS NULL AND slides.publish_at > ?)
+      OR (slides.publish_at IS NOT NULL AND slides.unpublish_at IS NOT NULL AND ? NOT BETWEEN slides.publish_at AND slides.unpublish_at)',
+      *[DateTime.now]*3
+    )
+  }
   scope :not_on_sign, lambda { |sign|
     joins("LEFT JOIN slots ON (slides.id = slots.slide_id AND slots.sign_id = #{sign.id})").
     group('slides.id').
@@ -35,13 +69,27 @@ class Slide < ActiveRecord::Base
     order("`order`")
   }
 
+  search_methods :published_eq
+
   def valid_schedules(now=@now)
     return [] if schedules.size.zero?
     schedules.reject{ |s| s.time(now).nil? }
   end
 
+  def published?
+    if publish_at.nil? && unpublish_at.nil?
+      false
+    elsif unpublish_at.nil?
+      publish_at.past?
+    elsif publish_at.nil?
+      unpublish_at.future?
+    else
+      publish_at.past? && unpublish_at.future?
+    end 
+  end
+
   def unpublished?
-    return !self.published
+    !published?
   end
 
   def filename
@@ -69,7 +117,7 @@ class Slide < ActiveRecord::Base
   end
   
   def active?(now=Time.now)
-    return false unless self.published
+    return false if unpublished?
     showing?(now)
   end
   

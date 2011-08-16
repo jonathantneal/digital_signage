@@ -15,8 +15,10 @@
     %dd.resize=@slide.resize
     %dt.color Color
     %dd.color{:style => "color:##{@slide.color}; background-color:##{@slide.color};"}=@slide.color
-    %dt.published Published
-    %dd.published=@slide.published
+    %dt.publish_at Publish Date
+    %dd.publish_at=@slide.publish_at.try(:to_formatted_s, :long)
+    %dt.unpublish_at Unublish Date
+    %dd.unpublish_at=@slide.unpublish_at.try(:to_formatted_s, :long) 
     %dt.department Department
     %dd.department=@slide.department
 %h2.signs Signs

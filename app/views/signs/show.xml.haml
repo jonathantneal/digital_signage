@@ -11,7 +11,7 @@
       :last_check_in=>@sign.last_check_in.try(:to_s, :rfc822)}
   %slides
     -@sign.slots.each do |slot|
-      -if !slot.slide.expired? && slot.slide.published
+      -unless slot.slide.expired? || slot.slide.unpublished?
         %slide{:id=>slot.slide.id,
                :title=>slot.slide.title,
                :uri=>slide_url(slot.slide),

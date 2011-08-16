@@ -39,7 +39,7 @@ class SignsControllerTest < ActionController::TestCase
 
   ### Show
   test "should show sign" do
-    as_user(:manager) do
+    as_user(:admin) do
       get :show, :id => signs(:one).to_param
       assert_response :success
     end
@@ -84,6 +84,13 @@ class SignsControllerTest < ActionController::TestCase
         delete :destroy, :id => signs(:one).to_param
       end
     end
+  end
+  
+  
+  ### Check-In
+  test "guest should check-in to sign" do
+    get :check_in, :id => signs(:one).to_param
+    assert_response :success
   end
   
 end

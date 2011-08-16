@@ -56,6 +56,10 @@ authorization do
   
   role :guest do
   
+    has_permission_on :signs do
+      to :show, :check_in
+    end
+  
     has_permission_on :pages do
       to :feedback
     end

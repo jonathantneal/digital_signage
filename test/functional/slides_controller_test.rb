@@ -23,7 +23,7 @@ class SlidesControllerTest < ActionController::TestCase
     as_user(:admin) do
       assert_difference('Slide.count') do
         slide_file = fixture_file_upload('files/slide1.png', 'image/png')
-        post :create, :slide => { :title => 'JUST_CREATED', :content => slide_file, :resize => 'none', :delay => 5, :color => "000000", :published => true, :department_id => departments(:one).to_param}
+        post :create, :slide => { :title => 'JUST_CREATED', :content => slide_file, :resize => 'none', :delay => 5, :color => "000000", :department_id => departments(:one).to_param}
       end
 
       assert_redirected_to slide_path(assigns(:slide))
@@ -34,7 +34,7 @@ class SlidesControllerTest < ActionController::TestCase
     as_user(:manager_one) do
       assert_difference('Slide.count') do
         slide_file = fixture_file_upload('files/slide1.png', 'image/png')
-        post :create, :slide => { :title => 'JUST_CREATED_again', :content => slide_file, :resize => 'none', :delay => 5, :color => "000000", :published => true, :department_id => departments(:one).to_param}
+        post :create, :slide => { :title => 'JUST_CREATED_again', :content => slide_file, :resize => 'none', :delay => 5, :color => "000000", :department_id => departments(:one).to_param}
       end
 
       assert_redirected_to slide_path(assigns(:slide))

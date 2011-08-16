@@ -4,7 +4,6 @@ one:
   title: Slide 1
   delay: 5
   color: 000000
-  published: true
   department: one
   resize: "none"
 
@@ -12,6 +11,5 @@ two:
   title: Slide 2
   delay: 10
   color: 111111
-  published: false
   department: two
   resize: "none"

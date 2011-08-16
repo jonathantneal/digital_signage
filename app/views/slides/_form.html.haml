@@ -21,8 +21,10 @@
     %dd.resize=f.select(:resize, Slide::RESIZE_OPTIONS)
     %dt.color=f.label(:color)
     %dd.color=f.text_field(:color, {:style=>"color:##{@slide.color}; background-color:##{@slide.color};"})
-    %dt.published=f.label(:published)
-    %dd.published=f.check_box(:published)
+    %dt.publish_at=f.label(:publish_at)
+    %dd.publish_at=f.text_field(:publish_at, :value => @slide.publish_at.try(:to_formatted_s, :long), :class => :date)
+    %dt.unpublish_at=f.label(:unpublish_at)
+    %dd.unpublish_at=f.text_field(:unpublish_at, :value => @slide.unpublish_at.try(:to_formatted_s, :long), :class => :date)
     %dt.department=f.label(:department_id, 'Department')
     %dd.department=f.collection_select(:department_id, Department.with_permissions_to(:show), :id, :title)
   .slots

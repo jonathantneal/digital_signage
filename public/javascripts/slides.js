@@ -1,5 +1,9 @@
 $(document).ready(function() {
 
+  // Date Picker
+  $('.publish_at input[type=text]').datepicker({dateFormat: "MM d, yy '12:00 AM'"});
+  $('.unpublish_at input[type=text]').datepicker({dateFormat: "MM d, yy '11:59 PM'"});
+
   // Color Picker
   var colorBox = $('dd.color input');
   if(typeof(jQuery.fn.ColorPicker) != 'undefined' && colorBox.length) {

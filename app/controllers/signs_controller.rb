@@ -48,17 +48,8 @@ class SignsController < ApplicationController
     @sign = Sign.find_by_id(params[:id]) || Sign.find_by_name(params[:id])
     @sign.last_check_in = DateTime.now
     @sign.last_ip = request.remote_ip
-    @sign.save(false)
-  end
-  
-  def add_slide
-    @sign.slides += [Slide.find(params[:sign][:slide_ids])]
-  
-    if @sign.update_attributes(params[:sign])
-      flash[:notice] = 'Sign updated'
-    end
-    
-    respond_with @sign.slots
+    @sign.save(:validate => false)
+    render :nothing => true
   end
   
   protected
