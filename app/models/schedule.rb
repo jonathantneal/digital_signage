@@ -3,7 +3,7 @@ class Schedule < ActiveRecord::Base
   ACTIVE_OPTIONS = [['hide',false], ['show',true]]
 
   attr_accessible :slide, :when, :active
-  belongs_to :slide
+  belongs_to :slide, :counter_cache => true
   
   validates_presence_of :slide, :when
   validates_uniqueness_of :when, :scope => :slide_id

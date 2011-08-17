@@ -19,7 +19,7 @@ module ApplicationHelper
   end
 
   def admin_menu
-    if(current_user.try(:is_admin?))
+    if(current_user.try(:is_admin?) || current_user.try(:is_developer?))
       content_tag(:ul, :class=>'admin menu') do
         AppConfig.ui.admin_menu.map do |link_settings|
           navigation_link(link_settings.to_h.merge({:wrapper=>'li'})).to_s
@@ -71,7 +71,7 @@ module ApplicationHelper
     fields = f.fields_for(association, new_object, :child_index => "new_#{association}") do |builder|
       render(association.to_s.singularize + "_fields", :f => builder)
     end
-    link_to_function(name, "add_fields(this, '#{association}', '#{escape_javascript(fields)}')")
+    link_to_function(name, "add_fields(this, '#{association}', '#{escape_javascript(fields)}')", :class=>:add_fields)
   end
 
   def to_yn(bit)
@@ -142,6 +142,10 @@ module ApplicationHelper
         collection.total_count
       ]
     end.html_safe
+  end
+  
+  def cancel_button
+    link_to 'Cancel', :back, :class => "cancel button"
   end
 
 end

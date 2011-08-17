@@ -1,0 +1,7 @@
+-content_for(:aside) do
+  %h2 Actions
+  -if permitted_to?(:create, :slots)
+    .box
+      %h3.add Add Slide
+      =render(:partial => 'form')
+      

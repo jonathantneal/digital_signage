@@ -4,13 +4,13 @@
     %legend Filter Slides
     %span.param
       =f.label :signs_id_eq, 'Sign'
-      =f.collection_select :signs_id_eq, Sign.all, :id, :title, {:include_blank=>true}
+      =f.collection_select :signs_id_eq, Sign.with_permissions_to(:index), :id, :title, {:include_blank=>true}
     %span.param
-      =f.label :user_id_eq, 'Owner'
-      =f.collection_select :user_id_eq, User.all, :id, :name, {:include_blank=>true}
+      =f.label :department_id_eq, 'Department'
+      =f.collection_select :department_id_eq, Department.with_permissions_to(:show), :id, :title, {:include_blank=>true}
     %span.param
       =f.label :published_eq, 'Published'
-      =f.select :published_eq, [['Published', true], ['Unpublished', false]], {:include_blank=>true}
+      =f.select :published_eq, [['Published', 1], ['Unpublished', 0]], {:include_blank=>true}
     .buttons=f.submit 'Filter'
 
 .search_results

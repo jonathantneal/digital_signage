@@ -1,0 +1,12 @@
+%h1 Departments
+%table
+  %tr
+    %th Title
+    %th
+  -@departments.each do |department|
+    %tr
+      %td=link_to department.title, department
+      %td
+        =action_links department
+
+=render('index_aside')

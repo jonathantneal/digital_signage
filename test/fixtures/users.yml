@@ -10,6 +10,28 @@ manager:
   photo_url: ""
   affiliations: employee
   entitlements: <%= AppConfig.security.roles.base_entitlement%>manager
+  
+manager_one:
+  username: johnd1
+  first_name: John
+  last_name: Doe
+  email: john.doe@example.com
+  title: Imaginary Man
+  department: Imaginary Services
+  photo_url: ""
+  affiliations: employee
+  entitlements: <%= AppConfig.security.roles.base_entitlement%>manager
+
+manager_two:
+  username: johnd2
+  first_name: John
+  last_name: Doe
+  email: john.doe@example.com
+  title: Imaginary Man
+  department: Imaginary Services
+  photo_url: ""
+  affiliations: employee
+  entitlements: <%= AppConfig.security.roles.base_entitlement%>manager
 
 admin:
   username: janed0

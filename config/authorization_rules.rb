@@ -1,21 +1,22 @@
 authorization do
 
-  role :admin do
+  role :developer do
   
+    has_omnipotence
+    
+  end
+  
+  role :admin do
     has_permission_on [:announcements, :documents, :users] do
       to :administrate
     end
     
-    has_permission_on :signs do
+    has_permission_on [:signs, :slides, :slots, :departments] do
       to :administrate
     end
-    
-    has_permission_on :info do
-      to :performance, :database, :configuration, :reload_configuration, :appinfo
-    end
+    has_permission_on :slots, :to => :sort
     
     includes :manager
-    
   end
   
   role :manager do
@@ -24,26 +25,29 @@ authorization do
       to :read
     end
     
-    has_permission_on :announcements do
-      to :read
+    has_permission_on :announcements, :to => :read do
       if_attribute :show? => is {true}
     end
     
-    has_permission_on :users do
-      to :show
+    has_permission_on :users, :to => :show do
       if_attribute :id => is {user.id}
     end
    
-    has_permission_on :signs do
-      to :read
+    has_permission_on :signs, :to => [:read, :update, :check_in] do
+      if_permitted_to :show, :department
     end
     
-    has_permission_on :slides do
-      to :administrate
+    has_permission_on :slides, :to => [:read, :create]
+    has_permission_on :slides, :to => :update do
+      if_permitted_to :show, :department
     end
     
-    has_permission_on :slots do
-      to :administrate, :sort
+    has_permission_on :slots, :to => [:administrate, :sort] do
+      if_permitted_to :update, :sign
+    end
+    
+    has_permission_on :departments, :to => :show do
+      if_attribute :users => contains {user}
     end
     
     includes :guest
@@ -51,6 +55,10 @@ authorization do
   end
   
   role :guest do
+  
+    has_permission_on :signs do
+      to :show, :check_in
+    end
   
     has_permission_on :pages do
       to :feedback
@@ -62,10 +70,6 @@ authorization do
     
     has_permission_on :info do
       to :appinfo
-    end
-    
-    has_permission_on :signs do
-      to :show, :check_in
     end
     
   end

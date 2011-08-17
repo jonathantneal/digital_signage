@@ -10,7 +10,7 @@ SignManager::Application.routes.draw do
     resource :dashboards, :only => :show
     resources :documents
 
-    resources :users, :except => [:new, :edit, :update] do
+    resources :users, :except => [:new] do
       get :auto_update, :on => :member
     end
     resources :info, :only => [] do
@@ -24,12 +24,15 @@ SignManager::Application.routes.draw do
     end
     resources :slides
     resources :signs do
-      resources :slots, :only => [:index, :destroy]
-      get :check_in, :on => :member
+      resources :slots, :only => [:index, :edit, :destroy]
+      member do
+        get :check_in
+      end
     end
-    resources :slots do
+    resources :slots, :only => [:create, :update, :destroy] do
       put :sort, :on=>:collection
     end
+    resources :departments
 
     # Named routes
     match 'appinfo' => 'info#appinfo'

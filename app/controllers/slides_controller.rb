@@ -7,7 +7,7 @@ class SlidesController < ApplicationController
 
   def index
     @search = Slide.search(params[:search])
-    @slides = @search.relation.page(params[:page]).per(params[:per] || Kaminari.config.default_per_page)
+    @slides = @search.relation.includes(:department).page(params[:page]).per(params[:per] || Kaminari.config.default_per_page)
     respond_with(@slides) do |format|
       format.js { render :partial => 'slides' }
     end
@@ -30,8 +30,6 @@ class SlidesController < ApplicationController
   end
 
   def update
-    # Works around a checkbox list submitting nothing if all are unchecked
-    params[:slide][:sign_ids] ||= []
     if @slide.update_attributes(params[:slide])
       flash[:notice] = 'Slide updated'
     end

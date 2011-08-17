@@ -10,3 +10,20 @@ td a.sort {
 
 ul.actions a.sort {
   background-image: url(../images/sort.png); }
+
+#wrapperPage #contentAside .box h2 {
+  color: black; }
+
+ul.checkbox {
+  list-style: none; }
+
+#wrapperPage #content a.cancel.button {
+  background: #cc3333 url(../images/button_overlay.png) repeat-x; }
+  #wrapperPage #content a.cancel.button[disabled=disabled] {
+    background-color: #999999; }
+    #wrapperPage #content a.cancel.button[disabled=disabled]:hover {
+      background-color: #999999;
+      cursor: default; }
+  #wrapperPage #content a.cancel.button:hover {
+    background-color: #111111;
+    color: #ff6666; }

@@ -22,9 +22,13 @@
     %dd.video=f.check_box(:video)
     %dt.audio=f.label(:audio)
     %dd.audio=f.check_box(:audio)
+    %dt.owner=f.label(:department_id, 'Department')
+    %dd.owner=f.collection_select(:department_id, Department.with_permissions_to(:show), :id, :title)
     %dt.on_off On From
     %dd.on_off
       =f.text_field(:on)
       to
       =f.text_field(:off)
-  .buttons= f.submit('Save')
+  .buttons
+    = f.submit('Save')
+    = cancel_button

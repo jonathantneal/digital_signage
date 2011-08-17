@@ -2,6 +2,8 @@
 %dl
   %dt Name
   %dd=@sign.name
+  %dt Department
+  %dd=link_to @sign.department, @sign.department
   %dt Data Feed URL
   %dd=link_to(sign_url(@sign, :format=>:xml), sign_url(@sign, :format=>:xml))
   %dt Fullscreen Mode

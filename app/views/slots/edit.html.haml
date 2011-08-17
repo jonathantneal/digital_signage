@@ -1,0 +1,17 @@
+%h1 Editing Slot
+
+=form_for @slot do |f|
+
+  %dl
+    %dt.slide=f.label(:slide_id, "Slide")
+    %dd.slide=f.collection_select(:slide_id, Slide.with_permissions_to(:index), :id, :title)
+    
+    %dt.delay
+      =f.label :delay, "Custom Delay (in seconds) <em style='font-weight: normal'>- Leave blank to keep default (#{f.object.slide.delay}s)</em>".html_safe
+    %dd.slide=f.text_field :delay
+  
+  =f.hidden_field :sign_id
+
+  .buttons
+    = f.submit('Save')
+    = cancel_button

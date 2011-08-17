@@ -1,5 +1,5 @@
-!thumbnail_width = 336px
-!thumbnail_height = 189px
+$thumbnail_width: 336px
+$thumbnail_height: 189px
 
 div.thumbnail
   position: absolute
@@ -7,10 +7,10 @@ div.thumbnail
   padding: 0
   top: 0
   left: 0
-  width= !thumbnail_width
-  height= !thumbnail_height
+  width: $thumbnail_width
+  height: $thumbnail_height
   text-align: center
-  border= !default_border
+  border: $default_border
 
 div.thumbnail.video
   background-image: url(../images/video_thumbnail.jpg)
@@ -18,6 +18,6 @@ div.thumbnail.video
 div.thumbnail img, div.thumbnail .swf
   width: auto
   height: auto
-  max-width= !thumbnail_width
-  max-height= !thumbnail_height
+  max-width: $thumbnail_width
+  max-height: $thumbnail_height
   border: none

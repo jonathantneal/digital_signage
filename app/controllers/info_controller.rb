@@ -3,7 +3,7 @@ class InfoController < ApplicationController
   before_filter :authenticate_user!, :except=>[:appinfo]
   filter_access_to :performance, :database, :configuration, :reload_configuration
 
-  ssl_required :config if AppConfig.security.https_available
+  ssl_required :config if AppConfig.security.https_available && defined? SslRequirement
 
   def performance
     if NewRelic::Control.instance.developer_mode?

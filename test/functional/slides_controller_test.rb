@@ -4,45 +4,82 @@ class SlidesControllerTest < ActionController::TestCase
   setup { sign_in @user = users(:manager) }
   teardown { sign_out @user }
 
+
+  ### Index
   test "should get index" do
     get :index
     assert_response :success
     assert_not_nil assigns(:slides)
   end
 
+
+  ### Create
   test "should get new" do
     get :new
     assert_response :success
   end
 
-  test "should create slide" do
-    assert_difference('Slide.count') do
-      post :create, :slide => { :title => 'JUST CREATED', :uri => slides(:one).uri, :resize => 'none', :user_id => users(:manager).id }
+  test "admin should create slide" do
+    as_user(:admin) do
+      assert_difference('Slide.count') do
+        slide_file = fixture_file_upload('files/slide1.png', 'image/png')
+        post :create, :slide => { :title => 'JUST_CREATED', :content => slide_file, :resize => 'none', :delay => 5, :color => "000000", :department_id => departments(:one).to_param}
+      end
+
+      assert_redirected_to slide_path(assigns(:slide))
     end
-
-    assert_redirected_to slide_path(assigns(:slide))
   end
+  
+  test "manager one should create slide with department one" do
+    as_user(:manager_one) do
+      assert_difference('Slide.count') do
+        slide_file = fixture_file_upload('files/slide1.png', 'image/png')
+        post :create, :slide => { :title => 'JUST_CREATED_again', :content => slide_file, :resize => 'none', :delay => 5, :color => "000000", :department_id => departments(:one).to_param}
+      end
 
-  test "should show slide" do
-    get :show, :id => slides(:one).to_param
-    assert_response :success
-  end
-
-  test "should get edit" do
-    get :edit, :id => slides(:one).to_param
-    assert_response :success
-  end
-
-  test "should update slide" do
-    put :update, :id => slides(:one).to_param, :slide => { :title => 'UPDATED' }
-    assert_redirected_to slide_path(assigns(:slide))
-  end
-
-  test "should destroy slide" do
-    assert_difference('Slide.count', -1) do
-      delete :destroy, :id => slides(:one).to_param
+      assert_redirected_to slide_path(assigns(:slide))
     end
+  end
 
-    assert_redirected_to slides_path
+
+  ### Show
+  test "manager one should show slide one" do
+    as_user(:manager_one) do
+      get :show, :id => slides(:one).to_param
+      assert_response :success
+    end
+  end
+
+
+  ### Edit/update
+  test "manager one should get edit slide one" do
+    as_user(:manager_one) do
+      get :edit, :id => slides(:one).to_param
+      assert_response :success
+    end
+  end
+  test "manager one should NOT get edit slide two" do
+    as_user(:manager_one) do
+      get :edit, :id => slides(:two).to_param
+      assert_response :redirect
+    end
+  end
+
+  test "manager two should update slide two" do
+    as_user(:manager_two) do
+      put :update, :id => slides(:two).to_param, :slide => { :title => 'UPDATED' }
+      assert_redirected_to slide_path(assigns(:slide))
+    end
+  end
+
+
+  ### Destroy
+  test "admin should destroy slide" do
+    as_user(:admin) do
+      assert_difference('Slide.count', -1) do
+        delete :destroy, :id => slides(:one).to_param
+      end
+      assert_redirected_to slides_path
+    end
   end
 end

@@ -1,0 +1,24 @@
+%h1 Department "#{@department.title}"
+
+
+%h3 Signs
+%table
+  %tr
+    %th Title
+    %th Active Slides
+    %th Content Time
+    %th Last Check In
+    %th.actions Actions
+  -@signs.each do |sign|
+    %tr
+      %td=link_to(sign.title, sign)
+      %td=sign.active_slides.length
+      %td=seconds_to_time(sign.active_slides_time)
+      %td
+        =time_ago_in_words(sign.last_check_in)+" ago" if sign.checked_in?
+      %td
+        =action_links(sign) do
+          =link_to('Sort', sign_slots_path(sign), :class=>:sort)       
+
+
+=action_links @department

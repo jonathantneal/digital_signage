@@ -16,10 +16,20 @@ class UsersController < ApplicationController
 
   def new
   end
+  
+  def edit
+  end
 
   def create
     if @user.save
       flash[:notice] = 'User created'
+    end
+    respond_with @user
+  end
+
+  def update
+    if @user.update_attributes(params[:user])
+      flash[:notice] = 'User updated'
     end
     respond_with @user
   end

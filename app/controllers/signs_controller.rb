@@ -6,7 +6,7 @@ class SignsController < ApplicationController
   respond_to :xml, :only => [:show, :check_in]
 
   def index
-    @signs = Sign.all
+    @signs = Sign.with_permissions_to(:index)
   end
 
   def show
@@ -48,7 +48,8 @@ class SignsController < ApplicationController
     @sign = Sign.find_by_id(params[:id]) || Sign.find_by_name(params[:id])
     @sign.last_check_in = DateTime.now
     @sign.last_ip = request.remote_ip
-    @sign.save(false)
+    @sign.save(:validate => false)
+    render :nothing => true
   end
   
   protected

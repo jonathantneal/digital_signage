@@ -15,6 +15,6 @@
         =time_ago_in_words(sign.last_check_in)+" ago" if sign.checked_in?
       %td
         =action_links(sign) do
-          =link_to('Sort', sign_slots_path(sign), :class=>:sort)
+          =link_to('Sort', sign_slots_path(sign), :class=>:sort) if permitted_to? :edit, sign
 
 =render('index_aside')

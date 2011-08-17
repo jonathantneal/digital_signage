@@ -1,0 +1,9 @@
+=form_for Slot.new do |f|
+
+  %dl
+    %dt.slide=f.label(:slide_id, "Slide")
+    %dd.slide=f.collection_select(:slide_id, Slide.with_permissions_to(:index), :id, :title)
+    
+  =f.hidden_field :sign_id, :value => @sign.id
+
+  .buttons= f.submit('Add')
