@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 source 'http://git.biola.edu/gem-repo'
 
-gem 'rails', '3.0.9'
+gem 'rails', '3.0.10'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -22,8 +22,8 @@ gem 'admin_data', '~>1.1.13'
 gem 'biola_web_services', '~>0.1.2'
 gem 'carrierwave', '~>0.5.4'
 gem 'chronic', '~>0.6.2'
-gem 'declarative_authorization', '~>0.5.1'
-gem 'devise', '~>1.1.5'
+gem 'declarative_authorization', '~>0.5.3'
+gem 'devise', '~>1.4.2'
 gem 'devise_netid_authenticatable', '~>0.3.2'
 # Use the following instead if using CAS:
 #gem 'devise_cas_authenticatable', '~>1.0.0.alpha8'
