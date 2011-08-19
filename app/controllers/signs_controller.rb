@@ -47,7 +47,8 @@ class SignsController < ApplicationController
   def check_in
     @sign = Sign.find_by_id(params[:id]) || Sign.find_by_name(params[:id])
     @sign.last_check_in = DateTime.now
-    @sign.last_ip = request.remote_ip
+    # This is a hack to get around this issue: https://github.com/rails/rails/issues/1010
+    @sign.last_ip = request.headers['HTTP_X_FORWARDED_FOR'].to_s.strip.split(/[,\s+]/).first || request.remote_ip
     @sign.save(:validate => false)
     render :nothing => true
   end
