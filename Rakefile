@@ -5,3 +5,6 @@ require File.expand_path('../config/application', __FILE__)
 require 'rake'
 
 SignManager::Application.load_tasks
+
+require 'rake/version_task'
+Rake::VersionTask.new
