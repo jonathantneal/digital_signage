@@ -3,6 +3,7 @@
 app:
   name: &app_name App Name
   host: your.server.tld
+  relative_url_root: /your-app # or blank if no relative root
 
 security:
   url: 'https://example.com/ws'

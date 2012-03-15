@@ -7,3 +7,8 @@ ActionMailer::Base.smtp_settings = {
   :user_name => AppConfig.email.smtp.username,
   :password => AppConfig.email.smtp.password
 }
+
+ActionMailer::Base.default_url_options = {
+  :host => AppConfig.app.host,
+  :script_name => AppConfig.app.relative_url_root
+}
