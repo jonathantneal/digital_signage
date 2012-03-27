@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 source 'http://git.biola.edu/gem-repo'
 
-gem 'rails', '3.0.11'
+gem 'rails', '3.0.12'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
