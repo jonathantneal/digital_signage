@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 source 'http://git.biola.edu/gem-repo'
 
-gem 'rails', '3.0.10'
+gem 'rails', '3.0.12'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -35,11 +35,12 @@ gem 'jquery-rails', '~>0.2.6'
 gem 'kaminari', '~>0.12.4'
 gem 'meta_search', '~>0.9.10'
 gem 'mini_magick', '~>3.3'
-gem 'newrelic_rpm', '~>3.1.1'
+gem 'newrelic_rpm', '~>3.3.3'
 gem 'oauth', '~>0.4.3'
 gem 'port-a-query', '~>0.1.0'
 gem 'sass', '~>3.1.7'
 gem 'turnout', '~>0.2.2'
+gem 'version', '~> 1.0.0'
 gem 'viva-app_config', '~>1.2.0', :require=>'app_config'
 gem 'yaml_db', '~>0.2.1'
 
