@@ -1,5 +1,5 @@
 source 'http://rubygems.org'
-source 'http://git.biola.edu/gem-repo'
+source 'https://gems.biola.edu'
 
 gem 'rails', '3.0.12'
 
