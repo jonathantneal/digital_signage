@@ -43,6 +43,7 @@ gem 'turnout', '~>0.2.2'
 gem 'version', '~> 1.0.0'
 gem 'viva-app_config', '~>1.2.0', :require=>'app_config'
 gem 'yaml_db', '~>0.2.1'
+gem 'appinfo', '~>0.1.0'
 
 # Bundle gems for the local environment. Make sure to
 # put test-only gems in this group so their generators

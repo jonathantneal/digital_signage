@@ -68,10 +68,6 @@ authorization do
       to :read
     end
     
-    has_permission_on :info do
-      to :appinfo
-    end
-    
   end
   
 end

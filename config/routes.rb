@@ -16,7 +16,6 @@ SignManager::Application.routes.draw do
       get :database
       get :configuration
       get :reload_configuration
-      get :appinfo
     end
   end
   resources :slides
@@ -30,9 +29,6 @@ SignManager::Application.routes.draw do
     put :sort, :on=>:collection
   end
   resources :departments
-
-  # Named routes
-  match 'appinfo' => 'info#appinfo'
 
   root :to=>"#{AppConfig.routing.default.controller}##{AppConfig.routing.default.action}"
 end
