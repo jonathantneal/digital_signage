@@ -19,22 +19,9 @@ security:
   login:
     required: true # for reporting only, doesn't turn authentication on or off
     forgot_url: "https://www.example.com/forgot-password"
-    auto_create_users: true
-    allow_bypass: false # should only be usid in development
-    allow_local: false
-    allowed_roles:
-    - employee
-    impersonation:
-      enable: false
-      allowed_groups:
-      - it
-      allowed_roles:
-      - admin
+
     cas:
-      url: 'https://auth.example.com/cas'
-      
-  users:
-    auto_update: true
+      url: "https://login.biola.edu/cas"
       
   roles:
     base_entitlement: "company:app:"
