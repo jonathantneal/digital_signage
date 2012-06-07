@@ -7,9 +7,7 @@ SignManager::Application.routes.draw do
   resource :dashboards, :only => :show
   resources :documents
 
-  resources :users, :except => [:new] do
-    get :auto_update, :on => :member
-  end
+  resources :users, :except => [:new]
   resources :info, :only => [] do
     collection do
       get :performance

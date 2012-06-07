@@ -77,5 +77,5 @@ privileges do
   privilege :read, :includes => [:index, :show]
   privilege :update, :includes => :edit
   privilege :delete, :includes => :destroy
-  privilege :administrate, :includes => [:create, :read, :update, :delete, :auto_update]
+  privilege :administrate, :includes => [:create, :read, :update, :delete]
 end

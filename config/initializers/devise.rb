@@ -20,7 +20,7 @@ Devise.setup do |config|
   # authenticating an user, both parameters are required. Remember that those
   # parameters are used only when authenticating and not when retrieving from
   # session. If you need permissions, you should implement that in a before filter.
-  config.authentication_keys = [ :netid ]
+  config.authentication_keys = [ :username ]
 
   # Tell if authentication through request.params is enabled. True by default.
   # config.params_authenticatable = true
@@ -140,14 +140,7 @@ Devise.setup do |config|
   #   manager.default_strategies(:scope => :user).unshift :twitter_oauth
   # end
   
-  if (defined?(Devise::Models::NetidAuthenticatable))
-    # ==> Netid Authentication Settings
-    config.allow_authentication_bypass = AppConfig.security.login.allow_bypass
-    config.netid_auto_create_users = AppConfig.security.login.auto_create_users
-    config.netid_allow_impersonation = AppConfig.security.login.impersonation.enable
-    config.allow_local_authentication = AppConfig.security.login.allow_local
-    config.service_name = AppConfig.security.service_name
-  else
+  if (defined?(Devise::Models::CasAuthenticatable))
     # ==> CAS Authentication Settings
     config.cas_base_url = AppConfig.security.login.cas.url
 

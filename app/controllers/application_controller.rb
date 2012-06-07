@@ -25,13 +25,8 @@ class ApplicationController < ActionController::Base
   end
 
   def permission_denied
-  
-    flash[:error] = 'Access denied' unless current_user.nil?
-  
-    if permitted_to? AppConfig.routing.default.action.to_sym, AppConfig.routing.default.controller.to_sym
-      redirect_to :back rescue redirect_to root_url
-    elsif !current_user.nil?
-      redirect_to destroy_user_session_url
+    if user_signed_in?
+      render :file => "#{Rails.root}/public/403", :formats => [:html], :status => 403, :layout => false
     else
       redirect_to new_user_session_url
     end
