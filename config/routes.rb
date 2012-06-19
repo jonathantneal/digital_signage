@@ -11,7 +11,6 @@ SignManager::Application.routes.draw do
   resources :info, :only => [] do
     collection do
       get :performance
-      get :database
       get :configuration
       get :reload_configuration
     end

@@ -1,7 +1,7 @@
 class InfoController < ApplicationController
 
   before_filter :authenticate_user!
-  filter_access_to :performance, :database, :configuration, :reload_configuration
+  filter_access_to :performance, :configuration, :reload_configuration
 
   ssl_required :config if AppConfig.security.https_available && defined? SslRequirement
 
@@ -11,10 +11,6 @@ class InfoController < ApplicationController
     else
       redirect_to AppConfig.newrelic.link
     end
-  end
-
-  def database
-    redirect_to admin_data_root_path
   end
 
   def configuration

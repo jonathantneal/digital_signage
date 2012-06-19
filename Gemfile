@@ -18,7 +18,6 @@ gem 'rails', '3.0.12'
 
 # Bundle the extra gems:
 gem 'addressable', '~>2.2.6'
-gem 'admin_data', '~>1.1.13'
 gem 'carrierwave', '~>0.5.4'
 gem 'chronic', '~>0.6.2'
 gem 'declarative_authorization', '~>0.5.3'

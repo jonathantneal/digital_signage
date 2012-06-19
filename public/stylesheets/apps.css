@@ -243,8 +243,6 @@ ul.admin.menu {
       background-image: url(../images/pie_chart.png); }
     ul.admin.menu a.performance {
       background-image: url(../images/time.png); }
-    ul.admin.menu a.database {
-      background-image: url(../images/database.png); }
     ul.admin.menu a.configuration {
       background-image: url(../images/settings.png); }
 

@@ -70,9 +70,6 @@ ui:
     action: performance
     text: Performance
   - controller: info
-    action: database
-    text: Database
-  - controller: info
     action: configuration
     text: Config
   pagination:
