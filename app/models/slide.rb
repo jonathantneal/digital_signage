@@ -1,9 +1,9 @@
 class Slide < ActiveRecord::Base
   extend ActiveSupport::Memoizable
-
+require 'carrierwave/orm/activerecord'
   RESIZE_OPTIONS = ['none', 'zoom', 'zoom & crop', 'stretch']
 
-  attr_accessible :title, :delay, :color, :department_id, :publish_at, :unpublish_at, :created_at, :updated_at, :sign_id, :sign_ids, :resize, :content, :schedules_attributes, :parameters_attributes, :slots_attributes
+  attr_accessible :title, :delay, :color, :department_id, :publish_at, :unpublish_at, :created_at, :updated_at, :sign_id, :sign_ids, :resize, :content, :content_cache, :schedules_attributes, :parameters_attributes, :slots_attributes
   
   belongs_to :department
   has_many :schedules, :dependent => :destroy
@@ -27,7 +27,7 @@ class Slide < ActiveRecord::Base
     end
   end
 
-  before_save :set_content_type
+  # before_save :set_content_type
   
   scope :published_eq, lambda{ |status|
     # convert to nil or boolean
@@ -97,7 +97,7 @@ class Slide < ActiveRecord::Base
   end
 
   def url(version=nil)
-    content.url(version)
+    content_url(version)
   end
 
   def type

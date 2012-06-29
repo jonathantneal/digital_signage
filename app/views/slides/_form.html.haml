@@ -6,7 +6,9 @@
     %dt.title.title=f.label(:title)
     %dd.title=f.text_field(:title)
     %dt.file=f.label(:content)
-    %dd.file=f.file_field(:content)
+    %dd.file
+      =f.file_field(:content)
+      .hidden_field=f.:content_cache
     %dt.parameters Parameters
     %dd.parameters
       %ul#parameters.parameters

@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 source 'https://gems.biola.edu'
 
-gem 'rails', '3.1.6'
+gem 'rails', '3.2.6'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -19,7 +19,7 @@ gem 'rails', '3.1.6'
 # Bundle the extra gems:
 gem 'addressable', '~>2.2.6'
 gem 'appinfo', '~>0.1.0'
-gem 'carrierwave', '~>0.5.4'
+gem 'carrierwave', '~>0.6.2'
 gem 'chronic', '~>0.6.2'
 gem 'declarative_authorization', '~>0.5.3'
 gem 'devise', '~>1.4.5'
@@ -29,13 +29,13 @@ gem 'feed_satisfaction', '~>0.1.2'
 gem 'haml', '~>3.1.3'
 gem 'highline', '~>1.6.2'
 gem 'httparty', '~>0.7.8'
-gem 'jquery-rails', '~>1.0.14'
+gem 'jquery-rails', '~>2.0.2'
 gem 'kaminari', '~>0.12.4'
 gem 'meta_search', '~>1.1.1'
-gem 'mini_magick', '~>3.3'
-gem 'newrelic_rpm', '~>3.3.3'
+gem 'mini_magick', '~>3.4'
+gem 'newrelic_rpm', '~>3.3.4'
 gem 'oauth', '~>0.4.3'
-gem 'port-a-query', '~>0.1.0'
+gem 'port-a-query', '~>0.1.1'
 gem 'sass', '~>3.1.7'
 gem 'turnout', '~>0.2.2'
 gem 'version', '~> 1.0.0'
@@ -47,6 +47,7 @@ gem 'yaml_db', '~>0.2.1'
 # and rake tasks are available in development mode:
 group :development, :test do
   gem 'sqlite3-ruby', '~>1.3.3', :require => 'sqlite3'
+  gem 'pry'
 end
 
 group :staging, :production do
