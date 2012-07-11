@@ -19,7 +19,7 @@ gem 'rails', '3.2.6'
 # Bundle the extra gems:
 gem 'addressable', '~>2.2.6'
 gem 'appinfo', '~>0.1.0'
-gem 'carrierwave', '~>0.6.2'
+gem 'carrierwave', '~>0.5.4'
 gem 'chronic', '~>0.6.2'
 gem 'declarative_authorization', '~>0.5.3'
 gem 'devise', '~>1.4.5'

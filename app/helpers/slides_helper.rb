@@ -21,11 +21,7 @@ module SlidesHelper
     
     url = Addressable::URI.parse(path_to_image(slide.url(version).to_s))
     if defined? request
-      begin
-        url.scheme = request.scheme 
-      rescue 
-         raise(slide.id.inspect)
-      end
+      url.scheme = request.scheme 
       url.host = request.host
       url.port = request.port
     end
