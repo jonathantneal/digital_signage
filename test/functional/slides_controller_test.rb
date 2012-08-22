@@ -61,7 +61,7 @@ class SlidesControllerTest < ActionController::TestCase
   test "manager one should NOT get edit slide two" do
     as_user(:manager_one) do
       get :edit, :id => slides(:two).to_param
-      assert_response :redirect
+      assert_response 403
     end
   end
 

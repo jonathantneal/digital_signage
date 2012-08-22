@@ -1,5 +1,5 @@
 class Sign < ActiveRecord::Base
-  extend ActiveSupport::Memoizable  
+  extend Memoist 
 
   FULL_SCREEN_MODES = ['fullscreen', 'maximize']
 

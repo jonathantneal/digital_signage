@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 source 'https://gems.biola.edu'
 
-gem 'rails', '3.2.6'
+gem 'rails', '3.2.8'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -17,9 +17,10 @@ gem 'rails', '3.2.6'
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
 # Bundle the extra gems:
+gem 'action_links', '~> 0.3.0'
 gem 'addressable', '~>2.2.6'
 gem 'appinfo', '~>0.1.0'
-gem 'carrierwave', '~>0.5.4'
+gem 'carrierwave', '~>0.6.2'
 gem 'chronic', '~>0.6.2'
 gem 'declarative_authorization', '~>0.5.3'
 gem 'devise', '~>1.4.5'
@@ -30,7 +31,8 @@ gem 'haml', '~>3.1.3'
 gem 'highline', '~>1.6.2'
 gem 'httparty', '~>0.7.8'
 gem 'jquery-rails', '~>2.0.2'
-gem 'kaminari', '~>0.12.4'
+gem 'kaminari', '~>0.13.0'
+gem 'memoist', '~> 0.2.0'
 gem 'meta_search', '~>1.1.1'
 gem 'mini_magick', '~>3.4'
 gem 'newrelic_rpm', '~>3.3.4'

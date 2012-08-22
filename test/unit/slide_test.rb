@@ -56,8 +56,8 @@ class SlideTest < ActiveSupport::TestCase
     assert @slide.published?
   end
   
-  test "published count plus unpublished count should equal total slide count"
-    assert_no_difference(Slide.publishted.count + Slide.published.count, Slide.count) 
+  test "published count plus unpublished count should equal total slide count" do
+    assert Slide.published.count + Slide.unpublished.count == Slide.count
   end
 
 end

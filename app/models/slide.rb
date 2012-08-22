@@ -1,9 +1,10 @@
 class Slide < ActiveRecord::Base
-  extend ActiveSupport::Memoizable
-require 'carrierwave/orm/activerecord'
+  require 'carrierwave/orm/activerecord'
+  extend Memoist
   RESIZE_OPTIONS = ['none', 'zoom', 'zoom & crop', 'stretch']
 
-  attr_accessible :title, :delay, :color, :department_id, :publish_at, :unpublish_at, :created_at, :updated_at, :sign_id, :sign_ids, :resize, :content, :schedules_attributes, :parameters_attributes, :slots_attributes
+  attr_accessible :title, :delay, :color, :department_id, :publish_at, :unpublish_at, :created_at, :updated_at, 
+                  :sign_id, :sign_ids, :resize, :content, :content_cache, :schedules_attributes, :parameters_attributes, :slots_attributes
   
   belongs_to :department
   has_many :schedules, :dependent => :destroy
@@ -188,7 +189,7 @@ require 'carrierwave/orm/activerecord'
   
   # Class Methods
   class << self
-    extend ActiveSupport::Memoizable
+    extend Memoist
   
     def expired_slides(now=Time.now)
       Slide.all.reject { |s| !s.expired?(now) }
