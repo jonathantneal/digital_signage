@@ -1,9 +1,9 @@
 class SlotsController < ApplicationController
 
   before_filter :authenticate_user!
-  filter_resource_access :additional_collection => :sort
-  respond_to :html, :except => :sort
-  respond_to :js, :only => :sort
+  filter_resource_access :additional_collection => [:sort, :destroy_multiple]
+  respond_to :html, :except => [:sort, :destroy_multiple]
+  respond_to :js, :only => [:sort, :destroy_multiple]
 
   def index
     @sign = Sign.where('id = ? OR name = ?', params[:sign_id], params[:sign_id]).first
@@ -34,6 +34,11 @@ class SlotsController < ApplicationController
       flash[:notice] = 'Slot deleted'
     end
     respond_with @slot.sign, :slots
+  end
+
+  def destroy_multiple
+    Slot.find(params[:slot]).each { |object| object.destroy }
+    render :nothing => true
   end
 
   def sort

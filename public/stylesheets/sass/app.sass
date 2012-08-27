@@ -1,3 +1,6 @@
+@import settings.sass
+@import thumbnails.sass
+
 td a
   &.sort
     display: block
@@ -38,4 +41,120 @@ ul.checkbox
   &:hover
     background-color: #111
     color: #F66
+    
+    
+    
+    
+    
+// ****************  CUSTOM DASHBOARD STYLES  *****************************
+
+body
+  background: url(../images/stripe_bg.png) repeat
+
+#wrapper
+  #wrapperTitle
+    @include box-shadow(1px, 3px, 3px, $opacity: 0.2)
+    border-bottom: none
+
+  #wrapperPage
+    padding-top: 0
+    padding-bottom: 20px
+    margin-bottom: 30px
+    
+    #navigation
+      a:hover
+        color: #8DC422
+    
+    #page
+      width: auto
+      padding: 0
+      min-width: 940px
+      
+      #navigation
+        background-color: #202a42
+        
+        @include box-shadow(1px, 3px, 3px, $opacity: 0.3)
+        
+        ul
+          height: auto
+          
+          li
+            height: auto
+            &.active
+              background: none
+              a
+                color: #9CF
+              
+            
+            a
+              height: auto
+              padding: 10px
+              
+              
+      ul#navAside
+        float: right
+        font-weight: normal
+        li
+          margin: 0
+          a
+            font-weight: normal
+            background-image: url(../images/documents_bw.png)
+            background-repeat: no-repeat
+            padding: 0
+            margin: 10px
+            padding-left: 18px
+            font-size: small
+
+      #contentAside
+        float: right
+        box-shadow: -1px 1px 7px rgba(0, 0, 0, .5)
+        z-index: 10
+        border-radius: 5px
+        margin-right: 20px
+        width: 250px
+        padding: 10px
+        margin-top: 30px
+        background-color: white
+
+      #wrapperContent
+        margin: 30px
+        float: none
+        width: auto
+        border: none
+        min-width: 400px
+
+        &.make-room-for-aside
+          margin-right: 300px
+        
+        
+.google_button
+  display: inline-block
+  text-decoration: none
+  -webkit-border-radius: 2px
+  border-radius: 2px
+  cursor: default!important
+  font-family: arial,sans-serif
+  font-size: 11px
+  font-weight: bold
+  height: 27px
+  line-height: 27px
+  margin: 2px 0
+  min-width: 54px
+  padding: 0 8px
+  text-align: center
+  -webkit-transition: all 0.218s
+  transition: all 0.218s
+  -webkit-user-select: none
+  background-color: whiteSmoke
+  background-image: -webkit-gradient(linear, left top, left bottom, from(whiteSmoke), to(#f1f1f1))
+  background-image: -webkit-linear-gradient(top, whiteSmoke, #f1f1f1)
+  background-image: linear-gradient(top, whiteSmoke, #f1f1f1)
+  border: 1px solid gainsboro
+  color: #444
+  &:hover
+    color: #222
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1)
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1)
+    -webkit-transition: all 0.0s
+    transition: all 0.0s
 

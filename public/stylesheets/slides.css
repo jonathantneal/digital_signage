@@ -1,13 +1,9 @@
 div.thumbnail {
-  position: absolute;
   margin: 0;
   padding: 0;
-  top: 0;
-  left: 0;
   width: 336px;
   height: 189px;
-  text-align: center;
-  border: solid 1px #123357; }
+  text-align: center; }
 
 div.thumbnail.video {
   background-image: url(../images/video_thumbnail.jpg); }
@@ -49,7 +45,10 @@ ul.slides {
   ul.slides div.thumbnail {
     border-top: none;
     border-bottom: none;
-    border-left: none; }
+    border-left: none;
+    position: absolute;
+    top: 0;
+    left: 0; }
   ul.slides dd.actions ul.actions {
     position: absolute;
     right: 10px;

@@ -1,18 +1,21 @@
 %h1 Slides on the #{link_to(@sign.title, sign_path(@sign))} Sign
+
+#slide_options
+  =link_to('Show Slide', "#", :id=>"show-slide-button", :class=>"google_button single_slide_button")
+  =link_to('Edit Slot', "#", :id=>"edit-slide-button", :class=>"google_button single_slide_button")
+  =link_to('Remove', "#", :id=>"remove-slide-button", :class=>"google_button multi_slide_button")
+  #thumb_size_slider
+
 %ol.slots
   -@slots.each do |slot|
-    %li(id="slot_#{slot.id}" class="slot")
-      %dl
-        %dt.title Title
-        %dd.title=link_to(slot.slide.title, slide_path(slot.slide))
-        %dt.thumbnail Preview
-        %dd.thumbnail
-          =render(:partial=>'shared/thumbnail', :locals=>{:slide=>slot.slide})
-        %dt.status Status
-        %dd.status{:class=>slide_status(slot.slide)}=slide_status(slot.slide)
-        %dt.delay Delay
-        %dd.delay=slot.custom_delay
-        %dt.actions Actions
-        %dd.actions=action_links [@sign, slot]
+    %li{:id=>"slot_#{slot.id}", :class=>"slot", 'data-edit-url'=>url_for([:edit, @sign, slot]), 'data-show-url'=>slide_url(slot.slide)}
+      
+      .slide_status= "#{slide_status(slot.slide)}" + (slot.slide.showing? ? " - #{slot.custom_delay}s" : "")
+
+      .preview_wrapper
+        =render(:partial=>'shared/thumbnail', :locals=>{:slide=>slot.slide, :no_swf=>true})
+        .title_bar
+          %h4=slot.slide.title
         
-=render 'index_aside'
+-content_for :aside do
+  =render 'index_aside'

@@ -23,7 +23,10 @@ SignManager::Application.routes.draw do
     end
   end
   resources :slots, :only => [:create, :update, :destroy] do
-    put :sort, :on=>:collection
+    collection do
+      put :sort
+      post :destroy_multiple
+    end
   end
   resources :departments
 

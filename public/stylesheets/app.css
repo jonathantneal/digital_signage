@@ -1,3 +1,20 @@
+div.thumbnail {
+  margin: 0;
+  padding: 0;
+  width: 336px;
+  height: 189px;
+  text-align: center; }
+
+div.thumbnail.video {
+  background-image: url(../images/video_thumbnail.jpg); }
+
+div.thumbnail img, div.thumbnail .swf {
+  width: auto;
+  height: auto;
+  max-width: 336px;
+  max-height: 189px;
+  border: none; }
+
 td a.sort {
   display: block;
   float: left;
@@ -27,3 +44,100 @@ ul.checkbox {
   #wrapperPage #content a.cancel.button:hover {
     background-color: #111111;
     color: #ff6666; }
+
+body {
+  background: url(../images/stripe_bg.png) repeat; }
+
+#wrapper #wrapperTitle {
+  -moz-box-shadow: 1px 3px 3px rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 1px 3px 3px rgba(0, 0, 0, 0.2);
+  box-shadow: 1px 3px 3px rgba(0, 0, 0, 0.2);
+  border-bottom: none; }
+#wrapper #wrapperPage {
+  padding-top: 0;
+  padding-bottom: 20px;
+  margin-bottom: 30px; }
+  #wrapper #wrapperPage #navigation a:hover {
+    color: #8dc422; }
+  #wrapper #wrapperPage #page {
+    width: auto;
+    padding: 0;
+    min-width: 940px; }
+    #wrapper #wrapperPage #page #navigation {
+      background-color: #202a42;
+      -moz-box-shadow: 1px 3px 3px rgba(0, 0, 0, 0.3);
+      -webkit-box-shadow: 1px 3px 3px rgba(0, 0, 0, 0.3);
+      box-shadow: 1px 3px 3px rgba(0, 0, 0, 0.3); }
+      #wrapper #wrapperPage #page #navigation ul {
+        height: auto; }
+        #wrapper #wrapperPage #page #navigation ul li {
+          height: auto; }
+          #wrapper #wrapperPage #page #navigation ul li.active {
+            background: none; }
+            #wrapper #wrapperPage #page #navigation ul li.active a {
+              color: #99ccff; }
+          #wrapper #wrapperPage #page #navigation ul li a {
+            height: auto;
+            padding: 10px; }
+    #wrapper #wrapperPage #page ul#navAside {
+      float: right;
+      font-weight: normal; }
+      #wrapper #wrapperPage #page ul#navAside li {
+        margin: 0; }
+        #wrapper #wrapperPage #page ul#navAside li a {
+          font-weight: normal;
+          background-image: url(../images/documents_bw.png);
+          background-repeat: no-repeat;
+          padding: 0;
+          margin: 10px;
+          padding-left: 18px;
+          font-size: small; }
+    #wrapper #wrapperPage #page #contentAside {
+      float: right;
+      box-shadow: -1px 1px 7px rgba(0, 0, 0, 0.5);
+      z-index: 10;
+      border-radius: 5px;
+      margin-right: 20px;
+      width: 250px;
+      padding: 10px;
+      margin-top: 30px;
+      background-color: white; }
+    #wrapper #wrapperPage #page #wrapperContent {
+      margin: 30px;
+      float: none;
+      width: auto;
+      border: none;
+      min-width: 400px; }
+      #wrapper #wrapperPage #page #wrapperContent.make-room-for-aside {
+        margin-right: 300px; }
+
+.google_button {
+  display: inline-block;
+  text-decoration: none;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  cursor: default !important;
+  font-family: arial, sans-serif;
+  font-size: 11px;
+  font-weight: bold;
+  height: 27px;
+  line-height: 27px;
+  margin: 2px 0;
+  min-width: 54px;
+  padding: 0 8px;
+  text-align: center;
+  -webkit-transition: all 0.218s;
+  transition: all 0.218s;
+  -webkit-user-select: none;
+  background-color: whiteSmoke;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(whiteSmoke), to(#f1f1f1));
+  background-image: -webkit-linear-gradient(top, whiteSmoke, #f1f1f1);
+  background-image: linear-gradient(top, whiteSmoke, #f1f1f1);
+  border: 1px solid gainsboro;
+  color: #444444; }
+  .google_button:hover {
+    color: #222222;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    -webkit-transition: all 0s;
+    transition: all 0s; }

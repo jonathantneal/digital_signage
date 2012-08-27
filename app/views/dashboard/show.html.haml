@@ -1,24 +1,13 @@
-%table
-  %caption Recent Slides
-  %tr
-    %th Slide
-    %th Created
-    %th.actions Actions
-  -@recent_slides.each do |slide|
-    %tr
-      %td=link_to(slide.title, slide_path(slide))
-      %td=slide.created_at.to_s(:short)
-      %td=action_links(slide)
+%ul.signs
+  -@signs.each do |sign|
+    %li[sign] 
+      %dl
+        .title_bar
+          %dt.title Title
+          %dd.title=link_to(sign.title, sign_slots_path(sign))
+        %dt.thumbnail Preview
+        %a{ :href=> sign_slots_path(sign)}
+          -if sign.slides.count > 0
+            %dd.thumbnail=render(:partial=>'shared/thumbnail', :locals=>{:slide=>sign.slides.first})
 
--unless @expired_slides.empty?
-  %table
-    %caption Expired Slides
-    %tr
-      %th Slide
-      %th Expired On
-      %th.actions Actions
-    -@expired_slides.each do |slide|
-      %tr
-        %td=link_to(slide.title, slide_path(slide))
-        %td=slide.expired_at.try(:to_s, :short)
-        %td=action_links(slide)
+.clear

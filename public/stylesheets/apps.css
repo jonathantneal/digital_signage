@@ -48,15 +48,6 @@ hr {
 img {
   border: none; }
 
-a:link {
-  color: #327fcc; }
-a:visited {
-  color: #293e6d; }
-a:hover {
-  color: #992211; }
-a:active {
-  color: black; }
-
 dt {
   font-weight: bold; }
 
@@ -481,8 +472,6 @@ ul#messages {
     box-shadow: 1px 3px 3px rgba(0, 0, 0, 0.5); }
   #wrapperPage #content {
     padding: 20px; }
-    #wrapperPage #content a:hover {
-      color: #8dc422; }
     #wrapperPage #content dt {
       margin-top: 10px;
       font-weight: bold; }
@@ -576,7 +565,6 @@ ul#messages {
     width: 270px; }
     #wrapperPage #contentAside h2 {
       font: bold 92% Helvetica, Arial, sans-serif;
-      color: white;
       text-transform: uppercase;
       margin-bottom: 10px; }
     #wrapperPage #contentAside h3 {
@@ -611,9 +599,9 @@ ul#messages {
       #wrapperPage #contentAside .box a.cancel {
         display: none; }
     #wrapperPage #contentAside input[type=text], #wrapperPage #contentAside select {
-      width: 250px; }
+      width: 230px; }
     #wrapperPage #contentAside textarea {
-      width: 250px;
+      width: 230px;
       height: 150px; }
     #wrapperPage #contentAside input[type=text].date {
       width: 225px; }
@@ -630,7 +618,7 @@ ul#messages {
         border-top: solid 1px #123357;
         position: relative;
         padding: 8px;
-        color: white; }
+        color: black; }
         #wrapperPage #contentAside ul.stacked li a:hover {
           background-color: #cccccc; }
     #wrapperPage #contentAside .side_block {
