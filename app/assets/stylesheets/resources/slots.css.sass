@@ -1,0 +1,104 @@
+@import ../includes/settings.sass
+
+body.slots
+
+  #wrapperContent #content h1
+    margin: 0
+    font-size: 2em
+
+  #slide_options
+    text-align: right
+    padding: 10px 0
+    height: 33px
+    #thumb_size_slider
+      display: inline-block
+      width: 150px
+      margin: 8px 20px 0 20px
+
+  ol.slots
+    margin: 0
+    padding: 5px 0
+    list-style-type: none
+
+    >li
+      display: inline-block
+      position: relative
+      margin: 5px
+      cursor: move
+      border: 5px solid rgba(0,0,0,0)
+
+      &.selected
+        border: 5px solid #1175AE
+        opacity: .6
+
+      .slide_status 
+        opacity: 0
+        z-index: 10
+        position: absolute
+        left: 0
+        background-color: rgba(0, 0, 0, 0.8)
+        border-radius: 0 0 5px 0
+        padding: 5px
+        color: white
+
+      ul.actions
+        opacity: 0
+        z-index: 10
+        position: absolute
+        right: 0
+        background-color: rgba(0, 0, 0, 0.8)
+        border-radius: 0 0 0 5px
+        margin-top: 0
+        padding: 5px
+        border-top: none
+        li a 
+          color: white
+
+      .preview_wrapper
+        position: relative
+        @include box-shadow(1px, 3px, 3px, $opacity: 0.5)
+      
+        div.thumbnail
+          left: 48px
+          width: $thumbnail_width
+          height: auto //$thumbnail_height
+          border-top: none
+
+        div.thumbnail img, div.thumbnail .swf
+          max-width: 100% //$thumbnail_width
+          max-height: 100% //$thumbnail_height
+        
+        .title_bar
+          opacity: 0
+          width: 100%
+          bottom: 0
+          margin: 0
+          padding: 0
+          position: absolute
+          background-color: rgba(0, 0, 0, 0.8)
+
+          h4 
+            color: white
+            margin: 5px
+            a
+              text-decoration: none
+              color: white
+
+      &:hover
+        .slide_status, ul.actions, .title_bar
+          opacity: 1
+          @include transition(opacity, 0.2s, 0s)
+
+    &.mini-slides
+      .slide_status, ul.actions, .title_bar
+        display: none
+
+      > li 
+        .preview_wrapper 
+          div.thumbnail
+            width: $thumbnail_width / 2
+            height: $thumbnail_height / 2
+          div.thumbnail img, div.thumbnail .swf
+            max-width: $thumbnail_width / 2
+            max-height: $thumbnail_height / 2
+

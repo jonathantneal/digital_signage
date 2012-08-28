@@ -3,7 +3,7 @@
 %html{:xmlns => "http://www.w3.org/1999/xhtml", "xml:lang" => "en", :lang => "en"}
   %head
     =render('layouts/head')
-  %body
+  %body{:class=>"#{controller_name} #{action_name}"}
     =admin_menu
     #wrapper
       =render('layouts/biola_header')
@@ -26,4 +26,5 @@
             =render('layouts/messages')
             #content=yield
           
-        #pageFooter
+    =javascript_include_tag 'application'
+    =yield :foot

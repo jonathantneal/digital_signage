@@ -1,0 +1,19 @@
+@import settings.sass
+
+div.thumbnail
+  margin: 0
+  padding: 0
+  width: $thumbnail_width
+  height: $thumbnail_height
+  text-align: center
+  // border: $default_border
+
+div.thumbnail.video
+  background-image: url('video_thumbnail.jpg')
+
+div.thumbnail img, div.thumbnail .swf
+  width: auto
+  height: auto
+  max-width: $thumbnail_width
+  max-height: $thumbnail_height
+  border: none

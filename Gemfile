@@ -27,10 +27,12 @@ gem 'devise', '~>1.4.5'
 # gem 'devise_netid_authenticatable', '~>0.3.3'
 gem 'devise_cas_authenticatable', '~>1.1.2'
 gem 'feed_satisfaction', '~>0.1.2'
-gem 'haml', '~>3.1.3'
+gem 'haml', '~>3.1.7'
 gem 'highline', '~>1.6.2'
 gem 'httparty', '~>0.7.8'
-gem 'jquery-rails', '~>2.0.2'
+gem 'jquery-rails', '~>2.1.1'
+gem 'jquery-ui-rails', '~>2.0.0'
+gem 'jquery-ui-themes', '~> 0.0.7'
 gem 'kaminari', '~>0.13.0'
 gem 'memoist', '~> 0.2.0'
 gem 'meta_search', '~>1.1.1'
@@ -38,7 +40,7 @@ gem 'mini_magick', '~>3.4'
 gem 'newrelic_rpm', '~>3.3.4'
 gem 'oauth', '~>0.4.3'
 gem 'port-a-query', '~>0.1.1'
-gem 'sass', '~>3.1.7'
+gem 'sass', '~>3.2.1'
 gem 'turnout', '~>0.2.2'
 gem 'version', '~> 1.0.0'
 gem 'viva-app_config', '~>1.2.0', :require=>'app_config'
@@ -50,6 +52,11 @@ gem 'yaml_db', '~>0.2.1'
 group :development, :test do
   gem 'sqlite3-ruby', '~>1.3.3', :require => 'sqlite3'
   gem 'pry'
+end
+
+group :assets do
+  gem 'coffee-rails', '~> 3.2.2'
+  gem 'therubyracer', '~> 0.10.2'
 end
 
 group :staging, :production do
