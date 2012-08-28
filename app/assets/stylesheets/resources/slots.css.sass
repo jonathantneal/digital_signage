@@ -2,9 +2,18 @@
 
 body.slots
 
-  #wrapperContent #content h1
-    margin: 0
-    font-size: 2em
+  .filter-divider
+    position: relative
+    clear: both
+    width: 100%
+    margin: 10px 0 10px -20px
+    padding: 10px 20px
+    border: 1px #CCC
+    border-style: dashed none
+    background-color: #EAEAEA
+    overflow: hidden
+    @include box-shadow(0px, 2px, 2px, $opacity: 0.12)
+    // @include border-radius(5px)
 
   #slide_options
     text-align: right
@@ -61,7 +70,7 @@ body.slots
         div.thumbnail
           left: 48px
           width: $thumbnail_width
-          height: auto //$thumbnail_height
+          height: $thumbnail_height
           border-top: none
 
         div.thumbnail img, div.thumbnail .swf
@@ -88,17 +97,4 @@ body.slots
         .slide_status, ul.actions, .title_bar
           opacity: 1
           @include transition(opacity, 0.2s, 0s)
-
-    &.mini-slides
-      .slide_status, ul.actions, .title_bar
-        display: none
-
-      > li 
-        .preview_wrapper 
-          div.thumbnail
-            width: $thumbnail_width / 2
-            height: $thumbnail_height / 2
-          div.thumbnail img, div.thumbnail .swf
-            max-width: $thumbnail_width / 2
-            max-height: $thumbnail_height / 2
 

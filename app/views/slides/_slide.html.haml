@@ -1,0 +1,20 @@
+%li[slide]
+  .slide_status= "#{slide_status(slide)}" + (slide.showing? ? " - #{slide.delay}s" : "")
+
+  =link_to slide do
+    .preview_wrapper
+      =render(:partial=>'shared/thumbnail', :locals=>{:slide=>slide, :no_swf=>true})
+      .title_bar
+        %h4=slide.title
+
+  / %dl
+  /   %dt.title Title
+  /   %dd.title=link_to(slide.title, slide)
+  /   %dt.thumbnail Preview
+  /   %dd.thumbnail=render(:partial=>'shared/thumbnail', :locals=>{:slide=>slide})
+  /   %dt.status Status
+  /   %dd.status{:class=>slide_status(slide)}=slide_status(slide)
+  /   %dt.department Department
+  /   %dd.department=link_to(slide.department.title, slide.department)
+  /   %dt.actions Actions
+  /   %dd.actions=action_links(slide, :exclude=>:show, :remote=>:destroy)

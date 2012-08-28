@@ -1,21 +1,9 @@
 .search.summary
   =page_entries_info(@slides, :entry_name => 'Slide')
-  -unless @slides.num_pages < 2
-    =link_to('View All', params.merge({:page=>1, :per=>1000}), :class=>:view_all)
+  / -unless @slides.num_pages < 2
+  /   =link_to('View All', params.merge({:page=>1, :per=>1000}), :class=>:view_all)
 
 %ul.slides
-  -@slides.each do |slide|
-    %li[slide]
-      %dl
-        %dt.title Title
-        %dd.title=link_to(slide.title, slide)
-        %dt.thumbnail Preview
-        %dd.thumbnail=render(:partial=>'shared/thumbnail', :locals=>{:slide=>slide})
-        %dt.status Status
-        %dd.status{:class=>slide_status(slide)}=slide_status(slide)
-        %dt.department Department
-        %dd.department=link_to(slide.department.title, slide.department)
-        %dt.actions Actions
-        %dd.actions=action_links(slide, :exclude=>:show, :remote=>:destroy)
+  =render @slides
 
-=paginate(@slides)
+.endlessScroll=paginate(@slides)

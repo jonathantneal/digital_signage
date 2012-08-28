@@ -1,7 +1,0 @@
--@sign = Sign.new
--content_for(:aside)do
-  %h2 Actions
-  -if permitted_to?(:create, :signs)
-    .box
-      %h3.add= link_to "New sign", new_sign_path
-      / =render(:partial => 'form')

@@ -1,7 +1,7 @@
 class SignsController < ApplicationController
 
   before_filter :authenticate_user!, :except=>[:show, :check_in]
-  filter_resource_access :additional_member => :check_in
+  filter_resource_access :additional_member => [:info, :check_in]
   respond_to :html, :except => :check_in
   respond_to :xml, :only => [:show, :check_in]
 
@@ -10,6 +10,10 @@ class SignsController < ApplicationController
   end
 
   def show
+    @slots = @sign.slots.with_permissions_to(:index).published
+  end
+
+  def info
     if user_signed_in? || request.format.xml?
       respond_with @sign
     else

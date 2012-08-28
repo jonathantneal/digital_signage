@@ -28,3 +28,32 @@ $(document).ready ->
 
     $("input.delete[type=checkbox]").live "click", (event) ->
       $(this).closest("li,tr").fadeOut()
+
+
+  if $('body.slides.index').exists()
+    resetThumbnailSize = ->
+      $("ul.slides li div.thumbnail").css "width", (localStorage.slidervalue or 336)
+      $("ul.slides li div.thumbnail").css "height", ($("ul.slides li div.thumbnail").width() * 113 / 200)
+
+    if $('.pagination').length
+      $(window).scroll ->
+        url = $('.pagination .next').attr('href')
+        if url && $(window).scrollTop() > $(document).height() - $(window).height() - 350
+          $('.pagination').text("Fetching more slides...")
+          $.getScript(url).done (script, textStatus) ->
+            resetThumbnailSize()
+      $(window).scroll()
+
+
+    $("#thumb_size_slider").slider
+      value: (localStorage.slidervalue or 336)
+      min: 175
+      max: 336
+      step: 1
+      slide: (event, ui) ->
+        $("ul.slides li div.thumbnail").css "width", ui.value
+        $("ul.slides li div.thumbnail").css "height", (ui.value * 113 / 200.0)
+      change: (event, ui) ->
+        localStorage.slidervalue = ui.value
+    # Initiate width when page loads
+    resetThumbnailSize()

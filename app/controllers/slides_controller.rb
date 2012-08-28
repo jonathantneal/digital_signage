@@ -9,7 +9,9 @@ class SlidesController < ApplicationController
     @search = Slide.search(params[:search])
     @slides = @search.relation.includes(:department).page(params[:page]).per(params[:per] || Kaminari.config.default_per_page)
     respond_with(@slides) do |format|
-      format.js { render :partial => 'slides' }
+      format.js do
+        render :partial => 'slides' unless params["_"] # Otherwise if infinites scroll render index.js.erb
+      end
     end
   end
 

@@ -1,5 +1,6 @@
 /*= require jquery.ui.theme
 /*= require jquery-ui/smoothness
+/*= require font-awesome
 /*= require_tree ./plugins
 /*= require apps
 /*= require_self
@@ -10,6 +11,10 @@
 
 @import includes/settings.sass
 @import includes/thumbnails.css.sass
+
+h1
+  height: auto
+  margin: 0
 
 td a
   &.sort
@@ -53,7 +58,12 @@ ul.checkbox
     color: #F66
     
     
-    
+#top-right-link
+  float: right
+  a
+    margin-left: 5px
+    i
+      margin-right: 1px
     
     
 // ****************  CUSTOM DASHBOARD STYLES  *****************************

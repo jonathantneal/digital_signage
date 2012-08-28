@@ -1,0 +1,34 @@
+%h1=@sign.title + ' Sign'
+%dl
+  %dt Name
+  %dd=@sign.name
+  %dt Department
+  %dd=link_to @sign.department, @sign.department
+  %dt Data Feed URL
+  %dd=link_to(sign_url(@sign, :format=>:xml), sign_url(@sign, :format=>:xml))
+  %dt Fullscreen Mode
+  %dd=@sign.full_screen_mode
+  %dt Transition Duration
+  %dd
+    =@sign.transition_duration
+    seconds
+  %dt Reload Interval
+  %dd
+    =@sign.reload_interval
+    seconds
+  %dt Check-In Interval
+  %dd
+    =@sign.check_in_interval
+    seconds
+  %dt Video
+  %dd=@sign.video
+  %dt Audio
+  %dd=@sign.audio
+  %dt On From
+  %dd
+    =@sign.on.try(:to_s,:time) || '?'
+    to
+    =@sign.off.try(:to_s,:time) || '?'
+=action_links(@sign)
+
+=render('info_aside')

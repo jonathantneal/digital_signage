@@ -1,6 +1,6 @@
 $(document).ready ->
 
-  if $('body.slots').exists()
+  if $('body.signs.show').exists()
 
     removeSlots = (slots) ->
       r = confirm("Are you sure you would like to remove these " + slots.length + " slides from this sign?")
@@ -39,6 +39,7 @@ $(document).ready ->
       step: 1
       slide: (event, ui) ->
         $("ol.slots li div.thumbnail").css "width", ui.value
+        $("ol.slots li div.thumbnail").css "height", (ui.value * 113 / 200.0)
 
       change: (event, ui) ->
         localStorage.slidervalue = ui.value
@@ -46,6 +47,9 @@ $(document).ready ->
     
     # Initiate width when page loads
     $("ol.slots li div.thumbnail").css "width", (localStorage.slidervalue or 336)
+    $("ol.slots li div.thumbnail").css "height", ($("ol.slots li div.thumbnail").width() * 113 / 200.0)
+
+
     $("ol.slots li").click (e) ->
       if not event.altKey and not event.shiftKey
         $(".selected").not(this).removeClass "selected"

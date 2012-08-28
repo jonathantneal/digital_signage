@@ -67,6 +67,8 @@ GEM
       multi_json (~> 1.0)
     feed_satisfaction (0.1.2)
       oauth (>= 0.4.0)
+    font-awesome-rails (0.4.0)
+      railties (~> 3.1)
     haml (3.1.7)
     highline (1.6.13)
     hike (1.2.1)
@@ -185,6 +187,7 @@ DEPENDENCIES
   devise_cas_authenticatable (~> 1.1.2)
   exception_notification!
   feed_satisfaction (~> 0.1.2)
+  font-awesome-rails (~> 0.4.0)
   haml (~> 3.1.7)
   highline (~> 1.6.2)
   httparty (~> 0.7.8)
