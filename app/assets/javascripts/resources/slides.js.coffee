@@ -2,6 +2,11 @@ $(document).ready ->
 
   if $('body.slides').exists()
     
+    @add_fields = (link, association, content) ->
+      new_id = new Date().getTime()
+      regexp = new RegExp("new_" + association, "g")
+      $("#" + association).append content.replace(regexp, new_id)
+
     # Date Picker
     $(".publish_at input[type=text]").datepicker dateFormat: "MM d, yy '12:00 AM'"
     $(".unpublish_at input[type=text]").datepicker dateFormat: "MM d, yy '11:59 PM'"

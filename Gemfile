@@ -53,6 +53,7 @@ gem 'yaml_db', '~>0.2.1'
 group :development, :test do
   gem 'sqlite3-ruby', '~>1.3.3', :require => 'sqlite3'
   gem 'pry'
+  gem 'thin'
 end
 
 group :assets do

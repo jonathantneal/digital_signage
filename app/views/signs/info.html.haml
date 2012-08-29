@@ -1,4 +1,7 @@
-%h1=@sign.title + ' Sign'
+%h2
+  =link_to "#{@sign.title} Sign", @sign
+  ="/ info"
+%hr
 %dl
   %dt Name
   %dd=@sign.name

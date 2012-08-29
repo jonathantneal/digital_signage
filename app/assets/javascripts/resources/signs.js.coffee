@@ -1,5 +1,12 @@
 $(document).ready ->
 
+  if $('body.signs.index').exists()
+    $(".sign_slides").slides
+      play: 5000
+      pagination: false
+      generatePagination: false
+      effect: 'fade'
+
   if $('body.signs.show').exists()
 
     removeSlots = (slots) ->
@@ -13,7 +20,7 @@ $(document).ready ->
       str = str.join("&")
       $.ajax
         type: "POST"
-        url: ROOT_URL + "/slots/destroy_multiple"
+        url: ROOT_URL + "slots/destroy_multiple"
         data: str
         dataType: "script"
         success: (data) ->
@@ -86,7 +93,7 @@ $(document).ready ->
       update: ->
         $.ajax
           type: "PUT"
-          url: ROOT_URL + "/slots/sort"
+          url: ROOT_URL + "slots/sort"
           data: $(this).sortable("serialize")
           dataType: "script"
 

@@ -10,7 +10,7 @@ class SignsController < ApplicationController
   end
 
   def show
-    @slots = @sign.slots.with_permissions_to(:index).published
+    @slots = @sign.slots.with_permissions_to(:index).published.includes(:slide)
   end
 
   def info

@@ -22,6 +22,13 @@
       .slide_status= "#{slide_status(slot.slide)}" + (slot.slide.showing? ? " - #{slot.custom_delay}s" : "")
 
       .preview_wrapper
-        =render(:partial=>'shared/thumbnail', :locals=>{:slide=>slot.slide, :no_swf=>true})
+        %div{:class=>"thumbnail #{slide_type(slot.slide)}", :style=>"background-color:##{slot.slide.color};"}
+          -if slot.slide.image?
+            =image_tag slide_file_url(slot.slide, :preview), :alt=>"#{slot.slide.title} thumbnail"
+          -elsif slot.slide.swf?
+            =image_tag "flash.jpg", :alt=>"#{slot.slide.title} flash player"
+          -elsif slot.slide.video?
+            =image_tag "video_thumbnail.jpg", :alt=>"#{slot.slide.title} video"
+
         .title_bar
           %h4=slot.slide.title

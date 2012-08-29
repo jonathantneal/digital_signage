@@ -21,40 +21,30 @@ body.signs.index
       @include box-shadow(3px, 3px, 3px, $opacity: 0.2)
       
       
-      dl
-        .title_bar
-          position: absolute
-          top: 0
-          left: 0
-          z-index: 1
-          
-          opacity: 0
-          @include transition(opacity, 0.1s, 0s)
-          
-          width: $thumbnail_width
-          background-color: rgba(1, 1, 1, 0.8)
-          text-align: center
-          
-          dd
-            padding: 3px
-            
-            a
-              color: white
+      .title_bar
+        position: absolute
+        top: 0
+        left: 0
+        z-index: 1
+        
+        opacity: 1
+        @include transition(opacity, 0.1s, 0s)
+        
+        width: $thumbnail_width
+        background-color: rgba(1, 1, 1, 0.8)
+        text-align: center
+        
+        .title
+          padding: 3px
+          a
+            color: white
       
-      
-    dl, dd
-      margin: 0
-      padding: 0
-      
-    dt.title, dt.thumbnail, dt.actions
-      display: none !important
-      
-    dd.title a
+    .title a
       font-size: 14pt
       font-weight: bold
       text-decoration: none
 
-    dd.title a:hover
+    .title a:hover
       text-decoration: underline
 
     div.thumbnail
@@ -62,32 +52,12 @@ body.signs.index
       border-bottom: none
       border-left: none
       position: relative
-
-    dd.actions ul.actions
-      position: absolute
-      right: 0
-      bottom: 0
-      
-      opacity: 0
-      @include transition(opacity, 0.1s, 0s)
-      
-      border: none
-      width: $thumbnail_width
-      background-color: rgba(250, 250, 250, 0.8)
-      text-align: right
-      padding: 5px 0
-      
-      
-      
+         
   ul.signs
     >li:hover
-      dl
-        .title_bar
-          opacity: 1
-          @include transition(opacity, 0.2s, 0s)
-        dd.actions ul.actions
-          opacity: 1
-          @include transition(opacity, 0.2s, 0s)
+      .title_bar
+        opacity: 0
+        @include transition(opacity, 0.2s, 0s)
           
           
           

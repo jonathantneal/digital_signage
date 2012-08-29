@@ -68,11 +68,6 @@ flashMessages = (messages) ->
   for key of messages
     $("#messages").append "<li class=\"" + key + "\">" + messages[key] + "</li>"
 
-add_fields = (link, association, content) ->
-  new_id = new Date().getTime()
-  regexp = new RegExp("new_" + association, "g")
-  $("#" + association).append content.replace(regexp, new_id)
-
 
 $(document).ready ->
   collapseSidebarBoxes $("#contentAside .box")

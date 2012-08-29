@@ -1,14 +1,9 @@
-- no_swf ||= false
-
 %div{:class=>"thumbnail #{slide_type(slide)}", :style=>"background-color:##{slide.color};"}
   -if slide.image?
     =image_tag slide_file_url(slide, :preview), :alt=>"#{slide.title} thumbnail"
-  -if slide.swf?
-    -if no_swf
-      =image_tag "flash.jpg", :alt=>"#{slide.title} flash player"
-    -else
-      .swf
-        %object{:type=>'application/x-shockwave-flash', :data=>slide_url(slide), :width=>336, :height=>189}
-          %param{:name=>'movie', :value=>slide_url(slide)}
-  -if slide.video?
+  -elsif slide.swf?
+    .swf
+      %object{:type=>'application/x-shockwave-flash', :data=>slide_url(slide), :width=>336, :height=>189}
+        %param{:name=>'movie', :value=>slide_url(slide)}
+  -elsif slide.video?
     =image_tag "video_thumbnail.jpg", :alt=>"#{slide.title} video"

@@ -24,6 +24,7 @@ SignManager::Application.routes.draw do
   end
   resources :slots, :only => [:create, :update, :destroy] do
     collection do
+      put :sort
       post :destroy_multiple
     end
   end
