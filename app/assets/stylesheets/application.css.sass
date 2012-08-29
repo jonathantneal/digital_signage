@@ -12,109 +12,15 @@
 @import includes/settings.sass
 @import includes/thumbnails.css.sass
 
-h1
-  height: auto
-  margin: 0
-
-td a
-  &.sort
-    display: block
-    float: left
-    width: 16px
-    height: 16px
-    margin: 0 5px
-    padding: 0 !important
-    text-indent: 99999px
-    overflow: hidden
-    
-ul.actions
-  a.sort
-    background-image: url('sort.png')
-    
-    
-#wrapperPage
-  #contentAside
-    .box h2
-      color: black
-      
-      
-ul.checkbox
-  list-style: none
-
-
-.preview_wrapper
-  overflow: hidden
-  .corner-banner
-    color: white
-    position: absolute
-    left: -50px
-    top: 20px
-    display: block
-    width: 150px
-    background: #333
-    /* old browsers
-    background: -moz-linear-gradient(top, #333333 0%, black 100%)
-    /* firefox
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #333333), color-stop(100%, black))
-    /* webkit
-    text-align: center
-    font-size: 11px
-    line-height: 13px
-    padding: 3px 3px 4px 3px
-    text-shadow: #000 1px 1px 0
-    -moz-transform: rotate(-45deg)
-    /* FF3.5+
-    -o-transform: rotate(-45deg)
-    /* Opera 10.5
-    -webkit-transform: rotate(-45deg)
-    /* Saf3.1+, Chrome
-    transform: rotate(-45deg)
-    /* CSS3 (for when it gets supported)
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 6px
-    -moz-box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 6px
-    -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 6px
-    -o-box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 6px
-
-
-#slide_options
-  float: right
-  text-align: right
-  padding: 10px 0
-  height: 33px
-  #thumb_size_slider
-    display: inline-block
-    width: 150px
-    margin: 8px 20px 0 20px
-  
-  
-  
-#wrapperPage #content a.cancel.button
-  background: #C33 url(button_overlay.png) repeat-x 
-
-  &[disabled=disabled]
-    background-color: #999
-    
-    &:hover
-      background-color: #999
-      cursor: default
-
-  &:hover
-    background-color: #111
-    color: #F66
-    
-    
-#top-right-link
-  float: right
-  a
-    margin-left: 5px
-    i
-      margin-right: 1px
-    
-    
-// ****************  CUSTOM DASHBOARD STYLES  *****************************
-
 body
   background: url(stripe_bg.png) repeat
+
+h1
+  height: auto
+  margin: 0      
+
+ul.checkbox
+  list-style: none    
 
 #wrapper
   #wrapperTitle
@@ -149,8 +55,6 @@ body
               background: none
               a
                 color: #9CF
-              
-            
             a
               height: auto
               padding: 10px
@@ -180,6 +84,8 @@ body
         padding: 10px
         margin-top: 30px
         background-color: white
+        .box h2
+          color: black
 
       #wrapperContent
         margin: 30px
@@ -191,38 +97,65 @@ body
         &.make-room-for-aside
           margin-right: 300px
         
-        
-.google_button
-  display: inline-block
-  text-decoration: none
-  -webkit-border-radius: 2px
-  border-radius: 2px
-  cursor: default!important
-  font-family: arial,sans-serif
-  font-size: 11px
-  font-weight: bold
-  height: 27px
-  line-height: 27px
-  margin: 2px 0
-  min-width: 54px
-  padding: 0 8px
-  text-align: center
-  -webkit-transition: all 0.218s
-  transition: all 0.218s
-  -webkit-user-select: none
-  background-color: whiteSmoke
-  background-image: -webkit-gradient(linear, left top, left bottom, from(whiteSmoke), to(#f1f1f1))
-  background-image: -webkit-linear-gradient(top, whiteSmoke, #f1f1f1)
-  background-image: linear-gradient(top, whiteSmoke, #f1f1f1)
-  border: 1px solid gainsboro
-  color: #444
-  &:hover
-    color: #222
-    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1)
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1)
-    -webkit-transition: all 0.0s
-    transition: all 0.5s
-    border: 1px solid #C6C6C6
-  &:focus, &:active
-    border: 1px solid #4D90FE
+        a.cancel.button
+          background: #C33 url(button_overlay.png) repeat-x 
+          &[disabled=disabled]
+            background-color: #999
+            &:hover
+              background-color: #999
+              cursor: default
+          &:hover
+            background-color: #111
+            color: #F66
+
+        #slide_options
+          float: right
+          text-align: right
+          padding: 10px 0
+          height: 33px
+          #thumb_size_slider
+            display: inline-block
+            width: 150px
+            margin: 8px 20px 0 20px
+          
+        #top-right-link
+          float: right
+          a
+            margin-left: 5px
+            i
+              margin-right: 1px
+
+        .google_button
+          display: inline-block
+          text-decoration: none
+          -webkit-border-radius: 2px
+          border-radius: 2px
+          cursor: default!important
+          font-family: arial,sans-serif
+          font-size: 11px
+          font-weight: bold
+          height: 27px
+          line-height: 27px
+          margin: 2px 0
+          min-width: 54px
+          padding: 0 8px
+          text-align: center
+          -webkit-transition: all 0.218s
+          transition: all 0.218s
+          -webkit-user-select: none
+          background-color: whiteSmoke
+          background-image: -webkit-gradient(linear, left top, left bottom, from(whiteSmoke), to(#f1f1f1))
+          background-image: -webkit-linear-gradient(top, whiteSmoke, #f1f1f1)
+          background-image: linear-gradient(top, whiteSmoke, #f1f1f1)
+          border: 1px solid gainsboro
+          color: #444
+          &:hover
+            color: #222
+            -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1)
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1)
+            -webkit-transition: all 0.0s
+            transition: all 0.5s
+            border: 1px solid #C6C6C6
+          &:focus, &:active
+            border: 1px solid #4D90FE
 

@@ -1,5 +1,5 @@
 -@slots.each do |slot|
-  %li{:id=>"slot_#{slot.id}", :class=>"slot", 'data-edit-url'=>url_for([:edit, @sign, slot]), 'data-show-url'=>slide_url(slot.slide)}
+  %li[slot]{'data-edit-url'=>url_for([:edit, @sign, slot]), 'data-show-url'=>slide_url(slot.slide)}
     
     .slide_status= "#{slide_status(slot.slide)}" + (slot.slide.showing? ? " - #{slot.custom_delay}s" : "")
 
