@@ -19,6 +19,12 @@ class SlidesController < ApplicationController
   end
 
   def new
+    @slottable_signs = Sign.with_permissions_to(:update)
+    
+    # Add all available slots
+    @slottable_signs.each do |sign|
+      @slide.slots << Slot.new({:sign=>sign})
+    end
   end
 
   def edit
