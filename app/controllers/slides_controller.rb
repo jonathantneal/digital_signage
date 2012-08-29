@@ -28,6 +28,7 @@ class SlidesController < ApplicationController
   end
 
   def edit
+    @slottable_signs = Sign.with_permissions_to(:update)
   end
 
   def create

@@ -61,6 +61,7 @@ ajaxifySearchForm = (form) ->
       success: (data) ->
         form.removeClass "searching"
         $(".search_results").html data
+        refresh_preview_size() if typeof window.refresh_preview_size is "function"
 
 
 flashMessages = (messages) ->

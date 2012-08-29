@@ -10,7 +10,14 @@ class SignsController < ApplicationController
   end
 
   def show
-    @slots = @sign.slots.with_permissions_to(:index).published.includes(:slide)
+    @search = @sign.slots.with_permissions_to(:index).search(params[:search])
+    @slots = @search.includes(:slide)
+ 
+    respond_with(@slides) do |format|
+      format.js do
+        render :partial => 'slots' unless params["_"] # Otherwise if infinites scroll render index.js.erb
+      end
+    end
   end
 
   def info

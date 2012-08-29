@@ -7,28 +7,21 @@
     Edit
 
 %h1 Slides on the #{@sign.title} Sign
+=form_for(@search, :url=>url_for(@sign), :html=>{:class=>'filter'}) do |f|
+  %fieldset
+    %legend Filter Slides
+  
+    #slide_options
+      =link_to('Show Slide', "#", :id=>"show-slide-button", :class=>"google_button single_slide_button")
+      =link_to('Edit Slot', "#", :id=>"edit-slide-button", :class=>"google_button single_slide_button")
+      =link_to('Remove', "#", :id=>"remove-slide-button", :class=>"google_button multi_slide_button")
+      #thumb_size_slider
 
-.filter-divider
-  #slide_options
-    =link_to('Show Slide', "#", :id=>"show-slide-button", :class=>"google_button single_slide_button")
-    =link_to('Edit Slot', "#", :id=>"edit-slide-button", :class=>"google_button single_slide_button")
-    =link_to('Remove', "#", :id=>"remove-slide-button", :class=>"google_button multi_slide_button")
-    #thumb_size_slider
+    %span.param
+      =f.label :published_eq, 'Published'
+      =f.select :published_eq, [['Published', 1], ['Unpublished', 0]], {:include_blank=>true}
+    .buttons=f.submit 'Filter'
 
-%ol.slots
-  -@slots.each do |slot|
-    %li{:id=>"slot_#{slot.id}", :class=>"slot", 'data-edit-url'=>url_for([:edit, @sign, slot]), 'data-show-url'=>slide_url(slot.slide)}
-      
-      .slide_status= "#{slide_status(slot.slide)}" + (slot.slide.showing? ? " - #{slot.custom_delay}s" : "")
 
-      .preview_wrapper
-        %div{:class=>"thumbnail #{slide_type(slot.slide)}", :style=>"background-color:##{slot.slide.color};"}
-          -if slot.slide.image?
-            =image_tag slide_file_url(slot.slide, :preview), :alt=>"#{slot.slide.title} thumbnail"
-          -elsif slot.slide.swf?
-            =image_tag "flash.jpg", :alt=>"#{slot.slide.title} flash player"
-          -elsif slot.slide.video?
-            =image_tag "video_thumbnail.jpg", :alt=>"#{slot.slide.title} video"
-
-        .title_bar
-          %h4=slot.slide.title
+%ol.slots.search_results
+  =render 'slots'

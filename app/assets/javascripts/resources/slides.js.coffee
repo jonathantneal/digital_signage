@@ -36,7 +36,7 @@ $(document).ready ->
 
 
   if $('body.slides.index').exists()
-    resetThumbnailSize = ->
+    window.refresh_preview_size = ->
       $("ul.slides li div.thumbnail").css "width", (localStorage.slidervalue or 336)
       $("ul.slides li div.thumbnail").css "height", ($("ul.slides li div.thumbnail").width() * 113 / 200)
 
@@ -46,7 +46,7 @@ $(document).ready ->
         if url && $(window).scrollTop() > $(document).height() - $(window).height() - 350
           $('.pagination').text("Fetching more slides...")
           $.getScript(url).done (script, textStatus) ->
-            resetThumbnailSize()
+            refresh_preview_size()
       $(window).scroll()
 
 
@@ -61,4 +61,4 @@ $(document).ready ->
       change: (event, ui) ->
         localStorage.slidervalue = ui.value
     # Initiate width when page loads
-    resetThumbnailSize()
+    refresh_preview_size()
