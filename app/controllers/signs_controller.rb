@@ -11,7 +11,7 @@ class SignsController < ApplicationController
 
   def show
     @search = @sign.slots.with_permissions_to(:index).search(params[:search])
-    @slots = @search.includes(:slide)
+    @slots = @search.includes(:slide => :schedules)
  
     respond_with(@slides) do |format|
       format.js do

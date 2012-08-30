@@ -45,11 +45,6 @@ email:
     password: ****************
 
 ui:
-  menu: # accepts text, url, controller, action and css_class
-  - controller: signs
-  - controller: slides
-  - controller: users
-  - controller: departments
   admin_menu:
   - controller: users
   - url: http://apps.biola.edu/access

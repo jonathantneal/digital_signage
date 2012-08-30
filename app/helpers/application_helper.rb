@@ -18,6 +18,19 @@ module ApplicationHelper
     
   end
 
+  def navigation_menu
+    menu_items = [{:controller=>"signs", :text=>"Signs"},
+                  {:controller=>"slides", :text=>"Slides"},
+                  {:controller=>"users", :text=>"Users"},
+                  {:controller=>"departments", :text=>"Departments"}]
+                  
+    content_tag(:ul) do
+      menu_items.map do |link_settings|
+        navigation_link link_settings.merge({:wrapper=>'li'})
+      end.join('').html_safe
+    end
+  end
+
   def admin_menu
     if(current_user.try(:is_admin?) || current_user.try(:is_developer?))
       content_tag(:ul, :class=>'admin menu') do

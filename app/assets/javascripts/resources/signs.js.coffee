@@ -71,6 +71,7 @@ $(document).ready ->
       $(this).toggleClass "selected"
       $(".last_selected").removeClass "last_selected"
       $(this).addClass "last_selected"
+
       if $("ol.slots li.selected").length > 1
         $(".single_slide_button").hide()
       else if $("ol.slots li.selected").length is 1
@@ -79,7 +80,7 @@ $(document).ready ->
         $("#slide_options .google_button").hide()
       e.stopPropagation()
 
-    $("body").click ->
+    $("body").live "click", (e) ->
       $(".selected").removeClass "selected"
       $("#slide_options .google_button").hide()
 
