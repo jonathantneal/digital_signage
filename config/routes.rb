@@ -3,9 +3,6 @@ SignManager::Application.routes.draw do
 
   devise_for :users, :path_names => { :sign_in=>'login', :sign_out=>'logout' }
 
-  resources :announcements
-  resources :documents
-
   resources :users, :except => [:new]
   resources :info, :only => [] do
     collection do

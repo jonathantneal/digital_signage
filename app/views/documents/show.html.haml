@@ -1,8 +1,0 @@
-%h2=@document.name
-.content=@document.content
-.tags
-  %h3 Tags
-  %ul.tags
-    -@document.tag_array.each do |tag|
-      %li=link_to(tag, {:controller=>'documents', :tag=>tag})
-=action_links(@document)

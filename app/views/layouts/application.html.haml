@@ -15,8 +15,6 @@
         
       #wrapperPage
         #page{:class=>"#{controller_name} #{action_name}"}
-          #navigation.tabnav
-            =render('layouts/navigation_aside')
           =render('layouts/navigation')
           -if content_for? :aside
             #contentAside

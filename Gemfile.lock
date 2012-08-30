@@ -67,8 +67,6 @@ GEM
     eventmachine (0.12.10)
     execjs (1.4.0)
       multi_json (~> 1.0)
-    feed_satisfaction (0.1.2)
-      oauth (>= 0.4.0)
     font-awesome-rails (0.4.0)
       railties (~> 3.1)
     haml (3.1.7)
@@ -192,7 +190,6 @@ DEPENDENCIES
   devise (~> 1.4.5)
   devise_cas_authenticatable (~> 1.1.2)
   exception_notification!
-  feed_satisfaction (~> 0.1.2)
   font-awesome-rails (~> 0.4.0)
   haml (~> 3.1.7)
   highline (~> 1.6.2)

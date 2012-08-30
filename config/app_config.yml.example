@@ -50,15 +50,6 @@ ui:
   - controller: slides
   - controller: users
   - controller: departments
-  menu_aside:
-  - controller: feed_satisfaction/feedbacks
-    action: show
-    text: Feedback
-    css_class: feedback
-  - controller: documents
-    css_class: documents
-  - controller: announcements
-    css_class: announcements
   admin_menu:
   - controller: users
   - url: http://apps.biola.edu/access
@@ -75,18 +66,6 @@ ui:
     text: Config
   pagination:
     per_page: 30
-
-feedback:
-  domain: getsatisfaction.example.com
-  fastpass:
-    key: **********
-    secret: ****************************
-  widget_id: 0000000000
-  company: company_name
-  product: product_name
-  custom_css: http://example.com/path/to/css/file.css
-  default_tab: idea
-  question_limit: 5
   
 google_analytics:
   enabled: true

@@ -7,11 +7,7 @@ authorization do
   end
   
   role :admin do
-    has_permission_on [:announcements, :documents, :users] do
-      to :administrate
-    end
-    
-    has_permission_on [:signs, :slides, :slots, :departments] do
+    has_permission_on [:signs, :slides, :slots, :departments, :users] do
       to :administrate
     end
     has_permission_on :slots, :to => :sort
@@ -20,14 +16,6 @@ authorization do
   end
   
   role :manager do
-    
-    has_permission_on :dashboard do
-      to :read
-    end
-    
-    has_permission_on :announcements, :to => :read do
-      if_attribute :show? => is {true}
-    end
     
     has_permission_on :users, :to => :show do
       if_attribute :id => is {user.id}
@@ -60,14 +48,6 @@ authorization do
       to :show, :check_in
     end
   
-    has_permission_on :pages do
-      to :feedback
-    end
-  
-    has_permission_on :documents do
-      to :read
-    end
-    
   end
   
 end
