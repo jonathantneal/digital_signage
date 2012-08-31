@@ -10,7 +10,7 @@ authorization do
     has_permission_on [:signs, :slides, :slots, :departments, :users] do
       to :administrate
     end
-    has_permission_on :slots, :to => :sort
+    has_permission_on :slots, :to => [:sort, :destroy_multiple]
     
     includes :manager
   end
@@ -30,7 +30,7 @@ authorization do
       if_permitted_to :show, :department
     end
     
-    has_permission_on :slots, :to => [:administrate, :sort] do
+    has_permission_on :slots, :to => [:administrate, :sort, :destroy_multiple] do
       if_permitted_to :update, :sign
     end
     

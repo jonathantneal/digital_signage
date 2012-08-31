@@ -10,13 +10,19 @@ class SignsController < ApplicationController
   end
 
   def show
-    @search = @sign.slots.with_permissions_to(:index).search(params[:search])
-    @slots = @search.includes(:slide => :schedules)
- 
-    respond_with(@slides) do |format|
-      format.js do
-        render :partial => 'slots' unless params["_"] # Otherwise if infinites scroll render index.js.erb
+    if request.format.xml?
+      @slots = @sign.slots.published.includes(:slide => :schedules)
+    elsif user_signed_in?
+      @search = @sign.slots.with_permissions_to(:index).search(params[:search])
+      @slots = @search.includes(:slide => :schedules)
+   
+      respond_with(@slides) do |format|
+        format.js do
+          render :partial => 'slots' unless params["_"] # Otherwise if infinites scroll render index.js.erb
+        end
       end
+    else
+      authenticate_user!
     end
   end
 
