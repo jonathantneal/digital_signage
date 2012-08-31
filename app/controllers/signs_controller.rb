@@ -68,7 +68,6 @@ class SignsController < ApplicationController
   
   def load_sign
     @sign = Sign.where('id = ? OR name = ?', params[:id], params[:id]).first
-    raise RecordNotFound if @sign.nil?
   end
   
 end
