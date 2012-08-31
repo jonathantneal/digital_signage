@@ -62,6 +62,10 @@ ui:
   pagination:
     per_page: 30
   
+defaults:
+  slide:
+    delay: 7
+  
 google_analytics:
   enabled: true
   web_property_id: XX-00000-00

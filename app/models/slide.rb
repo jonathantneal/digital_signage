@@ -15,6 +15,8 @@ class Slide < ActiveRecord::Base
   accepts_nested_attributes_for :parameters, :allow_destroy => true
   accepts_nested_attributes_for :slots, :allow_destroy => true
 
+  after_initialize :defaults
+
   mount_uploader :content, ContentUploader
   
   validates_presence_of :title, :delay, :color, :department_id
@@ -213,6 +215,12 @@ class Slide < ActiveRecord::Base
       unless content.file.try(:content_type).nil?
         self.content_type = content.file.content_type
       end
+    end
+  end
+
+  def defaults
+    if new_record?
+      self.delay ||= AppConfig.defaults.slide.delay
     end
   end
   
