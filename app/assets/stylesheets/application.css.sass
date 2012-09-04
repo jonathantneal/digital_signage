@@ -1,0 +1,147 @@
+/*= require jquery.ui.theme
+/*= require jquery-ui/smoothness
+/*= require font-awesome
+/*= require_tree ./plugins
+/*= require apps
+/*= require_self
+/*= require_tree ./resources
+/*= require ./print
+/**/
+
+
+@import includes/settings.sass
+@import includes/thumbnails.css.sass
+
+body
+  background: url(stripe_bg.png) repeat
+
+h1
+  height: auto
+  margin: 0      
+
+ul.checkbox
+  list-style: none    
+
+#wrapper
+  #wrapperTitle
+    @include box-shadow(1px, 3px, 3px, $opacity: 0.2)
+    border-bottom: none
+
+  #wrapperPage
+    padding-top: 0
+    padding-bottom: 20px
+    margin-bottom: 30px
+    
+    #navigation
+      a:hover
+        color: #8DC422
+    
+    #page
+      width: auto
+      padding: 0
+      min-width: 940px
+      
+      #navigation
+        background-color: #202a42
+        
+        @include box-shadow(1px, 3px, 3px, $opacity: 0.3)
+        
+        ul
+          height: auto
+          
+          li
+            height: auto
+            &.active
+              background: none
+              a
+                color: #9CF
+            a
+              height: auto
+              padding: 10px
+              
+
+      #contentAside
+        float: right
+        box-shadow: -1px 1px 7px rgba(0, 0, 0, .5)
+        z-index: 10
+        border-radius: 5px
+        margin-right: 20px
+        width: 250px
+        padding: 10px
+        margin-top: 30px
+        background-color: white
+        .box h2
+          color: black
+
+      #wrapperContent
+        margin: 30px
+        float: none
+        width: auto
+        border: none
+        min-width: 400px
+
+        &.make-room-for-aside
+          margin-right: 300px
+        
+        a.cancel.button
+          background: #C33 url(button_overlay.png) repeat-x 
+          &[disabled=disabled]
+            background-color: #999
+            &:hover
+              background-color: #999
+              cursor: default
+          &:hover
+            background-color: #111
+            color: #F66
+
+        #slide_options
+          float: right
+          text-align: right
+          padding: 10px 0
+          height: 33px
+          #thumb_size_slider
+            display: inline-block
+            width: 150px
+            margin: 8px 20px 0 20px
+          
+        #top-right-link
+          float: right
+          a
+            margin-left: 5px
+            i
+              margin-right: 1px
+
+        .google_button
+          display: inline-block
+          text-decoration: none
+          -webkit-border-radius: 2px
+          border-radius: 2px
+          cursor: default!important
+          font-family: arial,sans-serif
+          font-size: 11px
+          font-weight: bold
+          height: 27px
+          line-height: 27px
+          margin: 2px 0
+          min-width: 54px
+          padding: 0 8px
+          text-align: center
+          -webkit-transition: all 0.218s
+          transition: all 0.218s
+          -webkit-user-select: none
+          background-color: whiteSmoke
+          background-image: -webkit-gradient(linear, left top, left bottom, from(whiteSmoke), to(#f1f1f1))
+          background-image: -webkit-linear-gradient(top, whiteSmoke, #f1f1f1)
+          background-image: linear-gradient(top, whiteSmoke, #f1f1f1)
+          border: 1px solid gainsboro
+          color: #444
+          &:hover
+            color: #222
+            -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1)
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1)
+            -webkit-transition: all 0.0s
+            transition: all 0.5s
+            border: 1px solid #C6C6C6
+          &:focus, &:active
+            border: 1px solid #4D90FE
+

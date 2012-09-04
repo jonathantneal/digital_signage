@@ -13,12 +13,6 @@ class ApplicationController < ActionController::Base
 
   protected
 
-  def flash_announcements_for(user=nil)
-    user ||= current_user
-    Announcement.current.after(user.last_sign_in_at).each do |announcement|
-      flash.now[:announce] = announcement.announcement
-    end
-  end
   
   def set_current_user
     Authorization.current_user = current_user

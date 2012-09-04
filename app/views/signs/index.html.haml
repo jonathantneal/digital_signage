@@ -1,20 +1,33 @@
-%h1 Signs
-%table
-  %tr
-    %th Title
-    %th Active Slides
-    %th Content Time
-    %th Last Check In
-    %th.actions Actions
-  -@signs.each do |sign|
-    %tr
-      %td=link_to(sign.title, sign)
-      %td=sign.active_slides.length
-      %td=seconds_to_time(sign.active_slides_time)
-      %td
-        =time_ago_in_words(sign.last_check_in)+" ago" if sign.checked_in?
-      %td
-        =action_links(sign) do
-          =link_to('Sort', sign_slots_path(sign), :class=>:sort) if permitted_to? :edit, sign
+#top-right-link
+  -if permitted_to?(:create, :signs)
+    =link_to new_sign_path, :class=>"google_button" do
+      %i.icon-plus
+      Create New Sign
 
-=render('index_aside')
+%h1 Signs
+
+%ul.signs
+  -@signs.each do |sign|
+    %li[sign] 
+      .title_bar
+        .title=link_to(sign.title, sign_path(sign))
+      %a{ :href=> sign_path(sign)}
+        .sign_slides
+          .slides_container
+            -sign.slides.published.limit(10).each do |slide|
+              %div{:class=>"thumbnail #{slide_type(slide)}", :style=>"background-color:##{slide.color};"}
+                -if slide.image?
+                  =image_tag slide_file_url(slide, :preview), :alt=>"#{slide.title} thumbnail"
+
+.clear
+
+:javascript
+  // This hides all but the first image. The multiple images are used for the slideshow.
+  // Also, this js needs to be here so the user doesn't see the windows resize.
+  var signs = document.getElementsByClassName("slides_container");
+  for(i in signs){
+    var children = signs[i].children;
+    for(j in children){
+      if(j > 0) children[j].style.display = 'none';
+    }
+  }

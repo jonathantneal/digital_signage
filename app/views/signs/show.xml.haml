@@ -10,18 +10,17 @@
       :check_in_interval=>@sign.check_in_interval,
       :last_check_in=>@sign.last_check_in.try(:to_s, :rfc822)}
   %slides
-    -@sign.slots.each do |slot|
-      -unless slot.slide.expired? || slot.slide.unpublished?
-        %slide{:id=>slot.slide.id,
-               :title=>slot.slide.title,
-               :uri=>slide_url(slot.slide),
-               :content_type=>slot.slide.type,
-               :delay=>slot.custom_delay,
-               :resize=>slot.slide.resize,
-               :color=>'#'+slot.slide.color,
-               :lastupdate=>(slot.slide.updated_at || slot.slide.created_at).to_s(:rfc822)}
-          %schedules
-            -if !slot.slide.previous_schedule.nil?
-              %schedule{:time=>slot.slide.previous_schedule.time.to_s(:rfc822), :action=>slot.slide.previous_schedule.action}
-            -if !slot.slide.next_schedule.nil?
-              %schedule{:time=>slot.slide.next_schedule.time.to_s(:rfc822), :action=>slot.slide.next_schedule.action}
+    -@slots.each do |slot|
+      %slide{:id=>slot.slide.id,
+             :title=>slot.slide.title,
+             :uri=>slide_url(slot.slide),
+             :content_type=>slot.slide.type,
+             :delay=>slot.custom_delay,
+             :resize=>slot.slide.resize,
+             :color=>'#'+slot.slide.color,
+             :lastupdate=>(slot.slide.updated_at || slot.slide.created_at).to_s(:rfc822)}
+        %schedules
+          -if !slot.slide.previous_schedule.nil?
+            %schedule{:time=>slot.slide.previous_schedule.time.to_s(:rfc822), :action=>slot.slide.previous_schedule.action}
+          -if !slot.slide.next_schedule.nil?
+            %schedule{:time=>slot.slide.next_schedule.time.to_s(:rfc822), :action=>slot.slide.next_schedule.action}

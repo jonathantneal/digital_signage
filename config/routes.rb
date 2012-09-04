@@ -3,10 +3,6 @@ SignManager::Application.routes.draw do
 
   devise_for :users, :path_names => { :sign_in=>'login', :sign_out=>'logout' }
 
-  resources :announcements
-  resource :dashboards, :only => :show
-  resources :documents
-
   resources :users, :except => [:new]
   resources :info, :only => [] do
     collection do
@@ -17,13 +13,17 @@ SignManager::Application.routes.draw do
   end
   resources :slides
   resources :signs do
-    resources :slots, :only => [:index, :edit, :destroy]
+    resources :slots, :only => :edit
     member do
+      get :info
       get :check_in
     end
   end
-  resources :slots, :only => [:create, :update, :destroy] do
-    put :sort, :on=>:collection
+  resources :slots, :only => [:create, :update] do
+    collection do
+      put :sort
+      post :destroy_multiple
+    end
   end
   resources :departments
 

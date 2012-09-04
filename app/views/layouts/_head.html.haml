@@ -1,16 +1,12 @@
 %title=yield_or(:title, AppConfig.app.name)
 %meta{"http-equiv"=>"Content-Type", :content=>"text/html; charset=utf-8"}/
 =csrf_meta_tag
+
 %link(rel="icon" type="image/png" href="https://media1.biola.edu/biola/img/biola-icon.png")/
 %link(rel="stylesheet" type="text/css" href="https://apps.biola.edu/media/css/biola-universal.css" media="screen")/
-=stylesheet_link_tag 'apps'
-=stylesheet_link_tag 'app', :media=>'screen,print'
-=stylesheet_link_tag 'print', :media=>'print'
-=stylesheet_link_tag 'jquery/smoothness/jquery-ui-1.8.2.custom'
-=controller_stylesheet_link_tag :media=>'screen,print'
+=stylesheet_link_tag 'application'
 %script(type="text/javascript") ROOT_URL = '#{root_url}'
-=javascript_include_tag :defaults
-=javascript_include_tag 'jquery-ui'
-=controller_javascript_include_tag
+
 =yield :head
+
 =google_analytics_script_tag

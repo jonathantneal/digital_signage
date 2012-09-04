@@ -3,7 +3,8 @@ class Sign < ActiveRecord::Base
 
   FULL_SCREEN_MODES = ['fullscreen', 'maximize']
 
-  attr_accessible :name, :title, :video, :audio, :on, :off, :full_screen_mode, :transition_duration, :reload_interval, :check_in_interval, :department_id, :slide_id
+  attr_accessible :name, :title, :video, :audio, :on, :off, :full_screen_mode, :transition_duration, :reload_interval, 
+                  :check_in_interval, :department_id, :slide_id, :email
   validates_presence_of :name, :title, :full_screen_mode, :transition_duration, :reload_interval, :check_in_interval, :department_id
   validates_uniqueness_of :name, :title
   validates_numericality_of :transition_duration, :greater_than => 0

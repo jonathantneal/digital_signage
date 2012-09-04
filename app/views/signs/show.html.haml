@@ -1,35 +1,27 @@
-%h1=@sign.title + ' Sign'
-%dl
-  %dt Name
-  %dd=@sign.name
-  %dt Department
-  %dd=link_to @sign.department, @sign.department
-  %dt Data Feed URL
-  %dd=link_to(sign_url(@sign, :format=>:xml), sign_url(@sign, :format=>:xml))
-  %dt Fullscreen Mode
-  %dd=@sign.full_screen_mode
-  %dt Transition Duration
-  %dd
-    =@sign.transition_duration
-    seconds
-  %dt Reload Interval
-  %dd
-    =@sign.reload_interval
-    seconds
-  %dt Check-In Interval
-  %dd
-    =@sign.check_in_interval
-    seconds
-  %dt Video
-  %dd=@sign.video
-  %dt Audio
-  %dd=@sign.audio
-  %dt On From
-  %dd
-    =@sign.on.try(:to_s,:time) || '?'
-    to
-    =@sign.off.try(:to_s,:time) || '?'
-=action_links(@sign) do
-  =link_to('Sort', sign_slots_path(@sign), :class=>:sort)
+#top-right-link
+  =link_to [:info, @sign], :class=>"google_button" do
+    %i.icon-info-sign
+    Info
+  =link_to [:edit, @sign], :class=>"google_button" do
+    %i.icon-pencil
+    Edit
 
-=render('show_aside')
+%h1 Slides on the #{@sign.title} Sign
+=form_for(@search, :url=>url_for(@sign), :html=>{:class=>'filter'}) do |f|
+  %fieldset
+    %legend Filter Slides
+  
+    #slide_options
+      =link_to('Show Slide', "#", :id=>"show-slide-button", :class=>"google_button single_slide_button")
+      =link_to('Edit Slot', "#", :id=>"edit-slide-button", :class=>"google_button single_slide_button")
+      =link_to('Remove', "#", :id=>"remove-slide-button", :class=>"google_button multi_slide_button")
+      #thumb_size_slider
+
+    %span.param
+      =f.label :published_status, 'Published'
+      =f.select :published_status, Slide::PUBLISHED_STATUS.map{|s| [s, s]}, {:include_blank=>true}
+    .buttons=f.submit 'Filter'
+
+
+%ol.slots.search_results
+  =render 'slots'

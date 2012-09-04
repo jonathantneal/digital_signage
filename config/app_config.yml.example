@@ -45,19 +45,6 @@ email:
     password: ****************
 
 ui:
-  menu: # accepts text, url, controller, action and css_class
-  - controller: dashboard
-    action: show
-  - controller: users
-  menu_aside:
-  - controller: feed_satisfaction/feedbacks
-    action: show
-    text: Feedback
-    css_class: feedback
-  - controller: documents
-    css_class: documents
-  - controller: announcements
-    css_class: announcements
   admin_menu:
   - controller: users
   - url: http://apps.biola.edu/access
@@ -73,19 +60,13 @@ ui:
     action: configuration
     text: Config
   pagination:
-    per_page: 10
-
-feedback:
-  domain: getsatisfaction.example.com
-  fastpass:
-    key: **********
-    secret: ****************************
-  widget_id: 0000000000
-  company: company_name
-  product: product_name
-  custom_css: http://example.com/path/to/css/file.css
-  default_tab: idea
-  question_limit: 5
+    per_page: 30
+  
+defaults:
+  sign:
+    email_frequency: 24   # in hours
+  slide:
+    delay: 7
   
 google_analytics:
   enabled: true
@@ -93,8 +74,8 @@ google_analytics:
   
 routing:
   default:
-    controller: dashboard
-    action: show
+    controller: signs
+    action: index
     
 developer:
   title: Example Company
