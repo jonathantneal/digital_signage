@@ -29,6 +29,8 @@
       =f.text_field(:on)
       to
       =f.text_field(:off)
+    %dt.email_on_error=f.label :email, "Email when sign is down"
+    %dd.email_on_error=f.text_field(:email)
   .buttons
     = f.submit('Save')
     = cancel_button

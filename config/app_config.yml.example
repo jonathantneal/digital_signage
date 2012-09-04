@@ -63,6 +63,8 @@ ui:
     per_page: 30
   
 defaults:
+  sign:
+    email_frequency: 24   # in hours
   slide:
     delay: 7
   
