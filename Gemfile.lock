@@ -155,7 +155,6 @@ GEM
     sqlite3 (1.3.6)
     sqlite3-ruby (1.3.3)
       sqlite3 (>= 1.3.3)
-    ssl_requirement (0.1.0)
     subexec (0.2.2)
     therubyracer (0.10.2)
       libv8 (~> 3.3.10)
@@ -210,7 +209,6 @@ DEPENDENCIES
   rails (= 3.2.8)
   sass (~> 3.2.1)
   sqlite3-ruby (~> 1.3.3)
-  ssl_requirement (~> 0.1.0)
   therubyracer (~> 0.10.2)
   thin
   turnout (~> 0.2.2)
