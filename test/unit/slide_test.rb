@@ -65,4 +65,31 @@ class SlideTest < ActiveSupport::TestCase
     assert slide.delay == AppConfig.defaults.slide.delay
   end
 
+  test "expired scope" do
+    @slide = slides(:one)
+    @slide.publish_at = 1.week.ago
+    @slide.unpublish_at = 1.day.ago
+    @slide.save
+
+    assert Slide.expired.include?(@slide)  # slide should be expired
+
+    @slide.publish_at = nil
+    @slide.unpublish_at = 1.day.ago
+    @slide.save
+
+    assert Slide.expired.include?(@slide)  # slide should be expired
+
+    @slide.publish_at = 1.week.ago
+    @slide.unpublish_at = 1.week.from_now
+    @slide.save
+
+    assert !Slide.expired.include?(@slide)  # slide should not be expired
+
+    @slide.publish_at = 1.week.from_now
+    @slide.unpublish_at = nil
+    @slide.save
+
+    assert !Slide.expired.include?(@slide)  # slide should not be expired
+  end
+
 end

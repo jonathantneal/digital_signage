@@ -18,8 +18,8 @@
       #thumb_size_slider
 
     %span.param
-      =f.label :published_eq, 'Published'
-      =f.select :published_eq, [['Published', 1], ['Unpublished', 0]], {:include_blank=>true}
+      =f.label :published_status, 'Published'
+      =f.select :published_status, Slide::PUBLISHED_STATUS.map{|s| [s, s]}, {:include_blank=>true}
     .buttons=f.submit 'Filter'
 
 

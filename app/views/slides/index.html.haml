@@ -19,8 +19,8 @@
       =f.label :department_id_eq, 'Department'
       =f.collection_select :department_id_eq, Department.with_permissions_to(:show), :id, :title, {:include_blank=>true}
     %span.param
-      =f.label :published_eq, 'Published'
-      =f.select :published_eq, [['Published', 1], ['Unpublished', 0]], {:include_blank=>true}
+      =f.label :published_status, 'Published'
+      =f.select :published_status, Slide::PUBLISHED_STATUS.map{|s| [s, s]}, {:include_blank=>true}
     .buttons=f.submit 'Filter'
 
 
