@@ -61,7 +61,6 @@ end
 
 group :staging, :production do
   gem 'mysql2', '~>0.3.7'
-  gem 'ssl_requirement', '~>0.1.0'
 end
 
 group :production do  
