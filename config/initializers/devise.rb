@@ -155,6 +155,4 @@ Devise.setup do |config|
     # config.cas_create_user = false    
   end
   
- end
-
-Devise::SessionsController.ssl_required :new, :create if defined? SslRequirement
+end
