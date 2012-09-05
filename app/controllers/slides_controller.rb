@@ -19,7 +19,7 @@ class SlidesController < ApplicationController
   end
 
   def new
-    @slottable_signs = Sign.with_permissions_to(:update)
+    @slottable_signs = Sign.with_permissions_to(:update).order(:title)
     
     # Add all available slots
     @slottable_signs.each do |sign|
@@ -28,7 +28,7 @@ class SlidesController < ApplicationController
   end
 
   def edit
-    @slottable_signs = Sign.with_permissions_to(:update)
+    @slottable_signs = Sign.with_permissions_to(:update).order(:title)
   end
 
   def create
