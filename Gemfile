@@ -25,7 +25,6 @@ gem 'chronic', '~>0.6.2'
 gem 'declarative_authorization', '~>0.5.3'
 gem 'devise', '~> 2.1.2'
 gem 'devise_cas_authenticatable', '~> 1.1.2'
-gem 'font-awesome-rails', '~>0.4.0'
 gem 'haml', '~>3.1.7'
 gem 'highline', '~>1.6.2'
 gem 'httparty', '~>0.7.8'
@@ -39,7 +38,6 @@ gem 'mini_magick', '~>3.4'
 gem 'newrelic_rpm', '~>3.3.4'
 gem 'oauth', '~>0.4.3'
 gem 'port-a-query', '~>0.1.1'
-gem 'sass', '~>3.2.1'
 gem 'turnout', '~>0.2.2'
 gem 'version', '~> 1.0.0'
 gem 'viva-app_config', '~>1.2.0', :require=>'app_config'
@@ -55,7 +53,10 @@ group :development, :test do
 end
 
 group :assets do
+  gem 'bourbon', '~> 2.1.0'
   gem 'coffee-rails', '~> 3.2.2'
+  gem 'compass-rails', '~> 1.0.3'
+  gem 'sass-rails', '~> 3.2.5'
   gem 'therubyracer', '~> 0.10.2'
 end
 
