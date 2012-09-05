@@ -4,7 +4,8 @@ require 'rails/all'
 
 # If you have a Gemfile, require the gems listed there, including any gems
 # you've limited to :test, :development, or :production.
-Bundler.require(:default, Rails.env) if defined?(Bundler)
+# See http://goo.gl/JYT5w - This seems to fix the problem with compass files not being found
+Bundler.require(*Rails.groups(:assets => %w(development test))) if defined?(Bundler)
 
 module SignManager
   class Application < Rails::Application
