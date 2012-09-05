@@ -13,7 +13,7 @@
     -@slots.each do |slot|
       %slide{:id=>slot.slide.id,
              :title=>slot.slide.title,
-             :uri=>slide_url(slot.slide),
+             :uri=>absolute_url(slot.slide.content.url),
              :content_type=>slot.slide.type,
              :delay=>slot.custom_delay,
              :resize=>slot.slide.resize,

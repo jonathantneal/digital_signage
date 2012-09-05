@@ -6,12 +6,11 @@ class DepartmentsController < ApplicationController
   respond_to :js, :only => :index
 
   def index
-    @departments = Department.all
+    @departments = Department.order(:title)
   end
 
   def show
-    @slides = @department.slides
-    @signs = @department.signs
+    @signs = @department.signs.order(:title)
   end
 
   def new

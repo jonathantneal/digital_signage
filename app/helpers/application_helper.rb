@@ -114,4 +114,9 @@ module ApplicationHelper
     link_to 'Cancel', :back, :class => "cancel button"
   end
 
+  # This is useful for carrierwave files which are only returned as relative urls
+  def absolute_url(url)
+    request.protocol + request.host_with_port + url
+  end
+
 end

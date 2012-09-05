@@ -9,7 +9,7 @@
     /reduce width so that the content doesn't go behind the preview image
     %dt.url URL
     -unless @slide.url.blank?
-      %dd.url=link_to(short_slide_url(@slide), slide_url(@slide))
+      %dd.url=link_to(@slide.content.url, @slide.content.url)
     %dt.delay Delay
     %dd.delay=@slide.delay
     %dt.resize Resize
