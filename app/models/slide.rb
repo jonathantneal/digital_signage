@@ -1,9 +1,11 @@
 class Slide < ActiveRecord::Base
-  extend ActiveSupport::Memoizable
-
+  require 'carrierwave/orm/activerecord'
+  extend Memoist
   RESIZE_OPTIONS = ['none', 'zoom', 'zoom & crop', 'stretch']
+  PUBLISHED_STATUS = ['published', 'unpublished', 'expired']
 
-  attr_accessible :title, :delay, :color, :department_id, :publish_at, :unpublish_at, :created_at, :updated_at, :sign_id, :sign_ids, :resize, :content, :schedules_attributes, :parameters_attributes, :slots_attributes
+  attr_accessible :title, :delay, :color, :department_id, :publish_at, :unpublish_at, :created_at, :updated_at, 
+                  :sign_id, :sign_ids, :resize, :content, :content_cache, :schedules_attributes, :parameters_attributes, :slots_attributes
   
   belongs_to :department
   has_many :schedules, :dependent => :destroy
@@ -13,6 +15,8 @@ class Slide < ActiveRecord::Base
   accepts_nested_attributes_for :schedules, :allow_destroy => true
   accepts_nested_attributes_for :parameters, :allow_destroy => true
   accepts_nested_attributes_for :slots, :allow_destroy => true
+
+  after_initialize :defaults
 
   mount_uploader :content, ContentUploader
   
@@ -27,18 +31,18 @@ class Slide < ActiveRecord::Base
     end
   end
 
-  before_save :set_content_type
+  # before_save :set_content_type
   
-  scope :published_eq, lambda{ |status|
-    # convert to nil or boolean
-    status = (status.to_s.blank?? nil : !['0', 'false'].include?(status.to_s.downcase.strip))
-    
-    if status.nil?
-      scoped
-    elsif status
+  scope :published_status, lambda{ |status|
+    case status
+    when 'published'
       published
-    else
+    when 'unpublished'
       unpublished
+    when 'expired'
+      expired
+    else
+      scoped
     end
   }
   scope :published, lambda{
@@ -58,6 +62,8 @@ class Slide < ActiveRecord::Base
       *[DateTime.now]*3
     )
   }
+  scope :expired, lambda{ where('(slides.unpublish_at < ?)', DateTime.now) }
+
   scope :not_on_sign, lambda { |sign|
     joins("LEFT JOIN slots ON (slides.id = slots.slide_id AND slots.sign_id = #{sign.id})").
     group('slides.id').
@@ -69,7 +75,7 @@ class Slide < ActiveRecord::Base
     order("`order`")
   }
 
-  search_methods :published_eq
+  search_methods :published_status
 
   def valid_schedules(now=@now)
     return [] if schedules.size.zero?
@@ -97,7 +103,7 @@ class Slide < ActiveRecord::Base
   end
 
   def url(version=nil)
-    content.url(version)
+    content_url(version)
   end
 
   def type
@@ -188,7 +194,7 @@ class Slide < ActiveRecord::Base
   
   # Class Methods
   class << self
-    extend ActiveSupport::Memoizable
+    extend Memoist
   
     def expired_slides(now=Time.now)
       Slide.all.reject { |s| !s.expired?(now) }
@@ -212,6 +218,12 @@ class Slide < ActiveRecord::Base
       unless content.file.try(:content_type).nil?
         self.content_type = content.file.content_type
       end
+    end
+  end
+
+  def defaults
+    if new_record?
+      self.delay ||= AppConfig.defaults.slide.delay
     end
   end
   

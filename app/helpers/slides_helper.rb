@@ -14,14 +14,14 @@ module SlidesHelper
     return 'swf' if slide.swf?
   end
 
-  def slide_url(slide, version=nil)
+  def slide_file_url(slide, version=nil)
     require 'addressable/uri'
     
     return nil if slide.nil?
     
     url = Addressable::URI.parse(path_to_image(slide.url(version).to_s))
     if defined? request
-      url.scheme = request.scheme
+      url.scheme = request.scheme 
       url.host = request.host
       url.port = request.port
     end

@@ -24,6 +24,6 @@
   %dt.departments Signage Departments
   %dd.departments= @user.departments.join(", ")
 
-=action_links @user, :include=>:auto_update
+=action_links @user
 
 =render('show_aside')

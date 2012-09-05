@@ -1,9 +1,0 @@
-=render('shared/wysiwyg')
-
-=form_for(@announcement) do |f|
-  %dl
-    %dt.show_at=f.label(:show_at, 'Show after')
-    %dd.show_at=f.text_field(:show_at, :value=>@announcement.show_at.to_s(:long), :class=>'date')
-    %dt.announcement=f.label(:announcement)
-    %dd.announcement=f.text_area(:announcement)
-  .buttons=f.submit('Save')

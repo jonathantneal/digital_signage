@@ -1,0 +1,9 @@
+<% last = @slides.last_page? ? @slides.total_count : @slides.offset_value + @slides.limit_value %>
+$('ul.slides').append('<%= j render(@slides) %>');
+$('.search.summary strong').first().html('1 - <%= last %>');
+<% unless @slides.last_page? %>
+  $('.endlessScroll nav.pagination').replaceWith('<%= j paginate(@slides) %>');
+<% else %>
+  $('.endlessScroll nav.pagination').remove();
+  $('a.view_all').remove();
+<% end %>

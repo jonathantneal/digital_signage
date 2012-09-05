@@ -1,6 +1,4 @@
 security:
-  login:
-    allow_bypass: false
   https_available: false
     
 newrelic:

@@ -18,6 +18,19 @@ module ApplicationHelper
     
   end
 
+  def navigation_menu
+    menu_items = [{:controller=>"signs", :text=>"Signs"},
+                  {:controller=>"slides", :text=>"Slides"},
+                  {:controller=>"users", :text=>"Users"},
+                  {:controller=>"departments", :text=>"Departments"}]
+                  
+    content_tag(:ul) do
+      menu_items.map do |link_settings|
+        navigation_link link_settings.merge({:wrapper=>'li'})
+      end.join('').html_safe
+    end
+  end
+
   def admin_menu
     if(current_user.try(:is_admin?) || current_user.try(:is_developer?))
       content_tag(:ul, :class=>'admin menu') do
@@ -78,53 +91,6 @@ module ApplicationHelper
     bit ? 'yes' : 'no'
   end
 
-  def action_links(object, options={}, &block)
-    defaults = {
-      :actions => [:show, :edit, :destroy],
-      :include => [],
-      :exclude => [],
-      :remote => [],
-      :list_wrapper => :ul,
-      :list_wrapper_class => :actions,
-      :link_wrapper => :li,
-      :link_wrapper_class => nil
-    }
-    
-    object_name = object.class.model_name.human
-    controller_name = object.class.model_name.plural
-    controller = "#{controller_name}_controller".classify.constantize.new
-    
-    options.reverse_merge! defaults
-    options.each { |key,val| options[key] = Array(val) if defaults[key].is_a? Array }
-    actions = (options[:actions] - options[:exclude]) + options[:include]
-    links = []
-    
-    links = actions.map do |action|
-      if controller.respond_to?(action) && permitted_to?(action, object)
-        unless current_page?(:controller=>object.class.model_name.plural, :action=>action, :id=>object.to_param) && action != :destroy
-          title = I18n.t(action, :scope=>'action_links', :default=>action.to_s.humanize)
-          url = { :controller=>controller_name, :action=>action, :id=>object.id }
-          html_options = { :class=>action.to_s.parameterize, :title=>"#{title} #{object_name}" }
-          html_options[:remote] = true if options[:remote].include? action
-          
-          if action == :destroy
-            html_options.merge! :method=>:delete, :confirm=>I18n.t(:confirm_delete, :scope=>'action_links', :default=>'Are you sure?')
-          end
-          
-          link_to(title, url, html_options)
-        end
-      end
-    end
-
-    links << capture(&block) if block_given?
-
-    return content_tag(options[:list_wrapper], :class=>:actions) do
-      links.compact.map { |link|
-        content_tag(options[:link_wrapper], link, :class=>options[:link_wrapper_class])
-      }.join("\n").html_safe
-    end
-  end
-
   def page_entries_info(collection, options = {})
     entry_name = options[:entry_name] ||
       (collection.empty?? 'entry' : collection.first.class.name.underscore.sub('_', ' '))
@@ -146,6 +112,11 @@ module ApplicationHelper
   
   def cancel_button
     link_to 'Cancel', :back, :class => "cancel button"
+  end
+
+  # This is useful for carrierwave files which are only returned as relative urls
+  def absolute_url(url)
+    request.protocol + request.host_with_port + url
   end
 
 end

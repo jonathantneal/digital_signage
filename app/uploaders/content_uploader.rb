@@ -1,5 +1,4 @@
 # encoding: utf-8
-
 class ContentUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or ImageScience support:
@@ -24,7 +23,8 @@ class ContentUploader < CarrierWave::Uploader::Base
 
   # Process files as they are uploaded:
   # process :scale => [200, 300]
-  #
+  process :set_content_type
+
   # def scale(width, height)
   #   # do something
   # end
@@ -50,6 +50,10 @@ class ContentUploader < CarrierWave::Uploader::Base
   
   def image?(new_file)
     @is_image ||= new_file.content_type =~ /^image\//
+  end
+
+  def set_content_type
+    model.content_type = file.content_type
   end
 
 end

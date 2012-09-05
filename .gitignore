@@ -13,3 +13,6 @@ public/uploads/*
 public/slide_content/*
 tmp/
 tmp/**/*
+Vagrantfile
+.vagrant
+.sass-cache

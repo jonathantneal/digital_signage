@@ -1,0 +1,137 @@
+@import ../includes/settings.sass
+
+
+// ****************   Slides Index page   ********************  //
+
+
+body.slides.index
+
+  ul.signs
+    margin: 0
+    padding-left: 10px
+    list-style-type: none
+
+
+
+// ****************   Slides Show page   ********************  //
+
+
+body.slides.show
+
+  ul.slides
+    margin: 0
+    padding: 0
+    list-style-type: none
+    
+    >li
+      position: relative
+      min-height: $thumbnail_height - ($default_padding * 2)
+      margin: $default_padding 0
+      padding: $default_padding
+      padding-left: $thumbnail_width
+      text-align: right
+      border: $default_border
+      background: #D3E1F0
+      border-radius: $default_border_radius_right
+      -moz-border-radius: $default_border_radius_right
+      -webkit-border-radius: $default_border_radius_right
+      
+    dl, dd
+      margin: 0
+      padding: 0
+      
+    dt.title, dt.thumbnail, dt.actions
+      display: none !important
+      
+    dd.title a
+      font-size: 14pt
+      font-weight: bold
+      text-decoration: none
+
+    dd.title a:hover
+      text-decoration: underline
+
+    div.thumbnail
+      border-top: none
+      border-bottom: none
+      border-left: none
+      position: absolute
+      top: 0
+      left: 0
+
+    dd.actions ul.actions
+      position: absolute
+      right: 10px
+      bottom: 10px
+      border: none
+
+  dl.slide
+
+    dt.thumbnail
+      display: block
+      position: absolute
+      top: 60px
+      right: $default_padding
+      width: $thumbnail_width
+
+    dd.thumbnail
+      position: absolute
+      top: 90px
+      right: $default_padding    
+      width: $thumbnail_width
+
+  dd.url a
+    display: block
+
+  dd.delay input, dd.color input
+    width: 75px !important
+    
+  dd.color, dd.color input
+    display: block
+    width: 75px !important
+    height: 30px
+    border: solid 1px #666
+    cursor: pointer
+
+  ul.signs
+    margin: 0
+    padding-left: 10px
+    list-style-type: none
+
+  form
+    dd.parameters
+      li
+        margin: 5px 0
+        list-style-type: none
+        input[type=text]
+          width: 150px
+
+    input.delete
+      display: none
+    label.delete
+      display: inline-block
+      width: 16px
+      height: 16px
+      margin: 0 5px
+      padding: 0 !important
+      text-indent: 99999px
+      overflow: hidden
+      background-image: url(delete.png)
+      cursor: pointer
+
+    dd.color
+      border: none
+      cursor: default
+    
+    a.add_fields
+      padding-left: 20px
+      background: url(add.gif) no-repeat
+    
+  #contentAside
+    .box h2
+      color: #000
+    div.schedule
+      display: none
+      
+  .details
+    width: 280px

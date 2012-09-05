@@ -19,22 +19,9 @@ security:
   login:
     required: true # for reporting only, doesn't turn authentication on or off
     forgot_url: "https://www.example.com/forgot-password"
-    auto_create_users: true
-    allow_bypass: false # should only be usid in development
-    allow_local: false
-    allowed_roles:
-    - employee
-    impersonation:
-      enable: false
-      allowed_groups:
-      - it
-      allowed_roles:
-      - admin
+
     cas:
-      url: 'https://auth.example.com/cas'
-      
-  users:
-    auto_update: true
+      url: "https://login.biola.edu/cas"
       
   roles:
     base_entitlement: "company:app:"
@@ -58,19 +45,6 @@ email:
     password: ****************
 
 ui:
-  menu: # accepts text, url, controller, action and css_class
-  - controller: dashboard
-    action: show
-  - controller: users
-  menu_aside:
-  - controller: feed_satisfaction/feedbacks
-    action: show
-    text: Feedback
-    css_class: feedback
-  - controller: documents
-    css_class: documents
-  - controller: announcements
-    css_class: announcements
   admin_menu:
   - controller: users
   - url: http://apps.biola.edu/access
@@ -83,25 +57,16 @@ ui:
     action: performance
     text: Performance
   - controller: info
-    action: database
-    text: Database
-  - controller: info
     action: configuration
     text: Config
   pagination:
-    per_page: 10
-
-feedback:
-  domain: getsatisfaction.example.com
-  fastpass:
-    key: **********
-    secret: ****************************
-  widget_id: 0000000000
-  company: company_name
-  product: product_name
-  custom_css: http://example.com/path/to/css/file.css
-  default_tab: idea
-  question_limit: 5
+    per_page: 30
+  
+defaults:
+  sign:
+    email_frequency: 24   # in hours
+  slide:
+    delay: 7
   
 google_analytics:
   enabled: true
@@ -109,8 +74,8 @@ google_analytics:
   
 routing:
   default:
-    controller: dashboard
-    action: show
+    controller: signs
+    action: index
     
 developer:
   title: Example Company

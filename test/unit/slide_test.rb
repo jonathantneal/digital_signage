@@ -56,8 +56,40 @@ class SlideTest < ActiveSupport::TestCase
     assert @slide.published?
   end
   
-  test "published count plus unpublished count should equal total slide count"
-    assert_no_difference(Slide.publishted.count + Slide.published.count, Slide.count) 
+  test "published count plus unpublished count should equal total slide count" do
+    assert Slide.published.count + Slide.unpublished.count == Slide.count
+  end
+
+  test "default value for delay is actually being set" do
+    slide = Slide.new
+    assert slide.delay == AppConfig.defaults.slide.delay
+  end
+
+  test "expired scope" do
+    @slide = slides(:one)
+    @slide.publish_at = 1.week.ago
+    @slide.unpublish_at = 1.day.ago
+    @slide.save
+
+    assert Slide.expired.include?(@slide)  # slide should be expired
+
+    @slide.publish_at = nil
+    @slide.unpublish_at = 1.day.ago
+    @slide.save
+
+    assert Slide.expired.include?(@slide)  # slide should be expired
+
+    @slide.publish_at = 1.week.ago
+    @slide.unpublish_at = 1.week.from_now
+    @slide.save
+
+    assert !Slide.expired.include?(@slide)  # slide should not be expired
+
+    @slide.publish_at = 1.week.from_now
+    @slide.unpublish_at = nil
+    @slide.save
+
+    assert !Slide.expired.include?(@slide)  # slide should not be expired
   end
 
 end

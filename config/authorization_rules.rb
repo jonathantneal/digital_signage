@@ -7,27 +7,15 @@ authorization do
   end
   
   role :admin do
-    has_permission_on [:announcements, :documents, :users] do
+    has_permission_on [:signs, :slides, :slots, :departments, :users] do
       to :administrate
     end
-    
-    has_permission_on [:signs, :slides, :slots, :departments] do
-      to :administrate
-    end
-    has_permission_on :slots, :to => :sort
+    has_permission_on :slots, :to => [:sort, :destroy_multiple]
     
     includes :manager
   end
   
   role :manager do
-    
-    has_permission_on :dashboard do
-      to :read
-    end
-    
-    has_permission_on :announcements, :to => :read do
-      if_attribute :show? => is {true}
-    end
     
     has_permission_on :users, :to => :show do
       if_attribute :id => is {user.id}
@@ -42,7 +30,7 @@ authorization do
       if_permitted_to :show, :department
     end
     
-    has_permission_on :slots, :to => [:administrate, :sort] do
+    has_permission_on :slots, :to => [:administrate, :sort, :destroy_multiple] do
       if_permitted_to :update, :sign
     end
     
@@ -60,18 +48,6 @@ authorization do
       to :show, :check_in
     end
   
-    has_permission_on :pages do
-      to :feedback
-    end
-  
-    has_permission_on :documents do
-      to :read
-    end
-    
-    has_permission_on :info do
-      to :appinfo
-    end
-    
   end
   
 end
@@ -81,5 +57,5 @@ privileges do
   privilege :read, :includes => [:index, :show]
   privilege :update, :includes => :edit
   privilege :delete, :includes => :destroy
-  privilege :administrate, :includes => [:create, :read, :update, :delete, :auto_update]
+  privilege :administrate, :includes => [:create, :read, :update, :delete]
 end

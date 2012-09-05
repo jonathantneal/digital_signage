@@ -1,15 +1,9 @@
 class SlotsController < ApplicationController
 
   before_filter :authenticate_user!
-  filter_resource_access :additional_collection => :sort
-  respond_to :html, :except => :sort
-  respond_to :js, :only => :sort
-
-  def index
-    @sign = Sign.where('id = ? OR name = ?', params[:sign_id], params[:sign_id]).first
-    raise ActiveRecord::RecordNotFound if @sign.nil?
-    @slots = @sign.slots.with_permissions_to(:index).published
-  end
+  filter_resource_access :additional_collection => [:sort, :destroy_multiple]
+  respond_to :html, :except => [:sort, :destroy_multiple]
+  respond_to :js, :only => [:sort, :destroy_multiple]
   
   def edit
   end
@@ -26,14 +20,12 @@ class SlotsController < ApplicationController
     if @slot.update_attributes(params[:slot])
       flash[:notice] = 'Slot updated'
     end
-    redirect_to sign_slots_path(@slot.sign)
+    redirect_to @slot.sign
   end
 
-  def destroy
-    if @slot.destroy
-      flash[:notice] = 'Slot deleted'
-    end
-    respond_with @slot.sign, :slots
+  def destroy_multiple
+    Slot.find(params[:slot]).each { |slot| slot.destroy if permitted_to? :destroy, slot }
+    render :nothing => true
   end
 
   def sort

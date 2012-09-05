@@ -1,17 +1,12 @@
 class User < ActiveRecord::Base
 
   STRING_SEPARATOR = ', '
-
-  if defined?(Devise::Models::NetidAuthenticatable)
-    devise :netid_authenticatable, :rememberable, :trackable, :timeoutable
-    before_save :update_from_directory
-  else
-    devise :cas_authenticatable, :rememberable, :trackable, :timeoutable
-  end
+  
+  devise :cas_authenticatable, :rememberable, :trackable, :timeoutable
 
   attr_accessible :username, :first_name, :last_name, :title, :email, :department, :photo_url, :password, :remember_me, :department_ids
   alias_attribute :netid, :username
-  validates :username, :presence => true, :uniqueness => true, :user_exists => true
+  validates :username, :presence => true, :uniqueness => true
   has_many :department_users
   has_many :departments, :through => :department_users
 
@@ -59,10 +54,8 @@ class User < ActiveRecord::Base
     write_attribute(:entitlements, entitlements.join(STRING_SEPARATOR))
   end
   
-  def roles(include_undefined=true)
-  
-    defined_roles = Authorization::Engine.instance.roles.map(&:to_s)
-  
+  def roles(include_unallowed=true)
+
     roles = self.entitlements.map{ |e| User.entitlement_to_role(e) }.compact
     if AppConfig.security.roles.include_affiliations
       roles += self.affiliations
@@ -70,10 +63,10 @@ class User < ActiveRecord::Base
     
     roles.uniq!
     
-    if include_undefined
+    if include_unallowed
       return roles
     else
-      return roles & defined_roles
+      return roles & allowed_roles
     end
     
   end
@@ -95,38 +88,11 @@ class User < ActiveRecord::Base
     self.has_role?(:developer)
   end
 
-  def groups
-    BiolaWebServices.dirsvc.get_group_membership(:netid=>self.username)
-  end
-
-  def group_names
-    self.groups.map{|g| g['cn']}
-  end
-
-  def in_group?(group)
-    group = group['cn'] if group.is_a?(Hash)
-    BiolaWebServices.dirsvc.is_user_in_group?(:netid=>self.username, :group=>group)
-  end
-
   # Called by Devise NETID Authenticable plugin
   def can_login?
-    self.update_from_directory(true)
-    self.has_role?(AppConfig.security.login.allowed_roles)
+    self.has_role? allowed_roles
   end
 
-  # Called by Devise NETID Authenticable plugin
-  def can_impersonate?(user=nil)
-  
-    config = AppConfig.security.login.impersonation
-    
-    return true unless (self.roles & config.allowed_roles).empty?
-    return true unless (self.group_names & config.allowed_groups).empty?
-    
-    false
-    
-  end
-
-  # Called by Devise CAS authenticatable plugin
   def cas_extra_attributes=(extra_attributes)
     
     extra_attributes.each do |name, value|
@@ -171,34 +137,8 @@ class User < ActiveRecord::Base
     
   end
 
-  def update_from_directory(force=false)
-  
-    if AppConfig.security.users.auto_update || force
-  
-      dir_user = BiolaWebServices.dirsvc.get_user(:id=>self.username)
-    
-      unless dir_user.nil? || dir_user['error'] || dir_user['netid'] != self.netid
-    
-        self.username = dir_user['netid']
-        self.first_name = dir_user['preferredname']
-        self.last_name = dir_user['lastname']
-        self.title = dir_user['title']
-        self.email = dir_user['email'].try(:first) || ''
-        self.department = dir_user['department']
-        self.affiliations = dir_user['affiliations']
-        self.entitlements = dir_user['entitlements']
-      
-        # Validate photo_url 
-        if HTTParty.head(dir_user['photourl']).response.is_a?(Net::HTTPSuccess)
-          self.photo_url = dir_user['photourl']
-        else
-          self.photo_url = ''
-        end
-        
-      end
-  
-    end
-  
+  def self.allowed_roles
+    Authorization::Engine.instance.roles.map(&:to_s)
   end
 
   private

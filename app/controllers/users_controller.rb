@@ -34,14 +34,6 @@ class UsersController < ApplicationController
     respond_with @user
   end
 
-  def auto_update
-    # @user.update_from_directory should be triggered automatically
-    if @user.save
-      flash[:notice] = 'User updated'
-    end
-    redirect_to @user # TODO change to post and use respond_with
-  end
-
   def destroy
     if @user.destroy
       flash[:notice] = 'User deleted'
