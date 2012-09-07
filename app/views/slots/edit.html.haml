@@ -4,7 +4,7 @@
 
   %dl
     %dt.slide=f.label(:slide_id, "Slide")
-    %dd.slide=f.collection_select(:slide_id, Slide.with_permissions_to(:index).order(:title), :id, :title)
+    %dd.slide=f.collection_select(:slide_id, Slide.with_permissions_to(:index).order('slides.title'), :id, :title)
     
     %dt.delay
       =f.label :delay, "Custom Delay (in seconds) <em style='font-weight: normal'>- Leave blank to keep default (#{f.object.slide.delay}s)</em>".html_safe

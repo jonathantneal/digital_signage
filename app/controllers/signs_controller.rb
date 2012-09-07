@@ -6,7 +6,7 @@ class SignsController < ApplicationController
   respond_to :xml, :only => [:show, :check_in]
 
   def index
-    @signs = Sign.with_permissions_to(:index).order(:title)
+    @signs = Sign.with_permissions_to(:index).order('signs.title')
   end
 
   def show

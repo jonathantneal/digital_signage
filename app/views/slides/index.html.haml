@@ -14,10 +14,10 @@
 
     %span.param
       =f.label :signs_id_eq, 'Sign'
-      =f.collection_select :signs_id_eq, Sign.with_permissions_to(:index).order(:title), :id, :title, {:include_blank=>true}
+      =f.collection_select :signs_id_eq, Sign.with_permissions_to(:index).order('signs.title'), :id, :title, {:include_blank=>true}
     %span.param
       =f.label :department_id_eq, 'Department'
-      =f.collection_select :department_id_eq, Department.with_permissions_to(:show).order(:title), :id, :title, {:include_blank=>true}
+      =f.collection_select :department_id_eq, Department.with_permissions_to(:show).order('departments.title'), :id, :title, {:include_blank=>true}
     %span.param
       =f.label :published_status, 'Published'
       =f.select :published_status, Slide::PUBLISHED_STATUS.map{|s| [s, s]}, {:include_blank=>true}
