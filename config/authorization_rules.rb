@@ -21,7 +21,7 @@ authorization do
       if_attribute :id => is {user.id}
     end
    
-    has_permission_on :signs, :to => [:read, :update, :check_in] do
+    has_permission_on :signs, :to => [:read, :update, :check_in, :info] do
       if_permitted_to :show, :department
     end
     
