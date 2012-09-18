@@ -31,7 +31,7 @@ while($running) do
     else
       #why aren't we sending an alert?
       reason = "[#{Time.now}] Skipping alert for sign=#{sign.name}. "
-      reason << (sign.email.empty? ? "No alert email set." : "Already sent email within scheduled time period.")
+      reason << (sign.email ? "Already sent email within scheduled time period." : "No alert email set.")
       puts reason
     end
    end
