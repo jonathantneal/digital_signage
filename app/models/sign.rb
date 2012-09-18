@@ -36,6 +36,38 @@ class Sign < ActiveRecord::Base
   def active_slides_time
     Slide.total_time self.active_slides
   end
+
+  def status
+    if self.last_check_in.blank?
+      return :never_checked_in
+    elsif self.email && (self.last_check_in + (self.check_in_interval * 2) < Time.now)
+      return :down
+    else
+      return :up
+    end
+  end
+
+  def down?
+    case self.status
+    when :down
+      return true
+    else
+      return false
+    end
+  end
+
+  def send_down_alert?
+    send_alert = false
+    if self.down?
+      if self.email_sent.blank?
+        send_alert = true
+      elsif self.email_sent < Time.now - (AppConfig.defaults.sign.email_frequency * 3600)
+        send_alert = true
+      end
+    end
+    return send_alert
+  end
+
   alias :loop_time :active_slides_time
 
   memoize :active_slides, :expired_slides, :active_slides_time
