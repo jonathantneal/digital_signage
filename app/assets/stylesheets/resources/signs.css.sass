@@ -69,9 +69,13 @@ body.signs.index
 
 
 body.signs.show
-
+  overflow: hidden
+  
   .seconds input
     width: 50px !important
 
   .on_off input
     width: 80px !important
+
+  .corner-banner
+    @include corner-banner(red)
