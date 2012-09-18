@@ -60,9 +60,9 @@ $(document).ready ->
     refresh_preview_size()
 
     $("ol.slots li").live "click", (e) ->
-      if not event.altKey and not event.shiftKey
+      if not e.altKey and not e.shiftKey
         $(".selected").not(this).removeClass "selected"
-      else if event.shiftKey
+      else if e.shiftKey
         last_selected = $(".last_selected").index()
         this_index = $(this).index()
         if last_selected < this_index
