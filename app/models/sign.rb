@@ -58,7 +58,7 @@ class Sign < ActiveRecord::Base
 
   def send_down_alert?
     send_alert = false
-    if self.down?
+    if self.down? && !self.email.empty?
       if self.email_sent.blank?
         send_alert = true
       elsif self.email_sent < Time.now - (AppConfig.defaults.sign.email_frequency * 3600)

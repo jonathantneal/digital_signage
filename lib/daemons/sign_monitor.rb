@@ -29,7 +29,10 @@ while($running) do
       puts "[#{Time.now}] Sending alert for sign=#{sign.name} to #{sign.email}."
       AlertMailer.sign_down(sign).deliver if sign.send_down_alert?  
     else
-      puts "[#{Time.now}] Skipping alert for sign=#{sign.name}. Already sent email within scheduled time period."
+      #why aren't we sending an alert?
+      reason = "[#{Time.now}] Skipping alert for sign=#{sign.name}. "
+      reason << (sign.email.empty? ? "No alert email set." : "Already sent email within scheduled time period.")
+      puts reason
     end
    end
   
