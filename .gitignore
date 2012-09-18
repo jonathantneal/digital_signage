@@ -16,3 +16,4 @@ tmp/**/*
 Vagrantfile
 .vagrant
 .sass-cache
+*.output

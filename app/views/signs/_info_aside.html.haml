@@ -1,4 +1,13 @@
 -content_for(:aside)do
+  -if @sign.down?
+    %h2 Alert Status
+    %ul.stacked
+      -if @sign.email?
+        %li="Sending Alerts to: #{@sign.email}"
+        %li=@sign.email_sent ? "Alert sent #{time_ago_in_words(@sign.email_sent)} ago" : "Alert not sent."
+      -else
+        %li="Not configured for alert emails"
+
   -if @sign.checked_in?
     %h2 Last Check-In
     %ul.stacked

@@ -19,11 +19,15 @@ body.signs.index
       float: left
       margin: 10px
       @include box-shadow(3px, 3px, 3px, $opacity: 0.2)
-      
+      overflow: hidden
+
+      .corner-banner
+        @include corner-banner (red)
+        z-index: 1
       
       .title_bar
         position: absolute
-        top: 0
+        bottom: 0
         left: 0
         z-index: 1
         
@@ -65,9 +69,13 @@ body.signs.index
 
 
 body.signs.show
-
+  overflow: hidden
+  
   .seconds input
     width: 50px !important
 
   .on_off input
     width: 80px !important
+
+  .corner-banner
+    @include corner-banner(red)
