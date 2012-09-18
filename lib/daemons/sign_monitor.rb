@@ -30,8 +30,8 @@ while($running) do
       AlertMailer.sign_down(sign).deliver if sign.send_down_alert?  
     else
       #why aren't we sending an alert?
-      reason = "[#{Time.now}] Skipping alert for sign=#{sign.name}. "
-      reason << (sign.email ? "Already sent email within scheduled time period." : "No alert email set.")
+      reason = "[#{Time.now}] Skipping alert for sign=#{sign.name}. reason= "
+      reason << (sign.email ? "Already sent email within scheduled time period of #{app_config.defaults.sign.email_frequency} hour(s)." : "No alert email set.")
       puts reason
     end
    end
