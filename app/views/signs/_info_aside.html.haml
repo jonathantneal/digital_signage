@@ -4,7 +4,7 @@
     %ul.stacked
       -if @sign.email?
         %li="Sending Alerts to: #{@sign.email}"
-        %li="Alert sent #{time_ago_in_words(@sign.email_sent)} ago"
+        %li=@sign.email_sent ? "Alert sent #{time_ago_in_words(@sign.email_sent)} ago" : "Alert not sent."
       -else
         %li="Not configured for alert emails"
 
