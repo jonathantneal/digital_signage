@@ -14,9 +14,9 @@ class AlertMailerTest < ActionMailer::TestCase
  
     # Test the body of the sent email contains what we expect it to
     assert_equal [sign.email], email.to
-    assert_equal "The Test sign is currently down", email.subject
-    assert_match "The Test sign is currently down", email.body.to_s
-    assert_match "This sign has been down for", email.body.to_s
+    assert_equal "The Test sign may be down", email.subject
+    assert_match "The Test sign may be down", email.body.to_s
+    assert_match "This sign last checked in", email.body.to_s
   end
 
   def test_sign_down_email_frequency

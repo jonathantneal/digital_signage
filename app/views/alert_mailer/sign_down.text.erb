@@ -1,4 +1,4 @@
-The <%= @sign.title %> sign is currently down
+The <%= @sign.title %> sign may be down.
 =============================================
 
-This sign has been down for <%= @down_time %>
+This sign last checked in <%= time_ago_in_words @sign.last_check_in %> ago at <%= @sign.last_check_in %>.

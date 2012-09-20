@@ -9,7 +9,7 @@ class AlertMailer < ActionMailer::Base
     seconds = (time - (minutes*60 + hours*3600)).to_i
     @down_time = "%02d:%02d:%02d" % [hours, minutes, seconds]
 
-    mail to: sign.email, subject: "The #{@sign.title} sign is currently down"
+    mail to: sign.email, subject: "The #{@sign.title} sign may be down"
 
     @sign.email_sent = Time.now
     @sign.save
