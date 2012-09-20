@@ -1,5 +1,4 @@
--if @sign.down?
-  .corner-banner=t '.sign_down_msg'
+=render 'status_check', :sign => @sign
 %h2
   =link_to "#{@sign.title} Sign", @sign
   ="/ info"

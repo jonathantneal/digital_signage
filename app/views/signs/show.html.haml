@@ -1,5 +1,4 @@
--if @sign.down?
-  .corner-banner=t '.sign_down_msg'
+=render 'status_check', :sign => @sign
 #top-right-link
   =link_to [:info, @sign], :class=>"google_button" do
     %i.icon-info-sign
