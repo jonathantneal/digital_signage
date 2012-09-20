@@ -19,13 +19,12 @@ end
 while($running) do
   puts "[#{Time.now}] Checking for signs with missed checkins..."
   Sign.all.each do |sign|
-    # Log that the sign is down
-    if sign.down?
-      puts "[#{Time.now}] Sign #{sign.name} missed regular checkins."
+    case sign.status
+    when :down
       # Log whether an alert was sent
       if sign.send_down_alert?
         puts "[#{Time.now}] Sending alert for sign=#{sign.name} to #{sign.email}."
-        AlertMailer.sign_down(sign).deliver if sign.send_down_alert?  
+        AlertMailer.sign_down(sign).deliver
       else
         if sign.email == nil || sign.email == ""
           reason = "alert email not set"
@@ -33,6 +32,11 @@ while($running) do
           reason = "Already sent email within scheduled time period of #{app_config.defaults.sign.email_frequency} hours."
         end
         puts "[#{Time.now}] Skipping alert for sign=#{sign.name}. reason= #{reason}."
+      end
+    when :up
+      if sign.email_sent
+        puts "[#{Time.now}] Clearing alert for sign=#{sign.name}. Sending up notice to #{sign.email}."
+        AlertMailer.sign_up(sign).deliver
       end
     end
   end

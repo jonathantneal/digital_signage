@@ -14,4 +14,13 @@ class AlertMailer < ActionMailer::Base
     @sign.email_sent = Time.now
     @sign.save
   end
+
+  def sign_up(sign)
+    @sign = sign
+
+    mail to: sign.email, subject: "The #{@sign.title} sign is back up"
+
+    @sign.email_sent = ""
+    @sign.save
+  end
 end

@@ -34,4 +34,23 @@ class AlertMailerTest < ActionMailer::TestCase
       assert false, "Email should not have been sent"
     end
   end
+
+  def test_sign_up_email
+    sign = signs(:one)
+    sign.title = "Test"
+    sign.email = "test@example.com"
+    sign.last_check_in = Time.now
+    sign.save
+ 
+    # Send the email, then test that it got queued
+    email = AlertMailer.sign_up(sign).deliver
+    assert !ActionMailer::Base.deliveries.empty?
+ 
+    # Test the body of the sent email contains what we expect it to
+    assert_equal [sign.email], email.to
+    assert_equal "The Test sign is back up", email.subject
+    assert_match "The Test sign is back up", email.body.to_s
+    assert_match "This sign last checked in", email.body.to_s
+  end
+
 end
