@@ -10,7 +10,7 @@
   -@signs.each do |sign|
     %li[sign] 
       -if sign.down?
-        .corner-banner sign is down!
+        .corner-banner=t '.sign_down_msg'
       .title_bar
         .title=link_to(sign.title, sign_path(sign))
       %a{ :href=> sign_path(sign)}
