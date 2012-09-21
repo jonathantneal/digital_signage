@@ -18,53 +18,6 @@ body.slides.index
 
 body.slides.show
 
-  ul.slides
-    margin: 0
-    padding: 0
-    list-style-type: none
-    
-    >li
-      position: relative
-      min-height: $thumbnail_height - ($default_padding * 2)
-      margin: $default_padding 0
-      padding: $default_padding
-      padding-left: $thumbnail_width
-      text-align: right
-      border: $default_border
-      background: #D3E1F0
-      border-radius: $default_border_radius_right
-      -moz-border-radius: $default_border_radius_right
-      -webkit-border-radius: $default_border_radius_right
-      
-    dl, dd
-      margin: 0
-      padding: 0
-      
-    dt.title, dt.thumbnail, dt.actions
-      display: none !important
-      
-    dd.title a
-      font-size: 14pt
-      font-weight: bold
-      text-decoration: none
-
-    dd.title a:hover
-      text-decoration: underline
-
-    div.thumbnail
-      border-top: none
-      border-bottom: none
-      border-left: none
-      position: absolute
-      top: 0
-      left: 0
-
-    dd.actions ul.actions
-      position: absolute
-      right: 10px
-      bottom: 10px
-      border: none
-
   dl.slide
 
     dt.thumbnail
@@ -97,7 +50,18 @@ body.slides.show
     margin: 0
     padding-left: 10px
     list-style-type: none
+    
+  #contentAside
+    .box h2
+      color: #000
+    div.schedule
+      display: none
+      
+  .details
+    width: 280px
 
+// ****************   Slides Edit page   ********************  //
+body.slides.edit
   form
     dd.parameters
       li
@@ -126,12 +90,3 @@ body.slides.show
     a.add_fields
       padding-left: 20px
       background: url(add.gif) no-repeat
-    
-  #contentAside
-    .box h2
-      color: #000
-    div.schedule
-      display: none
-      
-  .details
-    width: 280px

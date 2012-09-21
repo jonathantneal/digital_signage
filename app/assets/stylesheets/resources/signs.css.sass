@@ -69,7 +69,6 @@ body.signs.index
 
 
 body.signs.show
-  overflow: hidden
   
   .seconds input
     width: 50px !important
@@ -77,5 +76,15 @@ body.signs.show
   .on_off input
     width: 80px !important
 
-  .corner-banner
-    @include corner-banner(red)
+  #wrapperContent
+    overflow: hidden
+    .corner-banner
+      @include corner-banner(red)
+
+
+// *****************   Signs Info page   ************************* //
+body.signs.info
+  #wrapperContent
+    overflow: hidden
+    .corner-banner
+      @include corner-banner(red)

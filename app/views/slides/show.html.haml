@@ -1,3 +1,12 @@
+#top-right-link
+  -if permitted_to?(:edit, :slides)
+    =link_to edit_slide_path, :class=>"google_button" do
+      %i.icon-plus
+      Edit Slide
+  -if permitted_to?(:destroy, :slides)
+    =link_to @slide, :method => "delete", :class=>"google_button", :confirm=> "Are you sure?" do
+      %i.icon-plus
+      Delete Slide
 %h1=@slide.title + ' Slide'
 %dl.slide
   -if @slide.image? || @slide.swf?
@@ -30,4 +39,4 @@
 %ul.schedule
   -@slide.sorted_schedules.each do |schedule|
     %li=schedule
-=action_links(@slide)
+

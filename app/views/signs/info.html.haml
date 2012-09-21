@@ -1,3 +1,13 @@
+=render 'status_check', :sign => @sign
+#top-right-link
+  -if permitted_to?(:edit, :signs)
+    =link_to edit_sign_path, :class=>"google_button" do
+      %i.icon-plus
+      Edit Sign
+  -if permitted_to?(:destroy, :signs)
+    =link_to @sign, :method => "delete", :class=>"google_button", :confirm=> "Are you sure?" do
+      %i.icon-plus
+      Delete Sign
 %h2
   =link_to "#{@sign.title} Sign", @sign
   ="/ info"
@@ -32,6 +42,5 @@
     =@sign.on.try(:to_s,:time) || '?'
     to
     =@sign.off.try(:to_s,:time) || '?'
-=action_links(@sign)
 
 =render('info_aside')

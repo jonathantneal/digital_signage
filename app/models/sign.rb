@@ -40,7 +40,7 @@ class Sign < ActiveRecord::Base
   def status
     if self.last_check_in.blank?
       return :never_checked_in
-    elsif self.email && (self.last_check_in + (self.check_in_interval * 2) < Time.now)
+    elsif self.last_check_in + (self.check_in_interval * 2) < Time.now
       return :down
     else
       return :up
