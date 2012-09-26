@@ -1,11 +1,11 @@
 #top-right-link
   -if permitted_to?(:edit, :slides)
     =link_to edit_slide_path, :class=>"google_button" do
-      %i.icon-plus
+      %i.icon-pencil
       Edit Slide
   -if permitted_to?(:destroy, :slides)
     =link_to @slide, :method => "delete", :class=>"google_button", :confirm=> "Are you sure?" do
-      %i.icon-plus
+      %i.icon-trash
       Delete Slide
 %h1=@slide.title + ' Slide'
 %dl.slide
