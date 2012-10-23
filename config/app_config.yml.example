@@ -6,13 +6,6 @@ app:
   relative_url_root: /your-app # or blank if no relative root
 
 security:
-  url: 'https://example.com/ws'
-  service_name: dirsvc
-  key_path: /path/to/key.pem
-  key_password: *****************
-  cert_path: /path/to/cert.pem
-  verify_ssl: true
-  ssl_version: SSLv3 # accepts anything in OpenSSL::SSL::SSLContext::METHODS
   https_available: true
   validate_usernames: true
   
