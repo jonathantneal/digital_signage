@@ -1,6 +1,4 @@
 class SlidesController < ApplicationController
-
-  before_filter :authenticate_user!
   filter_resource_access
   respond_to :html
   respond_to :js, :only => [:index, :destroy]
@@ -20,7 +18,7 @@ class SlidesController < ApplicationController
 
   def new
     @slottable_signs = Sign.with_permissions_to(:update).order('signs.title')
-    
+
     # Add all available slots
     @slottable_signs.each do |sign|
       @slide.slots << Slot.new({:sign=>sign})
@@ -51,5 +49,4 @@ class SlidesController < ApplicationController
     end
     respond_with @slide
   end
-  
 end

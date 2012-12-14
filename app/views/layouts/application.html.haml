@@ -17,19 +17,18 @@
         -if user_signed_in?
           #profile
             =link_to(current_user.name, current_user, :class=>'name')
-            =link_to('Logout', destroy_user_session_path, :class=>'logout')
+            =link_to('Logout', logout_path, :class=>'logout')
 
-        
       #wrapperPage
         #page{:class=>"#{controller_name} #{action_name}"}
           #navigation.tabnav=navigation_menu
           -if content_for? :aside
             #contentAside
               =yield_or(:aside, '')
-          
+
           #wrapperContent{:class=>"#{content_for?(:aside) ? 'make-room-for-aside' : ''}"}
             =render('layouts/messages')
             #content=yield
-          
+
     =javascript_include_tag 'application'
     =yield :foot

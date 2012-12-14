@@ -1,8 +1,8 @@
 require 'test_helper'
 
 class SlidesControllerTest < ActionController::TestCase
-  setup { sign_in @user = users(:manager) }
-  teardown { sign_out @user }
+  setup { set_current_user users(:manager) }
+  teardown { unset_current_user }
 
 
   ### Index
@@ -29,7 +29,7 @@ class SlidesControllerTest < ActionController::TestCase
       assert_redirected_to slide_path(assigns(:slide))
     end
   end
-  
+
   test "manager one should create slide with department one" do
     as_user(:manager_one) do
       assert_difference('Slide.count') do

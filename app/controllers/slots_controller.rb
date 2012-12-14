@@ -1,10 +1,8 @@
 class SlotsController < ApplicationController
-
-  before_filter :authenticate_user!
   filter_resource_access :additional_collection => [:sort, :destroy_multiple]
   respond_to :html, :except => [:sort, :destroy_multiple]
   respond_to :js, :only => [:sort, :destroy_multiple]
-  
+
   def edit
   end
 
@@ -12,10 +10,10 @@ class SlotsController < ApplicationController
     if @slot.save
       flash[:notice] = 'Added  created'
     end
-    
+
     redirect_to :back
   end
-  
+
   def update
     if @slot.update_attributes(params[:slot])
       flash[:notice] = 'Slot updated'
@@ -34,5 +32,4 @@ class SlotsController < ApplicationController
     end
     render :nothing => true
   end
-  
 end

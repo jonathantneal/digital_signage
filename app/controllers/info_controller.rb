@@ -1,9 +1,6 @@
 class InfoController < ApplicationController
-
-  before_filter :authenticate_user!
   filter_access_to :performance, :configuration, :reload_configuration
-
-  ssl_required :config if AppConfig.security.https_available && defined? SslRequirement
+  ssl_required :config if AppConfig.security.https_available
 
   def performance
     if NewRelic::Control.instance.developer_mode?
@@ -22,5 +19,4 @@ class InfoController < ApplicationController
     flash[:notice] = 'Application configuration reloaded'
     redirect_to configuration_info_index_path
   end
-
 end

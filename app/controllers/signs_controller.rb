@@ -1,6 +1,4 @@
 class SignsController < ApplicationController
-
-  before_filter :authenticate_user!, :except=>[:show, :check_in]
   filter_resource_access :additional_member => [:info, :check_in]
   respond_to :html, :except => :check_in
   respond_to :xml, :only => [:show, :check_in]
@@ -15,14 +13,14 @@ class SignsController < ApplicationController
     elsif user_signed_in?
       @search = @sign.slots.with_permissions_to(:index).search(params[:search])
       @slots = @search.includes(:slide => :schedules)
-   
+
       respond_with(@slides) do |format|
         format.js do
           render :partial => 'slots' unless params["_"] # Otherwise if infinites scroll render index.js.erb
         end
       end
     else
-      authenticate_user!
+      permission_denied
     end
   end
 
@@ -30,7 +28,7 @@ class SignsController < ApplicationController
     if user_signed_in? || request.format.xml?
       respond_with @sign
     else
-      authenticate_user!
+      permission_denied
     end
   end
 
@@ -60,7 +58,7 @@ class SignsController < ApplicationController
     end
     respond_with @sign
   end
-  
+
   def check_in
     @sign = Sign.find_by_id(params[:id]) || Sign.find_by_name(params[:id])
     @sign.last_check_in = DateTime.now
@@ -69,11 +67,10 @@ class SignsController < ApplicationController
     @sign.save(:validate => false)
     render :nothing => true
   end
-  
+
   protected
-  
+
   def load_sign
     @sign = Sign.where('id = ? OR name = ?', params[:id], params[:id]).first
   end
-  
 end

@@ -1,8 +1,6 @@
 SignManager::Application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
 
-  devise_for :users, :path_names => { :sign_in=>'login', :sign_out=>'logout' }
-
   resources :users, :except => [:new]
   resources :info, :only => [] do
     collection do
@@ -26,6 +24,9 @@ SignManager::Application.routes.draw do
     end
   end
   resources :departments
+
+  # this is just a convenience to create a named route to rack-cas' logout
+  match '/logout' => -> env { [200, { 'Content-Type' => 'text/html' }, ['Rack::CAS should have caught this']] }, as: :logout
 
   root :to=>"#{AppConfig.routing.default.controller}##{AppConfig.routing.default.action}"
 end

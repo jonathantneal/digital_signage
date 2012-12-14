@@ -1,8 +1,8 @@
 require 'test_helper'
 
 class UsersControllerTest < ActionController::TestCase
-  setup { sign_in @user = users(:admin) }
-  teardown { sign_out @user }
+  setup { set_current_user users(:admin) }
+  teardown { unset_current_user }
 
   test "should get index" do
     get :index
@@ -12,7 +12,7 @@ class UsersControllerTest < ActionController::TestCase
 
   test "should create user" do
     AppConfig.security.validate_usernames = false
-    
+
     assert_difference('User.count') do
       post :create, :user => { :username=>'keysersoze' }
     end
