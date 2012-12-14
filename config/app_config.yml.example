@@ -8,18 +8,18 @@ app:
 security:
   https_available: true
   validate_usernames: true
-  
+
   login:
     required: true # for reporting only, doesn't turn authentication on or off
     forgot_url: "https://www.example.com/forgot-password"
 
     cas:
       url: "https://login.biola.edu/cas"
-      
+
   roles:
     base_entitlement: "company:app:"
     include_affiliations: true
-    
+
   session:
     key: _app_name_session
     secret: 4e9495adc1372ca773fba4d2287153f84c93187367c33044bc55fc626177a34a8a8ca54da7c96132f3358c86aafeabbeb35a8b6547299118ce553272a543810d
@@ -47,51 +47,26 @@ ui:
     text: Analytics
     css_class: analytics
   - controller: info
-    action: performance
-    text: Performance
-  - controller: info
     action: configuration
     text: Config
   pagination:
     per_page: 30
-  
+
 defaults:
   sign:
     email_frequency: 24   # in hours
   slide:
     delay: 7
-  
+
 google_analytics:
   enabled: true
   web_property_id: XX-00000-00
-  
+
 routing:
   default:
     controller: signs
     action: index
-    
+
 developer:
   title: Example Company
   homepage: http://example.com
-  
-# For more info: http://github.com/newrelic/rpm/blob/944dc0a6c9c8fe8fc2771e58d07aa8a30d00650d/newrelic.yml
-newrelic:
-  license_key: '***************************************'
-  app_name: *app_name
-  monitor_mode: true
-  developer_mode: false
-  log_level: info
-  ssl: false
-  apdex_t: 0.5 
-  capture_params: false
-  transaction_tracer:
-    enabled: true
-    transaction_threshold: apdex_f
-    record_sql: obfuscated
-    stack_trace_threshold: 0.500
-  error_collector:
-    enabled: true
-    capture_source: true    
-    ignore_errors: ActionController::RoutingError
-  link: http://rpm.newrelic.com
-  developer_link: /newrelic

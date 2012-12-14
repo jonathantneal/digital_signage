@@ -4,7 +4,6 @@ SignManager::Application.routes.draw do
   resources :users, :except => [:new]
   resources :info, :only => [] do
     collection do
-      get :performance
       get :configuration
       get :reload_configuration
     end
