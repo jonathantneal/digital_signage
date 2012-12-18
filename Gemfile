@@ -27,6 +27,11 @@ gem 'version', '~> 1.0.0'
 gem 'viva-app_config', '~> 1.2.0', :require=>'app_config'
 gem 'yaml_db', '~> 0.2.1'
 
+group :development do
+  gem 'better_errors'
+  gem 'binding_of_caller'
+end
+
 group :development, :test do
   gem 'sqlite3-ruby', '~> 1.3.3', :require => 'sqlite3'
   gem 'pry'
