@@ -115,7 +115,7 @@ GEM
       subexec (~> 0.2.1)
     multi_json (1.3.6)
     mysql2 (0.3.11)
-    newrelic_rpm (3.3.5)
+    newrelic_rpm (3.5.4.33)
     nokogiri (1.5.5)
     oauth (0.4.6)
     orm_adapter (0.4.0)
@@ -216,7 +216,7 @@ DEPENDENCIES
   meta_search (~> 1.1.1)
   mini_magick (~> 3.4)
   mysql2 (~> 0.3.7)
-  newrelic_rpm (~> 3.3.4)
+  newrelic_rpm (~> 3.5.4.33)
   oauth (~> 0.4.3)
   port-a-query (~> 0.1.1)
   pry
