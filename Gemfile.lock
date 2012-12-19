@@ -114,7 +114,7 @@ GEM
     multi_xml (0.5.1)
     multipart-post (1.1.5)
     mysql2 (0.3.11)
-    newrelic_rpm (3.5.3.25)
+    newrelic_rpm (3.5.4.33)
     nokogiri (1.5.5)
     polyamorous (0.5.0)
       activerecord (~> 3.0)
@@ -228,7 +228,7 @@ DEPENDENCIES
   meta_search (~> 1.1.1)
   mini_magick (~> 3.4)
   mysql2 (~> 0.3.7)
-  newrelic_rpm (~> 3.5.3.25)
+  newrelic_rpm (~> 3.5.4.33)
   port-a-query (~> 0.1.1)
   pry
   rack-cas (~> 0.3.1)
