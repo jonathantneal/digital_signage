@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 source 'https://gems.biola.edu'
 
-gem 'rails', '3.2.9'
+gem 'rails', '3.2.10'
 
 gem 'action_links', '~> 0.4.1'
 gem 'addressable', '~> 2.3.2'
