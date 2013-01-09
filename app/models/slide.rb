@@ -4,7 +4,7 @@ class Slide < ActiveRecord::Base
   RESIZE_OPTIONS = ['none', 'zoom', 'zoom & crop', 'stretch']
   PUBLISHED_STATUS = ['published', 'unpublished', 'expired']
 
-  attr_accessible :title, :delay, :color, :department_id, :publish_at, :unpublish_at, :created_at, :updated_at, 
+  attr_accessible :title, :delay, :color, :department_id, :publish_at, :unpublish_at, :created_at, :updated_at, :html_url,
                   :sign_id, :sign_ids, :resize, :content, :content_cache, :schedules_attributes, :parameters_attributes, :slots_attributes
   
   belongs_to :department
@@ -21,7 +21,7 @@ class Slide < ActiveRecord::Base
   mount_uploader :content, ContentUploader
   
   validates_presence_of :title, :delay, :color, :department_id
-  validates_presence_of :content, :on => :create
+  # validates_presence_of :content, :on => :create
   validates :title, :uniqueness => true
   validates_inclusion_of :resize, :in => RESIZE_OPTIONS
   validates_integrity_of :content
@@ -103,11 +103,12 @@ class Slide < ActiveRecord::Base
   end
 
   def url(version=nil)
-    content_url(version)
+    add_params = parameters.blank? ? "" : "?"+parameters.map{|p| p.name+"="+p.value }.join("&")
+    (content_url(version) || html_url).to_s + add_params
   end
 
   def type
-    content_type
+    content_type || "text/html"
   end
   
   def image?

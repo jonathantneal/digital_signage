@@ -14,7 +14,7 @@
   <!-- Cycle JQuery plugin -->
   <!-- <script src="http://malsup.github.com/jquery.cycle.all.js"></script> -->
   <!-- <script src="http://malsup.github.com/jquery.cycle.lite.js"></script> -->
-  <script src="http://localhost:3000/assets/plugins/jquery.cycle.js"></script>
+  <%= javascript_include_tag "plugins/jquery.cycle.js" %>
 
   <script>
     var sign;
@@ -35,28 +35,34 @@
       if (reload_interval < 3000) { reload_interval = 3000; }
       setInterval(function(){checkReload()}, reload_interval);
 
-      // // Loop through slides
-      // var weatherframe = $("<iframe src='http://localhost:8888/weather/'></iframe>");
-      // weatherframe.data('delay', 10);
-      // $('#digitalsign').append(weatherframe);
-
-      // var twitterframe = $("<iframe src='http://localhost:8888/twitter/'></iframe>");
-      // twitterframe.data('delay', 10);
-      // $('#digitalsign').append(twitterframe);
-
+      // Loop through slides
       $.each(sign.slots, function(i,slot) {
         var slide = slot.slide;
-        if (slide.content_type.match(/video/)) {
-          var video = $("<video/>");
-          video.attr('src', slide.uri);
-          video.get(0).addEventListener('ended',videoEnded,false);
-          $('#digitalsign').append(video);
-        }
-        if (slide.content_type.match(/image/)) {
-          var image = $("<img/>");
-          image.attr('src', slide.uri);
-          image.data('delay', slide.delay);
-          $('#digitalsign').append(image);
+        if (slide.uri != "") {
+          if (slide.content_type.match(/video/)) {
+            var video = $("<video/>");
+            video.attr('src', slide.uri);
+            video.get(0).addEventListener('ended',videoEnded,false);
+            $('#digitalsign').append(video);
+          }
+          if (slide.content_type.match(/image/)) {
+            var image = $("<img/>");
+            image.attr('src', slide.uri);
+            image.data('delay', slide.delay);
+            $('#digitalsign').append(image);
+          }
+          if (slide.content_type.match(/text/)) {
+            var frame = $("<iframe></iframe>");
+            frame.attr('src', slide.uri);
+            frame.data('delay', slide.delay);
+            $('#digitalsign').append(frame);
+          }
+          if (slide.content_type.match(/flash/)) {
+            var frame = $("<iframe></iframe>");
+            frame.attr('src', slide.uri);
+            frame.data('delay', slide.delay);
+            $('#digitalsign').append(frame);
+          }
         }
       });
 

@@ -8,7 +8,7 @@ class SlideSerializer < ActiveModel::Serializer
     '#' + object.color
   end
   def uri
-    object.content.url
+    object.url
   end
   def lastupdate
     (object.updated_at || object.created_at).to_s(:rfc822)
