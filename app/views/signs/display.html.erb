@@ -1,0 +1,106 @@
+<html>
+  <head>
+    <style type="text/css">
+      body {margin:0;padding:0;}
+      #digitalsign, img, video, iframe { width: 100%; }
+    </style>
+  </head>
+  <body>
+    <div id="digitalsign"></div>
+  </body>
+
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+
+  <!-- Cycle JQuery plugin -->
+  <!-- <script src="http://malsup.github.com/jquery.cycle.all.js"></script> -->
+  <!-- <script src="http://malsup.github.com/jquery.cycle.lite.js"></script> -->
+  <script src="http://localhost:3000/assets/plugins/jquery.cycle.js"></script>
+
+  <script>
+    var sign;
+    var refreshSlides = false;
+    var signUrl = 'http://localhost:3000/signs/cafeteria.json';
+
+    $.getJSON(signUrl, function(data){
+      sign = data.sign;
+      initializeDisplay();
+    });
+    function initializeDisplay() {
+      // Setup Check-in
+      var check_in_interval = sign.check_in_interval * 1000;
+      if (check_in_interval < 30000) { check_in_interval = 30000; }
+      setInterval(function(){checkIn()}, check_in_interval);
+      // Setup Reload interval
+      var reload_interval = sign.reload_interval * 1000;
+      if (reload_interval < 3000) { reload_interval = 3000; }
+      setInterval(function(){checkReload()}, reload_interval);
+
+      // // Loop through slides
+      // var weatherframe = $("<iframe src='http://localhost:8888/weather/'></iframe>");
+      // weatherframe.data('delay', 10);
+      // $('#digitalsign').append(weatherframe);
+
+      // var twitterframe = $("<iframe src='http://localhost:8888/twitter/'></iframe>");
+      // twitterframe.data('delay', 10);
+      // $('#digitalsign').append(twitterframe);
+
+      $.each(sign.slides, function(i,v) {
+        if (v.content_type.match(/video/)) {
+          var video = $("<video/>");
+          video.attr('src', v.uri);
+          video.get(0).addEventListener('ended',videoEnded,false);
+          $('#digitalsign').append(video);
+        }
+        if (v.content_type.match(/image/)) {
+          var image = $("<img/>");
+          image.attr('src', v.uri);
+          image.data('delay', v.delay);
+          $('#digitalsign').append(image);
+        }
+      });
+
+      $('#digitalsign').cycle({
+        timeout: 0,
+        width: 1920, //1440, //1920,
+        height: 1080, //900, //1080,
+        fit: 1,
+        before: function(){
+          if(this.nodeName=="VIDEO"){
+            this.play();
+          }
+          else {
+            var timeout = parseInt($(this).data('delay')) * 1000;
+            if (timeout < 3000) { timeout = 3000; }
+            setTimeout(function(){nextSlide()}, timeout);
+          }
+        },
+        end: function(){
+          if (refreshSlides) { location.reload(); }
+        }
+      });
+    }
+
+    function videoEnded(e) {
+      if(!e) { e = window.event; }
+      // What you want to do after the event
+      nextSlide();
+    }
+
+    function nextSlide() {
+      $('#digitalsign').cycle("next");
+    }
+
+    function checkReload() {
+      $.getJSON(signUrl, function(data){
+        if (JSON.stringify(sign) != JSON.stringify(data)){
+          refreshSlides = data;
+        }
+      });
+    }
+
+    function checkIn() {
+      $.get(sign.check_in_url, function(data) {});
+    }
+  </script>
+
+</html>

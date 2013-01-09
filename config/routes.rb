@@ -14,6 +14,7 @@ SignManager::Application.routes.draw do
     member do
       get :info
       get :check_in
+      get :display
     end
   end
   resources :slots, :only => [:create, :update] do

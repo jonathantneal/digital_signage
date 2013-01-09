@@ -1,14 +1,15 @@
 class SignsController < ApplicationController
-  filter_resource_access :additional_member => [:info, :check_in]
+  filter_resource_access :additional_member => [:info, :check_in, :display]
   respond_to :html, :except => :check_in
   respond_to :xml, :only => [:show, :check_in]
+  respond_to :json, :only => [:show]
 
   def index
     @signs = Sign.with_permissions_to(:index).order('signs.title')
   end
 
   def show
-    if request.format.xml?
+    if request.format.xml? || request.format.json?
       @slots = @sign.slots.published.includes(:slide => :schedules)
     elsif user_signed_in?
       @search = @sign.slots.with_permissions_to(:index).search(params[:search])
@@ -66,6 +67,10 @@ class SignsController < ApplicationController
     @sign.last_ip = request.headers['HTTP_X_FORWARDED_FOR'].to_s.strip.split(/[,\s+]/).first || request.remote_ip
     @sign.save(:validate => false)
     render :nothing => true
+  end
+
+  def display
+    render :layout => false
   end
 
   protected
