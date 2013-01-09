@@ -19,7 +19,7 @@
   <script>
     var sign;
     var refreshSlides = false;
-    var signUrl = 'http://localhost:3000/signs/cafeteria.json';
+    var signUrl = "<%= sign_path(@sign, format: :json) %>";
 
     $.getJSON(signUrl, function(data){
       sign = data.sign;
