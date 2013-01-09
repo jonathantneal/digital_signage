@@ -1,7 +1,7 @@
 class SignSerializer < ActiveModel::Serializer
   attributes  :id, :name, :title, :full_screen_mode, :transition_duration, 
-              :reload_interval, :check_in_interval, :updated_at, :video, :audio, 
-              :check_in_url, :last_check_in
+              :reload_interval, :check_in_interval, :video, :audio, 
+              :check_in_url
 
   has_many :slots
 
@@ -13,9 +13,6 @@ class SignSerializer < ActiveModel::Serializer
   end
   def check_in_url
     check_in_sign_url
-  end
-  def last_check_in
-    object.last_check_in.try(:to_s, :rfc822)
   end
 
   def slots
