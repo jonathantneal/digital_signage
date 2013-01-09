@@ -44,17 +44,18 @@
       // twitterframe.data('delay', 10);
       // $('#digitalsign').append(twitterframe);
 
-      $.each(sign.slides, function(i,v) {
-        if (v.content_type.match(/video/)) {
+      $.each(sign.slots, function(i,slot) {
+        var slide = slot.slide;
+        if (slide.content_type.match(/video/)) {
           var video = $("<video/>");
-          video.attr('src', v.uri);
+          video.attr('src', slide.uri);
           video.get(0).addEventListener('ended',videoEnded,false);
           $('#digitalsign').append(video);
         }
-        if (v.content_type.match(/image/)) {
+        if (slide.content_type.match(/image/)) {
           var image = $("<img/>");
-          image.attr('src', v.uri);
-          image.data('delay', v.delay);
+          image.attr('src', slide.uri);
+          image.data('delay', slide.delay);
           $('#digitalsign').append(image);
         }
       });

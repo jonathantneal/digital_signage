@@ -9,8 +9,10 @@ class SignsController < ApplicationController
   end
 
   def show
-    if request.format.xml? || request.format.json?
+    if request.format.xml?
       @slots = @sign.slots.published.includes(:slide => :schedules)
+    elsif request.format.json?
+      render json: @sign
     elsif user_signed_in?
       @search = @sign.slots.with_permissions_to(:index).search(params[:search])
       @slots = @search.includes(:slide => :schedules)

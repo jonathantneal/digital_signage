@@ -16,6 +16,8 @@ GEM
       rack-cache (~> 1.2)
       rack-test (~> 0.6.1)
       sprockets (~> 2.2.1)
+    active_model_serializers (0.6.0)
+      activemodel (>= 3.0)
     activemodel (3.2.10)
       activesupport (= 3.2.10)
       builder (~> 3.0.0)
@@ -82,8 +84,6 @@ GEM
       multi_json (~> 1.0)
       multi_xml
     i18n (0.6.1)
-    jbuilder (0.9.1)
-      activesupport (>= 3.0.0)
     journey (1.0.4)
     jquery-rails (2.1.4)
       railties (>= 3.0, < 5.0)
@@ -208,6 +208,7 @@ PLATFORMS
 
 DEPENDENCIES
   action_links (~> 0.4.1)
+  active_model_serializers (~> 0.6.0)
   addressable (~> 2.3.2)
   appinfo (~> 0.1.1)
   better_errors
@@ -222,7 +223,6 @@ DEPENDENCIES
   exception_notification (~> 3.0.0)
   haml (~> 3.1.7)
   httparty (~> 0.9.0)
-  jbuilder (~> 0.9.1)
   jquery-rails (~> 2.1.1)
   jquery-ui-rails (~> 2.0.0)
   jquery-ui-themes (~> 0.0.7)
