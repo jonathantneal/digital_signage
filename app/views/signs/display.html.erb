@@ -1,8 +1,13 @@
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
     <style type="text/css">
       body {margin:0;padding:0;}
-      #digitalsign, img, video, iframe { width: 100%; }
+      #digitalsign, .image_wrapper, video, iframe { width: 100%; border: none; }
+
+      /* Center images both verticly and horizontaly */
+      .image_wrapper { text-align: center; }
+      .image_wrapper > img { max-height: 100%; max-width: 100%; vertical-align: middle; }
     </style>
   </head>
   <body>
@@ -46,10 +51,13 @@
             $('#digitalsign').append(video);
           }
           if (slide.content_type.match(/image/)) {
+            var imageWrapper = $("<div class='image_wrapper'></div>")
+            imageWrapper.css("line-height", sign.height-1+"px");
+            imageWrapper.css("background-color", slide.color);
+            imageWrapper.data('delay', slide.delay);
             var image = $("<img/>");
             image.attr('src', slide.uri);
-            image.data('delay', slide.delay);
-            $('#digitalsign').append(image);
+            $('#digitalsign').append(imageWrapper.append(image));
           }
           if (slide.content_type.match(/text/)) {
             var frame = $("<iframe></iframe>");
@@ -68,8 +76,8 @@
 
       $('#digitalsign').cycle({
         timeout: 0,
-        width: 1920, //1440, //1920,
-        height: 1080, //900, //1080,
+        width: (sign.width || 1920),
+        height: (sign.height || 1080),
         fit: 1,
         before: function(){
           if(this.nodeName=="VIDEO"){
@@ -77,7 +85,7 @@
           }
           else {
             var timeout = parseInt($(this).data('delay')) * 1000;
-            if (timeout < 3000) { timeout = 3000; }
+            if (timeout < 3000 || isNaN(timeout)) { timeout = 3000; }
             setTimeout(function(){nextSlide()}, timeout);
           }
         },
