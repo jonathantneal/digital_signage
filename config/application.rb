@@ -46,7 +46,7 @@ module SignManager
     # config.assets.paths << Rails.root.join('vendor', 'assets', 'flash')
 
     # Specific precompiled assets (application.js and application.css are loaded by default)
-    # config.assets.precompile += ['base.css', 'desktop.css', 'mobile.css']
+    config.assets.precompile += ['plugins/jquery.cycle.js']
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
