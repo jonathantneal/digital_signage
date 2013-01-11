@@ -8,10 +8,12 @@
       /* Center images both verticly and horizontaly */
       .image_wrapper { text-align: center; }
       .image_wrapper > img { max-height: 100%; max-width: 100%; vertical-align: middle; }
+      #alert { background-color: rgb(255, 0, 0); position: fixed; top: 0; left: 0; z-index: 100; padding: 40px; color: white; font-family: sans-serif; font-size: 80px; text-shadow: -1px -1px rgba(0,0,0,.5); display: none; background: url(<%= asset_path('bg-noise.png') %>) red; }
     </style>
   </head>
   <body>
     <div id="digitalsign"></div>
+    <div id="alert"></div>
   </body>
 
   <script src="http://code.jquery.com/jquery-latest.js"></script>
@@ -125,13 +127,86 @@
     }
 
     function togglePlay() {
-      displayIsPaused = !displayIsPaused;
+      if (displayIsPaused)
+        playDisplay()
+      else
+        pauseDisplay()
+    }
+    function pauseDisplay() {
+      displayIsPaused = true;
+    }
+    function playDisplay() {
+      displayIsPaused = false;
       
-      // If resumed playing
-      if (!displayIsPaused && !waitToAdvanceSlides) {
+      // Wait to advance slide if a timeout is already set and hasn't finished yet.
+      if (!waitToAdvanceSlides) {
         nextSlide();
       }
     }
+
+    function showAlert(message) {
+      alert = $('#alert');
+      alert.width(window.innerWidth-80);
+      alert.height(window.innerHeight-80);
+      alert.html(message);
+      alert.show();
+    }
+    function hideAlert() {
+      alert = $('#alert');
+      alert.html("");
+      alert.hide();
+    }
   </script>
+
+  <%# ********  PUBNUB messaging *********** 
+  To use:
+    {
+      to: ['sign_name', 'another_sign'], // Required. You can also pass 'all' to trigger all signs
+      text_alert: { 
+        hide: true  // pass this without a message to turn off the alert
+        message: 'this is the text you want displayed in the alert on the signs'
+      }
+      reload: true  // Force reload
+    }
+  %>
+  <% if AppConfig.pubnub && AppConfig.pubnub.enabled %>
+    <div id="pubnub"></div>
+    <script src="http://cdn.pubnub.com/pubnub-3.4.min.js"></script>
+    <script>(function(){
+     
+        // INIT PubNub
+        var pubnub = PUBNUB.init({
+            publish_key   : "<%= AppConfig.pubnub.publish_key %>",
+            subscribe_key : "<%= AppConfig.pubnub.subscribe_key %>"
+        });
+     
+        // LISTEN
+        pubnub.subscribe({
+          channel : "all_signs",
+          message : function(m){
+            if ($.inArray('all',m.to) >= 0 || $.inArray('<%= @sign.name %>',m.to) >= 0) {
+              text_alert(m);
+              if (m.reload) { location.reload(); }
+            }
+          },
+        })
+
+        function text_alert(m) {
+          if (m.text_alert) {
+            if (m.text_alert.hide) {
+              hideAlert();
+              playDisplay();
+            } else if (m.text_alert.message) {
+              showAlert(m.text_alert.message);
+              pauseDisplay();
+            }
+          }
+        }
+     
+     
+    })();</script>
+  <% end %>
+  <%# ********  end PUBNUB messaging *********** %>
+
 
 </html>
