@@ -1,11 +1,10 @@
 class Slide < ActiveRecord::Base
   require 'carrierwave/orm/activerecord'
   extend Memoist
-  RESIZE_OPTIONS = ['none', 'zoom', 'zoom & crop', 'stretch']
   PUBLISHED_STATUS = ['published', 'unpublished', 'expired']
 
   attr_accessible :title, :delay, :color, :department_id, :publish_at, :unpublish_at, :created_at, :updated_at, :html_url,
-                  :sign_id, :sign_ids, :resize, :content, :content_cache, :schedules_attributes, :parameters_attributes, :slots_attributes
+                  :sign_id, :sign_ids, :content, :content_cache, :schedules_attributes, :parameters_attributes, :slots_attributes
   
   belongs_to :department
   has_many :schedules, :dependent => :destroy
@@ -23,7 +22,6 @@ class Slide < ActiveRecord::Base
   validates_presence_of :title, :delay, :color, :department_id
   # validates_presence_of :content, :on => :create
   validates :title, :uniqueness => true
-  validates_inclusion_of :resize, :in => RESIZE_OPTIONS
   validates_integrity_of :content
   validates_each :unpublish_at, :allow_nil => true do |record, attr, value|
     if record.publish_at.to_i > value.to_i

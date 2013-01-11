@@ -29,7 +29,7 @@ class SignsControllerTest < ActionController::TestCase
   test "admin should create sign" do
     as_user(:admin) do
       assert_difference('Sign.count') do
-        post :create, :sign => { :name => 'just_created', :title => 'Just Created', :department_id => 1, :full_screen_mode => 'fullscreen', :transition_duration => 1.0, :reload_interval => 300, :check_in_interval => 180}
+        post :create, :sign => { :name => 'just_created', :title => 'Just Created', :department_id => 1, :transition_duration => 1.0, :reload_interval => 300, :check_in_interval => 180}
       end
 
       assert_redirected_to sign_path(assigns(:sign))

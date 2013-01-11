@@ -19,8 +19,6 @@
   %dd=link_to @sign.department, @sign.department
   %dt Data Feed URL
   %dd=link_to(display_sign_url(@sign), display_sign_url(@sign))
-  %dt Fullscreen Mode
-  %dd=@sign.full_screen_mode
   %dt Transition Duration
   %dd
     =@sign.transition_duration
@@ -33,10 +31,6 @@
   %dd
     =@sign.check_in_interval
     seconds
-  %dt Video
-  %dd=@sign.video
-  %dt Audio
-  %dd=@sign.audio
   %dt On From
   %dd
     =@sign.on.try(:to_s,:time) || '?'

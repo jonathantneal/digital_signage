@@ -1,5 +1,5 @@
 class SlideSerializer < ActiveModel::Serializer
-  attributes :id, :title, :delay, :resize, :color, :uri, :lastupdate
+  attributes :id, :title, :delay, :color, :uri, :lastupdate
   attribute :type, key: :content_type
 
   has_many :schedules

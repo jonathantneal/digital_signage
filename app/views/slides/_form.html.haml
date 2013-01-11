@@ -19,8 +19,6 @@
       =f.label(:delay)
       %small in seconds
     %dd.delay=f.text_field(:delay)
-    %dt.resize=f.label(:resize)
-    %dd.resize=f.select(:resize, Slide::RESIZE_OPTIONS)
     %dt.color=f.label(:color)
     %dd.color=f.text_field(:color, {:style=>"color:##{@slide.color}; background-color:##{@slide.color};"})
     %dt.publish_at=f.label(:publish_at)
