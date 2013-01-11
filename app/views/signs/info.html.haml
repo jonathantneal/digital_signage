@@ -18,7 +18,7 @@
   %dt Department
   %dd=link_to @sign.department, @sign.department
   %dt Data Feed URL
-  %dd=link_to(sign_url(@sign, :format=>:xml), sign_url(@sign, :format=>:xml))
+  %dd=link_to(display_sign_url(@sign), display_sign_url(@sign))
   %dt Fullscreen Mode
   %dd=@sign.full_screen_mode
   %dt Transition Duration

@@ -45,8 +45,8 @@ class SignsControllerTest < ActionController::TestCase
     end
   end
 
-  test "should show sign xml" do
-    get :show, :id => signs(:one).to_param, :format => :xml
+  test "should show sign json" do
+    get :show, :id => signs(:one).to_param, :format => :json
     assert_response :success
   end
 
