@@ -70,3 +70,9 @@ routing:
 developer:
   title: Example Company
   homepage: http://example.com
+
+pubnub:
+  enabled: false
+  channel: signage_development
+  publish_key: '****************'
+  subscribe_key: '****************'

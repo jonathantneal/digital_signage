@@ -182,7 +182,7 @@
      
         // LISTEN
         pubnub.subscribe({
-          channel : "all_signs",
+          channel : "<%= AppConfig.pubnub.channel %>",
           message : function(m){
             if ($.inArray('all',m.to) >= 0 || $.inArray('<%= @sign.name %>',m.to) >= 0) {
               text_alert(m);

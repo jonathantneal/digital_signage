@@ -25,7 +25,7 @@
       var message_to = ["<%= @sign.name %>"]
 
       function publish_message(message_object) {
-        pubnub.publish({ channel : "all_signs",  message : $.extend(message_object, {to: message_to})});
+        pubnub.publish({ channel : "<%= AppConfig.pubnub.channel %>",  message : $.extend(message_object, {to: message_to})});
       }
 
       $('#submit_message').click(function() {
