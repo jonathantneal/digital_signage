@@ -12,6 +12,7 @@ $(document).ready ->
     window.refresh_preview_size = ->
       $("ol.slots li div.thumbnail").css "width", (localStorage.slidervalue or 336)
       $("ol.slots li div.thumbnail").css "height", ($("ol.slots li div.thumbnail").width() * 113 / 200.0)
+      $("ol.slots li div.thumbnail").css "line-height", ($("ol.slots li div.thumbnail").width() * 113 / 200.0 - 3)+"px"
 
     removeSlots = (slots) ->
       r = confirm("Are you sure you would like to remove these " + slots.length + " slides from this sign?")
@@ -51,6 +52,7 @@ $(document).ready ->
       slide: (event, ui) ->
         $("ol.slots li div.thumbnail").css "width", ui.value
         $("ol.slots li div.thumbnail").css "height", (ui.value * 113 / 200.0)
+        $("ol.slots li div.thumbnail").css "line-height", (ui.value * 113 / 200.0 - 3)+"px"
 
       change: (event, ui) ->
         localStorage.slidervalue = ui.value

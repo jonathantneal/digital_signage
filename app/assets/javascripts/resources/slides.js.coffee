@@ -39,6 +39,7 @@ $(document).ready ->
     window.refresh_preview_size = ->
       $("ul.slides li div.thumbnail").css "width", (localStorage.slidervalue or 336)
       $("ul.slides li div.thumbnail").css "height", ($("ul.slides li div.thumbnail").width() * 113 / 200)
+      $("ul.slides li div.thumbnail").css "line-height", ($("ul.slides li div.thumbnail").width() * 113 / 200 - 3)+"px"
 
     if $('.pagination').length
       $(window).scroll ->
@@ -58,6 +59,7 @@ $(document).ready ->
       slide: (event, ui) ->
         $("ul.slides li div.thumbnail").css "width", ui.value
         $("ul.slides li div.thumbnail").css "height", (ui.value * 113 / 200.0)
+        $("ul.slides li div.thumbnail").css "line-height", (ui.value * 113 / 200.0 - 3)+"px"
       change: (event, ui) ->
         localStorage.slidervalue = ui.value
     # Initiate width when page loads

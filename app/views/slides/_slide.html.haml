@@ -13,6 +13,8 @@
           =image_tag "flash.jpg", :alt=>"#{slide.title} flash player"
         -elsif slide.video?
           =image_tag "video_thumbnail.jpg", :alt=>"#{slide.title} video"
+        -else
+          =image_tag "white-link.png", :alt=>"link"
       
       .title_bar
         %h4=slide.title

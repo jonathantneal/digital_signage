@@ -7,3 +7,5 @@
         %param{:name=>'movie', :value=>slide_url(slide)}
   -elsif slide.video?
     =image_tag "video_thumbnail.jpg", :alt=>"#{slide.title} video"
+  -else
+    =image_tag "white-link.png", :alt=>"link"
