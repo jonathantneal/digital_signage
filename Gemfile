@@ -1,7 +1,6 @@
 source 'http://rubygems.org'
-source 'https://gems.biola.edu'
 
-gem 'rails', '3.2.10'
+gem 'rails', '3.2.11'
 
 gem 'action_links', '~> 0.4.1'
 gem 'active_model_serializers', '~> 0.6.0'
