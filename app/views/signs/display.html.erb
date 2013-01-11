@@ -25,6 +25,8 @@
     var sign;
     var refreshSlides = false;
     var signUrl = "<%= sign_path(@sign, format: :json) %>";
+    var displayIsPaused = false;
+    var waitToAdvanceSlides = false;
 
     $.getJSON(signUrl, function(data){
       sign = data.sign;
@@ -87,6 +89,7 @@
             var timeout = parseInt($(this).data('delay')) * 1000;
             if (timeout < 3000 || isNaN(timeout)) { timeout = 3000; }
             setTimeout(function(){nextSlide()}, timeout);
+            waitToAdvanceSlides = true; // wait till the above timeout finishes so you don't have two cycles running at once when resume to early from pause
           }
         },
         end: function(){
@@ -102,7 +105,11 @@
     }
 
     function nextSlide() {
-      $('#digitalsign').cycle("next");
+      if (!displayIsPaused) {
+        $('#digitalsign').cycle("next");
+      } else { 
+        waitToAdvanceSlides = false;
+      }
     }
 
     function checkReload() {
@@ -115,6 +122,15 @@
 
     function checkIn() {
       $.get(sign.check_in_url, function(data) {});
+    }
+
+    function togglePlay() {
+      displayIsPaused = !displayIsPaused;
+      
+      // If resumed playing
+      if (!displayIsPaused && !waitToAdvanceSlides) {
+        nextSlide();
+      }
     }
   </script>
 
