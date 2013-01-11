@@ -52,7 +52,7 @@
           }
           if (slide.content_type.match(/image/)) {
             var imageWrapper = $("<div class='image_wrapper'></div>")
-            imageWrapper.css("line-height", sign.height-1+"px");
+            imageWrapper.css("line-height", sign.height-5+"px"); // The minus 5 is to account for some browser differences
             imageWrapper.css("background-color", slide.color);
             imageWrapper.data('delay', slide.delay);
             var image = $("<img/>");
