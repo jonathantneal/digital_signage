@@ -5,12 +5,27 @@
 /*= require_self
 /*= require_tree ./resources
 /*= require ./print
-/**/
+
+/*   Table of Contents
+
+1.0 - Import tags
+2.0 - General Class and tag declarations
+3.0 - Header
+  3.1 - Branding
+  3.2 - Navigation
+  3.3 - Profile
+4.0 - Page
 
 
+*/
+
+
+// *********   1.0 - Import tags    ***************
 @import includes/settings.sass
 @import includes/thumbnails.css.sass
 
+
+// *********   2.0 - General Class and tag declarations    ***************
 body
   background: #BABECF url(stripe_bg.png) repeat
 
@@ -21,27 +36,14 @@ h1
 ul.checkbox
   list-style: none    
 
-
-
+// *******************************************
+// *********   3.0 - Header    ***************
+// *******************************************
 #header
   background-color: #202a42
   @include box-shadow(1px, 3px, 3px, $opacity: 0.3)
 
-  #profile
-    float: right
-    padding: 3px 20px
-    font: 12px/30px $sans_serif_font
-    background-color: #141E36
-    a
-      padding: 0 5px
-      text-decoration: none
-    a.name
-      padding-left: 20px
-      color: #7493D1
-      background: url(user.png) no-repeat
-    a.logout
-      color: #FFF
-
+  // *********   3.1 - Branding    ***************
   #branding
     float: left
     background-color: #141E36
@@ -52,6 +54,7 @@ ul.checkbox
       height: 24px
       padding: 10px 20px 3px 15px
 
+  // *********   3.2 - Navigation    ***************
   #navigation
     display: inline-block
     
@@ -84,7 +87,32 @@ ul.checkbox
         a:hover
           color: #8DC422
 
+  // *********   3.3 - Profile    ***************
+  #profile
+    float: right
+    padding: 3px 20px
+    font: 12px/30px $sans_serif_font
+    background-color: #141E36
+    a
+      padding: 0 5px
+      text-decoration: none
+    a.name
+      padding-left: 20px
+      color: #7493D1
+      background: url(user.png) no-repeat
+    a.logout
+      color: #FFF
 
+
+
+
+
+
+
+
+// ******************************************
+// *********   4.0 - Page     ***************
+// ******************************************
 #page
   width: auto
   min-width: 940px
@@ -157,6 +185,21 @@ ul.checkbox
       text-align: right
       border-top: none
 
+    ul.stacked
+      line-height: 130%
+      list-style: none
+      margin: 0px
+      padding: 0px
+
+      li
+        border-top: $default_border
+        position: relative
+        padding: 8px
+        color: black
+
+        a:hover
+          background-color: #ccc
+
     .side_block
       color: #fff
       margin-bottom: 18px
@@ -179,65 +222,212 @@ ul.checkbox
     &.make-room-for-aside
       margin-right: 300px
     
-    a.cancel.button
-      background: #C33 url(button_overlay.png) repeat-x 
-      &[disabled=disabled]
-        background-color: #999
-        &:hover
-          background-color: #999
-          cursor: default
-      &:hover
-        background-color: #111
-        color: #F66
 
-    #slide_options
-      float: right
-      text-align: right
-      padding: 10px 0
-      height: 33px
-      #thumb_size_slider
-        display: inline-block
-        width: 150px
-        margin: 8px 20px 0 20px
+    #messagesWrapper
+      // padding-top: 1px   // This for some reason makes the top margin in the ul#messages work
+      ul#messages
+        margin: 20px 0 0 0
+        padding: 5px 20px
+        border-top: dashed $light_border 1px
+        border-bottom: dashed $light_border 1px
+        background-color: #eaeaea
+        @include inset-box-shadow(0, 2px, 2px, 0.12)
+
+        >li
+          position: relative
+          display: inline-block
+          margin: 5px
+          padding: 5px 10px 5px 37px
+          list-style-type: none
+          text-align: left
+          border: solid 1px #F6A670
+          background: #FFEFAA no-repeat 10px center
+          background-image: url(info.gif)
+          @include border-radius
+          @include box-shadow(1px, 2px, 2px, 0.12)
+
+          &.notice
+            background-image: url(notice.gif)
+
+          &.announce
+            display: block
+            padding-top: 20px
+            padding-bottom: 20px
+            background-image: url(announcement.png)
+
+          &.confirmation
+            background-image: url(confirmation.gif)
+
+          &.warn, &.alert
+            background-image: url(warn.gif)
+
+          &.error
+            background-image: url(error.gif)
+
+    #content
+      padding: 20px
+
+      dt
+        margin-top: 10px
+        font-weight: bold
+
+      dd.updated
+        padding-left: 20px
+        font-style: italic
+        background: url(new.png) no-repeat left center
+
+      div.buttons
+        margin-top: 10px
+        padding: 5px
+        text-align: right
+        border-top: solid 1px #a2a2a2
+
+      .pagination
+        a, span
+          padding: 3px 7px
+          color: #fff
+          text-decoration: none
+          background: #327FCC
+
+        a:hover, .current
+          color: #fdfd9f !important
+          background-color: #293e6d
+
+        a.disabled, span.disabled
+          color: #a2a2a2
+          border: solid 1px #a2a2a2
+          background: transparent
+
+      .search.summary
+        margin-bottom: 10px
+        color: #666
+        text-align: right
+
+        .view_all
+          padding-left: 20px
+
+      form.search
+        float: right
+        padding-bottom: 15px
+        text-align: right
+
+        label
+          display: block
+          float: left
+          width: 24px
+          height: 24px
+          text-indent: 9999px
+          overflow: hidden
+          background: url(view.png)
+          background-position: center
+          background-repeat: no-repeat
+
+        input[type=text]
+          float: left
+
+        &.searching label
+          background-image: url(spinner.gif)
+
+
+      form.filter
+
+        fieldset
+          position: relative
+          width: 100%
+          margin: 10px 0 10px -20px
+          padding: 10px 20px
+          border: 1px $light_border
+          border-style: dashed none
+          background-color: #eaeaea
+          overflow: hidden
+          @include box-shadow(0, 2px, 2px, 0.12)
+
+          legend
+            position: absolute
+            right: 20px
+            bottom: -2px
+            color: $lighter_text
+            font-size: 14pt
+            font-weight: bold
+            line-height: 14pt
       
-    #top-right-link
-      float: right
-      a
-        margin-left: 5px
-        i
-          margin-right: 1px
+        span.param
+          float: left
+          width: 180px
+          padding: 5px
 
-    .google_button
-      display: inline-block
-      text-decoration: none
-      -webkit-border-radius: 2px
-      border-radius: 2px
-      cursor: default!important
-      font-family: arial,sans-serif
-      font-size: 11px
-      font-weight: bold
-      height: 27px
-      line-height: 27px
-      margin: 2px 0
-      min-width: 54px
-      padding: 0 8px
-      text-align: center
-      -webkit-transition: all 0.218s
-      transition: all 0.218s
-      -webkit-user-select: none
-      background-color: whiteSmoke
-      background-image: -webkit-gradient(linear, left top, left bottom, from(whiteSmoke), to(#f1f1f1))
-      background-image: -webkit-linear-gradient(top, whiteSmoke, #f1f1f1)
-      background-image: linear-gradient(top, whiteSmoke, #f1f1f1)
-      border: 1px solid gainsboro
-      color: #444
-      &:hover
-        color: #222
-        -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1)
-        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1)
-        -webkit-transition: all 0.0s
-        transition: all 0.5s
-        border: 1px solid #C6C6C6
-      &:focus, &:active
-        border: 1px solid #4D90FE
+        label
+          display: block
+          font-weight: bold
 
+        input[type=text], select
+          width: 100%
+
+        div.buttons
+          text-align: right
+          border-top: none !important
+
+          input
+            padding: 2px 30px
+
+      a.cancel.button
+        background: #C33 url(button_overlay.png) repeat-x 
+        &[disabled=disabled]
+          background-color: #999
+          &:hover
+            background-color: #999
+            cursor: default
+        &:hover
+          background-color: #111
+          color: #F66
+
+      #slide_options
+        float: right
+        text-align: right
+        padding: 10px 0
+        height: 33px
+        #thumb_size_slider
+          display: inline-block
+          width: 150px
+          margin: 8px 20px 0 20px
+        
+      #top-right-link
+        float: right
+        a
+          margin-left: 5px
+          i
+            margin-right: 1px
+
+      .google_button
+        display: inline-block
+        text-decoration: none
+        -webkit-border-radius: 2px
+        border-radius: 2px
+        cursor: default!important
+        font-family: arial,sans-serif
+        font-size: 11px
+        font-weight: bold
+        height: 27px
+        line-height: 27px
+        margin: 2px 0
+        min-width: 54px
+        padding: 0 8px
+        text-align: center
+        -webkit-transition: all 0.218s
+        transition: all 0.218s
+        -webkit-user-select: none
+        background-color: whiteSmoke
+        background-image: -webkit-gradient(linear, left top, left bottom, from(whiteSmoke), to(#f1f1f1))
+        background-image: -webkit-linear-gradient(top, whiteSmoke, #f1f1f1)
+        background-image: linear-gradient(top, whiteSmoke, #f1f1f1)
+        border: 1px solid gainsboro
+        color: #444
+        &:hover
+          color: #222
+          -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1)
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1)
+          -webkit-transition: all 0.0s
+          transition: all 0.5s
+          border: 1px solid #C6C6C6
+        &:focus, &:active
+          border: 1px solid #4D90FE
