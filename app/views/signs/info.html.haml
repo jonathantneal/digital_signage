@@ -38,7 +38,8 @@
     =@sign.off.try(:to_s,:time) || '?'
 
 
-%hr
-=render('message')
+-if current_user.is_admin?
+  %hr
+  =render('message')
 
 =render('info_aside')
