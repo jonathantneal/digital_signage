@@ -12,7 +12,7 @@
 @import includes/thumbnails.css.sass
 
 body
-  background: url(stripe_bg.png) repeat
+  background: #BABECF url(stripe_bg.png) repeat
 
 h1
   height: auto
@@ -21,126 +21,223 @@ h1
 ul.checkbox
   list-style: none    
 
-#wrapper
-  #wrapperTitle
-    @include box-shadow(1px, 3px, 3px, $opacity: 0.2)
-    border-bottom: none
 
-  #wrapperPage
-    padding-top: 0
-    padding-bottom: 20px
-    margin-bottom: 30px
-    
-    #navigation
-      a:hover
-        color: #8DC422
-    
-    #page
-      width: auto
-      padding: 0
-      min-width: 940px
-      
-      #navigation
-        background-color: #202a42
-        
-        @include box-shadow(1px, 3px, 3px, $opacity: 0.3)
-        
-        ul
-          height: auto
-          
-          li
-            height: auto
-            &.active
-              background: none
-              a
-                color: #9CF
-            a
-              height: auto
-              padding: 10px
-              
 
-      #contentAside
-        float: right
-        box-shadow: -1px 1px 7px rgba(0, 0, 0, .5)
-        z-index: 10
-        border-radius: 5px
+#header
+  background-color: #202a42
+  @include box-shadow(1px, 3px, 3px, $opacity: 0.3)
+
+  #profile
+    float: right
+    padding: 3px 20px
+    font: 12px/30px $sans_serif_font
+    background-color: #141E36
+    a
+      padding: 0 5px
+      text-decoration: none
+    a.name
+      padding-left: 20px
+      color: #7493D1
+      background: url(user.png) no-repeat
+    a.logout
+      color: #FFF
+
+  #branding
+    float: left
+    background-color: #141E36
+
+    #site_title
+      font: bold 15px $sans_serif_font
+      color: #fff
+      height: 24px
+      padding: 10px 20px 3px 15px
+
+  #navigation
+    display: inline-block
+    
+    ul
+      margin: 0
+      padding: 0 5px
+      list-style: none
+      height: 40px
+      height: auto
+
+      li
+        display: inline-block
+        text-align: center
         margin-right: 20px
-        width: 250px
-        padding: 10px
-        margin-top: 30px
-        background-color: white
-        .box h2
-          color: black
-
-      #wrapperContent
-        margin: 30px
-        float: none
-        width: auto
-        border: none
-        min-width: 400px
-
-        &.make-room-for-aside
-          margin-right: 300px
-        
-        a.cancel.button
-          background: #C33 url(button_overlay.png) repeat-x 
-          &[disabled=disabled]
-            background-color: #999
-            &:hover
-              background-color: #999
-              cursor: default
-          &:hover
-            background-color: #111
-            color: #F66
-
-        #slide_options
-          float: right
-          text-align: right
-          padding: 10px 0
-          height: 33px
-          #thumb_size_slider
-            display: inline-block
-            width: 150px
-            margin: 8px 20px 0 20px
-          
-        #top-right-link
-          float: right
+        height: 40px
+        height: auto
+        &.active
+          background: none
           a
-            margin-left: 5px
-            i
-              margin-right: 1px
-
-        .google_button
-          display: inline-block
-          text-decoration: none
-          -webkit-border-radius: 2px
-          border-radius: 2px
-          cursor: default!important
-          font-family: arial,sans-serif
-          font-size: 11px
-          font-weight: bold
-          height: 27px
-          line-height: 27px
-          margin: 2px 0
-          min-width: 54px
-          padding: 0 8px
+            color: #9CF
+        a
+          font: bold 15px $sans_serif_font
+          color: #fff
+          display: block
+          height: 40px
           text-align: center
-          -webkit-transition: all 0.218s
-          transition: all 0.218s
-          -webkit-user-select: none
-          background-color: whiteSmoke
-          background-image: -webkit-gradient(linear, left top, left bottom, from(whiteSmoke), to(#f1f1f1))
-          background-image: -webkit-linear-gradient(top, whiteSmoke, #f1f1f1)
-          background-image: linear-gradient(top, whiteSmoke, #f1f1f1)
-          border: 1px solid gainsboro
-          color: #444
-          &:hover
-            color: #222
-            -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1)
-            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1)
-            -webkit-transition: all 0.0s
-            transition: all 0.5s
-            border: 1px solid #C6C6C6
-          &:focus, &:active
-            border: 1px solid #4D90FE
+          text-decoration: none
+          height: auto
+          padding: 10px
+        a:hover
+          color: #8DC422
+
+
+#page
+  width: auto
+  min-width: 940px
+  padding: 0
+  padding-bottom: 10px
+
+  #contentAside
+    position: relative
+    float: right
+    box-shadow: -1px 1px 7px rgba(0, 0, 0, .5)
+    z-index: 10
+    border-radius: 5px
+    margin-right: 20px
+    width: 250px
+    padding: 10px
+    background-color: white
+    h2
+      font: bold 92% $sans_serif_font
+      text-transform: uppercase
+      margin-bottom: 10px
+
+    h3
+      display: block
+      margin-bottom: 10px
+      padding-left: 20px
+      font-weight: bold
+      font-size: 10pt
+      background-position: left center
+      background-repeat: no-repeat
+
+      &.import
+        background-image: url(upload.gif)
+
+      &.add
+        background-image: url(add.gif)
+        
+      &.view
+        background-image: url(view.png)
+
+      a
+        color: #444
+        text-decoration: none
+
+    .box
+      position: relative
+      margin-bottom: 8px
+      padding: 10px
+      color: #000
+      background: #fdfd9f
+      @include border-radius(8px)
+      @include box-shadow(1px, 3px, 3px, 0.5)
+
+      h2
+        color: black
+      a.cancel
+        display: none
+
+    input[type=text], select
+      width: 230px
+
+    textarea
+      width: 230px
+      height: 150px
+
+    input[type=text].date
+      width: 225px
+
+    div.buttons
+      margin-top: 10px
+      text-align: right
+      border-top: none
+
+    .side_block
+      color: #fff
+      margin-bottom: 18px
+
+    em.number
+      display: block
+      float: left
+      margin-right: 10px
+
+  #wrapperContent
+    background: #fff
+    position: relative
+    margin: 30px
+    width: auto
+    border: none
+    min-width: 400px
+    @include border-radius(8px)
+    @include box-shadow(1px, 3px, 3px, 0.5)
+
+    &.make-room-for-aside
+      margin-right: 300px
+    
+    a.cancel.button
+      background: #C33 url(button_overlay.png) repeat-x 
+      &[disabled=disabled]
+        background-color: #999
+        &:hover
+          background-color: #999
+          cursor: default
+      &:hover
+        background-color: #111
+        color: #F66
+
+    #slide_options
+      float: right
+      text-align: right
+      padding: 10px 0
+      height: 33px
+      #thumb_size_slider
+        display: inline-block
+        width: 150px
+        margin: 8px 20px 0 20px
+      
+    #top-right-link
+      float: right
+      a
+        margin-left: 5px
+        i
+          margin-right: 1px
+
+    .google_button
+      display: inline-block
+      text-decoration: none
+      -webkit-border-radius: 2px
+      border-radius: 2px
+      cursor: default!important
+      font-family: arial,sans-serif
+      font-size: 11px
+      font-weight: bold
+      height: 27px
+      line-height: 27px
+      margin: 2px 0
+      min-width: 54px
+      padding: 0 8px
+      text-align: center
+      -webkit-transition: all 0.218s
+      transition: all 0.218s
+      -webkit-user-select: none
+      background-color: whiteSmoke
+      background-image: -webkit-gradient(linear, left top, left bottom, from(whiteSmoke), to(#f1f1f1))
+      background-image: -webkit-linear-gradient(top, whiteSmoke, #f1f1f1)
+      background-image: linear-gradient(top, whiteSmoke, #f1f1f1)
+      border: 1px solid gainsboro
+      color: #444
+      &:hover
+        color: #222
+        -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1)
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1)
+        -webkit-transition: all 0.0s
+        transition: all 0.5s
+        border: 1px solid #C6C6C6
+      &:focus, &:active
+        border: 1px solid #4D90FE
 

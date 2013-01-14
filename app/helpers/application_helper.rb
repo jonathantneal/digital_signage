@@ -31,16 +31,6 @@ module ApplicationHelper
     end
   end
 
-  def admin_menu
-    if(current_user.try(:is_admin?) || current_user.try(:is_developer?))
-      content_tag(:ul, :class=>'admin menu') do
-        AppConfig.ui.admin_menu.map do |link_settings|
-          navigation_link(link_settings.to_h.merge({:wrapper=>'li'})).to_s
-        end.join("\n").html_safe
-      end
-    end
-  end
-
   def navigation_link(settings)
 
     # Get settings and set defaults
