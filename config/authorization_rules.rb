@@ -17,7 +17,7 @@ authorization do
       if_attribute :id => is {user.id}
     end
 
-    has_permission_on :signs, :to => [:read, :update, :check_in, :info] do
+    has_permission_on :signs, :to => [:read, :update, :check_in] do
       if_permitted_to :show, :department
     end
 
@@ -38,9 +38,7 @@ authorization do
   end
 
   role :guest do
-    has_permission_on :signs do
-      to :show, :check_in, :display
-    end
+    has_permission_on :signs, to: [:show, :check_in, :display]
   end
 end
 
