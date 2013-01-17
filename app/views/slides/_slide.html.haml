@@ -1,12 +1,11 @@
-%li[slide]{'data-show-url'=>slide_url(slide)}
+%li[slide]{'data-show-url'=>slide_url(slide), 'data-edit-url'=>edit_slide_url(slide), 'data-slide-id'=>slide.id}
   .slide_status= "#{slide_status(slide)}" + (slide.showing? ? " - #{slide.delay}s" : "")
-
-  =link_to slide do
-    .preview_wrapper
-      -unless slide.published?
-        .corner-banner
-          unpublished
-      =render "shared/thumbnail", slide: slide
-      
-      .title_bar
-        %h4=slide.title
+  
+  .preview_wrapper
+    -unless slide.published?
+      .corner-banner
+        unpublished
+    =render "shared/thumbnail", slide: slide
+    
+    .title_bar
+      %h4=slide.title
