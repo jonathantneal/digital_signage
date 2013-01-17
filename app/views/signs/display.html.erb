@@ -54,7 +54,7 @@
       // Loop through slides
       $.each(sign.slots, function(i,slot) {
         var slide = slot.slide;
-        if (slide.uri != "") {
+        if (slide.uri != "" && slide.showing) {
           if (slide.content_type.match(/video/)) {
             var video = $("<video/>");
             video.attr('src', slide.uri);

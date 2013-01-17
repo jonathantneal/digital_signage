@@ -1,8 +1,6 @@
 class SlideSerializer < ActiveModel::Serializer
-  attributes :id, :title, :delay, :color, :uri, :lastupdate
+  attributes :id, :title, :delay, :color, :uri, :lastupdate, :showing
   attribute :type, key: :content_type
-
-  has_many :schedules
 
   def color
     '#' + object.color
@@ -12,6 +10,10 @@ class SlideSerializer < ActiveModel::Serializer
   end
   def lastupdate
     (object.updated_at || object.created_at).to_s(:rfc822)
+  end
+
+  def showing
+    object.showing?
   end
 
 end
