@@ -90,16 +90,21 @@
         width: (sign.width || 1920),
         height: (sign.height || 1080),
         fit: 1,
-        before: function(){
+        before: function(currSlideElement, nextSlideElement, options, forwardFlag){
           if(this.nodeName=="VIDEO"){
             this.play();
           }
           else {
+            if (nextSlideElement.contentWindow && (typeof nextSlideElement.contentWindow.beforeHook == 'function')) { nextSlideElement.contentWindow.beforeHook(); }
+
             var timeout = parseInt($(this).data('delay')) * 1000;
             if (timeout < 3000 || isNaN(timeout)) { timeout = 3000; }
             setTimeout(function(){nextSlide()}, timeout);
             waitToAdvanceSlides = true; // wait till the above timeout finishes so you don't have two cycles running at once when resume to early from pause
           }
+        },
+        after: function(currSlideElement, nextSlideElement, options, forwardFlag){
+          if (currSlideElement.contentWindow && (typeof currSlideElement.contentWindow.afterHook == 'function')) { currSlideElement.contentWindow.afterHook(); }
         },
         end: function(){
           if (refreshSlides) { location.reload(); }
