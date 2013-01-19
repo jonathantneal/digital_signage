@@ -66,13 +66,13 @@ When displays are active, they ping the digital signage server to let it know th
 
 
 ## Using HTML widgets
-The sign player uses iframes to display any type of web page. This provides great flexibility in the type of content you are able to display as slides. We have a few pre-built widgets that we use for our own signs that are included in `public/custom-slides`. Currently, these include the following:
+The sign player uses iframes to display any type of web page. This provides great flexibility in the type of content you are able to display as slides. We have a few pre-built widgets that we use for our own signs that are included in `public/custom-slides/`. Currently, these include the following:
 
 * **Weather slide** powered by wunderground.com
 * **Twitter slide**, showing the most recent tweets to any given account
 * **Dropmark slide**, showing a random image from a dropmark.com collection every time a slide is displayed
 
-Take a look at the README in each of these project directories to see how they work and what parameters you need to pass in. Also, feel free to submit a pull request with your own custom slides if they are of general use. Please keep the code clean and make sure that they are well commented. I've included a template folder to get you started.
+Take a look at the README in each of these project directories to see how they work and what parameters you need to pass in. For most people in local development, [this link](http://localhost:3000/custom_slides/) should work. Also, feel free to submit a pull request with your own custom slides if they are of general use. Please keep the code clean and make sure that they are well commented. I've included a template folder to get you started.
 
 There are also a few hooks you can use in your HTML widget that are called right before a slide is shown and right after the slide is hidden. These can be implemented as follows:
 
