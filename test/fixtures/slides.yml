@@ -5,11 +5,9 @@ one:
   delay: 5
   color: 000000
   department: one
-  resize: "none"
 
 two:
   title: Slide 2
   delay: 10
   color: 111111
   department: two
-  resize: "none"

@@ -16,9 +16,7 @@
         .sign_slides
           .slides_container
             -sign.slides.published.limit(10).each do |slide|
-              %div{:class=>"thumbnail #{slide_type(slide)}", :style=>"background-color:##{slide.color};"}
-                -if slide.image?
-                  =image_tag slide_file_url(slide, :preview), :alt=>"#{slide.title} thumbnail"
+              =render "shared/thumbnail", slide: slide
 
 .clear
 

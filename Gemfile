@@ -1,11 +1,10 @@
 source 'http://rubygems.org'
-source 'https://gems.biola.edu'
 
 gem 'rails', '3.2.11'
 
 gem 'action_links', '~> 0.4.1'
+gem 'active_model_serializers', '~> 0.6.0'
 gem 'addressable', '~> 2.3.2'
-gem 'appinfo', '~> 0.1.1'
 gem 'carrierwave', '~> 0.7.1'
 gem 'chronic', '~> 0.8.0'
 gem 'daemons', '~> 1.1.9'

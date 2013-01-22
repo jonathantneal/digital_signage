@@ -1,6 +1,6 @@
 @import settings.sass
 
-#wrapper #page div.thumbnail
+#page div.thumbnail
   margin: 0
   padding: 0
   width: $thumbnail_width
@@ -66,11 +66,13 @@ div.thumbnail img, div.thumbnail .swf
       div.thumbnail
         width: $thumbnail_width
         height: $thumbnail_height
+        line-height: $thumbnail_height
         border-top: none
 
       div.thumbnail img, div.thumbnail .swf
         max-width: 100%
         max-height: 100%
+        vertical-align: middle
       
       .title_bar
         opacity: 0

@@ -18,9 +18,7 @@
   %dt Department
   %dd=link_to @sign.department, @sign.department
   %dt Data Feed URL
-  %dd=link_to(sign_url(@sign, :format=>:xml), sign_url(@sign, :format=>:xml))
-  %dt Fullscreen Mode
-  %dd=@sign.full_screen_mode
+  %dd=link_to(display_sign_url(@sign), display_sign_url(@sign))
   %dt Transition Duration
   %dd
     =@sign.transition_duration
@@ -33,14 +31,15 @@
   %dd
     =@sign.check_in_interval
     seconds
-  %dt Video
-  %dd=@sign.video
-  %dt Audio
-  %dd=@sign.audio
   %dt On From
   %dd
     =@sign.on.try(:to_s,:time) || '?'
     to
     =@sign.off.try(:to_s,:time) || '?'
+
+
+-if current_user.is_admin?
+  %hr
+  =render('message')
 
 =render('info_aside')

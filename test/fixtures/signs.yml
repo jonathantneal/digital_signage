@@ -4,12 +4,9 @@ one:
   name: sign1
   title: Sign 1
   department: one
-  video: false
-  audio: false
   "on": 2010-01-01 00:00:00
   "off": 2010-01-01 12:00:00
   last_check_in: 2010-01-01 12:00:00
-  full_screen_mode: fullscreen
   transition_duration: 1.0
   reload_interval: 300
   check_in_interval: 180
@@ -19,12 +16,9 @@ two:
   name: sign2
   title: Sign 2
   department: two
-  video: true
-  audio: true
   "on": 2000-01-01 00:00:00
   "off": 2000-01-01 12:00:00
   last_check_in: 2000-01-01 12:00:00
-  full_screen_mode: fullscreen
   transition_duration: 1.0
   reload_interval: 300
   check_in_interval: 180

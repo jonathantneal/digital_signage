@@ -1,6 +1,6 @@
 =form_for(@slide, :html => {:multipart => true}) do |f|
   %dl
-    %dt.title.title=f.label(:title)
+    %dt.title=f.label(:title)
     %dd.title=f.text_field(:title)
     %dt.file=f.label(:content)
     %dd.file=f.file_field(:content)
@@ -10,12 +10,15 @@
         =f.fields_for(:parameters, @slide.parameters) do |f2|
           =render('parameter_fields', :f => f2)
       =link_to_add_fields('Add Parameter', f, :parameters)
+    %br
+    or
+    %dt.html_url=f.label(:html_url)
+    %dd.html_url=f.text_field(:html_url)
+    %hr
     %dt.delay
       =f.label(:delay)
       %small in seconds
     %dd.delay=f.text_field(:delay)
-    %dt.resize=f.label(:resize)
-    %dd.resize=f.select(:resize, Slide::RESIZE_OPTIONS)
     %dt.color=f.label(:color)
     %dd.color=f.text_field(:color, {:style=>"color:##{@slide.color}; background-color:##{@slide.color};"})
     %dt.publish_at=f.label(:publish_at)

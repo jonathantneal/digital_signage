@@ -1,0 +1,54 @@
+<% if AppConfig.pubnub && AppConfig.pubnub.enabled %>
+  <h4>Sign Messaging</h4>
+  <p>
+    <textarea id="message_text">Type your alert here...</textarea>
+    <br>
+    <a href="#" id="submit_message">Send alert to this sign</a>
+    |
+    <a href="#" id="hide_alert">Hide Alert</a>
+  </p>
+  <p><br><a href="#" id="refresh_display">Refresh Display</a></p>
+
+  <div id="pubnub"></div>
+
+  <% content_for(:foot) do %>
+
+    <script src="http://cdn.pubnub.com/pubnub-3.4.min.js"></script>
+    <script>(function(){
+
+      // INIT PubNub
+      var pubnub = PUBNUB.init({
+          publish_key   : "<%= AppConfig.pubnub.publish_key %>",
+          subscribe_key : "<%= AppConfig.pubnub.subscribe_key %>"
+      });
+
+      var message_to = ["<%= @sign.name %>"]
+
+      function publish_message(message_object) {
+        pubnub.publish({ channel : "<%= AppConfig.pubnub.channel %>",  message : $.extend(message_object, {to: message_to})});
+      }
+
+      $('#submit_message').click(function() {
+        publish_message({
+          text_alert: { message: $("#message_text").val() }
+        })
+      });
+
+      $('#hide_alert').click(function() {
+        publish_message({
+          text_alert: { hide: true }
+        })
+      });
+
+      $('#refresh_display').click(function() {
+        publish_message({ reload: true })
+      });
+
+    })();</script>
+    
+
+  <% end %>
+
+<% else %>
+You do not currently have pubnub enabled.
+<% end %>

@@ -10,7 +10,6 @@ html, body
 body
   margin: 0
   font: 9pt $sans_serif_font
-  background: #81A0DF url(contentbg.png) 0 0 repeat-x
 
 h1
   height: 1.6em
@@ -193,11 +192,6 @@ em.number
   @include border-radius(2px)
 
 
-#contentAside em.number
-  display: block
-  float: left
-  margin-right: 10px
-
 .hidden
   display: none
 
@@ -207,490 +201,87 @@ em.number
   width: 100%
   clear: both
 
-
 .nowrap
   white-space: nowrap
 
 
-ul.admin.menu
-  position: fixed
-  top: 0
-  left: 0
-  z-index: 100000000
-  padding: 4px 10px
-  list-style-type: none
-  background: rgba(0,0,0,0.7)
-  @include border-radius(0 0 6px 0)
-  @include box-shadow(2px)
-  
-  li, a
-    display: inline-block
-    width: 16px
-    height: 16px
-    padding: 0
-    white-space: nowrap
-    background-repeat: no-repeat
-    overflow: hidden
 
-  li
-    margin: 0 10px
+table
+  margin-bottom: 2em
+  border-collapse: collapse
+  width: 100%
 
-  a
-    padding: 0 0 0 16px
-
-    &.users
-      background-image: url(users.png)
-    &.access
-      background-image: url(access.png)
-    &.analytics
-      background-image: url(pie_chart.png)
-    &.configuration
-      background-image: url(settings.png)
-
-#wrapper
-  position: relative
-  min-height: 100%
-  
-
-#wrapperHeader
-  float: none
-
-
-#wrapperTitle
-  position: relative
-  height: 68px
-  background: #21335A url(wrappertitlebg.png) 0 0 repeat-x
-  border-top: 7px solid #1D1309
-  border-bottom: 3px solid #141E36
-  min-width: 940px
-  @include box-shadow(1px, 3px, 3px)
-
-  #siteTitle a
-    display: block
-    height: 0
-    width: 460px
-    padding-top: 68px
-    overflow: hidden
-    float: left
-    background: 10px 10px no-repeat
-    background-image: $logo_url
-    margin-right: 180px
-
-
-  #branding
-    float: left
-    height: 65px
-    padding: 0 80px 0 10px
-    margin: 0 auto
-    width: auto
-    position: relative
-
-
-  #profile
-    position: absolute
-    right: 0
-    bottom: 0
-    padding: 0 20px
-    font: 12px/30px $sans_serif_font
-    background-color: #141E36
-    @include border-radius(6px 0 0 0)
-
-    a
-      padding: 0 5px
-      text-decoration: none
-
-    a.name
-      padding-left: 20px
-      color: #7493D1
-      background: url(user.png) no-repeat
-
-    a.logout
-      color: #FFF
-
-
-
-ul#messages
-  margin: 20px 0 0 0
-  padding: 5px 20px
-  border-top: dashed $light_border 1px
-  border-bottom: dashed $light_border 1px
-  background-color: #eaeaea
-  @include inset-box-shadow(0, 2px, 2px, 0.12)
-
-  >li
-    position: relative
-    display: inline-block
-    margin: 5px
-    padding: 5px 10px 5px 37px
-    list-style-type: none
-    text-align: left
-    border: solid 1px #F6A670
-    background: #FFEFAA no-repeat 10px center
-    background-image: url(info.gif)
-    @include border-radius
-    @include box-shadow(1px, 2px, 2px, 0.12)
-
-    &.notice
-      background-image: url(notice.gif)
-
-    &.announce
-      display: block
-      padding-top: 20px
-      padding-bottom: 20px
-      background-image: url(announcement.png)
-
-    &.confirmation
-      background-image: url(confirmation.gif)
-
-    &.warn, &.alert
-      background-image: url(warn.gif)
-
-    &.error
-      background-image: url(error.gif)
-
-#wrapperPage
-  padding-bottom: 150px
-
-  #page
-    float: none
-    margin: 0px auto
-    padding: 20px 0
-    width: 960px
-    text-align: left
-
-
-  table
-    margin-bottom: 2em
-    border-collapse: collapse
-    width: 100%
-    clear: both
-  
-    tr
-      padding: 6px
-      background-color: #E3E9F2
+  tr
+    padding: 6px
+    background-color: #E3E9F2
+    
+    &:nth-of-type(odd) td
+      background-color: #D2DBEC
+    
+    th
+      vertical-align: top
+      padding: 6px 6px 6px 12px
+      text-align: left
+      font-weight: bold
+      color: #D2DBEC
+      background-color: #21335A
+      @include box-shadow
       
-      &:nth-of-type(odd) td
-        background-color: #D2DBEC
-      
-      th
-        vertical-align: top
-        padding: 6px 6px 6px 12px
-        text-align: left
-        font-weight: bold
+      &.actions
+        text-indent: -9999px
+
+      a:link
         color: #D2DBEC
-        background-color: #21335A
-        @include box-shadow
-        
-        &.actions
-          text-indent: -9999px
 
-        a:link
-          color: #D2DBEC
+      &.rating, &.rating
+        text-align: center
 
-        &.rating, &.rating
-          text-align: center
+      &.actions
+        text-indent: -99999px
+      
+    td
+      font: 1.1em/1.2 $sans_serif_font
+      vertical-align: top
+      padding: 4px 8px
 
-        &.actions
-          text-indent: -99999px
-        
-      td
-        font: 1.1em/1.2 $sans_serif_font
-        vertical-align: top
-        padding: 4px 8px
+      &.name
+        white-space: nowrap
 
-        &.name
+      &.comment
+        position: absolute
+
+        p
+          position: relative
+          width: 50px
+          margin: 0
+          padding: 0 0 0 20px
+          font-size: 9pt
           white-space: nowrap
+          background: url(comment.png) no-repeat
+          overflow: hidden
 
-        &.comment
-          position: absolute
-
-          p
-            position: relative
-            width: 50px
+          &:hover
+            position: absolute
+            z-index: 100
+            top: -6px
+            left: -2px
+            width: 200px
             margin: 0
-            padding: 0 0 0 20px
-            font-size: 9pt
-            white-space: nowrap
-            background: url(comment.png) no-repeat
-            overflow: hidden
+            padding: 10px 10px 10px 30px
+            background: url(comment.png) no-repeat 10px 10px
+            background-color: #FDFD9F
+            cursor: default
+            white-space: normal
+            @include border-radius(8px)
 
-            &:hover
-              position: absolute
-              z-index: 100
-              top: -6px
-              left: -2px
-              width: 200px
-              margin: 0
-              padding: 10px 10px 10px 30px
-              background: url(comment.png) no-repeat 10px 10px
-              background-color: #FDFD9F
-              cursor: default
-              white-space: normal
-              @include border-radius(8px)
+  tfoot
+    border-top: 1px solid #BBB
+    border-bottom: 1px solid #BBB
 
-    tfoot
-      border-top: 1px solid #BBB
-      border-bottom: 1px solid #BBB
+    th, td
+      padding-top: 8px
 
-      th, td
-        padding-top: 8px
-
-      th
-        color: #000
-        text-transform: none
-        border: none
-
-
-  #navigation
-    ul
-      margin: 0
-      padding: 0 5px
-      list-style: none
-      height: 40px
-
-    li
-      display: inline-block
-      text-align: center
-      margin-right: 20px
-      height: 40px
-
-      &.active
-        background: url(navselect_white.png) 50% 100% no-repeat
-
-    a
-      font: bold 15px $sans_serif_font
-      color: #fff
-      display: block
-      height: 40px
-      text-align: center
-      text-decoration: none
-
-
-  #wrapperContent
-    background: #fff
-    float: left
-    margin-right: 20px
-    position: relative
-    width: 660px
-    @include border-radius(8px)
-    @include box-shadow(1px, 3px, 3px, 0.5)
-    
-  #content
-    padding: 20px
-
-    dt
-      margin-top: 10px
-      font-weight: bold
-
-    dd.updated
-      padding-left: 20px
-      font-style: italic
-      background: url(new.png) no-repeat left center
-
-    div.buttons
-      margin-top: 10px
-      padding: 5px
-      text-align: right
-      border-top: solid 1px #a2a2a2
-
-    .pagination
-      a, span
-        padding: 3px 7px
-        color: #fff
-        text-decoration: none
-        background: #327FCC
-
-      a:hover, .current
-        color: #fdfd9f !important
-        background-color: #293e6d
-
-      a.disabled, span.disabled
-        color: #a2a2a2
-        border: solid 1px #a2a2a2
-        background: transparent
-
-    .search.summary
-      clear: both
-      margin-bottom: 10px
-      color: #666
-      text-align: right
-
-      .view_all
-        padding-left: 20px
-
-    form.search
-      float: right
-      clear: both
-      padding-bottom: 15px
-      text-align: right
-
-      label
-        display: block
-        float: left
-        width: 24px
-        height: 24px
-        text-indent: 9999px
-        overflow: hidden
-        background: url(view.png)
-        background-position: center
-        background-repeat: no-repeat
-
-      input[type=text]
-        float: left
-
-      &.searching label
-        background-image: url(spinner.gif)
-
-
-    form.filter
-
-      fieldset
-        position: relative
-        clear: both
-        width: 100%
-        margin: 10px 0 10px -20px
-        padding: 10px 20px
-        border: 1px $light_border
-        border-style: dashed none
-        background-color: #eaeaea
-        overflow: hidden
-        @include box-shadow(0, 2px, 2px, 0.12)
-
-        legend
-          position: absolute
-          right: 20px
-          bottom: -2px
-          color: $lighter_text
-          font-size: 14pt
-          font-weight: bold
-          line-height: 14pt
-    
-      span.param
-        float: left
-        width: 180px
-        padding: 5px
-
-      label
-        display: block
-        font-weight: bold
-
-      input[type=text], select
-        width: 100%
-
-      div.buttons
-        clear: both
-        text-align: right
-        border-top: none !important
-
-        input
-          padding: 2px 30px
-
-  #contentAside
-    float: left
-    padding-top: 20px
-    position: relative
-    width: 270px
-
-    h2
-      font: bold 92% $sans_serif_font
-      text-transform: uppercase
-      margin-bottom: 10px
-
-    h3
-      display: block
-      margin-bottom: 10px
-      padding-left: 20px
-      font-weight: bold
-      font-size: 10pt
-      background-position: left center
-      background-repeat: no-repeat
-
-      &.import
-        background-image: url(upload.gif)
-
-      &.add
-        background-image: url(add.gif)
-        
-      &.view
-        background-image: url(view.png)
-
-      a
-        color: #444
-        text-decoration: none
-
-    .box
-      position: relative
-      margin-bottom: 8px
-      padding: 10px
+    th
       color: #000
-      background: #fdfd9f
-      @include border-radius(8px)
-      @include box-shadow(1px, 3px, 3px, 0.5)
-
-      a.cancel
-        display: none
-
-    input[type=text], select
-      width: 230px
-
-    textarea
-      width: 230px
-      height: 150px
-
-    input[type=text].date
-      width: 225px
-
-    div.buttons
-      margin-top: 10px
-      text-align: right
-      border-top: none
-
-
-    ul.stacked
-      line-height: 130%
-      list-style: none
-      margin: 0px
-      padding: 0px
-
-      li
-        border-top: $default_border
-        position: relative
-        padding: 8px
-        color: black
-
-        a:hover
-          background-color: #ccc
-
-    .side_block
-      color: #fff
-      margin-bottom: 18px
-
-    ul.documents
-      margin: 0
-      padding: 0
-      list-style-type: none
-
-    ul.documents li a
-      padding-left: 18px
-      color: #c8b37e
-      text-decoration: none
-      line-height: 16px
-      background: url(help.png) left center no-repeat
-
-  #pageFooter
-    clear: both
-
-#wrapperBiolaFooter
-  position: absolute
-  bottom: 0
-
-  a.developer
-    overflow: hidden
-    width: 99px
-    height: 22px
-    background: url(it_logo_light.png) 0px 0px no-repeat
-    text-indent: 500px
-    line-height: 200px
-    position: absolute
-    right: 5px
-    bottom: 5px
+      text-transform: none
+      border: none

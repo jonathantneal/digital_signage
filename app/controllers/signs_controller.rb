@@ -1,15 +1,15 @@
 class SignsController < ApplicationController
-  filter_resource_access :additional_member => [:info, :check_in]
+  filter_resource_access :additional_member => [:info, :check_in, :display]
   respond_to :html, :except => :check_in
-  respond_to :xml, :only => [:show, :check_in]
+  respond_to :json, :only => [:show, :check_in]
 
   def index
     @signs = Sign.with_permissions_to(:index).order('signs.title')
   end
 
   def show
-    if request.format.xml?
-      @slots = @sign.slots.published.includes(:slide => :schedules)
+    if request.format.json?
+      render json: @sign
     elsif user_signed_in?
       @search = @sign.slots.with_permissions_to(:index).search(params[:search])
       @slots = @search.includes(:slide => :schedules)
@@ -25,7 +25,7 @@ class SignsController < ApplicationController
   end
 
   def info
-    if user_signed_in? || request.format.xml?
+    if user_signed_in?
       respond_with @sign
     else
       permission_denied
@@ -65,7 +65,11 @@ class SignsController < ApplicationController
     # This is a hack to get around this issue: https://github.com/rails/rails/issues/1010
     @sign.last_ip = request.headers['HTTP_X_FORWARDED_FOR'].to_s.strip.split(/[,\s+]/).first || request.remote_ip
     @sign.save(:validate => false)
-    render :nothing => true
+    render :json => { result: 'success' }
+  end
+
+  def display
+    render :layout => false
   end
 
   protected

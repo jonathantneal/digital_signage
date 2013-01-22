@@ -48,7 +48,6 @@ class User < ActiveRecord::Base
 
   def entitlements=(entitlements)
     raise TypeError.new('entitlementes is not an array') unless entitlements.is_a?(Array)
-    entitlements.map! { |ent| ent.gsub(/^urn:/, '') }
     write_attribute(:entitlements, entitlements.join(STRING_SEPARATOR))
   end
   
@@ -79,7 +78,7 @@ class User < ActiveRecord::Base
   end
 
   def is_admin?
-    self.has_role?(:admin)
+    self.has_role?(:admin) || self.is_developer?
   end
   
   def is_developer?

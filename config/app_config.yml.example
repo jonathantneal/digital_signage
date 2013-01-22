@@ -38,17 +38,6 @@ email:
     password: ****************
 
 ui:
-  admin_menu:
-  - controller: users
-  - url: http://apps.biola.edu/access
-    text: Access
-    css_class: access
-  - url: https://www.google.com/analytics/reporting/
-    text: Analytics
-    css_class: analytics
-  - controller: info
-    action: configuration
-    text: Config
   pagination:
     per_page: 30
 
@@ -70,3 +59,9 @@ routing:
 developer:
   title: Example Company
   homepage: http://example.com
+
+pubnub:
+  enabled: false
+  channel: signage_development
+  publish_key: '****************'
+  subscribe_key: '****************'

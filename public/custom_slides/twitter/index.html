@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <!-- <link rel="stylesheet" href="../shared_assets/bootstrap/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="../shared_assets/fontawesome/css/font-awesome.min.css">
+    <style>
+      body { 
+        margin: 0; 
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; 
+        text-align: center;
+        background-repeat: no-repeat;
+        background-image: url(http://a0.twimg.com/images/themes/theme1/bg.png);
+        background-color: rgb(192, 222, 237);
+      }
+      body.repeat {
+        background-repeat: repeat repeat;
+      }
+
+      /* Header */
+      div#header { border-radius: 4px; padding: 20px; min-width: 200px; max-width: 900px; margin: 20px auto; background-color: rgba(256, 256, 256, .5);}
+      div#header img { border: 3px white solid; border-radius: 4px; }
+      div#header div.user_name { font-size: 2em; }
+      div#header div.screen_name { font-size: 1.2em; }
+
+      /* Tweet */
+      div.tweets { margin: 0 20px; }
+      div.tweet { min-width: 200px; max-width: 900px; padding: 20px; background-color: #fff; -webkit-border-radius: 5px; -moz-border-radius: 5px; border: 1px #ccc solid; position: relative; text-align: left; margin: 20px auto; }
+
+      div.tweet img { float: left; padding: 0 10px 5px 0; }
+
+      div.tweet div.message_wrap { position: relative; margin-left: 90px; }
+
+      div.tweet div.message_wrap div.time_ago { float: right; color: #999; }      
+
+      div.tweet div.message_wrap div.profile_name { font-weight: bold; color: #333; font-size: 1.2em; }
+      div.tweet div.message_wrap div.profile_name span.handle { font-size: 0.9em; color: #999; font-weight: normal; padding-left: 8px; }
+
+      div.tweet div.message_wrap div.message { font-weight: 400; line-height: 1.25em; font-size: 1.9em;}
+      div.tweet div.message_wrap div.message a:link,
+      div.tweet div.message_wrap div.message a:visited { text-decoration: none; }
+      div.tweet div.message_wrap div.message a:hover { text-decoration: underline; }
+
+      div.tweet div.message_wrap .retweet_status { color: #999; }
+
+    </style>
+  </head>
+  <body>
+
+    <div id="header">
+    </div>
+
+    <div id="tweets">
+
+    </div>
+
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="./jquery.timeago.js"></script>
+    <script>
+      jQuery(document).ready(function($) {
+
+        // Update Tweets
+        var tweets;
+
+        // Get api url
+        var api_screen_name = url_query('screen_name') || "biolau";
+        var api_count = url_query('count') || "5";
+        var api_url = "http://api.twitter.com/1/statuses/user_timeline.json?include_rts=1&";
+        if (url_query('biola')) api_url = "https://ws.biola.edu/twitter/UserTimeline?jsonp&";
+            // used internally by Biola for caching purposes
+        if (api_screen_name) api_url += "screen_name="+api_screen_name+"&";
+        if (api_count) api_url += "count="+api_count+"&";
+
+        // get other preferences
+        var user_themed = url_query('user_themed') || false;
+
+        function updateTweets() {
+          if (api_url) {
+            $.ajax({
+              url : api_url,
+              dataType : "jsonp",
+              success : function(parsed_json) {
+                tweets = parsed_json;
+                buildTweets();
+                setupHeader();
+                if (user_themed) {
+                  setupBackground();
+                  changeLinkColor();
+                }
+              },
+              error : function(bla) {
+                // Schedule another update in a minute (90 seconds) if load failed
+                setTimeout(function(){updateTweets()}, 90000);
+              }
+            });
+          }
+        }
+
+        function buildTweets() {
+          if (tweets.length > 0) {
+            // clear previous tweets
+            $('#tweets').html("");
+
+            $.each(tweets, function(i,tweet) {
+              buildTweet(tweet);
+            });
+          }
+        }
+        function buildTweet(tweet) {
+          // Check retweet status
+          var retweet = null;
+          if (tweet.retweeted_status) {
+            retweet = tweet.retweeted_status;
+          }
+          var user = (retweet || tweet).user
+          
+          // Initialize new tweet tag
+          var new_tweet = $("<div class='tweet'></div>");
+          new_tweet.append(
+            $("<img/>").attr('src', user.profile_image_url.replace("normal.", "bigger."))
+          );
+          new_tweet.append(buildMessage(retweet || tweet));
+          $('#tweets').append(new_tweet);
+          if (retweet) {
+            var retweet_status = $("<div class='retweet_status'></div>");
+            retweet_status.append($("<i class='icon-retweet'></i> "));
+            retweet_status.append(" Retweeted by "+tweet.user.name);
+            new_tweet.find('.message_wrap').append(retweet_status);
+          }
+        }
+        function buildMessage(tweet) {
+          var message_wrap = $("<div class='message_wrap'></div>");
+
+          // Build time ago tag
+          time_ago = $("<div class='time_ago'></div>");
+          time_ago_in_words = $.timeago(tweet.created_at)
+          time_ago.html(time_ago_in_words);
+          message_wrap.append(time_ago);
+
+          // Build user name and handle
+          profile_name = $("<div class='profile_name'></div>");
+          profile_name.html(tweet.user.name + " <span class='handle'>@" + tweet.user.screen_name + "</span>");
+          message_wrap.append(profile_name);
+
+          // Build message
+          message = $("<div class='message'></div>").html(parseTweetText(tweet.text));
+          return message_wrap.append(message);
+        }
+
+        function setupBackground() {
+          bg_color = "#" + tweets[0].user.profile_background_color;
+          bg_image = tweets[0].user.profile_background_image_url;
+          bg_repeat = tweets[0].user.profile_background_tile;
+
+          var body_tag = document.getElementsByTagName('body')[0];
+
+          body_tag.style.backgroundImage = "url("+bg_image+")";
+          body_tag.style.backgroundColor = bg_color;
+
+          if (bg_repeat) body_tag.style.backgroundRepeat = "repeat repeat";
+        }
+        function setupHeader() {
+          $('#header').html(
+            $("<img/>").attr('src', tweets[0].user.profile_image_url.replace("normal.", "bigger."))
+          ).append(
+            $("<div class='user_name'></div>").html(tweets[0].user.name)
+          ).append(
+            $("<div class='screen_name'></div>").html("@"+tweets[0].user.screen_name)
+          )
+        }
+
+        function changeLinkColor() {
+          $('a').css('color', "#"+tweets[0].user.profile_link_color);
+        }
+
+        // Parse URL Queries
+        function url_query( query ) {
+          query = query.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+          var expr = "[\\?&]"+query+"=([^&#]*)";
+          var regex = new RegExp( expr );
+          var results = regex.exec( window.location.href );
+          if ( results !== null ) {
+            return results[1];
+          } else {
+            return false;
+          }
+        }
+
+        function parseTweetText(text) {
+          return text.replace(/(https?:\/\/[A-Za-z0-9\-\._~:\/&?#=%]*)/g, "<a href='$1'>$1</a>");
+        }
+
+        updateTweets();
+        // schedule to reupdate every 15 minutes
+        setInterval(function(){updateTweets()},15*60*1000);
+
+      });
+    </script>
+  </body>
+</html>
