@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <!-- <link rel="stylesheet" href="../shared_assets/bootstrap/css/bootstrap.min.css"> -->
+    <!-- <link rel="stylesheet" href="../shared_assets/fontawesome/css/font-awesome.min.css"> -->
+    
+    <style>
+      body { margin: 0; padding: 0; }
+      #container {
+        background: black;
+        text-align: center;
+        height: 700px;
+        line-height: 700px;
+      }
+      #container img { 
+        max-width: 100%;
+        max-height: 100%;
+        vertical-align: middle;
+      }
+      #container img.hidden { display: none; }
+
+    
+    </style>
+  </head>
+  <body>
+
+    <div id="container"></div>
+
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript">
+      // Parse URL Queries
+      function url_query( query ) {
+        query = query.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+        var expr = "[\\?&]"+query+"=([^&#]*)";
+        var regex = new RegExp( expr );
+        var results = regex.exec( window.location.href );
+        if ( results !== null ) {
+          return results[1];
+        } else {
+          return false;
+        }
+      }
+    </script>
+
+    <script>
+      $('#container').css('height', window.innerHeight+"px").css('line-height', window.innerHeight+"px");
+
+      var dropmark_items;
+      var username = url_query("username");
+      var collection_id = url_query("collection_id");
+
+      if (username && collection_id) {
+        var yql = 'http://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent('SELECT * FROM rss WHERE url="http://'+username+'.dropmark.com/'+collection_id+'.rss"') + '&format=json&callback=cbFunc';  
+
+        $.ajax({
+          url : yql,
+          dataType : "jsonp"
+        });
+      }
+
+      // Gets called when the data loads from yahooapis
+      function cbFunc(data) {
+        dropmark_items = data.query.results.item;
+        $.each(dropmark_items, function(i,item) {
+          buildImage(item);
+        });
+        advanceSlide();
+      }
+
+      function buildImage(image) {
+        if (image.enclosure && image.enclosure.type.match(/image/)) {  // Make sure it is really an image
+          $('#container').append(
+            $("<img />").attr('src', image.enclosure.url)
+          );
+        }
+      }
+
+      function advanceSlide() {
+        var images = $('#container img');
+        images.addClass('hidden');
+        $(images[Math.floor(Math.random() * images.length)]).removeClass('hidden');
+      }
+
+      // function beforeHook() {
+      // }
+      function afterHook() {
+        advanceSlide();
+      }
+
+    </script>
+  </body>
+</html>

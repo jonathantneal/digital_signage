@@ -22,15 +22,12 @@ body.slides.show
 
     dt.thumbnail
       display: block
-      position: absolute
-      top: 60px
-      right: $default_padding
+      float: right
       width: $thumbnail_width
 
     dd.thumbnail
-      position: absolute
-      top: 90px
-      right: $default_padding    
+      float: right
+      clear: right
       width: $thumbnail_width
 
   dd.url a
@@ -61,7 +58,7 @@ body.slides.show
     width: 280px
 
 // ****************   Slides Edit page   ********************  //
-body.slides.edit
+body.slides.edit, body.slides.new, body.slides.edit_multiple
   form
     dd.parameters
       li
@@ -90,3 +87,6 @@ body.slides.edit
     a.add_fields
       padding-left: 20px
       background: url(add.gif) no-repeat
+
+  ul.slide_list
+    margin-left: 20px

@@ -1,0 +1,223 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="apple-touch-icon" href="<%= asset_path('apple_icon_57x57.png') %>" />
+    <link rel="apple-touch-icon" sizes="72x72" href="<%= asset_path('apple_icon_72x72.png') %>" />
+    <link rel="apple-touch-icon" sizes="114x114" href="<%= asset_path('apple_icon_57x57@2x.png') %>" />
+    <link rel="apple-touch-icon" sizes="144x144" href="<%= asset_path('apple_icon_72x72@2x.png') %>" />
+
+    <style type="text/css">
+      body {margin:0;padding:0;}
+      #digitalsign, .image_wrapper, video, iframe { width: 100%; border: none; }
+
+      /* Center images both verticly and horizontaly */
+      .image_wrapper { text-align: center; }
+      .image_wrapper > img { max-height: 100%; max-width: 100%; vertical-align: middle; }
+      #alert { background-color: rgb(255, 0, 0); position: fixed; top: 0; left: 0; z-index: 100; padding: 40px; color: white; font-family: sans-serif; font-size: 80px; text-shadow: -1px -1px rgba(0,0,0,.5); display: none; background: url(<%= asset_path('bg-noise.png') %>) red; }
+    </style>
+  </head>
+  <body>
+    <div id="digitalsign"></div>
+    <div id="alert"></div>
+  </body>
+
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+
+  <!-- Cycle JQuery plugin -->
+  <!-- <script src="http://malsup.github.com/jquery.cycle.all.js"></script> -->
+  <!-- <script src="http://malsup.github.com/jquery.cycle.lite.js"></script> -->
+  <%= javascript_include_tag "plugins/jquery.cycle.js" %>
+
+  <script>
+    var sign;
+    var refreshSlides = false;
+    var signUrl = "<%= sign_path(@sign, format: :json) %>";
+    var displayIsPaused = false;
+    var waitToAdvanceSlides = false;
+
+    $.getJSON(signUrl, function(data){
+      sign = data.sign;
+      initializeDisplay();
+    });
+    function initializeDisplay() {
+      // Setup Check-in
+      var check_in_interval = sign.check_in_interval * 1000;
+      if (check_in_interval < 30000) { check_in_interval = 30000; }
+      setInterval(function(){checkIn()}, check_in_interval);
+      // Setup Reload interval
+      var reload_interval = sign.reload_interval * 1000;
+      if (reload_interval < 3000) { reload_interval = 3000; }
+      setInterval(function(){checkReload()}, reload_interval);
+
+      // Loop through slides
+      $.each(sign.slots, function(i,slot) {
+        var slide = slot.slide;
+        if (slide.uri != "" && slide.showing) {
+          if (slide.content_type.match(/video/)) {
+            var video = $("<video/>");
+            video.attr('src', slide.uri);
+            video.get(0).addEventListener('ended',videoEnded,false);
+            $('#digitalsign').append(video);
+          }
+          if (slide.content_type.match(/image/)) {
+            var imageWrapper = $("<div class='image_wrapper'></div>")
+            imageWrapper.css("line-height", sign.height-5+"px"); // The minus 5 is to account for some browser differences
+            imageWrapper.css("background-color", slide.color);
+            imageWrapper.data('delay', slide.delay);
+            var image = $("<img/>");
+            image.attr('src', slide.uri);
+            $('#digitalsign').append(imageWrapper.append(image));
+          }
+          if (slide.content_type.match(/text/)) {
+            var frame = $("<iframe></iframe>");
+            frame.attr('src', slide.uri);
+            frame.data('delay', slide.delay);
+            $('#digitalsign').append(frame);
+          }
+          if (slide.content_type.match(/flash/)) {
+            var frame = $("<iframe></iframe>");
+            frame.attr('src', slide.uri);
+            frame.data('delay', slide.delay);
+            $('#digitalsign').append(frame);
+          }
+        }
+      });
+
+      $('#digitalsign').cycle({
+        timeout: 0,
+        width: (sign.width || 1920),
+        height: (sign.height || 1080),
+        fit: 1,
+        before: function(currSlideElement, nextSlideElement, options, forwardFlag){
+          if(this.nodeName=="VIDEO"){
+            this.play();
+          }
+          else {
+            if (nextSlideElement.contentWindow && (typeof nextSlideElement.contentWindow.beforeHook == 'function')) { nextSlideElement.contentWindow.beforeHook(); }
+
+            var timeout = parseInt($(this).data('delay')) * 1000;
+            if (timeout < 3000 || isNaN(timeout)) { timeout = 3000; }
+            setTimeout(function(){nextSlide()}, timeout);
+            waitToAdvanceSlides = true; // wait till the above timeout finishes so you don't have two cycles running at once when resume to early from pause
+          }
+        },
+        after: function(currSlideElement, nextSlideElement, options, forwardFlag){
+          if (currSlideElement.contentWindow && (typeof currSlideElement.contentWindow.afterHook == 'function')) { currSlideElement.contentWindow.afterHook(); }
+        },
+        end: function(){
+          if (refreshSlides) { location.reload(); }
+        }
+      });
+    }
+
+    function videoEnded(e) {
+      if(!e) { e = window.event; }
+      // What you want to do after the event
+      nextSlide();
+    }
+
+    function nextSlide() {
+      if (!displayIsPaused) {
+        $('#digitalsign').cycle("next");
+      } else { 
+        waitToAdvanceSlides = false;
+      }
+    }
+
+    function checkReload() {
+      $.getJSON(signUrl, function(data){
+        if (JSON.stringify(sign) != JSON.stringify(data)){
+          refreshSlides = data;
+        }
+      });
+    }
+
+    function checkIn() {
+      $.get(sign.check_in_url, function(data) {});
+    }
+
+    function togglePlay() {
+      if (displayIsPaused)
+        playDisplay()
+      else
+        pauseDisplay()
+    }
+    function pauseDisplay() {
+      displayIsPaused = true;
+    }
+    function playDisplay() {
+      displayIsPaused = false;
+      
+      // Wait to advance slide if a timeout is already set and hasn't finished yet.
+      if (!waitToAdvanceSlides) {
+        nextSlide();
+      }
+    }
+
+    function showAlert(message) {
+      alert = $('#alert');
+      alert.width(window.innerWidth-80);
+      alert.height(window.innerHeight-80);
+      alert.html(message);
+      alert.show();
+    }
+    function hideAlert() {
+      alert = $('#alert');
+      alert.html("");
+      alert.hide();
+    }
+  </script>
+
+  <%# ********  PUBNUB messaging *********** 
+  To use:
+    {
+      to: ['sign_name', 'another_sign'], // Required. You can also pass 'all' to trigger all signs
+      text_alert: { 
+        hide: true  // pass this without a message to turn off the alert
+        message: 'this is the text you want displayed in the alert on the signs'
+      }
+      reload: true  // Force reload
+    }
+  %>
+  <% if AppConfig.pubnub && AppConfig.pubnub.enabled %>
+    <div id="pubnub"></div>
+    <script src="http://cdn.pubnub.com/pubnub-3.4.min.js"></script>
+    <script>(function(){
+     
+        // INIT PubNub
+        var pubnub = PUBNUB.init({
+            subscribe_key : "<%= AppConfig.pubnub.subscribe_key %>"
+        });
+     
+        // LISTEN
+        pubnub.subscribe({
+          channel : "<%= AppConfig.pubnub.channel %>",
+          message : function(m){
+            if ($.inArray('all',m.to) >= 0 || $.inArray('<%= @sign.name %>',m.to) >= 0) {
+              text_alert(m);
+              if (m.reload) { location.reload(); }
+            }
+          },
+        })
+
+        function text_alert(m) {
+          if (m.text_alert) {
+            if (m.text_alert.hide) {
+              hideAlert();
+              playDisplay();
+            } else if (m.text_alert.message) {
+              showAlert(m.text_alert.message);
+              pauseDisplay();
+            }
+          }
+        }
+     
+     
+    })();</script>
+  <% end %>
+  <%# ********  end PUBNUB messaging *********** %>
+
+
+</html>

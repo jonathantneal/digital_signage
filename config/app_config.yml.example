@@ -6,27 +6,20 @@ app:
   relative_url_root: /your-app # or blank if no relative root
 
 security:
-  url: 'https://example.com/ws'
-  service_name: dirsvc
-  key_path: /path/to/key.pem
-  key_password: *****************
-  cert_path: /path/to/cert.pem
-  verify_ssl: true
-  ssl_version: SSLv3 # accepts anything in OpenSSL::SSL::SSLContext::METHODS
   https_available: true
   validate_usernames: true
-  
+
   login:
     required: true # for reporting only, doesn't turn authentication on or off
     forgot_url: "https://www.example.com/forgot-password"
 
     cas:
       url: "https://login.biola.edu/cas"
-      
+
   roles:
     base_entitlement: "company:app:"
     include_affiliations: true
-    
+
   session:
     key: _app_name_session
     secret: 4e9495adc1372ca773fba4d2287153f84c93187367c33044bc55fc626177a34a8a8ca54da7c96132f3358c86aafeabbeb35a8b6547299118ce553272a543810d
@@ -45,35 +38,30 @@ email:
     password: ****************
 
 ui:
-  admin_menu:
-  - controller: users
-  - url: http://apps.biola.edu/access
-    text: Access
-    css_class: access
-  - url: https://www.google.com/analytics/reporting/
-    text: Analytics
-    css_class: analytics
-  - controller: info
-    action: configuration
-    text: Config
   pagination:
     per_page: 30
-  
+
 defaults:
   sign:
     email_frequency: 24   # in hours
   slide:
     delay: 7
-  
+
 google_analytics:
   enabled: true
   web_property_id: XX-00000-00
-  
+
 routing:
   default:
     controller: signs
     action: index
-    
+
 developer:
   title: Example Company
   homepage: http://example.com
+
+pubnub:
+  enabled: false
+  channel: signage_development
+  publish_key: '****************'
+  subscribe_key: '****************'

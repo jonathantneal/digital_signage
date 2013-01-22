@@ -4,8 +4,11 @@
     %dd.name=f.text_field(:name)
     %dt.title=f.label(:title)
     %dd.title=f.text_field(:title)
-    %dt.full_screen_mode=f.label(:full_screen_mode)
-    %dd.full_screen_mode=f.select(:full_screen_mode, Sign::FULL_SCREEN_MODES)
+    %dt.screen_size Screen Size (WxH)
+    %dd.screen_size
+      =f.text_field(:width, placeholder: 'width')
+      x
+      =f.text_field(:height, placeholder: 'height')
     %dt.transition.seconds=f.label(:transition_duration)
     %dd.transition.seconds
       =f.text_field(:transition_duration)
@@ -18,10 +21,6 @@
     %dd.check_in.seconds
       =f.text_field(:check_in_interval)
       seconds
-    %dt.video=f.label(:video)
-    %dd.video=f.check_box(:video)
-    %dt.audio=f.label(:audio)
-    %dd.audio=f.check_box(:audio)
     %dt.owner=f.label(:department_id, 'Department')
     %dd.owner=f.collection_select(:department_id, Department.with_permissions_to(:show), :id, :title)
     %dt.on_off On From

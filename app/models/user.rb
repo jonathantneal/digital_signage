@@ -1,8 +1,6 @@
 class User < ActiveRecord::Base
 
   STRING_SEPARATOR = ', '
-  
-  devise :cas_authenticatable, :rememberable, :trackable, :timeoutable
 
   attr_accessible :username, :first_name, :last_name, :title, :email, :department, :photo_url, :password, :remember_me, :department_ids
   alias_attribute :netid, :username
@@ -50,7 +48,6 @@ class User < ActiveRecord::Base
 
   def entitlements=(entitlements)
     raise TypeError.new('entitlementes is not an array') unless entitlements.is_a?(Array)
-    entitlements.map! { |ent| ent.gsub(/^urn:/, '') }
     write_attribute(:entitlements, entitlements.join(STRING_SEPARATOR))
   end
   
@@ -81,20 +78,18 @@ class User < ActiveRecord::Base
   end
 
   def is_admin?
-    self.has_role?(:admin)
+    self.has_role?(:admin) || self.is_developer?
   end
   
   def is_developer?
     self.has_role?(:developer)
   end
 
-  # Called by Devise NETID Authenticable plugin
   def can_login?
     self.has_role? allowed_roles
   end
 
   def cas_extra_attributes=(extra_attributes)
-    
     extra_attributes.each do |name, value|
       case name.to_sym
       when :cn
@@ -117,6 +112,17 @@ class User < ActiveRecord::Base
         self.last_name = value.first
       end
     end
+
+    {
+      username: username,
+      entitlements: entitlements,
+      photo_url: photo_url,
+      department: department,
+      title: title,
+      affiliations: affiliations,
+      first_name: first_name,
+      last_name: last_name
+    }
   end
 
   def self.entitlement_to_role(entitlement)

@@ -1,6 +1,4 @@
 class DepartmentsController < ApplicationController
-
-  before_filter :authenticate_user!
   filter_resource_access
   respond_to :html
   respond_to :js, :only => :index
@@ -33,9 +31,8 @@ class DepartmentsController < ApplicationController
     respond_with @department
   end
 
-  def destroy  
+  def destroy
     @department.destroy
     respond_with @department
   end
-
 end

@@ -1,11 +1,13 @@
 class SlidesController < ApplicationController
-
-  before_filter :authenticate_user!
-  filter_resource_access
-  respond_to :html
-  respond_to :js, :only => [:index, :destroy]
+  filter_resource_access :additional_collection => [:destroy_multiple, :edit_multiple, :update_multiple]
+  respond_to :html, :except => [:destroy_multiple]
+  respond_to :js, :only => [:index, :destroy, :destroy_multiple]
 
   def index
+    if params[:search].blank?
+      params[:search] = {published_status: :published}  # Default to only showing published slides
+    end
+
     @search = Slide.search(params[:search])
     @slides = @search.relation.includes(:department).page(params[:page]).per(params[:per] || Kaminari.config.default_per_page)
     respond_with(@slides) do |format|
@@ -20,7 +22,7 @@ class SlidesController < ApplicationController
 
   def new
     @slottable_signs = Sign.with_permissions_to(:update).order('signs.title')
-    
+
     # Add all available slots
     @slottable_signs.each do |sign|
       @slide.slots << Slot.new({:sign=>sign})
@@ -51,5 +53,21 @@ class SlidesController < ApplicationController
     end
     respond_with @slide
   end
-  
+
+  def destroy_multiple
+    Slide.find(params[:slide]).each { |slide| slide.destroy if permitted_to? :destroy, slide }
+    render :nothing => true
+  end
+
+  def edit_multiple
+    @slides = Slide.find(params[:s_ids])
+  end
+  def update_multiple
+    @slides = Slide.find(params[:slide_ids])
+    @slides.each do |slide|
+      slide.update_attributes!(params[:slide].reject {|k,v| v.blank? }) # only update values that aren't blank
+    end
+    flash[:notice] = "Updated slides!"
+    redirect_to slides_path
+  end
 end

@@ -1,11 +1,11 @@
 #top-right-link
   -if permitted_to?(:edit, :slides)
     =link_to edit_slide_path, :class=>"google_button" do
-      %i.icon-plus
+      %i.icon-pencil
       Edit Slide
   -if permitted_to?(:destroy, :slides)
     =link_to @slide, :method => "delete", :class=>"google_button", :confirm=> "Are you sure?" do
-      %i.icon-plus
+      %i.icon-trash
       Delete Slide
 %h1=@slide.title + ' Slide'
 %dl.slide
@@ -18,11 +18,9 @@
     /reduce width so that the content doesn't go behind the preview image
     %dt.url URL
     -unless @slide.url.blank?
-      %dd.url=link_to(@slide.content.url, @slide.content.url)
+      %dd.url=link_to(@slide.url, @slide.url)
     %dt.delay Delay
     %dd.delay=@slide.delay
-    %dt.resize Resize
-    %dd.resize=@slide.resize
     %dt.color Color
     %dd.color{:style => "color:##{@slide.color}; background-color:##{@slide.color};"}=@slide.color
     %dt.publish_at Publish Date

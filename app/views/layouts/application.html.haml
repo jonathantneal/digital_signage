@@ -4,32 +4,23 @@
   %head
     =render('layouts/head')
   %body{:class=>"#{controller_name} #{action_name}"}
-    =admin_menu
-    #wrapper
-      #biolaHeaderNav
-        %nav
-          %p
-            %a(href="http://www.biola.edu") Biola University
+    #header
+      #branding 
+        #site_title Digital Signage
+      -if user_signed_in?
+        #profile
+          =link_to(current_user.name, current_user, :class=>'name')
+          =link_to('Logout', logout_path, :class=>'logout')
+      #navigation.tabnav=navigation_menu
 
-      #wrapperTitle
-        #branding
-          #siteTitle=link_to(AppConfig.app.name, root_path)
-        -if user_signed_in?
-          #profile
-            =link_to(current_user.name, current_user, :class=>'name')
-            =link_to('Logout', destroy_user_session_path, :class=>'logout')
+    #page{:class=>"#{controller_name} #{action_name}"}
+      -if content_for? :aside
+        #contentAside
+          =yield_or(:aside, '')
 
-        
-      #wrapperPage
-        #page{:class=>"#{controller_name} #{action_name}"}
-          #navigation.tabnav=navigation_menu
-          -if content_for? :aside
-            #contentAside
-              =yield_or(:aside, '')
-          
-          #wrapperContent{:class=>"#{content_for?(:aside) ? 'make-room-for-aside' : ''}"}
-            =render('layouts/messages')
-            #content=yield
-          
+      #wrapperContent{:class=>"#{content_for?(:aside) ? 'make-room-for-aside' : ''}"}
+        =render('layouts/messages')
+        #content=yield
+
     =javascript_include_tag 'application'
     =yield :foot

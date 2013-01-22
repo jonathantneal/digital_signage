@@ -8,7 +8,11 @@ class UsersController < ApplicationController
     @search = User.with_permissions_to(:index).metasearch(params[:search])
     @users = @search.relation.page(params[:page])
     @user = User.new
-    respond_with @users
+    # respond_with @users
+    respond_to do |format|
+      format.html # index.html.haml
+      format.js { render :partial => 'users' }
+    end
   end
 
   def show

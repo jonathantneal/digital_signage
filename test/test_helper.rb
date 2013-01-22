@@ -10,18 +10,22 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+  def set_current_user(user)
+    session['cas'] = { 'user' => user.try(:username), 'extra_attributes' => {} }
+  end
+
+  def unset_current_user
+    session['cas'] = nil
+  end
+
   def as_user(user, &block)
     begin
-      sign_in :user, users(user)
+      set_current_user users(user)
       yield
     ensure
-      sign_out :user
+      unset_current_user
     end
   end
-end
-
-class ActionController::TestCase
-  include Devise::TestHelpers
 end
 
 require 'declarative_authorization/maintenance'
