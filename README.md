@@ -22,19 +22,21 @@ This application is used for managing a collection of digital signs.
 
 1. Clone repository
 
-2. Create and setup your `app/config/app_config.yml` file
+2. Create and setup your `/config/app_config.yml` file by copying the `.yml.example` file in the same directory
 
-3. Create and setup your `app/config/database.yml` file
+3. Create and setup your `/config/database.yml` file by copying the `.yml.example` file in the same directory
 
-4. Install the required gems:  
+4. Create and setup your `/config/newrelic.yml` file by copying the `.yml.example` file in the same directory (you can leave the license_key as it is for development)
+
+5. Install the required gems:  
   `bundle install`
   *(or if you're running on production)*
   `bundle install --deployment`
 
-5. Migrate your database:  
+6. Migrate your database:  
    `rake db:migrate`
     
-6. Precompile assets:  
+7. Precompile assets:  
    *(in staging or production only)*  
    *(`RAILS_RELATIVE_URL_ROOT` is only needed if the site does not have it's own domain)*  
    `bundle exec rake assets:precompile RAILS_RELATIVE_URL_ROOT=/signage`
