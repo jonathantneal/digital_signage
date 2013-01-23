@@ -128,8 +128,8 @@
 
     function checkReload() {
       $.getJSON(signUrl, function(data){
-        if (JSON.stringify(sign) != JSON.stringify(data)){
-          refreshSlides = data;
+        if (JSON.stringify(sign) != JSON.stringify(data.sign)){
+          refreshSlides = data.sign;
         }
       });
     }
