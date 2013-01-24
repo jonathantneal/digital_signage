@@ -5,9 +5,10 @@
     <!-- <link rel="stylesheet" href="../shared_assets/bootstrap/css/bootstrap.min.css"> -->
     <link rel="stylesheet" href="../shared_assets/fontawesome/css/font-awesome.min.css">
     <style>
-      body { 
-        margin: 0; 
-        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; 
+      body {
+        margin: 0 20px; 
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 1.5em;
         text-align: center;
         background-repeat: no-repeat;
         background-image: url(http://a0.twimg.com/images/themes/theme1/bg.png);
@@ -16,16 +17,19 @@
       body.repeat {
         background-repeat: repeat repeat;
       }
+      a { color: #0084B4; }
 
       /* Header */
-      div#header { border-radius: 4px; padding: 20px; min-width: 200px; max-width: 900px; margin: 20px auto; background-color: rgba(256, 256, 256, .5);}
+      div#header { border-radius: 4px; padding: 20px; min-width: 200px; max-width: 1600px; margin: 20px auto; background-color: rgba(256, 256, 256, .8);}
       div#header img { border: 3px white solid; border-radius: 4px; }
       div#header div.user_name { font-size: 2em; }
       div#header div.screen_name { font-size: 1.2em; }
 
       /* Tweet */
-      div.tweets { margin: 0 20px; }
-      div.tweet { min-width: 200px; max-width: 900px; padding: 20px; background-color: #fff; -webkit-border-radius: 5px; -moz-border-radius: 5px; border: 1px #ccc solid; position: relative; text-align: left; margin: 20px auto; }
+      div#tweets { }
+      div.tweet { min-width: 200px; max-width: 1600px; padding: 20px; background-color: #fff; border: 1px #ccc solid; border-bottom: none; position: relative; text-align: left; margin: 0 auto; }
+      div.tweet:first-child { border-radius: 5px 5px 0 0; font-weight: bold; }
+      div.tweet:last-child { border-radius: 0 0 5px 5px; border: 1px #ccc solid; }
 
       div.tweet img { float: left; padding: 0 10px 5px 0; }
 
@@ -99,10 +103,12 @@
         function buildTweets() {
           if (tweets.length > 0) {
             // clear previous tweets
-            $('#tweets').html("");
+            $('#tweets').html("<div class='tweet'>Tweets</div>");
 
             $.each(tweets, function(i,tweet) {
-              buildTweet(tweet);
+              if (i < api_count) {  // ensure you are only returning the correct amount of tweets
+                buildTweet(tweet);
+              }
             });
           }
         }
