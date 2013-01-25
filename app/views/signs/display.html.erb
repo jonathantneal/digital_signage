@@ -44,11 +44,11 @@
     function initializeDisplay() {
       // Setup Check-in
       var check_in_interval = sign.check_in_interval * 1000;
-      if (check_in_interval < 30000) { check_in_interval = 30000; }
+      if (check_in_interval < 60000) { check_in_interval = 60000; }
       setInterval(function(){checkIn()}, check_in_interval);
       // Setup Reload interval
       var reload_interval = sign.reload_interval * 1000;
-      if (reload_interval < 3000) { reload_interval = 3000; }
+      if (reload_interval < 90000) { reload_interval = 90000; }
       setInterval(function(){checkReload()}, reload_interval);
 
       // Loop through slides
