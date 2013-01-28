@@ -1,6 +1,7 @@
 authorization do
   role :developer do
-    has_omnipotence
+    # has_omnipotence
+    includes :admin
   end
 
   role :admin do
@@ -8,6 +9,7 @@ authorization do
       to :administrate
     end
     has_permission_on :slots, :to => [:sort, :destroy_multiple]
+    has_permission_on :slides, :to => [:destroy_multiple, :edit_multiple, :update_multiple]  #TODO: give managers permission to do this too, but permissions will probably have to happen in the controller.
 
     includes :manager
   end
