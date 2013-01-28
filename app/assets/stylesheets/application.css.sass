@@ -329,6 +329,7 @@ ul.checkbox
 
 
       form.filter
+        min-height: 100px
 
         fieldset
           position: relative
@@ -349,6 +350,14 @@ ul.checkbox
             font-size: 14pt
             font-weight: bold
             line-height: 14pt
+
+        &.fixed
+          fieldset
+            position: fixed
+            top: 0
+            left: 0
+            margin-top: 0
+            z-index: 100
       
         span.param
           float: left

@@ -75,3 +75,11 @@ $(document).ready ->
   $("form.search, form.filter").each ->
     ajaxifySearchForm this
 
+  if $('form.filter').exists()
+    filter_offset = $('form.filter').offset().top
+    if filter_offset
+      window.onscroll = (oEvent) ->
+        if window.pageYOffset > filter_offset
+          $('form.filter').addClass('fixed')
+        else
+          $('form.filter').removeClass('fixed')
