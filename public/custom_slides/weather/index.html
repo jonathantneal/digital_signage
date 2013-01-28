@@ -105,7 +105,8 @@
           $("#current_time").html(moment().format("h:mm:ss"));
           $("#current_day").html(moment().format("dddd, MMMM D"));
           if (today != (new Date()).getDay()) {
-            updateWeather();
+            var rand_time_from_now = Math.random() * (600000); // schedule weather to update sometime in the next 10 minutes to avoid too many API calls per minute
+            setTimeout(function(){updateWeather()}, rand_time_from_now);
             today = (new Date()).getDay();
           }
         }
