@@ -44,7 +44,14 @@
     </script>
 
     <script>
-      $('#container').css('height', window.innerHeight+"px").css('line-height', window.innerHeight+"px");
+      function resizeThisWindow() {
+        // The height needs to be set explicitly and not just set at 100% so that the images will align vertically
+        $('#container').css('height', window.innerHeight+"px").css('line-height', window.innerHeight+"px");
+      }
+      $(window).resize(function() {
+        resizeThisWindow();
+      });
+      resizeThisWindow();
 
       var dropmark_items;
       var username = url_query("username");

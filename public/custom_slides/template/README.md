@@ -11,7 +11,7 @@ Short description
 
 ###Example Url
 
-`http://your-url.com/custom_slides/signage_slides/template/?param1=foobar`
+`http://your-url.com/custom_slides/signage_slides/template/index.html?param1=foobar`
 
 [click here to view the slide](./index.html)
 

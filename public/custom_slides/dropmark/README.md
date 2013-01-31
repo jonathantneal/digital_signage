@@ -12,6 +12,6 @@ This shows a random image from a dropmark.com collection every time a slide is d
 
 ###Example Url
 
-`http://your-url.com/custom_slides/dropmark/?username=your_user_name&collection_id=123456`
+`http://your-url.com/custom_slides/dropmark/index.html?username=your_user_name&collection_id=123456`
 
 [click here to view the slide](./index.html)

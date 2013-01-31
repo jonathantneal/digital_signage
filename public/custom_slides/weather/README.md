@@ -11,7 +11,7 @@ This Weather page currently uses wunderground's api. See http://www.wunderground
 
 ###Example Url
 
-`http://your-url.com/custom_slides/signage_slides/weather/?weatherapi=http://api.wunderground.com/api/your_key/forecast/q/CA/La_Mirada.json`
+`http://your-url.com/custom_slides/signage_slides/weather/index.html?weatherapi=http://api.wunderground.com/api/your_key/forecast/q/CA/La_Mirada.json`
 
 [click here to view the slide](./index.html)
 
