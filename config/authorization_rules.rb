@@ -8,8 +8,9 @@ authorization do
     has_permission_on [:signs, :slides, :slots, :departments, :users] do
       to :administrate
     end
-    has_permission_on :slots, :to => [:sort, :destroy_multiple]
-    has_permission_on :slides, :to => [:destroy_multiple, :edit_multiple, :update_multiple]  #TODO: give managers permission to do this too, but permissions will probably have to happen in the controller.
+    has_permission_on :signs, to: [:info]
+    has_permission_on :slots, to: [:sort, :destroy_multiple]
+    has_permission_on :slides, to: [:destroy_multiple, :edit_multiple, :update_multiple]  #TODO: give managers permission to do this too, but permissions will probably have to happen in the controller.
 
     includes :manager
   end
