@@ -9,6 +9,7 @@ This shows the most recent tweets to any given account.
 * **screen_name** (required)
 * **count**
 * **user_themed** - changes the default theme to the user's twitter theme
+* **custom_url** - if you are caching the request somewhere. You can use [api_cache](https://github.com/biola/api_cache) to host your own caching server.
 
 
 ###Example Url

@@ -69,9 +69,7 @@
         // Get api url
         var api_screen_name = url_query('screen_name') || "biolau";
         var api_count = url_query('count') || "5";
-        var api_url = "http://api.twitter.com/1/statuses/user_timeline.json?include_rts=1&";
-        if (url_query('biola')) api_url = "https://ws.biola.edu/twitter/UserTimeline?jsonp&";
-            // used internally by Biola for caching purposes
+        var api_url = (url_query('custom_url') || "http://api.twitter.com/1/statuses/user_timeline.json") + "?include_rts=1&";
         if (api_screen_name) api_url += "screen_name="+api_screen_name+"&";
         if (api_count) api_url += "count="+api_count+"&";
 
