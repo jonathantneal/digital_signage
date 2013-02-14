@@ -1,4 +1,4 @@
-# Digital Signage
+# Digital Signage [![Build Status](https://travis-ci.org/biola/digital_signage.png?branch=master)](https://travis-ci.org/biola/digital_signage)
 
 This application is used for managing a collection of digital signs.
 
