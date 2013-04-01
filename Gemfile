@@ -2,29 +2,29 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.2.13'
 
-gem 'action_links', '~> 0.4.1'
-gem 'active_model_serializers', '~> 0.6.0'
-gem 'addressable', '~> 2.3.2'
-gem 'carrierwave', '~> 0.7.1'
-gem 'chronic', '~> 0.8.0'
+gem 'action_links'
+gem 'active_model_serializers'
+gem 'addressable'
+gem 'carrierwave'
+gem 'chronic'
 gem 'daemons', '~> 1.1.9'
-gem 'declarative_authorization', '~> 0.5.3'
-gem 'haml', '~> 3.1.7'
-gem 'httparty', '~> 0.9.0'
-gem 'jquery-rails', '~> 2.1.1'
-gem 'jquery-ui-rails', '~> 2.0.0'
-gem 'jquery-ui-themes', '~> 0.0.7'
-gem 'kaminari', '~> 0.14.1'
-gem 'memoist', '~> 0.2.0'
-gem 'meta_search', '~> 1.1.1'
-gem 'mini_magick', '~> 3.4'
-gem 'newrelic_rpm', '~> 3.5.4.33'
-gem 'port-a-query', '~> 0.1.1'
+gem 'declarative_authorization'
+gem 'haml'
+gem 'httparty'
+gem 'jquery-rails'
+gem 'jquery-ui-rails'
+gem 'jquery-ui-themes'
+gem 'kaminari'
+gem 'memoist'
+gem 'meta_search'
+gem 'mini_magick'
+gem 'newrelic_rpm'
+gem 'port-a-query'
 gem 'rack-cas'
-gem 'turnout', '~> 0.2.2'
-gem 'version', '~> 1.0.0'
-gem 'viva-app_config', '~> 1.2.0', :require=>'app_config'
-gem 'yaml_db', '~> 0.2.1'
+gem 'turnout'
+gem 'version'
+gem 'viva-app_config', :require=>'app_config'
+gem 'yaml_db'
 
 group :development do
   gem 'better_errors'
@@ -32,23 +32,23 @@ group :development do
 end
 
 group :development, :test do
-  gem 'sqlite3-ruby', '~> 1.3.3', :require => 'sqlite3'
+  gem 'sqlite3-ruby', :require => 'sqlite3'
   gem 'pry'
   gem 'thin'
 end
 
 group :assets do
-  gem 'bourbon', '~> 3.0.1'
-  gem 'coffee-rails', '~> 3.2.2'
-  gem 'compass-rails', '~> 1.0.3'
-  gem 'sass-rails', '~> 3.2.5'
-  gem 'therubyracer', '~> 0.10.2'
+  gem 'bourbon'
+  gem 'coffee-rails'
+  gem 'compass-rails'
+  gem 'sass-rails'
+  gem 'therubyracer'
 end
 
 group :staging, :production do
-  gem 'mysql2', '~> 0.3.7'
+  gem 'mysql2'
 end
 
 group :production do
-  gem 'exception_notification', '~> 3.0.0'
+  gem 'exception_notification'
 end
