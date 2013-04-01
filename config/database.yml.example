@@ -22,7 +22,7 @@ staging:
   database: digitalsignage
   pool: 5
   username: digitalsignage
-  password: ***********
+  password: "***********"
 #  socket: /var/run/mysqld/mysqld.sock
 
 production:
@@ -32,5 +32,5 @@ production:
   database: digitalsignage
   pool: 5
   username: digitalsignage
-  password: ***********
+  password: "***********"
 #  socket: /var/run/mysqld/mysqld.sock

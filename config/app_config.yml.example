@@ -35,7 +35,7 @@ email:
     enable_tls: true
     auth_type: login
     username: user@example.com
-    password: ****************
+    password: "****************"
 
 ui:
   pagination:
@@ -63,5 +63,5 @@ developer:
 pubnub:
   enabled: false
   channel: signage_development
-  publish_key: '****************'
-  subscribe_key: '****************'
+  publish_key: "****************"
+  subscribe_key: "****************"
