@@ -5,7 +5,7 @@ gem 'rails', '3.2.13'
 gem 'action_links'
 gem 'active_model_serializers'
 gem 'addressable'
-gem 'carrierwave'
+gem 'carrierwave', '~> 0.7.1' # Test actual display page (on site with relative_url_root) before updating that the image links aren't broken
 gem 'chronic'
 gem 'daemons', '~> 1.1.9'
 gem 'declarative_authorization'
