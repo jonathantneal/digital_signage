@@ -1,6 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
+    <title><%= @sign.title %></title>
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <link rel="apple-touch-icon" href="<%= asset_path('apple_icon_57x57.png') %>" />
@@ -23,7 +24,7 @@
     <div id="alert"></div>
   </body>
 
-  <script src="http://code.jquery.com/jquery-latest.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 
   <!-- Cycle JQuery plugin -->
   <!-- <script src="http://malsup.github.com/jquery.cycle.all.js"></script> -->
@@ -121,7 +122,7 @@
     function nextSlide() {
       if (!displayIsPaused) {
         $('#digitalsign').cycle("next");
-      } else { 
+      } else {
         waitToAdvanceSlides = false;
       }
     }
@@ -149,7 +150,7 @@
     }
     function playDisplay() {
       displayIsPaused = false;
-      
+
       // Wait to advance slide if a timeout is already set and hasn't finished yet.
       if (!waitToAdvanceSlides) {
         nextSlide();
@@ -170,27 +171,27 @@
     }
   </script>
 
-  <%# ********  PUBNUB messaging *********** 
+  <%# ********  PUBNUB messaging ***********
   To use:
     {
       to: ['sign_name', 'another_sign'], // Required. You can also pass 'all' to trigger all signs
-      text_alert: { 
+      text_alert: {
         hide: true  // pass this without a message to turn off the alert
         message: 'this is the text you want displayed in the alert on the signs'
       }
       reload: true  // Force reload
     }
   %>
-  <% if AppConfig.pubnub && AppConfig.pubnub.enabled %>
+  <% if AppConfig.pubnub.present? && AppConfig.pubnub.enabled %>
     <div id="pubnub"></div>
-    <script src="http://cdn.pubnub.com/pubnub-3.4.min.js"></script>
+    <script src="https://cdn.pubnub.com/pubnub-3.4.min.js"></script>
     <script>(function(){
-     
+
         // INIT PubNub
         var pubnub = PUBNUB.init({
             subscribe_key : "<%= AppConfig.pubnub.subscribe_key %>"
         });
-     
+
         // LISTEN
         pubnub.subscribe({
           channel : "<%= AppConfig.pubnub.channel %>",
@@ -213,8 +214,8 @@
             }
           }
         }
-     
-     
+
+
     })();</script>
   <% end %>
   <%# ********  end PUBNUB messaging *********** %>
