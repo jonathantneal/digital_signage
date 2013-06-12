@@ -1,7 +1,7 @@
 $(document).ready ->
 
   if $('body.slides').exists()
-    
+
     @add_fields = (link, association, content) ->
       new_id = new Date().getTime()
       regexp = new RegExp("new_" + association, "g")
@@ -10,7 +10,7 @@ $(document).ready ->
     # Date Picker
     $(".publish_at input[type=text]").datepicker dateFormat: "MM d, yy '12:00 AM'"
     $(".unpublish_at input[type=text]").datepicker dateFormat: "MM d, yy '11:59 PM'"
-    
+
     # Color Picker
     colorBox = $("dd.color input")
     if typeof (jQuery.fn.ColorPicker) isnt "undefined" and colorBox.length
@@ -31,7 +31,7 @@ $(document).ready ->
             backgroundColor: "#" + hex
 
 
-    $("input.delete[type=checkbox]").live "click", (event) ->
+    $(document).on "click", "input.delete[type=checkbox]", (event) ->
       $(this).closest("li,tr").fadeOut()
 
 
@@ -73,7 +73,7 @@ $(document).ready ->
     refresh_preview_size()
 
     # ****  Enable Multi Select  ******    TODO, you may want to break this off into a jQuery plugin eventually, it is also being reused in sign.js
-    $("ul.slides li").live "click", (e) ->
+    $(document).on "click", "ul.slides li", (e) ->
       if not e.altKey and not e.shiftKey
         $(".selected").not(this).removeClass "selected"
       else if e.shiftKey
@@ -96,7 +96,7 @@ $(document).ready ->
 
 
     # ***** Enable context sensitive buttons based on what slide is currently selected  ********
-    $("body").live "click", (e) ->
+    $(document).on "click", "body", (e) ->
       $(".selected").removeClass "selected"
       $("#slide_options .google_button").hide()
 
@@ -105,7 +105,7 @@ $(document).ready ->
       e.stopPropagation()
 
     $("#edit-slide-button").click (e) ->
-      selected_slides = $("ul.slides li.selected") 
+      selected_slides = $("ul.slides li.selected")
       if selected_slides.length == 1
         window.location = (selected_slides.first().data("edit-url"))
       if selected_slides.length > 1
@@ -123,7 +123,7 @@ $(document).ready ->
     removeSlides = (slides) ->
       r = confirm("Are you sure you would like to delete these " + slides.length + " slides? This action is irreversible.")
       return  unless r
-      
+
       # Serialize slide id's
       str = []
       $(slides).each ->

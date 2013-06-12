@@ -57,11 +57,11 @@ $(document).ready ->
       change: (event, ui) ->
         localStorage.slidervalue = ui.value
 
-    
+
     # Initiate width when page loads
     refresh_preview_size()
 
-    $("ol.slots li").live "click", (e) ->
+    $(document).on "click", "ol.slots li", (e) ->
       if not e.altKey and not e.shiftKey
         $(".selected").not(this).removeClass "selected"
       else if e.shiftKey
@@ -82,7 +82,7 @@ $(document).ready ->
         $("#slide_options .google_button").hide()
       e.stopPropagation()
 
-    $("body").live "click", (e) ->
+    $(document).on "click", "body", (e) ->
       $(".selected").removeClass "selected"
       $("#slide_options .google_button").hide()
 
