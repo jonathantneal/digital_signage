@@ -36,7 +36,7 @@ SignManager::Application.configure do
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
-  
+
   # Tell Action Mailer not to deliver emails to the real world.
   # The :test delivery method accumulates sent emails in the
   # ActionMailer::Base.deliveries array.
@@ -51,5 +51,10 @@ SignManager::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
-  
+
+
+  # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
+  #config.force_ssl = true
+  require 'rack/ssl'
+  config.middleware.use Rack::SSL, hsts: false # disable Strict-Transport-Security
 end
