@@ -11,11 +11,8 @@
 =form_for(@search, :url=>url_for(@sign), :html=>{:class=>'filter'}) do |f|
   %fieldset
     %legend Filter Slides
-  
+
     #slide_options
-      =link_to('Show Slide', "#", :id=>"show-slide-button", :class=>"google_button single_slide_button")
-      =link_to('Edit Slot', "#", :id=>"edit-slide-button", :class=>"google_button single_slide_button")
-      =link_to('Remove', "#", :id=>"remove-slide-button", :class=>"google_button multi_slide_button")
       #thumb_size_slider
 
     %span.param
@@ -24,5 +21,6 @@
     .buttons=f.submit 'Filter'
 
 
-%ol.slots.search_results
-  =render 'slots'
+=form_tag drop_on_sign_url(@sign), id: 'slide-upload-dropzone', class: 'dropzone' do
+  %ol.slots.search_results.dropzone-previews#list_of_slots
+    =render 'slots'

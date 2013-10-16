@@ -1,5 +1,5 @@
 class SignsController < ApplicationController
-  filter_resource_access :additional_member => [:info, :check_in, :display]
+  filter_resource_access :additional_member => [:info, :check_in, :display, :drop_on]
   respond_to :html, :except => :check_in
   respond_to :json, :only => [:show, :check_in]
 
@@ -70,6 +70,20 @@ class SignsController < ApplicationController
 
   def display
     render :layout => false
+  end
+
+  def drop_on
+    slide = Slide.new
+    slide.content     = params[:file]
+    slide.title       = params[:file].original_filename
+    slide.department  = @sign.department
+    slide.publish_at  = Time.now
+    if slide.save
+      @sign.slides << slide
+      render :json => { result: 'success' }
+    else
+      render :json => { result: 'error' }
+    end
   end
 
   protected

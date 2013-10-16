@@ -30,7 +30,7 @@ div.thumbnail img, div.thumbnail .swf
   &.ui-sortable
     >li
       cursor: move
-      
+
   >li
     display: inline-block
     position: relative
@@ -38,22 +38,40 @@ div.thumbnail img, div.thumbnail .swf
     border: 5px solid rgba(0,0,0,0)
 
     &:hover
-      .slide_status, ul.actions, .preview_wrapper .title_bar
+      .slide_status, .remove_slot_link, ul.actions, .preview_wrapper .title_bar
         opacity: 1
         @include transition(opacity, 0.2s, 0s)
     &.selected
       border: 5px solid #1175AE
       opacity: .6
 
-    .slide_status 
+    .slide_status
       opacity: 0
       z-index: 10
       position: absolute
+      top: 0
       left: 0
       background-color: rgba(0, 0, 0, 0.8)
       border-radius: 0 0 5px 0
       padding: 5px
       color: white
+
+    .remove_slot_link
+      opacity: 0
+      z-index: 10
+      position: absolute
+      top: 0
+      right: 0
+      background-color: rgba(0, 0, 0, 0.8)
+      border: 1px solid rgba(0, 0, 0, 0.8)
+      border-radius: 0 0 0 5px
+      padding: 5px 10px
+      color: white
+      text-decoration: none
+
+      &:hover
+        background-color: rgba(255, 150, 150, 0.8)
+        color: #333
 
     .preview_wrapper
       position: relative
@@ -62,7 +80,7 @@ div.thumbnail img, div.thumbnail .swf
       .corner-banner
         @include corner-banner
 
-    
+
       div.thumbnail
         width: $thumbnail_width
         height: $thumbnail_height
@@ -73,7 +91,7 @@ div.thumbnail img, div.thumbnail .swf
         max-width: 100%
         max-height: 100%
         vertical-align: middle
-      
+
       .title_bar
         opacity: 0
         width: 100%
@@ -83,7 +101,7 @@ div.thumbnail img, div.thumbnail .swf
         position: absolute
         background-color: rgba(0, 0, 0, 0.8)
 
-        h4 
+        h4
           color: white
           margin: 5px
           a

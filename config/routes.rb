@@ -11,11 +11,12 @@ SignManager::Application.routes.draw do
     end
   end
   resources :signs do
-    resources :slots, :only => :edit
+    resources :slots, :only => :destroy
     member do
       get :info
       get :check_in
       get :display
+      post :drop_on
     end
   end
   resources :slots, :only => [:create, :update] do

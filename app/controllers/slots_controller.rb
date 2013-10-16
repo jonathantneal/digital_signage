@@ -21,6 +21,12 @@ class SlotsController < ApplicationController
     redirect_to @slot.sign
   end
 
+  def destroy
+    @sign = @slot.sign
+    @slot.destroy
+    render :nothing => true
+  end
+
   def destroy_multiple
     Slot.find(params[:slot]).each { |slot| slot.destroy if permitted_to? :destroy, slot }
     render :nothing => true

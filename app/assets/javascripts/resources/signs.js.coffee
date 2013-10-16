@@ -14,36 +14,6 @@ $(document).ready ->
       $("ol.slots li div.thumbnail").css "height", ($("ol.slots li div.thumbnail").width() * 113 / 200.0)
       $("ol.slots li div.thumbnail").css "line-height", ($("ol.slots li div.thumbnail").width() * 113 / 200.0 - 3)+"px"
 
-    removeSlots = (slots) ->
-      r = confirm("Are you sure you would like to remove these " + slots.length + " slides from this sign?")
-      return  unless r
-      str = []
-      $(slots).each ->
-        res = $(this).attr("id").match(/(.+)[-=_](.+)/)
-        str.push (res[1] + "[]") + "=" + (res[2])  if res
-
-      str = str.join("&")
-      $.ajax
-        type: "POST"
-        url: ROOT_URL + "slots/destroy_multiple"
-        data: str
-        dataType: "script"
-        success: (data) ->
-          slots.remove()
-
-    $("#show-slide-button").click (e) ->
-      window.location = ($("ol.slots li.selected").first().data("show-url"))
-      e.stopPropagation()
-
-    $("#edit-slide-button").click (e) ->
-      window.location = ($("ol.slots li.selected").first().data("edit-url"))
-      e.stopPropagation()
-
-    $("#remove-slide-button").click (e) ->
-      removeSlots $("ol.slots li.selected")
-      e.stopPropagation()
-
-    $("#slide_options .google_button").hide()
     $("#thumb_size_slider").slider
       value: (localStorage.slidervalue or 336)
       min: 175
@@ -57,34 +27,11 @@ $(document).ready ->
       change: (event, ui) ->
         localStorage.slidervalue = ui.value
 
-
     # Initiate width when page loads
     refresh_preview_size()
 
-    $(document).on "click", "ol.slots li", (e) ->
-      if not e.altKey and not e.shiftKey
-        $(".selected").not(this).removeClass "selected"
-      else if e.shiftKey
-        last_selected = $(".last_selected").index()
-        this_index = $(this).index()
-        if last_selected < this_index
-          $("ol.slots li").slice(last_selected, this_index).addClass "selected"
-        else $("ol.slots li").slice(this_index + 1, last_selected).addClass "selected"  if last_selected > this_index
-      $(this).toggleClass "selected"
-      $(".last_selected").removeClass "last_selected"
-      $(this).addClass "last_selected"
-
-      if $("ol.slots li.selected").length > 1
-        $(".single_slide_button").hide()
-      else if $("ol.slots li.selected").length is 1
-        $("#slide_options .google_button").show()
-      else
-        $("#slide_options .google_button").hide()
-      e.stopPropagation()
-
-    $(document).on "click", "body", (e) ->
-      $(".selected").removeClass "selected"
-      $("#slide_options .google_button").hide()
+    $('.remove_slot_link').click ->
+      $(this).parents('li.slot').remove()
 
     $("ol.slots").sortable
       items: ".slot"
@@ -103,3 +50,24 @@ $(document).ready ->
           dataType: "script"
 
 
+
+    Dropzone.options.slideUploadDropzone = {
+      previewsContainer: "#list_of_slots"
+      previewTemplate: "<li class=\"slot dz-preview dz-file-preview\">\n  <div class=\"slide_status\">\n    <span data-dz-size></span>\n  </div>\n  <div class=\"preview_wrapper\">\n    <div class=\"thumbnail image\">\n      <img data-dz-thumbnail />\n    </div>\n    <div class=\"title_bar dz-filename\">\n      <h4><span data-dz-name></span></h4>\n    </div>\n  </div>\n</li>"
+
+      thumbnailWidth: 336
+      thumbnailHeight: 189
+
+      # previewTemplate: '
+      #   <li class="slot dz-preview dz-file-preview">
+      #     <div class="preview_wrapper">
+      #       <div class="thumbnail image">
+      #         <img data-dz-thumbnail />
+      #       </div>
+      #       <div class="title_bar dz-filename">
+      #         <h4><span data-dz-name></span></h4>
+      #       </div>
+      #     </div>
+      #   </li>
+      # '
+    }

@@ -1,13 +1,17 @@
 -@slots.each do |slot|
-  %li[slot]{'data-edit-url'=>url_for([:edit, @sign, slot]), 'data-show-url'=>slide_url(slot.slide)}
-    
-    .slide_status= "#{slide_status(slot.slide)}" + (slot.slide.showing? ? " - #{slot.custom_delay}s" : "")
+  %li[slot]
 
-    .preview_wrapper
-      -unless slot.slide.published?
-        .corner-banner
-          unpublished
-      =render "shared/thumbnail", slide: slot.slide
+    .slide_status
+      = "#{slide_status(slot.slide)}" + (slot.slide.showing? ? " - #{slot.custom_delay}s" : "")
 
-      .title_bar
-        %h4=slot.slide.title
+    = link_to 'X', sign_slot_url(@sign, slot), method: :delete, class: 'remove_slot_link', title: 'Remove this slide from sign', remote: true
+
+    = link_to slot.slide do
+      .preview_wrapper
+        -unless slot.slide.published?
+          .corner-banner
+            unpublished
+        =render "shared/thumbnail", slide: slot.slide
+
+        .title_bar
+          %h4=slot.slide.title
