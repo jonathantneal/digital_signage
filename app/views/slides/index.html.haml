@@ -8,8 +8,9 @@
 =form_for(@search, :html=>{:class=>'filter'}) do |f|
   %fieldset
     %legend Filter Slides
-    
+
     #slide_options
+      =link_to('Add To Sign', "#", :id=>"add-to-sign-button", :class=>"google_button multi_slide_button")
       =link_to('Show', "#", :id=>"show-slide-button", :class=>"google_button single_slide_button")
       =link_to('Edit', "#", :id=>"edit-slide-button", :class=>"google_button multi_slide_button")
       =link_to('Delete', "#", :id=>"remove-slide-button", :class=>"google_button multi_slide_button")
@@ -29,3 +30,22 @@
 
 .search_results
   =render('slides')
+
+
+#signSelectModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", role: "dialog", tabindex: "-1"}
+  .modal-dialog
+    .modal-content
+      = form_tag [:add_to_signs, :slides] do |f|
+        = hidden_field_tag 'slide_ids', ''
+        .modal-header
+          %h4.modal-title Add to selected signs
+        .modal-body
+          - Sign.with_permissions_to(:index).order('signs.title').each do |sign|
+            = label_tag do
+              = check_box_tag 'sign_ids[]', sign.id
+              = sign.title
+            / = sign.title
+            %br
+        .modal-footer
+          %button.btn.btn-default{"data-dismiss" => "modal", type: "button"} Close
+          = submit_tag 'Add to signs', class: 'button btn btn-primary'

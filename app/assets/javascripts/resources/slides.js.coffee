@@ -97,8 +97,14 @@ $(document).ready ->
 
     # ***** Enable context sensitive buttons based on what slide is currently selected  ********
     $(document).on "click", "body", (e) ->
-      $(".selected").removeClass "selected"
-      $("#slide_options .google_button").hide()
+      unless $(this).hasClass('modal-open')
+        $(".selected").removeClass "selected"
+        $("#slide_options .google_button").hide()
+
+    $("#add-to-sign-button").click (e) ->
+      selected_slides = $("ul.slides li.selected")
+      addSlidesToSign selected_slides
+      e.stopPropagation()
 
     $("#show-slide-button").click (e) ->
       window.location = ($("ul.slides li.selected").first().data("show-url"))
@@ -144,5 +150,16 @@ $(document).ready ->
     editSlides = (slides) ->
       # Serialize the selected slide ids and pass them as parameters to slides#edit_multiple
       slide_array = $.map slides, (slide) ->
-        return $(slide).data("slide-id")
+        $(slide).data("slide-id")
       window.location = ROOT_URL + "slides/edit_multiple?" + $.param({s_ids:slide_array})
+
+
+    # ****** Add one or more slides to a sign  *****
+    addSlidesToSign = (slides) ->
+      slide_array = $.map slides, (slide) ->
+        $(slide).data("slide-id")
+      $('#slide_ids').val slide_array
+      openSignSelectModal()
+
+    openSignSelectModal = ->
+      $('#signSelectModal').modal('show')

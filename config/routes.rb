@@ -7,6 +7,7 @@ SignManager::Application.routes.draw do
       post :destroy_multiple
       put :update_multiple
       get :edit_multiple
+      post :add_to_signs
     end
   end
   resources :signs do

@@ -1,5 +1,5 @@
 class SlidesController < ApplicationController
-  filter_resource_access :additional_collection => [:destroy_multiple, :edit_multiple, :update_multiple]
+  filter_resource_access :additional_collection => [:destroy_multiple, :edit_multiple, :update_multiple, :add_to_signs]
   respond_to :html, :except => [:destroy_multiple]
   respond_to :js, :only => [:index, :destroy, :destroy_multiple]
 
@@ -69,5 +69,19 @@ class SlidesController < ApplicationController
     end
     flash[:notice] = "Updated slides!"
     redirect_to slides_path
+  end
+
+  def add_to_signs
+    signs = Sign.with_permissions_to(:edit).find(params[:sign_ids])  # signs already come as an array
+    slides = Slide.with_permissions_to(:index).find(params[:slide_ids].split(','))  # slides come as a comma seperated string
+
+    # Add new slides to each selected sign
+    signs.each do |sign|
+      sign.slides << slides
+    end
+
+    flash[:notice] = "#{slides.length} Slides added to the following signs - #{signs.map{|s| view_context.link_to(s.title, s) }.join(', ')}".html_safe
+
+    redirect_to slides_url
   end
 end
