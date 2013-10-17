@@ -1,0 +1,16 @@
+h2 Edit User Departments
+hr
+
+= form_for(@user) do |f|
+
+  .departments
+    - Department.with_permissions_to(:show).each do |department|
+      .checkbox
+        = label_tag do
+          = check_box_tag :department_ids, department.id, @user.departments.include?(department), name: 'user[department_ids][]'
+          = department.title
+
+  hr
+
+  .buttons
+    = f.submit 'Save', class: 'btn btn-primary'

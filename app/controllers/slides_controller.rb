@@ -1,5 +1,5 @@
 class SlidesController < ApplicationController
-  filter_resource_access :additional_collection => [:destroy_multiple, :edit_multiple, :update_multiple, :add_to_signs]
+  filter_resource_access :additional_collection => [:destroy_multiple, :edit_multiple, :update_multiple, :add_to_signs, :drop_create]
   respond_to :html, :except => [:destroy_multiple]
   respond_to :js, :only => [:index, :destroy, :destroy_multiple]
 
@@ -84,5 +84,15 @@ class SlidesController < ApplicationController
     flash[:notice] = "#{slides.length} Slides added to the following signs - #{signs.map{|s| view_context.link_to(s.title, s) }.join(', ')}".html_safe
 
     redirect_to slides_url
+  end
+
+  def drop_create
+    slide = Slide.from_drop params[:file], current_user.departments.first
+
+    if slide.save
+      render :json => { result: 'success' }
+    else
+      render :json => { result: 'error' }
+    end
   end
 end

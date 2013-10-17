@@ -5,7 +5,7 @@ class Slide < ActiveRecord::Base
 
   attr_accessible :title, :delay, :color, :department_id, :publish_at, :unpublish_at, :created_at, :updated_at, :html_url,
                   :sign_id, :sign_ids, :content, :content_cache, :schedules_attributes, :parameters_attributes, :slots_attributes
-  
+
   belongs_to :department
   has_many :schedules, :dependent => :destroy
   has_many :parameters, :dependent => :destroy
@@ -18,10 +18,10 @@ class Slide < ActiveRecord::Base
   after_initialize :defaults
 
   mount_uploader :content, ContentUploader
-  
+
   validates_presence_of :title, :delay, :color, :department_id
   # validates_presence_of :content, :on => :create
-  validates :title, :uniqueness => true
+  # validates :title, :uniqueness => true
   validates_integrity_of :content
   validates_each :unpublish_at, :allow_nil => true do |record, attr, value|
     if record.publish_at.to_i > value.to_i
@@ -30,7 +30,7 @@ class Slide < ActiveRecord::Base
   end
 
   # before_save :set_content_type
-  
+
   scope :published_status, lambda{ |status|
     case status
     when 'published'
@@ -89,7 +89,7 @@ class Slide < ActiveRecord::Base
       unpublish_at.future?
     else
       publish_at.past? && unpublish_at.future?
-    end 
+    end
   end
 
   def unpublished?
@@ -108,35 +108,35 @@ class Slide < ActiveRecord::Base
   def type
     content_type || "text/html"
   end
-  
+
   def image?
     type.try(:[], 'image/').present?
   end
-  
+
   def video?
     type.try(:[], 'video/').present?
   end
-  
+
   def swf?
     type == 'application/x-shockwave-flash'
   end
-  
+
   def active?(now=Time.now)
     return false if unpublished?
     showing?(now)
   end
-  
+
   def inactive?(now=Time.now)
     !active?(now)
   end
-  
+
   def showing?(now=Time.now)
     return true if valid_schedules(now).empty?
     return previous_schedule(now).activate? unless previous_schedule(now).nil?
     return next_schedule(now).deactivate? unless next_schedule(now).nil?
-    false  
+    false
   end
-  
+
   def hidden?(now=Time.now)
     !showing?(now)
   end
@@ -162,15 +162,15 @@ class Slide < ActiveRecord::Base
       end
     end
   end
-  
+
   def sorted_valid_schedules(now=Time.now)
     valid_schedules(now).sort! { |a,b| a.time(now) <=> b.time(now) }
   end
-  
+
   def previous_schedule(now=Time.now)
     past_schedules(now).last unless past_schedules(now).empty?
   end
-  
+
   def past_schedules(now=Time.now)
     sorted_valid_schedules(now).reject { |s| s.time(now) > now }
   end
@@ -178,11 +178,11 @@ class Slide < ActiveRecord::Base
   def next_schedule(now=Time.now)
     future_schedules(now).first unless future_schedules(now).empty?
   end
-  
+
   def future_schedules(now=Time.now)
-    sorted_valid_schedules(now).reject { |s| s.time(now) < now }  
+    sorted_valid_schedules(now).reject { |s| s.time(now) < now }
   end
-  
+
   def parameter_hash
     params = {}
     self.parameters.each do |param|
@@ -190,15 +190,15 @@ class Slide < ActiveRecord::Base
     end
     params
   end
-  
+
   # Class Methods
   class << self
     extend Memoist
-  
+
     def expired_slides(now=Time.now)
       Slide.all.reject { |s| !s.expired?(now) }
     end
-    
+
     def total_time(slides)
       time = 0
       slides.each do |slide|
@@ -206,12 +206,23 @@ class Slide < ActiveRecord::Base
       end
       return time
     end
-  
+
+    def from_drop(file, department)
+      unless slide = Slide.find_by_title(file.original_filename)
+        slide = Slide.new
+        slide.content     = file
+        slide.title       = file.original_filename
+        slide.department  = department
+        slide.publish_at  = Time.now
+      end
+      slide
+    end
+
     memoize :expired_slides, :total_time
   end
-  
+
   private
-  
+
   def set_content_type
     if self.respond_to?(:content) && self.respond_to?(:content_type)
       unless content.file.try(:content_type).nil?
@@ -225,7 +236,7 @@ class Slide < ActiveRecord::Base
       self.delay ||= AppConfig.defaults.slide.delay
     end
   end
-  
+
   memoize :sorted_schedules, :valid_schedules, :sorted_valid_schedules,
     :previous_schedule, :past_schedules, :next_schedule, :future_schedules,
     :parameter_hash

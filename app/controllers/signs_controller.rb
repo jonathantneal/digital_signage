@@ -74,13 +74,7 @@ class SignsController < ApplicationController
   end
 
   def drop_on
-    unless slide = Slide.find_by_title(params[:file].original_filename)
-      slide = Slide.new
-      slide.content     = params[:file]
-      slide.title       = params[:file].original_filename
-      slide.department  = @sign.department
-      slide.publish_at  = Time.now
-    end
+    slide = Slide.from_drop params[:file], @sign.department
 
     if slide.save
       @sign.slides << slide
