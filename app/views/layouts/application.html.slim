@@ -25,7 +25,7 @@ html lang="en-us"
         -if user_signed_in?
           li.dropdown
             a.dropdown-toggle data-toggle="dropdown" href="#"
-              i.icon-user
+              i.icon-user>
               i.icon-caret-down
             ul.dropdown-menu
               li = link_to('My Account', current_user, :class=>'name')
@@ -35,6 +35,11 @@ html lang="en-us"
     #page_wrapper
       #messages = render('layouts/messages')
       = yield
+
+    #page-spinner
+      span.icon-stack
+        i.icon-sun.icon-spin.icon-stack-base
+        i.icon-cloud-upload
 
     = javascript_include_tag 'application'
     = yield :foot

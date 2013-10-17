@@ -78,8 +78,10 @@ class SignsController < ApplicationController
 
     if slide.save
       @sign.slides << slide
+      flash[:notice] = "Slide has been added"
       render :json => { result: 'success' }
     else
+      flash[:danger] = "There was a problem adding the slide"
       render :json => { result: 'error' }
     end
   end

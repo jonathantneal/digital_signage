@@ -48,13 +48,3 @@ $(document).ready ->
           url: ROOT_URL + "slots/sort"
           data: $(this).sortable("serialize")
           dataType: "script"
-
-
-
-    Dropzone.options.slideUploadDropzone = {
-      previewsContainer: "#list_of_slides"
-      previewTemplate: "<li class=\"slot dz-preview dz-file-preview\">\n  <div class=\"slide_status\">\n    <span data-dz-size></span>\n  </div>\n  <div class=\"preview_wrapper\">\n    <div class=\"thumbnail image\">\n      <img data-dz-thumbnail />\n    </div>\n    <div class=\"title_bar dz-filename\">\n      <h4><span data-dz-name></span></h4>\n    </div>\n  </div>\n</li>"
-      thumbnailWidth: 336
-      thumbnailHeight: 189
-      clickable: false
-    }

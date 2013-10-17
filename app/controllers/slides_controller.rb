@@ -89,9 +89,13 @@ class SlidesController < ApplicationController
   def drop_create
     slide = Slide.from_drop params[:file], current_user.departments.first
 
+    message = "Slide with title already exists" if slide.persisted?
+
     if slide.save
+      flash[:notice] = message || "Slide has been created"
       render :json => { result: 'success' }
     else
+      flash[:danger] = "There was a problem creating the slide"
       render :json => { result: 'error' }
     end
   end
