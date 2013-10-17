@@ -1,8 +1,18 @@
+div
+  .pull-right
+    = link_to edit_slide_url(@slide), class: 'btn btn-default' do
+      i.icon-edit>
+      | Edit
+    '
+    = link_to @slide, method: :delete, class: 'btn btn-default', title: 'Delete this slide', data: { confirm: "Are you sure? This will remove the slide from all signs as well." } do
+      i.icon-trash>
+      | Delete
+  h3.no-top-padding=@slide.title
+
 #slide_preview
   =render(:partial=>'shared/preview', :locals=>{:slide=>@slide})
 
 #slide_details
-  h3=@slide.title
   dl.slide
 
     .details

@@ -1,2 +1,5 @@
-%h1 Editing Slide
-=render('form')
+.row
+  .col-lg-4
+    = render 'shared/preview', slide: @slide
+  .col-lg-8
+    = render('form')

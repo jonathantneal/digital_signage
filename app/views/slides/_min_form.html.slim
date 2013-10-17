@@ -14,15 +14,18 @@
 
     .form-group
       .btn-group data-toggle='buttons'
-        label class='btn btn-primary'
+        label class='btn btn-primary active'
           input type='radio' name='options' id='option_upload'
-            i.icon-cloud-upload
+            i.icon-cloud-upload>
+            span.if-active Upload
         label class='btn btn-primary'
           input type='radio' name='options' id='option_link'
-            i.icon-link
+            i.icon-link>
+            span.if-active Link
         label class='btn btn-primary'
           input type='radio' name='options' id='option_editor'
-            i.icon-edit
+            i.icon-edit>
+            span.if-active Editor
     / .form-group
     /   =f.label(:content)
     /   =f.file_field(:content)

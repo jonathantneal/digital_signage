@@ -12,3 +12,17 @@
 #
 #= require_self
 #= require_tree ./resources
+
+
+
+if $('#filter_wrapper').length > 0
+
+  resetContentHeight = ->
+    margin = $('#filter_wrapper').outerHeight() + $('#top_navbar').outerHeight() + 20
+    $('body').css('margin-top', margin)
+
+    $('#filter_wrapper').css('top', $('#top_navbar').outerHeight())
+
+
+  # TODO: You will also need to run this on window resize
+  resetContentHeight()

@@ -21,13 +21,20 @@ body.slides.show {
 #list_of_slides { list-style: none; margin: 0; padding: 0;
   li.slide { display: inline-block; margin: 10px; position: relative; border: 5px solid transparent;
 
-    &:hover {
-      .remove_slide_link { opacity: 1; }
-    }
     &.selected { border: 5px solid #1175AE; opacity: .6;}
 
-    .remove_slide_link { opacity: 0; z-index: 10; position: absolute; top: 0; right: 0; background-color: rgba(0, 0, 0, 0.8); border: 1px solid rgba(0, 0, 0, 0.8); border-radius: 0 0 0 3px; padding: 5px 10px; color: white; text-decoration: none;
+    .remove_slide_link { transition: opacity .2s; opacity: 0; z-index: 10; position: absolute; top: 0; right: 0; background-color: rgba(0, 0, 0, 0.8); border: 1px solid rgba(0, 0, 0, 0.8); border-radius: 0 0 0 3px; padding: 5px 10px; color: white; text-decoration: none;
       &:hover { background-color: rgba(255, 150, 150, 0.8); color: #333; }
+    }
+
+    .title { margin: 0; font-weight: 500;
+      .show-link { transition: opacity .2s; opacity: 0;
+        a { color: inherit; text-decoration: none; padding: 10px 5px 10px 10px; }
+      }
+    }
+
+    &:hover {
+      .remove_slide_link, .title .show-link { transition: opacity .2s; opacity: 1; }
     }
   }
 }
