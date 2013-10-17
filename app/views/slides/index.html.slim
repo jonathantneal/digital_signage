@@ -1,0 +1,67 @@
+- if permitted_to?(:create, :slides)
+  = content_for :extra_nav_links do
+    li.dropdown.new_form_dropdown
+      a.dropdown-toggle data-toggle="dropdown" href="#"
+        i.icon-plus
+      .dropdown-menu
+        = render 'min_form'
+
+
+=form_for(@search, :html=>{:class=>'filter form-inline'}) do |f|
+  fieldset
+    legend Filter Slides
+
+    #slide_options.form-group.pull-right>
+      '
+      =link_to "#", :id=>"show-slide-button", :class=>"btn btn-primary single_slide_button" do
+        i.icon-info-sign>
+        | Details
+      '
+      =link_to "#", :id=>"edit-slide-button", :class=>"btn btn-default multi_slide_button" do
+        i.icon-edit>
+        | Edit
+      '
+      =link_to "#", :id=>"remove-slide-button", :class=>"btn btn-default multi_slide_button" do
+        i.icon-trash>
+        | Delete
+      '
+      =link_to "#", :id=>"add-to-sign-button", :class=>"btn btn-default multi_slide_button" do
+        i.icon-th-large>
+        | Add To Sign
+      #thumb_size_slider
+
+    .form-group>
+      =f.label :signs_id_eq, 'Sign', class: "sr-only"
+      =f.collection_select :signs_id_eq, Sign.with_permissions_to(:index).order('signs.title'), :id, :title, {:include_blank=>'Sign'}, class: 'form-control'
+    .form-group>
+      =f.label :department_id_eq, 'Department', class: "sr-only"
+      =f.collection_select :department_id_eq, Department.with_permissions_to(:show).order('departments.title'), :id, :title, {:include_blank=>'Dept'}, class: 'form-control'
+    .form-group>
+      =f.label :published_status, 'Published', class: "sr-only"
+      =f.select :published_status, Slide::PUBLISHED_STATUS.map{|s| [s, s]}, {:include_blank=>'Status'}, class: 'form-control'
+    .form-group>
+      =f.submit 'Filter', class: 'btn btn-primary'
+
+hr
+
+.search_results
+  =render('slides')
+
+
+#signSelectModal.modal.fade aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1"
+  .modal-dialog
+    .modal-content
+      = form_tag [:add_to_signs, :slides] do |f|
+        = hidden_field_tag 'slide_ids', ''
+        .modal-header
+          h4.modal-title Add to selected signs
+        .modal-body
+          - Sign.with_permissions_to(:index).order('signs.title').each do |sign|
+            = label_tag do
+              = check_box_tag 'sign_ids[]', sign.id
+              '
+              = sign.title
+            br
+        .modal-footer
+          button.btn.btn-default data-dismiss="modal" type="button" Cancel
+          = submit_tag 'Add to signs', class: 'button btn btn-primary'

@@ -1,0 +1,31 @@
+/*= require bootstrap
+/*= require font-awesome
+/*= require_self
+/*= require_tree ./resources
+
+/*   Table of Contents
+ *
+ *    1.0 -
+ */
+
+
+body { margin-top: 70px; }
+
+#page_wrapper { margin: 20px; }
+
+.new_form_dropdown .dropdown-menu { min-width: 250px; }
+
+
+
+.slide_thumbnail, .slide_preview { display: inline-block; position: relative; width: 100%; min-width: 250px;
+  .constraint { width: 100%; padding-top: 56.25%; }
+  .element { position: absolute; top: 0; bottom: 0; left: 0; right: 0; text-align: center;
+
+    // For spacing vertically
+    &:before { content: ''; display: inline-block; height: 100%; vertical-align: middle; }
+
+    img, iframe { max-width: 100%; max-height: 100%; display: inline-block; vertical-align: middle; }
+
+    iframe { width: 100%; height: 100%; border: none;  }
+  }
+}

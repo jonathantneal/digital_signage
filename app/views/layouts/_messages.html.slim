@@ -1,0 +1,6 @@
+- unless (messages = all_messages).empty?
+  #message_list
+    - messages.each do |msg|
+      div.alert class="alert-#{msg[:class]}"
+        a.close data-dismiss="alert" href="#" &times;
+        = msg[:message]

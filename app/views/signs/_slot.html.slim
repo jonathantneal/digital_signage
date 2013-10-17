@@ -1,0 +1,8 @@
+li.slot id="slot_#{slot.id}"
+  / .slide_status
+  /   = "#{slide_status(slot.slide)}" + (slot.slide.showing? ? " - #{slot.custom_delay}s" : "")
+
+  = link_to 'X', sign_slot_url(@sign, slot), method: :delete, class: 'remove_slide_link', title: 'Remove this slide from sign', remote: true
+
+  = link_to slot.slide do
+    =render "shared/thumbnail", slide: slot.slide

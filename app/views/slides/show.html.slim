@@ -1,0 +1,31 @@
+#slide_preview
+  =render(:partial=>'shared/preview', :locals=>{:slide=>@slide})
+
+#slide_details
+  h3=@slide.title
+  dl.slide
+
+    .details
+      /reduce width so that the content doesn't go behind the preview image
+      dt.url URL
+      -unless @slide.url.blank?
+        dd.url = link_to(@slide.url, @slide.url)
+      dt.delay Delay
+      dd.delay = @slide.delay
+      dt.color Color
+      dd.color style="color:##{@slide.color}; background-color:##{@slide.color};" = @slide.color
+      dt.publish_at Publish Date
+      dd.publish_at = @slide.publish_at.try(:to_formatted_s, :long)
+      dt.unpublish_at Unublish Date
+      dd.unpublish_at = @slide.unpublish_at.try(:to_formatted_s, :long)
+      dt.department Department
+      dd.department = @slide.department
+  h3.signs Signs
+  ul.signs
+    - @slide.signs.each do |sign|
+      li = permitted_to?(:show, sign) ? link_to(sign.title, sign_path(sign)) : sign.title
+  h3.schedule Schedule
+  ul.schedule
+    - @slide.sorted_schedules.each do |schedule|
+      li = schedule
+

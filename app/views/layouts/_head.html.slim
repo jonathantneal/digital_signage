@@ -1,0 +1,15 @@
+title = yield_or(:title, AppConfig.app.name)
+
+meta charset="utf-8"
+link rel="icon" type="image/png" href="https://media1.biola.edu/biola/img/biola-icon.png"
+meta name="viewport" content="width=device-width, initial-scale=1.0"
+= csrf_meta_tag
+
+
+= stylesheet_link_tag 'application'
+javascript:
+  ROOT_URL = '#{root_url}';
+
+= yield :head
+
+=google_analytics_script_tag

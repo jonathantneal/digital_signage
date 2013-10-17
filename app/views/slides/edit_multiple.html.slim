@@ -1,0 +1,58 @@
+=form_for(Slide.new, :url => update_multiple_slides_path, :html => { method: :put, multipart: true, class: 'update_multiple_slides', id: 'update_multiple_slides'}) do |f|
+
+  h2 Bulk editing the following slides:
+  ul.slide_list
+    - @slides.each do |slide|
+      li
+        =hidden_field_tag "slide_ids[]", slide.id
+        =slide.title
+
+  hr
+
+  .row
+    .form-group.col-lg-4
+      =f.label(:delay)
+      small<> in seconds
+      =f.text_field :delay, value: nil, class: 'form-control'
+    .form-group.col-lg-4
+      =f.label(:color)
+      =f.text_field :color, value: nil, class: 'form-control'
+  .row
+    .form-group.col-lg-4
+      =f.label(:publish_at)
+      =f.text_field :publish_at, class: 'date form-control', value: nil
+    .form-group.col-lg-4
+      =f.label(:unpublish_at)
+      =f.text_field :unpublish_at, class: 'date form-control', value: nil
+  .row
+    .form-group.col-lg-4
+      =f.label(:department_id, 'Department')
+      =f.collection_select :department_id, Department.with_permissions_to(:show), :id, :title, {include_blank: true}, { class: 'form-control' }
+
+  hr
+  .slots
+    h3 Add Slots
+    em Existing slots will not be removed
+    table.table#slots.slots
+      tr
+        th.name Name
+        th.remove Remove
+    =link_to_add_fields 'Add Slot', f, :slots
+
+  hr
+
+  .schedule
+    h3 Schedule
+    em Existing schedules will not be removed
+    table.table#schedules.schedules
+      tr
+        th.time Time
+        th.action Action
+        th.remove Remove
+    =link_to_add_fields 'Add Schedule', f, :schedules
+
+  hr
+  .buttons
+    =f.submit 'Save', class: 'btn btn-primary'
+    '
+    =cancel_button

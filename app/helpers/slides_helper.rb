@@ -12,16 +12,17 @@ module SlidesHelper
     return 'image' if slide.image?
     return 'video' if slide.video?
     return 'swf' if slide.swf?
+    return 'embed'
   end
 
   def slide_file_url(slide, version=nil)
     require 'addressable/uri'
-    
+
     return nil if slide.nil?
-    
+
     url = Addressable::URI.parse(path_to_image(slide.url(version).to_s))
     if defined? request
-      url.scheme = request.scheme 
+      url.scheme = request.scheme
       url.host = request.host
       url.port = request.port
     end
@@ -31,9 +32,9 @@ module SlidesHelper
 
   def short_slide_url(slide)
     require 'addressable/uri'
-    
+
     return nil if slide.nil?
-    
+
     url = Addressable::URI.parse(path_to_image(slide.url.to_s))
     url.query_values = slide.parameter_hash unless slide.parameters.size.zero?
     url.to_s

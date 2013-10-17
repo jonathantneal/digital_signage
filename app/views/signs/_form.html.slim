@@ -1,0 +1,37 @@
+.container
+  = form_for @sign do |f|
+    .form-group
+      = f.label :name
+      = f.text_field :name, class: "form-control"
+    .form-group
+      = f.label :title
+      = f.text_field :title, class: "form-control"
+    .form-group
+      = f.text_field :width, placeholder: 'width', class: "form-control"
+      = f.text_field :height, placeholder: 'height', class: "form-control"
+    .form-group
+      .seconds= f.label :transition_duration
+      .seconds
+        = f.text_field :transition_duration, class: "form-control"
+        seconds
+    .form-group
+      .seconds= f.label :reload_interval
+      .seconds
+        = f.text_field :reload_interval, class: "form-control"
+        seconds
+    .form-group
+      .seconds= f.label :check_in_interval
+      .seconds
+        = f.text_field :check_in_interval, class: "form-control"
+        seconds
+    .form-group
+      = f.label :department_id, 'Department'
+      = f.collection_select :department_id, Department.with_permissions_to(:show), :id, :title
+    .form-group
+      = f.text_field :on, class: "form-control"
+      = f.text_field :off, class: "form-control"
+    .form-group
+      = f.label :email, "Email when sign is down"
+      = f.text_field :email, class: "form-control"
+    .buttons
+      = f.submit 'Create', class: 'btn btn-primary'

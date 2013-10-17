@@ -2,64 +2,24 @@
 module ApplicationHelper
 
   def all_messages
-  
+    type_to_class = { notice: :info, alert: :danger, error: :danger }
+
     # Standard flash messages
-    messages = flash.map{|key,val| {:type=>key, :message=>val} }
-    
+    messages = flash.map do |type, msg|
+      { type: type, message: msg, class: (type_to_class[type] || type) }
+    end
+
     # Model validation errors
     model = instance_variable_get("@#{controller_name.singularize}")
     unless model.nil?
-      messages += model.errors.full_messages.map do |msg|
-        {:type=>:error, :message=>msg}
+      if model.respond_to? :errors
+        messages += model.errors.full_messages.map do |msg|
+          { type: :error, message: msg, class: :danger}
+        end
       end
     end
-    
+
     messages
-    
-  end
-
-  def navigation_menu
-    menu_items = [{:controller=>"signs", :text=>"Signs"},
-                  {:controller=>"slides", :text=>"Slides"},
-                  {:controller=>"users", :text=>"Users"},
-                  {:controller=>"departments", :text=>"Departments"}]
-                  
-    content_tag(:ul) do
-      menu_items.map do |link_settings|
-        navigation_link link_settings.merge({:wrapper=>'li'})
-      end.join('').html_safe
-    end
-  end
-
-  def navigation_link(settings)
-
-    # Get settings and set defaults
-    action = (settings[:action] || :index).to_sym
-    controller = settings[:controller]
-    controller = "/#{controller}" unless controller.blank? || controller.to_s[0] == ?/
-    controller_sym = controller.try(:parameterize,'_').try(:to_sym) 
-    controller_name = controller.try(:split,'/').try(:last).try(:downcase)
-    url =  settings[:url] || {:controller=>controller, :action=>action}
-    text = settings[:text] || controller_name.try(:humanize) 
-    css_class = settings[:css_class]
-    wrapper = settings[:wrapper]
-  
-    # Check permissions
-    if controller.blank? || permitted_to?(action, controller_sym)
-      
-      # HTML element classes
-      classes = [controller_name, action, css_class]
-      classes << 'active' if self.controller.controller_name == controller_name
-      class_attr_val = classes.join(' ')
-      
-      # Link tag
-      link = link_to(text, url, :class=>class_attr_val, :title=>text)
-      
-      # Optional wrapper
-      wrapper ? content_tag(wrapper, link, :class=>class_attr_val) : link
-    
-    end
-    
   end
 
   # Taken from http://blog.perplexedlabs.com/2008/02/08/seconds-to-minutesseconds-in-rails/
@@ -74,7 +34,7 @@ module ApplicationHelper
     fields = f.fields_for(association, new_object, :child_index => "new_#{association}") do |builder|
       render(association.to_s.singularize + "_fields", :f => builder)
     end
-    link_to_function(name, "add_fields(this, '#{association}', '#{escape_javascript(fields)}')", :class=>:add_fields)
+    link_to_function(name, "add_fields(this, '#{association}', '#{escape_javascript(fields)}')", :class=>'add_fields btn btn-default')
   end
 
   def to_yn(bit)
@@ -84,7 +44,7 @@ module ApplicationHelper
   def page_entries_info(collection, options = {})
     entry_name = options[:entry_name] ||
       (collection.empty?? 'entry' : collection.first.class.name.underscore.sub('_', ' '))
-    
+
     if collection.num_pages < 2
       case collection.total_count
       when 0; "No #{entry_name.pluralize} found"
@@ -99,9 +59,9 @@ module ApplicationHelper
       ]
     end.html_safe
   end
-  
+
   def cancel_button
-    link_to 'Cancel', :back, :class => "cancel button"
+    link_to 'Cancel', :back, :class => "btn"
   end
 
   # This is useful for carrierwave files which are only returned as relative urls

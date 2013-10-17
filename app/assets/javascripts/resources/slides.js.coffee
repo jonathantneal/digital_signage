@@ -72,7 +72,7 @@ $(document).ready ->
     # Initiate width when page loads
     refresh_preview_size()
 
-    # ****  Enable Multi Select  ******    TODO, you may want to break this off into a jQuery plugin eventually, it is also being reused in sign.js
+    # ****  Enable Multi Select  ******    TODO, you may want to break this off into a jQuery plugin eventually
     $(document).on "click", "ul.slides li", (e) ->
       if not e.altKey and not e.shiftKey
         $(".selected").not(this).removeClass "selected"
@@ -89,9 +89,9 @@ $(document).ready ->
       if $("ul.slides li.selected").length > 1
         $(".single_slide_button").hide()
       else if $("ul.slides li.selected").length is 1
-        $("#slide_options .google_button").show()
+        $("#slide_options .btn").show()
       else
-        $("#slide_options .google_button").hide()
+        $("#slide_options .btn").hide()
       e.stopPropagation()
 
 
@@ -99,7 +99,7 @@ $(document).ready ->
     $(document).on "click", "body", (e) ->
       unless $(this).hasClass('modal-open')
         $(".selected").removeClass "selected"
-        $("#slide_options .google_button").hide()
+        $("#slide_options .btn").hide()
 
     $("#add-to-sign-button").click (e) ->
       selected_slides = $("ul.slides li.selected")
@@ -122,7 +122,7 @@ $(document).ready ->
       removeSlides $("ul.slides li.selected")
       e.stopPropagation()
 
-    $("#slide_options .google_button").hide()  # hide all the option buttons on page load
+    $("#slide_options .btn").hide()  # hide all the option buttons on page load
 
 
     # *****  Remove slides or multiple selected slides at the same time  ******

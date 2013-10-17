@@ -1,0 +1,16 @@
+/ =form_for(@search, :url=>url_for(@sign), :html=>{:class=>'filter'}) do |f|
+/   fieldset
+/     legend Filter Slides
+
+/     #slide_options
+/       #thumb_size_slider
+
+/     span.param
+/       =f.label :published_status, 'Published'
+/       =f.select :published_status, Slide::PUBLISHED_STATUS.map{|s| [s, s]}, {:include_blank=>true}
+/     .buttons=f.submit 'Filter'
+
+
+=form_tag drop_on_sign_url(@sign), id: 'slide-upload-dropzone', class: 'dropzone' do
+  ol.slots.search_results.dropzone-previews#list_of_slides
+    =render @slots

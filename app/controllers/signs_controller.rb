@@ -5,6 +5,7 @@ class SignsController < ApplicationController
 
   def index
     @signs = Sign.with_permissions_to(:index).order('signs.title')
+    @sign = Sign.new
   end
 
   def show
@@ -73,11 +74,14 @@ class SignsController < ApplicationController
   end
 
   def drop_on
-    slide = Slide.new
-    slide.content     = params[:file]
-    slide.title       = params[:file].original_filename
-    slide.department  = @sign.department
-    slide.publish_at  = Time.now
+    unless slide = Slide.find_by_title(params[:file].original_filename)
+      slide = Slide.new
+      slide.content     = params[:file]
+      slide.title       = params[:file].original_filename
+      slide.department  = @sign.department
+      slide.publish_at  = Time.now
+    end
+
     if slide.save
       @sign.slides << slide
       render :json => { result: 'success' }

@@ -1,0 +1,56 @@
+.container
+  br
+  =form_for @slide, :html => {:multipart => true} do |f|
+    p
+      strong New Slide
+    .form-group
+      =f.label :title
+      =f.text_field :title, class: 'form-control'
+    .form-group
+      =f.label(:department_id, 'Department')
+      '
+      =f.collection_select :department_id, Department.with_permissions_to(:show), :id, :title, {}, class: 'form-control'
+
+
+    .form-group
+      .btn-group data-toggle='buttons'
+        label class='btn btn-primary'
+          input type='radio' name='options' id='option_upload'
+            i.icon-cloud-upload
+        label class='btn btn-primary'
+          input type='radio' name='options' id='option_link'
+            i.icon-link
+        label class='btn btn-primary'
+          input type='radio' name='options' id='option_editor'
+            i.icon-edit
+    / .form-group
+    /   =f.label(:content)
+    /   =f.file_field(:content)
+    / .form-group
+    /   p Parameters
+    /   ul#parameters.parameters
+    /     =f.fields_for(:parameters, @slide.parameters) do |f2|
+    /       =render('parameter_fields', :f => f2)
+    /   =link_to_add_fields('Add Parameter', f, :parameters)
+    / .form-group
+    /   =f.label(:html_url)
+    /   =f.text_field(:html_url)
+    / .form-group
+    /   =f.label(:delay)
+    /   small< in seconds
+    /   =f.text_field(:delay)
+    / .form-group
+    /   =f.label(:color)
+    /   =f.text_field(:color, {:style=>"color:##{@slide.color}; background-color:##{@slide.color};"})
+    / .form-group
+    /   =f.label(:publish_at)
+    /   =f.text_field(:publish_at, :value => @slide.publish_at.try(:to_formatted_s, :long), :class => :date)
+    / .form-group
+    /   =f.label(:unpublish_at)
+    /   =f.text_field(:unpublish_at, :value => @slide.unpublish_at.try(:to_formatted_s, :long), :class => :date)
+
+
+    .buttons
+      =f.submit 'Save', class: 'btn btn-primary'
+
+  br

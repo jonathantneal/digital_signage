@@ -1,0 +1,15 @@
+/ Just pass in the slide
+
+
+div class="slide_preview #{slide_type(slide)}"
+  .constraint style="background-color:##{slide.color};"
+  .element
+    -if slide.image?
+      =image_tag slide_file_url(slide), :alt=>"#{slide.title} thumbnail"
+    -elsif slide.swf?
+      =image_tag "flash.jpg", :alt=>"#{slide.title} flash player"
+    -elsif slide.video?
+      =image_tag "video_thumbnail.jpg", :alt=>"#{slide.title} video"
+    -else
+      iframe src=slide.url style='width:100%; min-height:400px;'
+      / =image_tag "white-link.png", :alt=>"link"

@@ -1,7 +1,7 @@
-.search.summary
-  =page_entries_info(@slides, :entry_name => 'Slide')
+/ .search.summary
+/   =page_entries_info(@slides, :entry_name => 'Slide')
 
-%ul.slides
+%ul.slides#list_of_slides
   =render @slides
 
 .endlessScroll=paginate(@slides)

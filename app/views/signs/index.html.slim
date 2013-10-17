@@ -1,0 +1,33 @@
+- if permitted_to?(:create, :signs)
+  = content_for :extra_nav_links do
+    li.dropdown.new_form_dropdown
+      a.dropdown-toggle data-toggle="dropdown" href="#"
+        i.icon-plus
+      .dropdown-menu
+        = render 'min_form'
+
+
+ul.signs
+  -@signs.each do |sign|
+    li[sign]
+      =render 'status_check', :sign => sign
+      .title_bar
+        .title=link_to(sign.title, sign_path(sign))
+      a href=sign_path(sign)
+        .sign_slides
+          .slides_container
+            -sign.slides.published.limit(10).each do |slide|
+              =render "shared/thumbnail", slide: slide
+
+.clear
+
+javascript:
+  // This hides all but the first image. The multiple images are used for the slideshow.
+  // Also, this js needs to be here so the user doesn't see the windows resize.
+  var signs = document.getElementsByClassName("slides_container");
+  for(i in signs){
+    var children = signs[i].children;
+    for(j in children){
+      if(j > 0) children[j].style.display = 'none';
+    }
+  }

@@ -1,5 +1,0 @@
-#messagesWrapper
-  -unless (messages = all_messages).empty?
-    %ul#messages
-      -messages.each do |msg|
-        %li{:class=>msg[:type]}=msg[:message]

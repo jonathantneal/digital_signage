@@ -1,0 +1,23 @@
+.container
+  br
+  = form_for @sign do |f|
+    p
+      strong New Sign
+    .form-group
+      = f.text_field :title, class: "form-control", placeholder: 'Title'
+    .form-group
+      = f.text_field :name, class: "form-control", placeholder: 'Slug'
+    .form-group
+      = f.hidden_field :width, value: '1920'
+      = f.hidden_field :height, value: '1080'
+      strong> Deminsions:
+      | 1920 x 1080
+    .form-group
+      = f.label :department_id, 'Department'
+      = f.collection_select :department_id, Department.with_permissions_to(:show), :id, :title, {}, class: "form-control"
+    .form-group
+      = f.label :email, "Email when sign is down"
+      = f.text_field :email, class: "form-control"
+    .buttons
+      = f.submit 'Create', class: 'btn btn-primary'
+    br
