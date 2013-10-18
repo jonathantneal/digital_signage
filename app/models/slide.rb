@@ -4,15 +4,13 @@ class Slide < ActiveRecord::Base
   PUBLISHED_STATUS = ['published', 'unpublished', 'expired']
 
   attr_accessible :title, :delay, :color, :department_id, :publish_at, :unpublish_at, :created_at, :updated_at, :html_url,
-                  :sign_id, :sign_ids, :content, :content_cache, :schedules_attributes, :parameters_attributes, :slots_attributes
+                  :sign_id, :sign_ids, :content, :content_cache, :schedules_attributes, :slots_attributes
 
   belongs_to :department
   has_many :schedules, :dependent => :destroy
-  has_many :parameters, :dependent => :destroy
   has_many :slots, :dependent => :destroy
   has_many :signs, :through => :slots
   accepts_nested_attributes_for :schedules, :allow_destroy => true
-  accepts_nested_attributes_for :parameters, :allow_destroy => true
   accepts_nested_attributes_for :slots, :allow_destroy => true
 
   after_initialize :defaults
@@ -101,8 +99,7 @@ class Slide < ActiveRecord::Base
   end
 
   def url(version=nil)
-    add_params = parameters.blank? ? "" : "?"+parameters.map{|p| p.name+"="+p.value }.join("&")
-    (content_url(version) || html_url).to_s + add_params
+    (content_url(version) || html_url).to_s
   end
 
   def type
@@ -179,14 +176,6 @@ class Slide < ActiveRecord::Base
     sorted_valid_schedules(now).reject { |s| s.time(now) < now }
   end
 
-  def parameter_hash
-    params = {}
-    self.parameters.each do |param|
-      params[param.name] = param.value
-    end
-    params
-  end
-
   # Class Methods
   class << self
     extend Memoist
@@ -235,5 +224,4 @@ class Slide < ActiveRecord::Base
 
   memoize :sorted_schedules, :valid_schedules, :sorted_valid_schedules,
     :previous_schedule, :past_schedules, :next_schedule, :future_schedules,
-    :parameter_hash
 end

@@ -30,12 +30,6 @@
     /   =f.label(:content)
     /   =f.file_field(:content)
     / .form-group
-    /   p Parameters
-    /   ul#parameters.parameters
-    /     =f.fields_for(:parameters, @slide.parameters) do |f2|
-    /       =render('parameter_fields', :f => f2)
-    /   =link_to_add_fields('Add Parameter', f, :parameters)
-    / .form-group
     /   =f.label(:html_url)
     /   =f.text_field(:html_url)
     / .form-group
