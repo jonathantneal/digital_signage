@@ -6,6 +6,6 @@ else
   require 'rack-cas/session_store/active_record'
 
   SignManager::Application.config.middleware.use Rack::CAS,
-    server_url: AppConfig.security.login.cas.url,
+    server_url: Settings.cas.url,
     session_store: RackCAS::ActiveRecordStore
 end

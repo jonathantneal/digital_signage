@@ -22,10 +22,10 @@ gem 'meta_search'
 gem 'mini_magick'
 gem 'newrelic_rpm'
 gem 'port-a-query'
+gem 'rails_config'
 gem 'rack-cas'
 gem 'turnout'
 gem 'version'
-gem 'viva-app_config', :require=>'app_config'
 gem 'yaml_db'
 
 group :development do

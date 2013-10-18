@@ -1,0 +1,11 @@
+email:
+  from: no-reply@example.com
+  developer: developer@example.com
+  smtp:
+    server: smtp.example.com
+    domain: example.com # Used in HELO handshaking
+    port: 25
+    enable_tls: true
+    auth_type: login
+    username: user@example.com
+    password: '****************'

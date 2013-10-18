@@ -1,0 +1,46 @@
+# Environment specific settings can be defined in /config/environments/[RAILS_ENV].yml
+
+app:
+  name: &app_name Signage
+  host: your.server.tld
+  relative_url_root: /signage # or blank if no relative root
+
+security:
+  roles:
+    base_entitlement: "urn:biola:sign-manager:"
+    include_affiliations: true
+
+cas:
+  url: 'https://login.biola.edu/cas'
+
+email:
+  from: no-reply@example.com
+  developer: developer@example.com
+  smtp:
+    server: smtp.example.com
+    domain: example.com # Used in HELO handshaking
+    port: 25
+    enable_tls: true
+    auth_type: login
+    username: user@example.com
+    password: '****************'
+
+ui:
+  pagination:
+    per_page: 30
+
+defaults:
+  sign:
+    email_frequency: 24   # in hours
+  slide:
+    delay: 7
+
+google_analytics:
+  enabled: true
+  web_property_id: XX-00000-00
+
+pubnub:
+  enabled: false
+  channel: channel_name
+  publish_key: ''
+  subscribe_key: ''

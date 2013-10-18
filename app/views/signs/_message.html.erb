@@ -1,4 +1,4 @@
-<% if AppConfig.pubnub && AppConfig.pubnub.enabled %>
+<% if Settings.pubnub && Settings.pubnub.enabled %>
   <h4>Sign Messaging</h4>
   <p>
     <textarea id="message_text">Type your alert here...</textarea>
@@ -18,14 +18,14 @@
 
       // INIT PubNub
       var pubnub = PUBNUB.init({
-          publish_key   : "<%= AppConfig.pubnub.publish_key %>",
-          subscribe_key : "<%= AppConfig.pubnub.subscribe_key %>"
+          publish_key   : "<%= Settings.pubnub.publish_key %>",
+          subscribe_key : "<%= Settings.pubnub.subscribe_key %>"
       });
 
       var message_to = ["<%= @sign.name %>"]
 
       function publish_message(message_object) {
-        pubnub.publish({ channel : "<%= AppConfig.pubnub.channel %>",  message : $.extend(message_object, {to: message_to})});
+        pubnub.publish({ channel : "<%= Settings.pubnub.channel %>",  message : $.extend(message_object, {to: message_to})});
       }
 
       $('#submit_message').click(function() {
@@ -45,7 +45,7 @@
       });
 
     })();</script>
-    
+
 
   <% end %>
 
