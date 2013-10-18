@@ -77,12 +77,6 @@
             frame.data('delay', slide.delay);
             $('#digitalsign').append(frame);
           }
-          if (slide.content_type.match(/flash/)) {
-            var frame = $("<iframe></iframe>");
-            frame.attr('src', slide.uri);
-            frame.data('delay', slide.delay);
-            $('#digitalsign').append(frame);
-          }
         }
       });
 

@@ -11,7 +11,6 @@ module SlidesHelper
   def slide_type(slide)
     return 'image' if slide.image?
     return 'video' if slide.video?
-    return 'swf' if slide.swf?
     return 'embed'
   end
 

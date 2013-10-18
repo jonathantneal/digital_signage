@@ -117,10 +117,6 @@ class Slide < ActiveRecord::Base
     type.try(:[], 'video/').present?
   end
 
-  def swf?
-    type == 'application/x-shockwave-flash'
-  end
-
   def active?(now=Time.now)
     return false if unpublished?
     showing?(now)
