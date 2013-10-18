@@ -1,7 +1,7 @@
 class Sign < ActiveRecord::Base
-  extend Memoist 
+  extend Memoist
 
-  attr_accessible :name, :title, :on, :off, :transition_duration, :reload_interval, 
+  attr_accessible :name, :title, :on, :off, :transition_duration, :reload_interval,
                   :check_in_interval, :department_id, :slide_id, :email, :width, :height
   validates_presence_of :name, :title, :transition_duration, :reload_interval, :check_in_interval, :department_id
   validates_uniqueness_of :name, :title
@@ -12,7 +12,7 @@ class Sign < ActiveRecord::Base
   belongs_to :department
   has_many :slots, :dependent=>:destroy
   has_many :slides, :through => :slots#, :order=>'slots.order'
-  
+
 
   def to_param
     self.name
@@ -25,7 +25,7 @@ class Sign < ActiveRecord::Base
   def active_slides
     self.slides.includes(:schedules).reject { |s| !s.active? }
   end
-  
+
   def expired_slides
     self.slides.includes(:schedules).reject { |s| !s.expired? }
   end
@@ -58,7 +58,7 @@ class Sign < ActiveRecord::Base
     if self.down? && !self.email.blank?
       if self.email_sent.blank?
         send_alert = true
-      elsif self.email_sent < Time.now - (AppConfig.defaults.sign.email_frequency * 3600)
+      elsif self.email_sent < Time.now - (Settings.defaults.sign.email_frequency * 3600)
         send_alert = true
       end
     end

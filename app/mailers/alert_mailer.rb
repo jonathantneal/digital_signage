@@ -1,5 +1,5 @@
 class AlertMailer < ActionMailer::Base
-  default from: AppConfig.email.from
+  default from: Settings.email.from
 
   def sign_down(sign)
     @sign = sign

@@ -9,22 +9,22 @@ class User < ActiveRecord::Base
   has_many :departments, :through => :department_users
 
   default_scope :order => 'first_name, last_name'
-  
+
   scope :affiliation, lambda { |affiliation|
     User.conditions_for_separated_fields(:affiliations=>affiliation)
   }
-  
+
   scope :entitlement, lambda { |entitlement|
     User.conditions_for_separated_fields(:entitlements=>User.role_to_entitlement(entitlement))
   }
-  
+
   scope :role, lambda { |role|
     User.conditions_for_separated_fields(
       :affiliations=>role,
       :entitlements=>User.role_to_entitlement(role)
     )
   }
-  
+
   def name
     "#{self.first_name} #{self.last_name}".strip
   end
@@ -41,7 +41,7 @@ class User < ActiveRecord::Base
     raise TypeError.new('argument is not an array') unless affiliations.is_a?(Array)
     write_attribute(:affiliations, affiliations.join(STRING_SEPARATOR))
   end
-  
+
   def entitlements
     read_attribute(:entitlements).split(STRING_SEPARATOR)
   end
@@ -50,22 +50,22 @@ class User < ActiveRecord::Base
     raise TypeError.new('entitlementes is not an array') unless entitlements.is_a?(Array)
     write_attribute(:entitlements, entitlements.join(STRING_SEPARATOR))
   end
-  
+
   def roles(include_unallowed=true)
 
     roles = self.entitlements.map{ |e| User.entitlement_to_role(e) }.compact
-    if AppConfig.security.roles.include_affiliations
+    if Settings.security.roles.include_affiliations
       roles += self.affiliations
     end
-    
+
     roles.uniq!
-    
+
     if include_unallowed
       return roles
     else
       return roles & allowed_roles
     end
-    
+
   end
 
   def role_symbols(include_undefined=true)
@@ -80,7 +80,7 @@ class User < ActiveRecord::Base
   def is_admin?
     self.has_role?(:admin) || self.is_developer?
   end
-  
+
   def is_developer?
     self.has_role?(:developer)
   end
@@ -126,21 +126,21 @@ class User < ActiveRecord::Base
   end
 
   def self.entitlement_to_role(entitlement)
-  
-    group = AppConfig.security.roles.base_entitlement
-    
+
+    group = Settings.security.roles.base_entitlement
+
     if entitlement[0, group.length] == group
       return entitlement[group.length..entitlement.length]
     else
       return nil
     end
-    
+
   end
 
   def self.role_to_entitlement(role)
-  
-    "#{AppConfig.security.roles.base_entitlement}#{role}"
-    
+
+    "#{Settings.security.roles.base_entitlement}#{role}"
+
   end
 
   def self.allowed_roles
@@ -148,18 +148,18 @@ class User < ActiveRecord::Base
   end
 
   private
-  
+
   def self.conditions_for_separated_fields(conditions)
-    
+
     fields = []; searches = []
-    
+
     conditions.each do |field, search|
       fields << PortAQuery.concat(STRING_SEPARATOR, field.to_sym, STRING_SEPARATOR)
       searches << search.to_s.wrap(STRING_SEPARATOR).wrap('%')
     end
 
     { :conditions=>[fields.map{|f| "#{f} LIKE ?" }.join(' OR '), *searches] }
-  
+
   end
 
 end

@@ -1,14 +1,14 @@
 ActionMailer::Base.smtp_settings = {
-  :address => AppConfig.email.smtp.server,
-  :port => AppConfig.email.smtp.port,
-  :domain => AppConfig.email.smtp.domain,
-  :enable_starttls_auto => AppConfig.email.smtp.enable_tls,
-  :authentication => AppConfig.email.smtp.auth_type.try(:to_sym),
-  :user_name => AppConfig.email.smtp.username,
-  :password => AppConfig.email.smtp.password
+  :address => Settings.email.smtp.server,
+  :port => Settings.email.smtp.port,
+  :domain => Settings.email.smtp.domain,
+  :enable_starttls_auto => Settings.email.smtp.enable_tls,
+  :authentication => Settings.email.smtp.auth_type.try(:to_sym),
+  :user_name => Settings.email.smtp.username,
+  :password => Settings.email.smtp.password
 }
 
 ActionMailer::Base.default_url_options = {
-  :host => AppConfig.app.host,
-  :script_name => AppConfig.app.relative_url_root
+  :host => Settings.app.host,
+  :script_name => Settings.app.relative_url_root
 }

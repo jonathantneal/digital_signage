@@ -11,8 +11,6 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   test "should create user" do
-    AppConfig.security.validate_usernames = false
-
     assert_difference('User.count') do
       post :create, :user => { :username=>'keysersoze' }
     end

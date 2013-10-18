@@ -218,10 +218,10 @@ class Slide < ActiveRecord::Base
 
   def defaults
     if new_record?
-      self.delay ||= AppConfig.defaults.slide.delay
+      self.delay ||= Settings.defaults.slide.delay
     end
   end
 
   memoize :sorted_schedules, :valid_schedules, :sorted_valid_schedules,
-    :previous_schedule, :past_schedules, :next_schedule, :future_schedules,
+    :previous_schedule, :past_schedules, :next_schedule, :future_schedules
 end

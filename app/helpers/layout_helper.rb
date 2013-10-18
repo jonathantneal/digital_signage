@@ -27,12 +27,12 @@ module LayoutHelper
   end
 
   def google_analytics_script_tag
-    
+
     script_tag = ''
-    config = AppConfig.google_analytics
-    
+    config = Settings.google_analytics
+
     if config.enabled
-    
+
       script_tag = <<-eos
         <script type='text/javascript'>
 
@@ -48,11 +48,11 @@ module LayoutHelper
 
         </script>
       eos
-    
+
     end
-    
+
     script_tag.html_safe
-    
+
   end
 
 end

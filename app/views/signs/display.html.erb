@@ -176,19 +176,19 @@
       reload: true  // Force reload
     }
   %>
-  <% if AppConfig.pubnub.present? && AppConfig.pubnub.enabled %>
+  <% if Settings.pubnub.present? && Settings.pubnub.enabled %>
     <div id="pubnub"></div>
     <script src="https://cdn.pubnub.com/pubnub-3.4.min.js"></script>
     <script>(function(){
 
         // INIT PubNub
         var pubnub = PUBNUB.init({
-            subscribe_key : "<%= AppConfig.pubnub.subscribe_key %>"
+            subscribe_key : "<%= Settings.pubnub.subscribe_key %>"
         });
 
         // LISTEN
         pubnub.subscribe({
-          channel : "<%= AppConfig.pubnub.channel %>",
+          channel : "<%= Settings.pubnub.channel %>",
           message : function(m){
             if ($.inArray('all',m.to) >= 0 || $.inArray('<%= @sign.name %>',m.to) >= 0) {
               text_alert(m);

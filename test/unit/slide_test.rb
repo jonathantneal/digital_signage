@@ -35,7 +35,7 @@ class SlideTest < ActiveSupport::TestCase
     @slide.update_attributes :publish_at => 1.day.ago, :unpublish_at => nil
     assert @slide.published?
   end
-  
+
   test "future publish date and a blank unpublish date should be considered unpublished" do
     @slide.update_attributes :publish_at => 1.day.from_now, :unpublish_at => nil
     assert @slide.unpublished?
@@ -55,14 +55,14 @@ class SlideTest < ActiveSupport::TestCase
     @slide.update_attributes :publish_at => 1.day.ago, :unpublish_at => 1.day.from_now
     assert @slide.published?
   end
-  
+
   test "published count plus unpublished count should equal total slide count" do
     assert Slide.published.count + Slide.unpublished.count == Slide.count
   end
 
   test "default value for delay is actually being set" do
     slide = Slide.new
-    assert slide.delay == AppConfig.defaults.slide.delay
+    assert slide.delay == Settings.defaults.slide.delay
   end
 
   test "expired scope" do

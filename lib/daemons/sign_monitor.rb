@@ -2,17 +2,17 @@
 
 ENV['RAILS_ENV'] ||= 'development'
 
-# Load AppConfig manually since Rails isn't loaded yet
-require 'app_config'
-app_config = ApplicationConfiguration.new(File.dirname(__FILE__) + '/../../config/app_config.yml')
+# Load Settings manually since Rails isn't loaded yet
+require 'rails_config'
+settings = RailsConfig.new(File.dirname(__FILE__) + '/../../config/settings.yml')
 # Need to set RAILS_RELATIVE_URL_ROOT so the URLs in emails are right
-ENV['RAILS_RELATIVE_URL_ROOT'] = app_config.app.relative_url_root
+ENV['RAILS_RELATIVE_URL_ROOT'] = settings.app.relative_url_root
 
 require File.dirname(__FILE__) + '/../../config/application'
 Rails.application.require_environment!
 
 $running = true
-Signal.trap('TERM') do 
+Signal.trap('TERM') do
   $running = false
 end
 
@@ -40,6 +40,6 @@ while($running) do
       end
     end
   end
-  
+
   sleep 60 #in seconds
 end
