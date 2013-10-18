@@ -17,3 +17,4 @@ Vagrantfile
 .vagrant
 .sass-cache
 *.output
+blazing.rb

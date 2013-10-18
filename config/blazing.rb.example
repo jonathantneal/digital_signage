@@ -1,0 +1,6 @@
+target :'staging', 'username@staging.example.com:/path/to/project', rails_env: 'staging'
+target :'.prod',    'username@prod.example.com:/path/to/project',   rails_env: 'production'
+
+env_scripts '/etc/profile'
+
+rake :post_deploy, 'RAILS_RELATIVE_URL_ROOT=/digital_signage'
