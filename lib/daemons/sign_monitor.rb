@@ -28,8 +28,8 @@ while($running) do
       else
         if sign.email == nil || sign.email == ""
           reason = "alert email not set"
-        elsif sign.email_sent >= Time.now - (app_config.defaults.sign.email_frequency * 3600)
-          reason = "Already sent email within scheduled time period of #{app_config.defaults.sign.email_frequency} hours."
+        elsif sign.email_sent >= Time.now - (settings.defaults.sign.email_frequency * 3600)
+          reason = "Already sent email within scheduled time period of #{settings.defaults.sign.email_frequency} hours."
         end
         puts "[#{Time.now}] Skipping alert for sign=#{sign.name}. reason= #{reason}."
       end

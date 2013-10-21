@@ -22,30 +22,30 @@ This application is used for managing a collection of digital signs.
 
 1. Clone repository
 
-2. Create and setup your `/config/app_config.yml` file by copying the `.yml.example` file in the same directory
+2. Create and setup your `/config/settings.local.yml` file by copying the `.local.yml.example` file in the same directory
 
 3. Create and setup your `/config/database.yml` file by copying the `.yml.example` file in the same directory
 
 4. Create and setup your `/config/newrelic.yml` file by copying the `.yml.example` file in the same directory (you can leave the license_key as it is for development)
 
-5. Install the required gems:  
+5. Install the required gems:
   `bundle install`
   *(or if you're running on production)*
   `bundle install --deployment`
 
-6. Migrate your database:  
+6. Migrate your database:
    `rake db:migrate`
-    
-7. Precompile assets:  
-   *(in staging or production only)*  
-   *(`RAILS_RELATIVE_URL_ROOT` is only needed if the site does not have it's own domain)*  
+
+7. Precompile assets:
+   *(in staging or production only)*
+   *(`RAILS_RELATIVE_URL_ROOT` is only needed if the site does not have it's own domain)*
    `bundle exec rake assets:precompile RAILS_RELATIVE_URL_ROOT=/signage`
 
 
 ## Testing
 1. Prepare database
    `rake db:test:prepare`
-    
+
     *(This needs to be run after doing a database migration)*
 
 2. Run the test unit tests
@@ -118,4 +118,4 @@ on a specific area:
 * o-auth as an alternate form of authentication if you are not using CAS
 * Transition from test::unit to Rspec for testing
 * Better tests for existing code (written in Rspec)
-* Better support for HTML widgets rather than just adding the URL. Maybe a way to install widgets from a central place. Or create widgets using a url then be able to select from a list of available widgets on the slide creation page. It would also be nice if they had meta-data attached to them explaining the parameters that can be set. 
+* Better support for HTML widgets rather than just adding the URL. Maybe a way to install widgets from a central place. Or create widgets using a url then be able to select from a list of available widgets on the slide creation page. It would also be nice if they had meta-data attached to them explaining the parameters that can be set.
