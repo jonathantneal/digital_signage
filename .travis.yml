@@ -5,5 +5,4 @@ rvm:
   - 2.0.0
 before_script:
   - cp config/database.yml.example config/database.yml
-  - cp config/app_config.yml.example config/app_config.yml
   - rake db:migrate
