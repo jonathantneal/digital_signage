@@ -11,8 +11,11 @@
 /     .buttons=f.submit 'Filter'
 
 
-- if permitted_to?(:create, :slides)
-  = content_for :extra_nav_links do
+= content_for :extra_nav_links do
+  li
+    = link_to [:display, @sign] do
+      i.icon-desktop
+  - if permitted_to?(:create, :slides)
     li.dropdown.new_form_dropdown
       a.dropdown-toggle data-toggle="dropdown" href="#"
         i.icon-plus

@@ -16,7 +16,7 @@
       /* Center images both verticly and horizontaly */
       .image_wrapper { text-align: center; }
       .image_wrapper > img { max-height: 100%; max-width: 100%; vertical-align: middle; }
-      #alert { background-color: rgb(255, 0, 0); position: fixed; top: 0; left: 0; z-index: 100; padding: 40px; color: white; font-family: sans-serif; font-size: 80px; text-shadow: -1px -1px rgba(0,0,0,.5); display: none; background: url(<%= asset_path('bg-noise.png') %>) red; }
+      #alert { background-color: rgb(255, 0, 0); position: fixed; top: 0; left: 0; z-index: 100; padding: 40px; color: white; font-family: sans-serif; font-size: 80px; text-shadow: -1px -1px rgba(0,0,0,.5); display: none; }
     </style>
   </head>
   <body>
@@ -29,7 +29,7 @@
   <!-- Cycle JQuery plugin -->
   <!-- <script src="http://malsup.github.com/jquery.cycle.all.js"></script> -->
   <!-- <script src="http://malsup.github.com/jquery.cycle.lite.js"></script> -->
-  <%= javascript_include_tag "plugins/jquery.cycle.js" %>
+  <%= javascript_include_tag "jquery.cycle.js" %>
 
   <script>
     var sign;
