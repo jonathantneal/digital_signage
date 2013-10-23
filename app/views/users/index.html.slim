@@ -12,8 +12,8 @@
     br
     = form_for @search, html: { class: 'search form-inline' } do |f|
       .form-group>
-        = f.text_field :username_or_first_name_or_last_name_like, class: 'form-control'
-      = f.submit 'Search', class: 'btn btn-default'
+        = f.text_field :username_or_first_name_or_last_name_like, class: 'form-control', placeholder: 'Search'
+      = f.submit 'Search', class: 'btn btn-default hide'
 
   h1.no-top-padding
     br

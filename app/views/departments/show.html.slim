@@ -1,0 +1,28 @@
+.container
+  ul.breadcrumb
+    li = link_to 'Departments', departments_path
+    li = @department
+
+
+  .pull-right
+    = bootstrap_action_links @department
+
+  .clearfix
+  hr
+
+  h3 Signs
+  table.table.table-striped
+    tr
+      th Title
+      th Active Slides
+      th Content Time
+      th Last Check In
+    -@signs.each do |sign|
+      tr
+        td=link_to(sign.title, sign)
+        td=sign.active_slides.length
+        td=seconds_to_time(sign.active_slides_time)
+        td
+          =time_ago_in_words(sign.last_check_in)+" ago" if sign.checked_in?
+
+

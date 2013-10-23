@@ -5,6 +5,8 @@ class DepartmentsController < ApplicationController
 
   def index
     @departments = Department.order('departments.title')
+
+    @department = Department.new
   end
 
   def show

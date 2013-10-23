@@ -1,0 +1,10 @@
+.mini_form
+  = form_for department  do |f|
+    p.text-center
+      strong New Department
+
+    .form-group
+      = f.text_field :title, class: 'form-control', placeholder: 'Title'
+
+    .buttons
+      = f.submit 'Save', class: 'btn btn-primary'

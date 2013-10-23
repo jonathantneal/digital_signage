@@ -1,0 +1,20 @@
+- if permitted_to?(:create, :departments)
+  = content_for :extra_nav_links do
+    li.dropdown.new_form_dropdown
+      a.dropdown-toggle data-toggle="dropdown" href="#"
+        i.icon-plus
+      .dropdown-menu
+        = render 'min_form', department: @department
+
+.container
+  ul.breadcrumb
+    li Departments
+
+  table.table
+    tr
+      th Department Title
+      th Signs
+    -@departments.each do |department|
+      tr
+        td = link_to department.title, department
+        td = department.signs.join(', ')

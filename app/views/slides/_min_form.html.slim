@@ -1,7 +1,7 @@
 #new_slide_mini_form.mini_form
   =form_for @slide, :html => {:multipart => true} do |f|
     = f.hidden_field :sign_ids, value: @slide.sign_ids.join(',')
-    p
+    p.text-center
       strong New Slide
     .form-group
       =f.label :title

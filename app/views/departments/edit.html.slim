@@ -1,0 +1,14 @@
+.container
+  ul.breadcrumb
+    li = link_to 'Departments', departments_path
+    li = link_to @department, @department
+    li Edit
+
+  = form_for @department  do |f|
+    .form-group
+      = f.label :title
+      = f.text_field :title, class: 'form-control'
+
+    .buttons
+      = f.submit 'Save', class: 'btn btn-primary'
+      = link_to 'Cancel', :back, class: 'btn'

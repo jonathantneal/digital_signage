@@ -20,4 +20,13 @@ body { margin-top: 70px; }
 .if-active { display: none; }
 .active .if-active { display: inline-block; }
 
-.mini_form { margin: 15px; }
+.mini_form { margin: 15px; }  // dropdown form in top right cornder
+
+
+// Prevent navbar from collapsing
+.navbar-nav { float: left; margin: 0; }
+.navbar-nav > li { float: left; }
+.navbar-nav > li > a { padding-top: 15px; padding-bottom: 15px; }
+.navbar-right { float: right !important; }
+.navbar-nav .open .dropdown-menu { position: absolute; background-color: #ffffff; border: 1px solid #cccccc; border: 1px solid rgba(0, 0, 0, 0.15); -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175); box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175); }
+.navbar-right .dropdown-menu { right: 0; left: auto; }

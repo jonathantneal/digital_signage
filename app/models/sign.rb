@@ -13,6 +13,9 @@ class Sign < ActiveRecord::Base
   has_many :slots, :dependent=>:destroy
   has_many :slides, :through => :slots#, :order=>'slots.order'
 
+  def to_s
+    title
+  end
 
   def to_param
     self.name
