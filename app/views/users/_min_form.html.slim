@@ -1,0 +1,13 @@
+.container
+  br
+  strong New User
+  br
+  =form_for user do |f|
+    br
+    .form-group
+      / =f.label :username, 'Net ID'
+      =f.text_field :username, class: 'form-control', placeholder: 'Net ID'
+
+    .buttons
+      =f.submit 'Save', class: 'btn btn-primary'
+    br

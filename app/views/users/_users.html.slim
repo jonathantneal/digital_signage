@@ -1,0 +1,16 @@
+.search.summary = page_entries_info(@users, entry_name: 'user')
+table.table
+  tr
+    th Name
+    th Roles
+    th Departments
+    th Last login
+
+  - @users.each do |user|
+    tr
+      td = link_to(user.name, user_path(user))
+      td = user.roles.join(', ')
+      td = user.departments.join(', ')
+      td = time_ago_in_words(user.last_sign_in_at) unless user.last_sign_in_at.nil?
+
+= paginate(@users)

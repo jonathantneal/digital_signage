@@ -1,0 +1,22 @@
+- if permitted_to?(:create, :slides)
+  = content_for :extra_nav_links do
+    li.dropdown.new_form_dropdown
+      a.dropdown-toggle data-toggle="dropdown" href="#"
+        i.icon-plus
+      .dropdown-menu
+        = render 'min_form', user: @user
+
+.container
+
+  .pull-right
+    br
+    = form_for @search, html: { class: 'search form-inline' } do |f|
+      .form-group>
+        = f.text_field :username_or_first_name_or_last_name_like, class: 'form-control'
+      = f.submit 'Search', class: 'btn btn-default'
+
+  h1.no-top-padding
+    br
+
+  .search_results
+    = render('users')

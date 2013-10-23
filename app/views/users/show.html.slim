@@ -1,0 +1,41 @@
+.container
+
+  - if permitted_to?(:index, :users)
+    ul.breadcrumb
+      li = link_to 'Users', users_path
+      li = @user.name
+
+  .panel.panel-default
+    .panel-heading
+      h3.no-top-padding = @user.name
+    .panel-body
+      - if @user.photo_url.present?
+        .pull-right
+          =image_tag @user.photo_url, alt: @user.name
+
+
+      dl
+
+        dt.title Title
+        dd.title=@user.title
+
+        dt.department Department
+        dd.department=@user.department
+
+        dt.username Net ID
+        dd.username=@user.username
+
+        dt.email Email
+        dd.email=mail_to @user.email, @user.email
+
+        dt.roles Roles
+        dd.roles= @user.roles.join(", ")
+
+        dt.departments Signage Departments
+        dd.departments= @user.departments.join(", ")
+
+      - if permitted_to? :edit, @user
+        .pull-right
+          = link_to [:edit, @user], class: 'btn btn-default' do
+            i.icon-pencil>
+            | Edit

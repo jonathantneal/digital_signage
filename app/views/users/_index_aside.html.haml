@@ -1,6 +1,0 @@
--content_for(:aside) do
-  %h2 Actions
-  -if permitted_to? :create, :users
-    .box
-      %h3.add New user
-      =render('form')
