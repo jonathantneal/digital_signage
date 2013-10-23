@@ -12,25 +12,12 @@
     .sign_stack
       =render 'status_check', :sign => sign
       = link_to sign do
-        .title= sign.title
+        .title
+          = sign.title
+          - if sign.down?
+            .label.label-warning<
+                i.icon-exclamation-sign>
+                | Sign Down
         .sign_slides
           -sign.slides.published.limit(4).each do |slide|
             =render "shared/thumbnail", slide: slide
-
-/ ul.signs
-/   - @signs.each do |sign|
-/     li[sign]
-/       = link_to sign.title, sign_path(sign)
-
-.clear
-
-/ javascript:
-/   // This hides all but the first image. The multiple images are used for the slideshow.
-/   // Also, this js needs to be here so the user doesn't see the windows resize.
-/   var signs = document.getElementsByClassName("slides_container");
-/   for(i in signs){
-/     var children = signs[i].children;
-/     for(j in children){
-/       if(j > 0) children[j].style.display = 'none';
-/     }
-/   }

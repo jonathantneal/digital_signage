@@ -1,0 +1,41 @@
+.container
+  h3.no-top-padding Editing Slide
+  hr
+
+  = form_for @sign do |f|
+    .row
+      .form-group.col-md-6
+        = f.label :title
+        = f.text_field :title, class: "form-control"
+      .form-group.col-md-6
+        = f.label :name, 'Slug'
+        = f.text_field :name, class: "form-control"
+    .row
+      .col-md-6
+        .row
+          .form-group.col-xs-6
+            = f.label :width
+            = f.text_field :width, placeholder: 'width', class: "form-control"
+          .form-group.col-xs-6
+            = f.label :height
+            = f.text_field :height, placeholder: 'height', class: "form-control"
+      .form-group.col-md-6
+        = f.label :department_id, 'Department'
+        = f.collection_select :department_id, Department.with_permissions_to(:show), :id, :title, {}, class: 'form-control'
+    hr
+    .row
+      .form-group.col-xs-6
+        = f.label :reload_interval
+        = f.text_field :reload_interval, class: "form-control"
+      .form-group.col-xs-6
+        = f.label :check_in_interval
+        = f.text_field :check_in_interval, class: "form-control"
+
+    .form-group
+      = f.label :email, "Email when sign is down"
+      = f.text_field :email, class: "form-control"
+
+    hr
+    .buttons
+      = f.submit 'Save', class: 'btn btn-primary'
+      = link_to 'Cancel', :back, class: 'btn'

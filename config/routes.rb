@@ -1,7 +1,7 @@
 SignManager::Application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
 
-  resources :users, :except => [:new]
+  resources :users, except: [:new]
   resources :slides do
     collection do
       post :destroy_multiple
@@ -11,10 +11,9 @@ SignManager::Application.routes.draw do
       post :drop_create
     end
   end
-  resources :signs do
+  resources :signs, except: [:new] do
     resources :slots, :only => :destroy
     member do
-      get :info
       get :check_in
       get :display
       post :drop_on

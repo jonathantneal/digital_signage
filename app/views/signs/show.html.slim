@@ -1,20 +1,16 @@
-/ =form_for(@search, :url=>url_for(@sign), :html=>{:class=>'filter'}) do |f|
-/   fieldset
-/     legend Filter Slides
+#filter_wrapper
+  =form_for(@search, :url=>url_for(@sign), :html=>{:class=>'filter form-inline'}) do |f|
+    fieldset
+      #slide_options
+        #thumb_size_slider
 
-/     #slide_options
-/       #thumb_size_slider
-
-/     span.param
-/       =f.label :published_status, 'Published'
-/       =f.select :published_status, Slide::PUBLISHED_STATUS.map{|s| [s, s]}, {:include_blank=>true}
-/     .buttons=f.submit 'Filter'
+      .form-group>
+        =f.label :published_status, 'Published', class: 'sr-only'
+        =f.select :published_status, Slide::PUBLISHED_STATUS.map{|s| [s, s]}, {:include_blank=>true}, class: 'form-control'
+      =f.submit 'Filter', class: 'btn btn-primary'
 
 
 = content_for :extra_nav_links do
-  li
-    = link_to [:display, @sign] do
-      i.icon-desktop
   - if permitted_to?(:create, :slides)
     li.dropdown.new_form_dropdown
       a.dropdown-toggle data-toggle="dropdown" href="#"

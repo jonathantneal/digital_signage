@@ -6,27 +6,40 @@
 
 /*   Table of Contents
  *
- *    1.0 -
+ *    1.0 - General Styles
+ *    2.0 - Bootstrap Overrides
+ *      2.1 - Prevent navbar from collapsing
+ *      2.2 - Dropdown Menus
  */
 
 
-body { margin-top: 70px; }
+////    1.0 - General Styles
+  body { margin-top: 70px; }
 
-#page_wrapper { margin: 20px; }
+  #page_wrapper { margin: 20px; }
+  .no-top-padding { margin-top: 5px; padding-top: 0; }
 
-.new_form_dropdown .dropdown-menu { min-width: 250px; }
-.no-top-padding { margin-top: 5px; padding-top: 0; }
-
-.if-active { display: none; }
-.active .if-active { display: inline-block; }
-
-.mini_form { margin: 15px; }  // dropdown form in top right cornder
+  .if-active { display: none; }
+  .active .if-active { display: inline-block; }
 
 
-// Prevent navbar from collapsing
-.navbar-nav { float: left; margin: 0; }
-.navbar-nav > li { float: left; }
-.navbar-nav > li > a { padding-top: 15px; padding-bottom: 15px; }
-.navbar-right { float: right !important; }
-.navbar-nav .open .dropdown-menu { position: absolute; background-color: #ffffff; border: 1px solid #cccccc; border: 1px solid rgba(0, 0, 0, 0.15); -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175); box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175); }
-.navbar-right .dropdown-menu { right: 0; left: auto; }
+
+
+////    2.0 - Bootstrap Overrides
+
+  ////    2.1 - Prevent navbar from collapsing
+    .navbar-nav { float: left; margin: 0; }
+    .navbar-nav > li { float: left; }
+    .navbar-nav > li > a { padding-top: 15px; padding-bottom: 15px; }
+    .navbar-right { float: right !important; }
+    .navbar-nav .open .dropdown-menu { position: absolute; background-color: #ffffff; border: 1px solid #cccccc; border: 1px solid rgba(0, 0, 0, 0.15); -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175); box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175); }
+    .navbar-right .dropdown-menu { right: 0; left: auto; }
+
+
+  ////    2.2 - Dropdown Menus
+    .new_form_dropdown .dropdown-menu { min-width: 250px; }
+    .mini_form { margin: 15px; }  // dropdown form in top right cornder
+    ul.dropdown-menu li i { margin-right: 5px; } // Add some extra padding icons in dropdown menus
+    #sign-options-dropdown {
+      .label.label-warning { margin-left: 10px; }
+    }

@@ -1,7 +1,7 @@
 class SignsController < ApplicationController
-  filter_resource_access :additional_member => [:info, :check_in, :display, :drop_on]
-  respond_to :html, :except => :check_in
-  respond_to :json, :only => [:show, :check_in]
+  filter_resource_access additional_member: [:check_in, :display, :drop_on]
+  respond_to :html, except: :check_in
+  respond_to :json, only: [:show, :check_in]
 
   def index
     @signs = Sign.with_permissions_to(:index).order('signs.title')
@@ -27,17 +27,6 @@ class SignsController < ApplicationController
     else
       permission_denied
     end
-  end
-
-  def info
-    if user_signed_in?
-      respond_with @sign
-    else
-      permission_denied
-    end
-  end
-
-  def new
   end
 
   def edit
@@ -92,7 +81,8 @@ class SignsController < ApplicationController
 
   protected
 
-  def load_sign
-    @sign = Sign.where('id = ? OR name = ?', params[:id], params[:id]).first
-  end
+    # Used by Declarative Authorization
+    def load_sign
+      @sign = Sign.where('id = ? OR name = ?', params[:id], params[:id]).first
+    end
 end

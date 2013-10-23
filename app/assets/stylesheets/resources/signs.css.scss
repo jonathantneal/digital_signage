@@ -7,9 +7,13 @@ body.signs.show { margin-top: 50px;
 body.signs.index {
   .signs {
     .sign_stack { float: left; height: 200px; width: 250px; margin: 20px;
-      a { height: 200px; width: 250px;
-        .title { text-align: center; }
+
+      a { height: 200px; width: 250px; text-decoration: none;
+        .title { text-align: center; margin-bottom: 5px; color: black; font-weight: bold;
+          .label { margin-left: 10px; }
+        }
         .sign_slides { position: relative; min-width: 250px; min-height: 141px; background-color: #eee;
+          &:hover { opacity: 0.8; }
           .slide_thumbnail { position: absolute; top: 0; left: 0;
             &:nth-child(1) { top: 0px; left: 0px; z-index: 10; }
             &:nth-child(2) { top: 5px; left: 5px; z-index: 9; }

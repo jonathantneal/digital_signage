@@ -15,9 +15,17 @@ html lang="en-us"
               li = link_to sign.title, sign
             li.divider
             li = link_to 'View All', signs_url
-        - if @sign
-          li
-            a href="#" = @sign.title
+        - if @sign.try(:persisted?)
+          li.dropdown#sign-options-dropdown
+            a.dropdown-toggle data-toggle="dropdown" href="#"
+              = @sign.title
+              - if @sign.down?
+                .label.label-warning<
+                  i.icon-exclamation-sign>
+                  | Sign Down
+            ul.dropdown-menu
+              li = link_to '<i class="icon-edit"></i> Edit'.html_safe, [:edit, @sign]
+              li = link_to '<i class="icon-desktop"></i> Preview'.html_safe, [:display, @sign], target: '_blank'
 
       ul.nav.navbar-nav.navbar-right
         = yield :extra_nav_links
@@ -30,13 +38,12 @@ html lang="en-us"
             ul.dropdown-menu
               - if current_user.is_admin?
                 li.dropdown-header Admin
-                li = link_to 'Departments', departments_path
-                li = link_to 'Users', users_path
+                li = link_to '<i class="icon-building"></i> Departments'.html_safe, departments_path
+                li = link_to '<i class="icon-group"></i> Users'.html_safe, users_path
                 li.divider
               li = link_to 'My Account', current_user, :class=>'name'
               li = link_to 'Logout', logout_path, :class=>'logout'
 
-    / .clearfix
     #page_wrapper
       #messages = render('layouts/messages')
       = yield
