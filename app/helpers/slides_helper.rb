@@ -9,9 +9,10 @@ module SlidesHelper
   end
 
   def slide_type(slide)
-    return 'image' if slide.image?
-    return 'video' if slide.video?
-    return 'embed'
+    return 'image'  if slide.image?
+    return 'video'  if slide.video?
+    return 'link'   if slide.link?
+    return 'editor' if slide.editor?
   end
 
   def slide_file_url(slide, version=nil)

@@ -1,4 +1,4 @@
-li.slide id="slide_#{slide.id}" data-edit-url=edit_slide_url(slide) data-show-url=slide_url(slide) data-slide-id=slide.id
+li.slide id="slide_#{slide.id}" data-edit-url=edit_slide_url(slide) data-slide-id=slide.id
   = link_to 'X', slide, method: :delete, class: 'remove_slide_link', title: 'Delete this slide', data: { confirm: "Are you sure? This will remove the slide from all signs as well." }, remote: true
   = render "shared/thumbnail", slide: slide
   p.title

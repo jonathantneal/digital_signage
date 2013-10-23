@@ -35,6 +35,18 @@ class SlidesController < ApplicationController
   end
 
   def create
+    @slide.publish_at ||= Time.now
+
+    case params[:option]
+    when 'upload'
+      @slide.html_url = ''
+    when 'link'
+      @slide.content = nil
+    when 'editor'
+      @slide.html_url = ''
+      @slide.content = nil
+    end
+
     if @slide.save
       flash[:notice] = 'Slide created'
     end

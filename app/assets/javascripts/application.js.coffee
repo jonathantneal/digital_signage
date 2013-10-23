@@ -9,6 +9,7 @@
 #= require dropzone
 #= require jquery.cycle
 #= require slideshow.min
+#=  require redactor
 #
 #= require_self
 #= require_tree ./resources

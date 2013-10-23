@@ -1,5 +1,5 @@
-/ Just pass in the slide
-
+- if slide.editor?
+  #editor_toolbar
 
 div class="slide_preview #{slide_type(slide)}"
   .constraint style="background-color:##{slide.color};"
@@ -8,6 +8,21 @@ div class="slide_preview #{slide_type(slide)}"
       =image_tag slide_file_url(slide), :alt=>"#{slide.title} thumbnail"
     -elsif slide.video?
       =image_tag "video_thumbnail.jpg", :alt=>"#{slide.title} video"
-    -else
+    -elsif slide.link?
       iframe src=slide.url style='width:100%; min-height:400px;'
-      / =image_tag "white-link.png", :alt=>"link"
+
+    -elsif slide.editor?
+      = form.text_area :editable_content, id: 'editable_content'
+
+      = content_for(:foot) do
+        coffee:
+          $('#editable_content').redactor
+            # air: true
+
+            focus: true
+            linebreaks: true
+            toolbarExternal: '#editor_toolbar'
+            # buttons: ['formatting', '|', 'bold', 'italic', 'underline', '|', 'alignleft', 'aligncenter', 'alignright', '|', 'unorderedlist', 'orderedlist', '|', 'horizontalrule', 'html']
+            #   Lists throw of drag and drop sorting on the sign page. So I'm leaving out support for now.
+            buttons: ['formatting', '|', 'bold', 'italic', 'underline', '|', 'alignleft', 'aligncenter', 'alignright', '|', 'horizontalrule', 'html']
+            formattingTags: ['p', 'h1', 'h2', 'h3']

@@ -1,4 +1,3 @@
-/ Just pass in the slide
 div class="slide_thumbnail #{slide_type(slide)}"
   .constraint style="background-color:##{slide.color};"
   .element
@@ -6,6 +5,10 @@ div class="slide_thumbnail #{slide_type(slide)}"
       =image_tag slide_file_url(slide, :preview), :alt=>"#{slide.title} thumbnail"
     -elsif slide.video?
       =image_tag "video_thumbnail.jpg", :alt=>"#{slide.title} video"
-    -else
+    -elsif slide.link?
       / iframe src=slide.url
       =image_tag "white-link.png", :alt=>"link"
+
+    - if slide.editor?
+      .custom_html_slide style="zoom:#{250.0/1920.0}; border: 1px solid #ddd;"
+        .custom_html_slide_content == slide.editable_content

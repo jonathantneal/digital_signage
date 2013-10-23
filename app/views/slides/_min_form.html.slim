@@ -12,23 +12,38 @@
       =f.collection_select :department_id, Department.with_permissions_to(:show), :id, :title, {}, class: 'form-control'
 
 
-    .form-group
+    .form-group#slide_option_buttons
       .btn-group data-toggle='buttons'
         label class='btn btn-primary active'
-          input type='radio' name='options' id='option_upload'
+          input type='radio' name='options' id='option_upload' value='upload' data-option='#upload_options' checked='checked'
             i.icon-cloud-upload>
             span.if-active Upload
         label class='btn btn-primary'
-          input type='radio' name='options' id='option_link'
+          input type='radio' name='options' id='option_link' value='link' data-option='#link_options'
             i.icon-link>
             span.if-active Link
         label class='btn btn-primary'
-          input type='radio' name='options' id='option_editor'
+          input type='radio' name='options' id='option_editor' value='editor' data-option='#editor_options'
             i.icon-edit>
             span.if-active Editor
-    / .form-group
-    /   =f.label(:content)
-    /   =f.file_field(:content)
+
+    .content_options#upload_options
+      .form-group
+        .form-group
+          =f.label :content
+          =f.file_field :content
+
+    .content_options#link_options
+      .form-group
+        .form-group
+          =f.label :html_url, 'URL'
+          =f.text_field :html_url, class: 'form-control'
+
+    .content_options#editor_options
+      / nothing needed here
+
+
+
     / .form-group
     /   =f.label(:html_url)
     /   =f.text_field(:html_url)

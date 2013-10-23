@@ -1,41 +1,82 @@
-div
-  .pull-right
-    = link_to edit_slide_url(@slide), class: 'btn btn-default' do
-      i.icon-edit>
-      | Edit
-    '
-    = link_to @slide, method: :delete, class: 'btn btn-default', title: 'Delete this slide', data: { confirm: "Are you sure? This will remove the slide from all signs as well." } do
-      i.icon-trash>
-      | Delete
-  h3.no-top-padding=@slide.title
+=form_for @slide do |form|
+  #slide_preview
+    .form-group
+      = form.label :title
+      = form.text_field :title, class: 'form-control'
+    =render(:partial=>'shared/preview', locals: { slide: @slide, form: form })
 
-#slide_preview
-  =render(:partial=>'shared/preview', :locals=>{:slide=>@slide})
+  #slide_details
+    - if @slide.link?
+      .form-group
+        = form.label :url
+        = form.text_field :url, class: 'form-control'
+    .form-group
+      = form.label :delay
+      = form.number_field :delay, class: 'form-control'
+    - if @slide.image? || @slide.video?
+      .form-group
+        = form.label :color
+        = form.text_field :color, style: "color:##{@slide.color}; background-color:##{@slide.color};", class: 'form-control'
+    .form-group
+      = form.label :publish_at
+      = form.text_field :publish_at, :value => @slide.publish_at.try(:to_formatted_s, :long), class: 'date form-control'
+    .form-group
+      = form.label :unpublish_at
+      = form.text_field :unpublish_at, :value => @slide.unpublish_at.try(:to_formatted_s, :long), class: 'date form-control'
 
-#slide_details
-  dl.slide
 
-    .details
-      /reduce width so that the content doesn't go behind the preview image
-      dt.url URL
-      -unless @slide.url.blank?
-        dd.url = link_to(@slide.url, @slide.url)
-      dt.delay Delay
-      dd.delay = @slide.delay
-      dt.color Color
-      dd.color style="color:##{@slide.color}; background-color:##{@slide.color};" = @slide.color
-      dt.publish_at Publish Date
-      dd.publish_at = @slide.publish_at.try(:to_formatted_s, :long)
-      dt.unpublish_at Unublish Date
-      dd.unpublish_at = @slide.unpublish_at.try(:to_formatted_s, :long)
-      dt.department Department
-      dd.department = @slide.department
-  h3.signs Signs
-  ul.signs
-    - @slide.signs.each do |sign|
-      li = permitted_to?(:show, sign) ? link_to(sign.title, sign_path(sign)) : sign.title
-  h3.schedule Schedule
-  ul.schedule
-    - @slide.sorted_schedules.each do |schedule|
-      li = schedule
+    hr
 
+    .slots
+      .pull-right = link_to_add_fields 'Add', form, :slots
+      h3 Slots
+      table.table#slots.slots
+        = form.fields_for :slots, @slide.slots do |f2|
+          = render 'slot_fields', :f => f2
+
+    .schedule
+      .pull-right = link_to_add_fields 'Add', form, :schedules
+      h3 Schedule
+      table.table#schedules.schedules
+        =form.fields_for :schedules, @slide.sorted_schedules do |f2|
+          =render 'schedule_fields', :f => f2
+
+
+
+
+    / dl.slide
+    /   .details
+    /     /reduce width so that the content doesn't go behind the preview image
+    /     dt.url URL
+    /     -unless @slide.url.blank?
+    /       dd.url = link_to(@slide.url, @slide.url)
+    /     dt.delay Delay
+    /     dd.delay = @slide.delay
+    /     dt.color Color
+    /     dd.color style="color:##{@slide.color}; background-color:##{@slide.color};" = @slide.color
+    /     dt.publish_at Publish Date
+    /     dd.publish_at = @slide.publish_at.try(:to_formatted_s, :long)
+    /     dt.unpublish_at Unublish Date
+    /     dd.unpublish_at = @slide.unpublish_at.try(:to_formatted_s, :long)
+    /     dt.department Department
+    /     dd.department = @slide.department
+    / h3.signs Signs
+    / ul.signs
+    /   - @slide.signs.each do |sign|
+    /     li = permitted_to?(:show, sign) ? link_to(sign.title, sign_path(sign)) : sign.title
+    / h3.schedule Schedule
+    / ul.schedule
+    /   - @slide.sorted_schedules.each do |schedule|
+    /     li = schedule
+
+
+  hr
+
+
+  = form.submit 'Save', class: 'btn btn-primary'
+  '
+  = link_to 'Cancel', :back, class: 'btn'
+  '
+  .pull-right= link_to @slide, method: :delete, class: 'btn btn-danger', title: 'Delete this slide', data: { confirm: "Are you sure? This will remove the slide from all signs as well." } do
+    i.icon-trash>
+    | Delete Slide

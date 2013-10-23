@@ -4,7 +4,7 @@ class Slide < ActiveRecord::Base
   PUBLISHED_STATUS = ['published', 'unpublished', 'expired']
 
   attr_accessible :title, :delay, :color, :department_id, :publish_at, :unpublish_at, :created_at, :updated_at, :html_url,
-                  :sign_id, :sign_ids, :content, :content_cache, :schedules_attributes, :slots_attributes
+                  :sign_id, :sign_ids, :content, :content_cache, :schedules_attributes, :slots_attributes, :editable_content
 
   belongs_to :department
   has_many :schedules, :dependent => :destroy
@@ -112,6 +112,18 @@ class Slide < ActiveRecord::Base
 
   def video?
     type.try(:[], 'video/').present?
+  end
+
+  def upload?
+    image? || video?
+  end
+
+  def link?
+    html_url.present? && !upload?
+  end
+
+  def editor?
+    !(upload? || link?)
   end
 
   def active?(now=Time.now)

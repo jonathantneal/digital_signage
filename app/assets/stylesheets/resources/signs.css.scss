@@ -3,3 +3,21 @@ body.signs.show { margin-top: 50px;
   #message_list { padding: 20px 20px 0 20px; }
 }
 
+
+body.signs.index {
+  .signs {
+    .sign_stack { float: left; height: 200px; width: 250px; margin: 20px;
+      a { height: 200px; width: 250px;
+        .title { text-align: center; }
+        .sign_slides { position: relative; min-width: 250px; min-height: 141px; background-color: #eee;
+          .slide_thumbnail { position: absolute; top: 0; left: 0;
+            &:nth-child(1) { top: 0px; left: 0px; z-index: 10; }
+            &:nth-child(2) { top: 5px; left: 5px; z-index: 9; }
+            &:nth-child(3) { top: 10px; left: 10px; z-index: 8; }
+            &:nth-child(4) { top: 15px; left: 15px; z-index: 7; }
+          }
+        }
+      }
+    }
+  }
+}

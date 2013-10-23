@@ -1,6 +1,0 @@
-%tr
-  %td.time=f.text_field(:when)
-  %td.action=f.select(:active, Schedule::ACTIVE_OPTIONS)
-  %td.remove
-    =f.label(:_destroy, :class=>:delete)
-    =f.check_box(:_destroy, :class=>:delete)

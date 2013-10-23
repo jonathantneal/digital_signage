@@ -36,10 +36,10 @@ $(document).ready ->
 
 
   if $('body.slides.index').exists()
-    window.refresh_preview_size = ->
-      $("ul.slides li div.thumbnail").css "width", (localStorage.slidervalue or 336)
-      $("ul.slides li div.thumbnail").css "height", ($("ul.slides li div.thumbnail").width() * 113 / 200)
-      $("ul.slides li div.thumbnail").css "line-height", ($("ul.slides li div.thumbnail").width() * 113 / 200 - 3)+"px"
+    # window.refresh_preview_size = ->
+    #   $("ul.slides li div.thumbnail").css "width", (localStorage.slidervalue or 336)
+    #   $("ul.slides li div.thumbnail").css "height", ($("ul.slides li div.thumbnail").width() * 113 / 200)
+    #   $("ul.slides li div.thumbnail").css "line-height", ($("ul.slides li div.thumbnail").width() * 113 / 200 - 3)+"px"
 
     refresh_endless_scroll = ->
       if $('.pagination').length
@@ -58,19 +58,19 @@ $(document).ready ->
 
 
 
-    $("#thumb_size_slider").slider
-      value: (localStorage.slidervalue or 336)
-      min: 175
-      max: 336
-      step: 1
-      slide: (event, ui) ->
-        $("ul.slides li div.thumbnail").css "width", ui.value
-        $("ul.slides li div.thumbnail").css "height", (ui.value * 113 / 200.0)
-        $("ul.slides li div.thumbnail").css "line-height", (ui.value * 113 / 200.0 - 3)+"px"
-      change: (event, ui) ->
-        localStorage.slidervalue = ui.value
-    # Initiate width when page loads
-    refresh_preview_size()
+    # $("#thumb_size_slider").slider
+    #   value: (localStorage.slidervalue or 336)
+    #   min: 175
+    #   max: 336
+    #   step: 1
+    #   slide: (event, ui) ->
+    #     $("ul.slides li div.thumbnail").css "width", ui.value
+    #     $("ul.slides li div.thumbnail").css "height", (ui.value * 113 / 200.0)
+    #     $("ul.slides li div.thumbnail").css "line-height", (ui.value * 113 / 200.0 - 3)+"px"
+    #   change: (event, ui) ->
+    #     localStorage.slidervalue = ui.value
+    # # Initiate width when page loads
+    # refresh_preview_size()
 
     # ****  Enable Multi Select  ******    TODO, you may want to break this off into a jQuery plugin eventually
     $(document).on "click", "ul.slides li", (e) ->
@@ -104,10 +104,6 @@ $(document).ready ->
     $("#add-to-sign-button").click (e) ->
       selected_slides = $("ul.slides li.selected")
       addSlidesToSign selected_slides
-      e.stopPropagation()
-
-    $("#show-slide-button").click (e) ->
-      window.location = ($("ul.slides li.selected").first().data("show-url"))
       e.stopPropagation()
 
     $("#edit-slide-button").click (e) ->
@@ -163,3 +159,13 @@ $(document).ready ->
 
     openSignSelectModal = ->
       $('#signSelectModal').modal('show')
+
+
+    # ***** Toggle between new slide options ********
+    refreshNewSlideOptions = (toggles) ->
+      option = toggles.find(':checked').data('option')
+      $('.content_options').hide()
+      $(option).show()
+    $('#slide_option_buttons').change ->
+      refreshNewSlideOptions($(this))
+    refreshNewSlideOptions($('#slide_option_buttons'))
