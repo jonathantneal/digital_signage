@@ -15,6 +15,10 @@ class SignsController < ApplicationController
       @search = @sign.slots.with_permissions_to(:index).search(params[:search])
       @slots = @search.includes(:slide => :schedules)
 
+      # Initialize new slide for mini form
+      @slide = Slide.new
+      @slide.signs << @sign
+
       respond_with(@slides) do |format|
         format.js do
           render :partial => 'slots' unless params["_"] # Otherwise if infinites scroll render index.js.erb

@@ -1,6 +1,6 @@
-.container
-  br
+#new_slide_mini_form.mini_form
   =form_for @slide, :html => {:multipart => true} do |f|
+    = f.hidden_field :sign_ids, value: @slide.sign_ids.join(',')
     p
       strong New Slide
     .form-group
@@ -43,26 +43,5 @@
       / nothing needed here
 
 
-
-    / .form-group
-    /   =f.label(:html_url)
-    /   =f.text_field(:html_url)
-    / .form-group
-    /   =f.label(:delay)
-    /   small< in seconds
-    /   =f.text_field(:delay)
-    / .form-group
-    /   =f.label(:color)
-    /   =f.text_field(:color, {:style=>"color:##{@slide.color}; background-color:##{@slide.color};"})
-    / .form-group
-    /   =f.label(:publish_at)
-    /   =f.text_field(:publish_at, :value => @slide.publish_at.try(:to_formatted_s, :long), :class => :date)
-    / .form-group
-    /   =f.label(:unpublish_at)
-    /   =f.text_field(:unpublish_at, :value => @slide.unpublish_at.try(:to_formatted_s, :long), :class => :date)
-
-
     .buttons
       =f.submit 'Save', class: 'btn btn-primary'
-
-  br

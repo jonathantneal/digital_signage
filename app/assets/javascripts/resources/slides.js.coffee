@@ -161,6 +161,14 @@ $(document).ready ->
       $('#signSelectModal').modal('show')
 
 
+
+
+
+
+
+  #########  Shared Javascript
+
+  if $('#new_slide_mini_form').length > 0
     # ***** Toggle between new slide options ********
     refreshNewSlideOptions = (toggles) ->
       option = toggles.find(':checked').data('option')
