@@ -37,9 +37,10 @@ html lang="en-us"
       = yield
 
     #page-spinner
-      span.icon-stack
-        i.icon-sun.icon-spin.icon-stack-base
+      .canvas_container
         i.icon-cloud-upload
+        br
+        canvas#circle-canvas height='200' width='200'
 
     = javascript_include_tag 'application'
     = yield :foot
