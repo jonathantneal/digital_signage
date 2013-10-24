@@ -18,16 +18,12 @@ class Slide < ActiveRecord::Base
   mount_uploader :content, ContentUploader
 
   validates_presence_of :title, :delay, :color, :department_id
-  # validates_presence_of :content, :on => :create
-  # validates :title, :uniqueness => true
   validates_integrity_of :content
   validates_each :unpublish_at, :allow_nil => true do |record, attr, value|
     if record.publish_at.to_i > value.to_i
       record.errors.add :publish_at, "can't be after the unpublish date"
     end
   end
-
-  # before_save :set_content_type
 
   scope :published_status, lambda{ |status|
     case status
@@ -73,29 +69,9 @@ class Slide < ActiveRecord::Base
 
   search_methods :published_status
 
-  def valid_schedules(now=@now)
-    return [] if schedules.size.zero?
-    schedules.reject{ |s| s.time(now).nil? }
-  end
-
-  def published?
-    if publish_at.nil? && unpublish_at.nil?
-      false
-    elsif unpublish_at.nil?
-      publish_at.past?
-    elsif publish_at.nil?
-      unpublish_at.future?
-    else
-      publish_at.past? && unpublish_at.future?
-    end
-  end
-
-  def unpublished?
-    !published?
-  end
 
   def filename
-    content.file.original_filename
+    content.file.original_filename if content.present?
   end
 
   def url(version=nil)
@@ -126,32 +102,49 @@ class Slide < ActiveRecord::Base
     !(upload? || link?)
   end
 
-  def active?(now=Time.now)
-    return false if unpublished?
-    showing?(now)
+
+
+
+
+  #####  Slide status methods
+
+  def published?
+    if publish_at.nil? && unpublish_at.nil?
+      false
+    elsif unpublish_at.nil?
+      publish_at.past?
+    elsif publish_at.nil?
+      unpublish_at.future?
+    else
+      publish_at.past? && unpublish_at.future?
+    end
   end
 
-  def inactive?(now=Time.now)
-    !active?(now)
+  def unpublished?
+    !published?
+  end
+
+  def expired?
+    # Things that are expired are also unpublished, but expired should take presidence.
+    unpublish_at.present? && unpublish_at.past?
+  end
+
+
+
+
+  #####  Scheduling Methods
+
+  def valid_schedules(now=@now)
+    return [] if schedules.size.zero?
+    schedules.reject{ |s| s.time(now).nil? }
   end
 
   def showing?(now=Time.now)
+    return false if unpublished?
     return true if valid_schedules(now).empty?
     return previous_schedule(now).activate? unless previous_schedule(now).nil?
     return next_schedule(now).deactivate? unless next_schedule(now).nil?
     false
-  end
-
-  def hidden?(now=Time.now)
-    !showing?(now)
-  end
-
-  def expired?(now=Time.now)
-    hidden?(now) && future_schedules(now).empty?
-  end
-
-  def expired_at(now=Time.now)
-    previous_schedule(now).try(:time) if expired?(now)
   end
 
   def sorted_schedules(now=Time.now)
@@ -188,52 +181,32 @@ class Slide < ActiveRecord::Base
     sorted_valid_schedules(now).reject { |s| s.time(now) < now }
   end
 
-  # Class Methods
-  class << self
-    extend Memoist
 
-    def expired_slides(now=Time.now)
-      Slide.all.reject { |s| !s.expired?(now) }
+
+
+  #### Class Methods
+
+  def self.from_drop(file, department)
+    unless slide = Slide.find_by_title(file.original_filename)
+      slide = Slide.new
+      slide.content     = file
+      slide.title       = file.original_filename
+      slide.department  = department
+      slide.publish_at  = Time.now
     end
-
-    def total_time(slides)
-      time = 0
-      slides.each do |slide|
-        time += slide.delay
-      end
-      return time
-    end
-
-    def from_drop(file, department)
-      unless slide = Slide.find_by_title(file.original_filename)
-        slide = Slide.new
-        slide.content     = file
-        slide.title       = file.original_filename
-        slide.department  = department
-        slide.publish_at  = Time.now
-      end
-      slide
-    end
-
-    memoize :expired_slides, :total_time
+    slide
   end
+
 
   private
 
-  def set_content_type
-    if self.respond_to?(:content) && self.respond_to?(:content_type)
-      unless content.file.try(:content_type).nil?
-        self.content_type = content.file.content_type
+    def defaults
+      if new_record?
+        self.delay ||= Settings.defaults.slide.delay
       end
     end
-  end
 
-  def defaults
-    if new_record?
-      self.delay ||= Settings.defaults.slide.delay
-    end
-  end
-
-  memoize :sorted_schedules, :valid_schedules, :sorted_valid_schedules,
+  memoize :published?, :expired?,
+    :sorted_schedules, :valid_schedules, :sorted_valid_schedules,
     :previous_schedule, :past_schedules, :next_schedule, :future_schedules
 end

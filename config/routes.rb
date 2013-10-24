@@ -12,14 +12,14 @@ SignManager::Application.routes.draw do
     end
   end
   resources :signs, except: [:new] do
-    resources :slots, :only => :destroy
+    resources :slots, only: :destroy
     member do
       get :check_in
       get :display
       post :drop_on
     end
   end
-  resources :slots, :only => [:create, :update] do
+  resources :slots, only: [:create, :update] do
     collection do
       put :sort
       post :destroy_multiple

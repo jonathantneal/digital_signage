@@ -17,12 +17,8 @@ div class="slide_preview #{slide_type(slide)}"
       = content_for(:foot) do
         coffee:
           $('#editable_content').redactor
-            # air: true
-
             focus: true
             linebreaks: true
             toolbarExternal: '#editor_toolbar'
-            # buttons: ['formatting', '|', 'bold', 'italic', 'underline', '|', 'alignleft', 'aligncenter', 'alignright', '|', 'unorderedlist', 'orderedlist', '|', 'horizontalrule', 'html']
-            #   Lists throw of drag and drop sorting on the sign page. So I'm leaving out support for now.
             buttons: ['formatting', '|', 'bold', 'italic', 'underline', '|', 'alignleft', 'aligncenter', 'alignright', '|', 'horizontalrule', 'html']
             formattingTags: ['p', 'h1', 'h2', 'h3']

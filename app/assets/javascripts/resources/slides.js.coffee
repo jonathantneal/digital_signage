@@ -48,7 +48,7 @@ $(document).ready ->
           if url && $(window).scrollTop() > $(document).height() - $(window).height() - 350
             $('.pagination').text("Fetching more slides...")
             $.getScript(url).done (script, textStatus) ->
-              refresh_preview_size()
+              # refresh_preview_size()
         $(window).scroll()
 
     refresh_endless_scroll()

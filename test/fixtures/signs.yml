@@ -7,7 +7,6 @@ one:
   "on": 2010-01-01 00:00:00
   "off": 2010-01-01 12:00:00
   last_check_in: 2010-01-01 12:00:00
-  transition_duration: 1.0
   reload_interval: 300
   check_in_interval: 180
   last_ip: 0.0.0.0
@@ -19,7 +18,6 @@ two:
   "on": 2000-01-01 00:00:00
   "off": 2000-01-01 12:00:00
   last_check_in: 2000-01-01 12:00:00
-  transition_duration: 1.0
   reload_interval: 300
   check_in_interval: 180
   last_ip: 0.0.0.0

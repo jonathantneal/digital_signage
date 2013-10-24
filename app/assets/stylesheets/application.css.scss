@@ -10,6 +10,7 @@
  *    2.0 - Bootstrap Overrides
  *      2.1 - Prevent navbar from collapsing
  *      2.2 - Dropdown Menus
+ *    3.0 - Messages
  */
 
 
@@ -42,4 +43,12 @@
     ul.dropdown-menu li i { margin-right: 5px; } // Add some extra padding icons in dropdown menus
     #sign-options-dropdown {
       .label.label-warning { margin-left: 10px; }
+    }
+
+
+
+
+  ////    3.0 - Messages
+    #floating_messages { position: fixed; z-index: 10000; top: 25px; right: 25px;
+      a.close { padding-left: 10px; }
     }

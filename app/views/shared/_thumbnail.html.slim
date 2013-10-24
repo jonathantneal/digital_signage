@@ -1,4 +1,10 @@
 div class="slide_thumbnail #{slide_type(slide)}"
+  .slide_status
+    - if slide.expired?
+      .label.label-danger expired
+    - elsif slide.unpublished?
+      .label.label-warning unpublished
+
   .constraint style="background-color:##{slide.color};"
   .element
     -if slide.image?

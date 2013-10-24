@@ -1,6 +1,3 @@
-/ .search.summary
-/   =page_entries_info(@slides, :entry_name => 'Slide')
-
 =form_tag drop_create_slides_url, id: 'slide-upload-dropzone', class: 'dropzone' do
   ul.slides#list_of_slides
     =render @slides

@@ -35,7 +35,7 @@ body.slides {
     &.selected { border: 5px solid #1175AE; opacity: .6;}
 
     .remove_slide_link { transition: opacity .2s; opacity: 0; z-index: 10; position: absolute; top: 0; right: 0; background-color: rgba(0, 0, 0, 0.8); border: 1px solid rgba(0, 0, 0, 0.8); border-radius: 0 0 0 3px; padding: 5px 10px; color: white; text-decoration: none;
-      &:hover { background-color: rgba(255, 150, 150, 0.8); color: #333; }
+      &:hover { background-color: #d9534f; }
     }
 
     .title { margin: 0; font-weight: 500;
@@ -61,6 +61,7 @@ body.slides {
 .slide_thumbnail, .slide_preview { display: inline-block; position: relative; width: 100%; min-width: 250px;
   &.editor .constraint { background-color: white !important; }
 
+  .slide_status { position: absolute; top: 2px; left: 4px; z-index: 10 }
   .constraint { background-color: black; width: 100%; padding-top: 56.25%; }
   .element { position: absolute; top: 0; bottom: 0; left: 0; right: 0; text-align: center;
 

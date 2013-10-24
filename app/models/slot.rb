@@ -22,9 +22,5 @@ class Slot < ActiveRecord::Base
   scope :expired, lambda{ joins(:slide).where(Slide.expired.where_clauses.join(' AND ')) }
 
   search_methods :published_status
-  
-  def custom_delay
-    self.delay.blank? ? self.slide.delay : self.delay
-  end
 
 end

@@ -1,6 +1,5 @@
 class SignSerializer < ActiveModel::Serializer
-  attributes  :id, :name, :title, :transition_duration, :reload_interval, :check_in_interval,
-              :check_in_url, :height, :width
+  attributes  :id, :name, :title, :reload_interval, :check_in_interval, :check_in_url, :height, :width
 
   has_many :slots
 

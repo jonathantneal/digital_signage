@@ -10,7 +10,6 @@
 .signs
   -@signs.each do |sign|
     .sign_stack
-      =render 'status_check', :sign => sign
       = link_to sign do
         .title
           = sign.title

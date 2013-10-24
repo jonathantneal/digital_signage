@@ -3,9 +3,6 @@ class SlotsController < ApplicationController
   respond_to :html, :except => [:sort, :destroy_multiple]
   respond_to :js, :only => [:sort, :destroy_multiple]
 
-  def edit
-  end
-
   def create
     if @slot.save
       flash[:notice] = 'Added  created'

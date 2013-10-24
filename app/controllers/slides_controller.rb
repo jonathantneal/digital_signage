@@ -5,11 +5,11 @@ class SlidesController < ApplicationController
 
   def index
     if params[:search].blank?
-      params[:search] = {published_status: :published}  # Default to only showing published slides
+      # params[:search] = {published_status: :published}  # Default to only showing published slides
     end
 
     @search = Slide.search(params[:search])
-    @slides = @search.relation.includes(:department).page(params[:page]).per(params[:per] || Kaminari.config.default_per_page)
+    @slides = @search.relation.includes(:department).page(params[:page]).per(20)
     @slide = Slide.new
     respond_with(@slides) do |format|
       format.js do

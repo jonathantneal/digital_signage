@@ -18,7 +18,7 @@ class SignsControllerTest < ActionController::TestCase
       assert_response :success
     end
   end
-  
+
   test "manager should not get new" do
     as_user(:admin) do
       get :new
@@ -29,7 +29,7 @@ class SignsControllerTest < ActionController::TestCase
   test "admin should create sign" do
     as_user(:admin) do
       assert_difference('Sign.count') do
-        post :create, :sign => { :name => 'just_created', :title => 'Just Created', :department_id => 1, :transition_duration => 1.0, :reload_interval => 300, :check_in_interval => 180}
+        post :create, :sign => { :name => 'just_created', :title => 'Just Created', :department_id => 1, :reload_interval => 300, :check_in_interval => 180}
       end
 
       assert_redirected_to sign_path(assigns(:sign))
@@ -85,12 +85,12 @@ class SignsControllerTest < ActionController::TestCase
       end
     end
   end
-  
-  
+
+
   ### Check-In
   test "guest should check-in to sign" do
     get :check_in, :id => signs(:one).to_param
     assert_response :success
   end
-  
+
 end
