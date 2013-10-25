@@ -5,10 +5,14 @@ app:
   host: your.server.tld
   relative_url_root: /signage # or blank if no relative root
 
-security:
-  roles:
-    base_entitlement: "urn:biola:sign-manager:"
-    include_affiliations: true
+# Overwrite this in settings.local.yml  -> rake secret
+secret_token: 'c457e099cb8f80054e41dccbfefeafc222ee1bd06c68006aa807698933186c291419f490defdd0d4145e57a64d59d5045bdb8699e7bc18c8c2e2361ff0d8d81b'
+
+urn_namespaces:
+- "urn:biola:apps:sign-manager:"
+- "urn:biola:apps:all:"
+
+base_entitlement: "urn:biola:apps:sign-manager:"
 
 cas:
   url: 'https://login.biola.edu/cas'

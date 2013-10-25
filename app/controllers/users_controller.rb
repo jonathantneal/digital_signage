@@ -5,9 +5,12 @@ class UsersController < ApplicationController
   respond_to :js, :only=>:index
 
   def index
-    @search = User.with_permissions_to(:index).metasearch(params[:search])
-    @users = @search.relation.page(params[:page])
+    @q = User.with_permissions_to(:index).search(params[:q])
+    @users = @q.result(distinct: true).custom_search(params[:cs]).page(params[:page])
+
+    # create new user for dropdown form
     @user = User.new
+
     # respond_with @users
     respond_to do |format|
       format.html # index.html.haml
@@ -20,7 +23,7 @@ class UsersController < ApplicationController
 
   def new
   end
-  
+
   def edit
   end
 
@@ -32,7 +35,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    if @user.update_attributes(params[:user])
+    if @user.update_attributes(user_params)
       flash[:notice] = 'User updated'
     end
     respond_with @user
@@ -44,5 +47,20 @@ class UsersController < ApplicationController
     end
     respond_with @user
   end
-  
+
+  private
+
+    # Override DeclarativeAuthorization method
+    def new_user_from_params
+      if params[:user]
+        @user = User.new(user_params)
+      else
+        @user = User.new
+      end
+    end
+
+    # Only allow a trusted parameter "white list" through.
+    def user_params
+      params.require(:user).permit(:username, department_ids: [])
+    end
 end

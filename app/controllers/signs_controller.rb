@@ -11,9 +11,9 @@ class SignsController < ApplicationController
   def show
     if request.format.json?
       render json: @sign
-    elsif user_signed_in?
-      @search = @sign.slots.with_permissions_to(:index).search(params[:search])
-      @slots = @search.includes(:slide => :schedules)
+    elsif user_logged_in?
+      @q = @sign.slots.search(params[:q])
+      @slots = @q.result(distinct: true).published_status(params[:published_status]).includes(slide: :schedules)
 
       # Initialize new slide for mini form
       @slide = Slide.new
@@ -40,7 +40,7 @@ class SignsController < ApplicationController
   end
 
   def update
-    if @sign.update_attributes(params[:sign])
+    if @sign.update_attributes(sign_params)
       flash[:notice] = 'Sign updated'
     end
     respond_with @sign
@@ -84,5 +84,21 @@ class SignsController < ApplicationController
     # Used by Declarative Authorization
     def load_sign
       @sign = Sign.where('id = ? OR name = ?', params[:id], params[:id]).first
+    end
+
+    # Override DeclarativeAuthorization method
+    def new_sign_from_params
+      if params[:sign]
+        @sign = Sign.new(sign_params)
+      else
+        @sign = Sign.new
+      end
+    end
+
+    # Only allow a trusted parameter "white list" through.
+    def sign_params
+      params.require(:sign).permit(:name, :title, :reload_interval, :check_in_interval, :department_id, :email, :width, :height)
+
+      # schedule:  attr_accessible :slide, :when, :active
     end
 end

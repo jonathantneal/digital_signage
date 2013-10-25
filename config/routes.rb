@@ -28,7 +28,7 @@ SignManager::Application.routes.draw do
   resources :departments
 
   # this is just a convenience to create a named route to rack-cas' logout
-  match '/logout' => -> env { [200, { 'Content-Type' => 'text/html' }, ['Rack::CAS should have caught this']] }, as: :logout
+  get '/logout' => -> env { [200, { 'Content-Type' => 'text/html' }, ['Rack::CAS should have caught this']] }, as: :logout
 
-  root :to=>"signs#index"
+  root to: "signs#index"
 end

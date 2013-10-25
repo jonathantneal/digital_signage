@@ -1,12 +1,12 @@
 #filter_wrapper
-  =form_for(@search, :url=>url_for(@sign), :html=>{:class=>'filter form-inline'}) do |f|
+  =search_form_for @q, url: url_for(@sign), html: { class: 'filter form-inline'} do |f|
     fieldset
       #slide_options
         #thumb_size_slider
 
       .form-group>
         =f.label :published_status, 'Published', class: 'sr-only'
-        =f.select :published_status, Slide::PUBLISHED_STATUS.map{|s| [s, s]}, {:include_blank=>true}, class: 'form-control'
+        =select_tag :published_status, options_for_select(Slide::PUBLISHED_STATUS.map{|s| [s, s]}), prompt: 'Status', class: 'form-control'
       =f.submit 'Filter', class: 'btn btn-primary'
 
 
@@ -14,7 +14,7 @@
   - if permitted_to?(:create, :slides)
     li.dropdown.new_form_dropdown
       a.dropdown-toggle data-toggle="dropdown" href="#"
-        i.icon-plus
+        i.fa.fa-plus
       .dropdown-menu
         = render 'slides/min_form'
 

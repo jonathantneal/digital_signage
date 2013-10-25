@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.13'
+gem 'rails', '4.0.0'
 
 gem 'action_links'
 gem 'active_model_serializers'
@@ -13,22 +13,29 @@ gem 'daemons', '~> 1.1.9'
 gem 'declarative_authorization'
 gem 'font-awesome-rails'
 gem 'haml'
+gem 'humanity'
 gem 'slim'
 gem 'httparty'
 gem 'jquery-rails'
-gem 'jquery-ui-rails'
-gem 'jquery-ui-themes'
 gem 'kaminari'
 gem 'memoist'
-gem 'meta_search'
 gem 'mini_magick'
 gem 'newrelic_rpm'
 gem 'port-a-query'
 gem 'rails_config'
 gem 'rack-cas'
+gem 'ransack'
 gem 'turnout'
 gem 'version'
 gem 'yaml_db'
+
+# Assets
+gem 'bourbon'
+gem 'coffee-rails'
+gem 'sass-rails'
+gem 'therubyracer', '~> 0.12.0'
+gem 'uglifier'
+
 
 group :development do
   gem 'better_errors'
@@ -39,14 +46,6 @@ group :development, :test do
   gem 'sqlite3-ruby', :require => 'sqlite3'
   gem 'pry'
   gem 'thin'
-end
-
-group :assets do
-  gem 'bourbon'
-  gem 'coffee-rails'
-  gem 'compass-rails'
-  gem 'sass-rails'
-  gem 'therubyracer'
 end
 
 group :staging, :production do

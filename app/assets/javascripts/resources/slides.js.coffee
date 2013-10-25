@@ -8,8 +8,8 @@ $(document).ready ->
       $("#" + association).append content.replace(regexp, new_id)
 
     # Date Picker
-    $(".publish_at input[type=text]").datepicker dateFormat: "MM d, yy '12:00 AM'"
-    $(".unpublish_at input[type=text]").datepicker dateFormat: "MM d, yy '11:59 PM'"
+    # $(".publish_at input[type=text]").datepicker dateFormat: "MM d, yy '12:00 AM'"
+    # $(".unpublish_at input[type=text]").datepicker dateFormat: "MM d, yy '11:59 PM'"
 
     # Color Picker
     colorBox = $("dd.color input")

@@ -36,6 +36,4 @@
 
       - if permitted_to? :edit, @user
         .pull-right
-          = link_to [:edit, @user], class: 'btn btn-default' do
-            i.icon-pencil>
-            | Edit
+          = link_to fa_icon('pencil', text: 'Edit'), [:edit, @user], class: 'btn btn-default'

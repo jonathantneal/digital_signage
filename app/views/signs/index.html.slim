@@ -2,7 +2,7 @@
   = content_for :extra_nav_links do
     li.dropdown.new_form_dropdown
       a.dropdown-toggle data-toggle="dropdown" href="#"
-        i.icon-plus
+        i.fa.fa-plus
       .dropdown-menu
         = render 'min_form'
 
@@ -15,8 +15,7 @@
           = sign.title
           - if sign.down?
             .label.label-warning<
-                i.icon-exclamation-sign>
-                | Sign Down
+              = fa_icon 'exclamation-circle', text: 'Sign Down'
         .sign_slides
           -sign.slides.published.limit(4).each do |slide|
             =render "shared/thumbnail", slide: slide

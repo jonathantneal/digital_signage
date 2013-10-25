@@ -11,6 +11,9 @@
         = form.label :html_url, 'URL'
         = form.text_field :html_url, class: 'form-control'
     .form-group
+      = form.label :department_id, 'Department'
+      = form.collection_select :department_id, Department.with_permissions_to(:show), :id, :title, {}, class: 'date form-control'
+    .form-group
       = form.label :interval
       = form.number_field :interval, class: 'form-control'
     - if @slide.image? || @slide.video?
@@ -47,6 +50,4 @@
   '
   = link_to 'Cancel', :back, class: 'btn'
   '
-  .pull-right= link_to @slide, method: :delete, class: 'btn btn-danger', title: 'Delete this slide', data: { confirm: "Are you sure? This will remove the slide from all signs as well." } do
-    i.icon-trash>
-    | Delete Slide
+  .pull-right= link_to fa_icon('trash-o', text: 'Delete Slide'), @slide, method: :delete, class: 'btn btn-danger', title: 'Delete this slide', data: { confirm: "Are you sure? This will remove the slide from all signs as well." }

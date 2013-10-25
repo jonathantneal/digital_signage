@@ -8,9 +8,9 @@ table.table
 
   - @users.each do |user|
     tr
-      td = link_to(user.name, user_path(user))
+      td = link_to (user.name.presence || user.username), user_path(user)
       td = user.roles.join(', ')
       td = user.departments.join(', ')
-      td = time_ago_in_words(user.last_sign_in_at) unless user.last_sign_in_at.nil?
+      td = time_ago_in_words(user.last_login_at) unless user.last_login_at.nil?
 
 = paginate(@users)

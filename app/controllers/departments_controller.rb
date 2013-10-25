@@ -27,7 +27,7 @@ class DepartmentsController < ApplicationController
   end
 
   def update
-    if @department.update_attributes(params[:department])
+    if @department.update_attributes(department_params)
       flash[:notice] = 'Department was successfully updated.'
     end
     respond_with @department
@@ -37,4 +37,20 @@ class DepartmentsController < ApplicationController
     @department.destroy
     respond_with @department
   end
+
+  private
+
+    # Override DeclarativeAuthorization method
+    def new_department_from_params
+      if params[:department]
+        @department = Department.new(department_params)
+      else
+        @department = Department.new
+      end
+    end
+
+    # Only allow a trusted parameter "white list" through.
+    def department_params
+      params.require(:department).permit(:title)
+    end
 end

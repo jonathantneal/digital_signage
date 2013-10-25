@@ -14,14 +14,12 @@
   table.table.table-striped
     tr
       th Title
-      th Active Slides
-      th Content Time
+      th Slides
       th Last Check In
     -@signs.each do |sign|
       tr
         td=link_to(sign.title, sign)
-        td=sign.active_slides.length
-        td=seconds_to_time(sign.active_slides_time)
+        td=sign.slides.length
         td
           =time_ago_in_words(sign.last_check_in)+" ago" if sign.checked_in?
 

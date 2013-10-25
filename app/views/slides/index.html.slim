@@ -2,27 +2,21 @@
   = content_for :extra_nav_links do
     li.dropdown.new_form_dropdown
       a.dropdown-toggle data-toggle="dropdown" href="#"
-        i.icon-plus
+        i.fa.fa-plus
       .dropdown-menu
         = render 'min_form'
 
 
 #filter_wrapper
-  =form_for(@search, :html=>{:class=>'filter form-inline'}) do |f|
+  =search_form_for @q, html: { class: 'filter form-inline'} do |f|
     fieldset
       #slide_options.form-group.pull-right>
         '
-        =link_to "#", :id=>"add-to-sign-button", :class=>"btn btn-primary multi_slide_button" do
-          i.icon-th-large>
-          | Add To Sign
+        =link_to fa_icon('th-large', text: 'Add To Sign'), "#", id: "add-to-sign-button", class: "btn btn-primary multi_slide_button"
         '
-        =link_to "#", :id=>"edit-slide-button", :class=>"btn btn-default multi_slide_button" do
-          i.icon-edit>
-          | Edit
+        =link_to fa_icon('edit', text: 'Edit'), "#", id: "edit-slide-button", class: "btn btn-default multi_slide_button"
         '
-        =link_to "#", :id=>"remove-slide-button", :class=>"btn btn-default multi_slide_button" do
-          i.icon-trash>
-          | Delete
+        =link_to fa_icon('trash-o', text: 'Delete'), "#", id: "remove-slide-button", class: "btn btn-default multi_slide_button"
         #thumb_size_slider
 
       .form-group>
@@ -33,7 +27,7 @@
         =f.collection_select :department_id_eq, Department.with_permissions_to(:show).order('departments.title'), :id, :title, {:include_blank=>'Dept'}, class: 'form-control'
       .form-group>
         =f.label :published_status, 'Published', class: "sr-only"
-        =f.select :published_status, Slide::PUBLISHED_STATUS.map{|s| [s, s]}, {:include_blank=>'Status'}, class: 'form-control'
+        =select_tag :published_status, options_for_select(Slide::PUBLISHED_STATUS.map{|s| [s, s]}), prompt: 'Status', class: 'form-control'
       .form-group>
         =f.submit 'Filter', class: 'btn btn-primary'
 

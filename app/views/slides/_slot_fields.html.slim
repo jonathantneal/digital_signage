@@ -3,7 +3,7 @@
     td.slot = f.collection_select(:sign_id, @slottable_signs ||= Sign.with_permissions_to(:update), :id, :title)
     td.remove
       = f.label :_destroy, class: :delete do
-        i.icon-remove
+        i.fa.fa-times
       = f.check_box :_destroy, class: :delete
 
 -else

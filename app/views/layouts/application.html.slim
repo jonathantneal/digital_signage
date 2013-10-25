@@ -9,7 +9,7 @@ html lang="en-us"
       ul.nav.navbar-nav
         li.dropdown class=('active' if @sign)
           a.dropdown-toggle data-toggle="dropdown" href="#"
-            i.icon-th-large
+            i.fa.fa-th-large
           ul.dropdown-menu
             - Sign.with_permissions_to(:index).limit(5).each do |sign|
               li = link_to sign.title, sign
@@ -21,25 +21,24 @@ html lang="en-us"
               = @sign.title
               - if @sign.down?
                 .label.label-warning<
-                  i.icon-exclamation-sign>
-                  | Sign Down
+                  = fa_icon('exclamation-circle', text: 'Sign Down')
             ul.dropdown-menu
-              li = link_to '<i class="icon-edit"></i> Edit'.html_safe, [:edit, @sign]
-              li = link_to '<i class="icon-desktop"></i> Preview'.html_safe, [:display, @sign], target: '_blank'
+              li = link_to fa_icon('edit', text: 'Edit'), [:edit, @sign]
+              li = link_to fa_icon('desktop', text: 'Preview'), [:display, @sign], target: '_blank'
 
       ul.nav.navbar-nav.navbar-right
         = yield :extra_nav_links
         li = link_to 'Slides', slides_url
-        -if user_signed_in?
+        -if user_logged_in?
           li.dropdown
             a.dropdown-toggle data-toggle="dropdown" href="#"
-              i.icon-user>
-              i.icon-caret-down
+              i.fa.fa-user>
+              i.fa.fa-caret-down
             ul.dropdown-menu
-              - if current_user.is_admin?
+              - if current_user.admin? || current_user.developer?
                 li.dropdown-header Admin
-                li = link_to '<i class="icon-building"></i> Departments'.html_safe, departments_path
-                li = link_to '<i class="icon-group"></i> Users'.html_safe, users_path
+                li = link_to fa_icon('building', text: 'Departments'), departments_path
+                li = link_to fa_icon('group', text: 'Users'), users_path
                 li.divider
               li = link_to 'My Account', current_user, :class=>'name'
               li = link_to 'Logout', logout_path, :class=>'logout'
@@ -50,7 +49,7 @@ html lang="en-us"
 
     #page-spinner
       .canvas_container
-        i.icon-cloud-upload
+        i.fa.fa-cloud-upload
         br
         canvas#circle-canvas height='200' width='200'
 

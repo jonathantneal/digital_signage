@@ -1,19 +1,22 @@
 class SlidesController < ApplicationController
-  filter_resource_access :additional_collection => [:destroy_multiple, :edit_multiple, :update_multiple, :add_to_signs, :drop_create]
-  respond_to :html, :except => [:destroy_multiple]
-  respond_to :js, :only => [:index, :destroy, :destroy_multiple]
+  filter_resource_access additional_collection: [:destroy_multiple, :edit_multiple, :update_multiple, :add_to_signs, :drop_create]
+  respond_to :html, except: [:destroy_multiple]
+  respond_to :js, only: [:index, :destroy, :destroy_multiple]
 
   def index
-    if params[:search].blank?
+    if params[:q].blank?
       # params[:search] = {published_status: :published}  # Default to only showing published slides
     end
 
-    @search = Slide.search(params[:search])
-    @slides = @search.relation.includes(:department).page(params[:page]).per(20)
+    @q = Slide.search(params[:q])
+    @slides = @q.result(distinct: true).published_status(params[:published_status]).includes(:department).page(params[:page]).per(20)
+
+    # create new slide for dropdown form.
     @slide = Slide.new
+
     respond_with(@slides) do |format|
       format.js do
-        render :partial => 'slides' unless params["_"] # Otherwise if infinites scroll render index.js.erb
+        render partial: 'slides' unless params["_"] # Otherwise if infinites scroll render index.js.erb
       end
     end
   end
@@ -54,7 +57,7 @@ class SlidesController < ApplicationController
   end
 
   def update
-    if @slide.update_attributes(params[:slide])
+    if @slide.update_attributes(slide_params)
       flash[:notice] = 'Slide updated'
     end
     respond_with @slide
@@ -111,4 +114,24 @@ class SlidesController < ApplicationController
       render :json => { result: 'error' }
     end
   end
+
+  private
+
+    # Override DeclarativeAuthorization method
+    def new_slide_from_params
+      if params[:slide]
+        @slide = Slide.new(slide_params)
+      else
+        @slide = Slide.new
+      end
+    end
+
+    # Only allow a trusted parameter "white list" through.
+    def slide_params
+      params.require(:slide).permit(
+        :title, :interval, :color, :department_id, :publish_at, :unpublish_at,
+        :html_url, :content, :content_cache, :editable_content,
+        schedules_attributes: [:when, :active, :id, :_destroy], slots_attributes: [:sign_id, :id, :_destroy]
+      )
+    end
 end

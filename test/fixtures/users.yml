@@ -9,7 +9,7 @@ manager:
   department: Imaginary Services
   photo_url: ""
   affiliations: employee
-  entitlements: <%= Settings.security.roles.base_entitlement%>manager
+  entitlements: <%= Settings.base_entitlement%>manager
 
 manager_one:
   username: johnd1
@@ -20,7 +20,7 @@ manager_one:
   department: Imaginary Services
   photo_url: ""
   affiliations: employee
-  entitlements: <%= Settings.security.roles.base_entitlement%>manager
+  entitlements: <%= Settings.base_entitlement%>manager
 
 manager_two:
   username: johnd2
@@ -31,7 +31,7 @@ manager_two:
   department: Imaginary Services
   photo_url: ""
   affiliations: employee
-  entitlements: <%= Settings.security.roles.base_entitlement%>manager
+  entitlements: <%= Settings.base_entitlement%>manager
 
 admin:
   username: janed0
@@ -42,4 +42,4 @@ admin:
   department: Office of Imagination
   photo_url: ""
   affiliations: employee,alumni
-  entitlements: <%= Settings.security.roles.base_entitlement%>admin
+  entitlements: <%= Settings.base_entitlement%>admin

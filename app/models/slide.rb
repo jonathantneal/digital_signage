@@ -3,9 +3,6 @@ class Slide < ActiveRecord::Base
   extend Memoist
   PUBLISHED_STATUS = ['published', 'unpublished', 'expired']
 
-  attr_accessible :title, :interval, :color, :department_id, :publish_at, :unpublish_at, :created_at, :updated_at, :html_url,
-                  :sign_id, :sign_ids, :content, :content_cache, :schedules_attributes, :slots_attributes, :editable_content
-
   belongs_to :department
   has_many :schedules, :dependent => :destroy
   has_many :slots, :dependent => :destroy
@@ -25,7 +22,7 @@ class Slide < ActiveRecord::Base
     end
   end
 
-  scope :published_status, lambda{ |status|
+  scope :published_status, ->(status) {
     case status
     when 'published'
       published
@@ -37,7 +34,7 @@ class Slide < ActiveRecord::Base
       scoped
     end
   }
-  scope :published, lambda{
+  scope :published, -> {
     where(
       '(slides.publish_at IS NULL AND slides.unpublish_at > ?)
       OR (slides.unpublish_at IS NULL AND slides.publish_at < ?)
@@ -45,7 +42,7 @@ class Slide < ActiveRecord::Base
       *[DateTime.now]*3
     )
   }
-  scope :unpublished, lambda{
+  scope :unpublished, -> {
     where(
       '(slides.publish_at IS NULL AND slides.unpublish_at IS NULL)
       OR (slides.publish_at IS NULL AND slides.unpublish_at < ?)
@@ -54,20 +51,18 @@ class Slide < ActiveRecord::Base
       *[DateTime.now]*3
     )
   }
-  scope :expired, lambda{ where('(slides.unpublish_at < ?)', DateTime.now) }
+  scope :expired, -> { where('(slides.unpublish_at < ?)', DateTime.now) }
 
-  scope :not_on_sign, lambda { |sign|
+  scope :not_on_sign, ->(sign) {
     joins("LEFT JOIN slots ON (slides.id = slots.slide_id AND slots.sign_id = #{sign.id})").
     group('slides.id').
     where('slots.sign_id IS NULL')
   }
-  scope :belongs_to_sign, lambda { |sign|
+  scope :belongs_to_sign, ->(sign) {
     joins("INNER JOIN slots ON (slides.id = slots.slide_id)").
     where("slots.sign_id = #{sign.id}").
     order("`order`")
   }
-
-  search_methods :published_status
 
 
   def filename

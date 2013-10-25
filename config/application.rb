@@ -2,10 +2,9 @@ require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
 
-# If you have a Gemfile, require the gems listed there, including any gems
+# Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
-# See http://goo.gl/JYT5w - This seems to fix the problem with compass files not being found
-Bundler.require(*Rails.groups(:assets => %w(development test))) if defined?(Bundler)
+Bundler.require(:default, Rails.env)
 
 module SignManager
   class Application < Rails::Application
@@ -30,9 +29,6 @@ module SignManager
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
-
-    # JavaScript files you want as :defaults (application.js is always included).
-    config.action_view.javascript_expansions[:defaults] = %w(jquery rails)
 
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
