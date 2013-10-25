@@ -66,7 +66,7 @@
             var imageWrapper = $("<div class='image_wrapper'></div>")
             imageWrapper.css("line-height", sign.height-5+"px"); // The minus 5 is to account for some browser differences
             imageWrapper.css("background-color", slide.color);
-            imageWrapper.data('delay', slide.delay);
+            imageWrapper.data('interval', slide.interval);
             var image = $("<img/>");
             image.attr('src', slide.uri);
             $('#digitalsign').append(imageWrapper.append(image));
@@ -74,7 +74,7 @@
           if (slide.content_type.match(/text/)) {
             var frame = $("<iframe></iframe>");
             frame.attr('src', slide.uri);
-            frame.data('delay', slide.delay);
+            frame.data('interval', slide.interval);
             $('#digitalsign').append(frame);
           }
         }
@@ -92,7 +92,7 @@
           else {
             if (nextSlideElement.contentWindow && (typeof nextSlideElement.contentWindow.beforeHook == 'function')) { nextSlideElement.contentWindow.beforeHook(); }
 
-            var timeout = parseInt($(this).data('delay')) * 1000;
+            var timeout = parseInt($(this).data('interval')) * 1000;
             if (timeout < 3000 || isNaN(timeout)) { timeout = 3000; }
             setTimeout(function(){nextSlide()}, timeout);
             waitToAdvanceSlides = true; // wait till the above timeout finishes so you don't have two cycles running at once when resume to early from pause

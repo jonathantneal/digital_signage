@@ -60,9 +60,9 @@ class SlideTest < ActiveSupport::TestCase
     assert Slide.published.count + Slide.unpublished.count == Slide.count
   end
 
-  test "default value for delay is actually being set" do
+  test "default value for interval is actually being set" do
     slide = Slide.new
-    assert slide.delay == Settings.defaults.slide.delay
+    assert slide.interval == Settings.defaults.slide.interval
   end
 
   test "expired scope" do

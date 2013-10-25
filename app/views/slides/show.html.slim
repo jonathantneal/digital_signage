@@ -8,11 +8,11 @@
   #slide_details
     - if @slide.link?
       .form-group
-        = form.label :url
-        = form.text_field :url, class: 'form-control'
+        = form.label :html_url, 'URL'
+        = form.text_field :html_url, class: 'form-control'
     .form-group
-      = form.label :delay
-      = form.number_field :delay, class: 'form-control'
+      = form.label :interval
+      = form.number_field :interval, class: 'form-control'
     - if @slide.image? || @slide.video?
       .form-group
         = form.label :color

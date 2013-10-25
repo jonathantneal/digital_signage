@@ -3,7 +3,7 @@ class Slide < ActiveRecord::Base
   extend Memoist
   PUBLISHED_STATUS = ['published', 'unpublished', 'expired']
 
-  attr_accessible :title, :delay, :color, :department_id, :publish_at, :unpublish_at, :created_at, :updated_at, :html_url,
+  attr_accessible :title, :interval, :color, :department_id, :publish_at, :unpublish_at, :created_at, :updated_at, :html_url,
                   :sign_id, :sign_ids, :content, :content_cache, :schedules_attributes, :slots_attributes, :editable_content
 
   belongs_to :department
@@ -17,7 +17,7 @@ class Slide < ActiveRecord::Base
 
   mount_uploader :content, ContentUploader
 
-  validates_presence_of :title, :delay, :color, :department_id
+  validates_presence_of :title, :interval, :color, :department_id
   validates_integrity_of :content
   validates_each :unpublish_at, :allow_nil => true do |record, attr, value|
     if record.publish_at.to_i > value.to_i
@@ -202,7 +202,7 @@ class Slide < ActiveRecord::Base
 
     def defaults
       if new_record?
-        self.delay ||= Settings.defaults.slide.delay
+        self.interval ||= Settings.defaults.slide.interval
       end
     end
 

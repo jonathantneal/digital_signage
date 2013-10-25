@@ -2,12 +2,12 @@
 
 one:
   title: Slide 1
-  delay: 5
+  interval: 5
   color: 000000
   department: one
 
 two:
   title: Slide 2
-  delay: 10
+  interval: 10
   color: 111111
   department: two
