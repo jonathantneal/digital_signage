@@ -3,6 +3,8 @@ class Slide < ActiveRecord::Base
   extend Memoist
   PUBLISHED_STATUS = ['published', 'unpublished', 'expired']
 
+  store :settings, accessors: [:is_editor, :background_color, :overlay_color]
+
   belongs_to :department
   has_many :schedules, :dependent => :destroy
   has_many :slots, :dependent => :destroy
@@ -11,6 +13,7 @@ class Slide < ActiveRecord::Base
   accepts_nested_attributes_for :slots, :allow_destroy => true
 
   after_initialize :defaults
+  before_save :schedule_url_screengrab
 
   mount_uploader :content, ContentUploader
 
@@ -70,11 +73,15 @@ class Slide < ActiveRecord::Base
   end
 
   def url(version=nil)
-    (content_url(version) || html_url).to_s
+    (html_url.presence || editable_content_url.presence || content_url(version)).to_s
   end
 
   def type
-    content_type || "text/html"
+    if editor?
+      "text/html"
+    else
+      content_type || "text/html"
+    end
   end
 
   def image?
@@ -94,7 +101,11 @@ class Slide < ActiveRecord::Base
   end
 
   def editor?
-    !(upload? || link?)
+    is_editor
+  end
+
+  def editable_content_url
+    Rails.application.routes.url_helpers.show_editable_content_slide_url(self, host: Settings.app.host) if self.is_editor
   end
 
 
@@ -200,6 +211,24 @@ class Slide < ActiveRecord::Base
         self.interval ||= Settings.defaults.slide.interval
       end
     end
+
+    def schedule_url_screengrab
+      if html_url.present?
+        # UrlImageWorker.perform_async(self)
+        save_url_preview_image if content.blank?
+      end
+    end
+
+    def save_url_preview_image(width = 1920, height = 1080)
+      if self.html_url.present?
+        file = Tempfile.new(["template_#{self.id.to_s}", '.jpg'], 'tmp', :encoding => 'ascii-8bit')
+        file.write IMGKit.new(self.html_url, width: width, height: height).to_jpg
+        file.rewind
+        self.content = file
+        file.unlink
+      end
+    end
+
 
   memoize :published?, :expired?,
     :sorted_schedules, :valid_schedules, :sorted_valid_schedules,

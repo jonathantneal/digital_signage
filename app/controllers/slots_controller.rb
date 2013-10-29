@@ -31,7 +31,7 @@ class SlotsController < ApplicationController
 
   def sort
     params[:slot].each_with_index do |id, index|
-      Slot.update_all(['`order` = ?', index+1], ['id = ?', id])
+      Slot.where(id: id).update_all(order: index+1)
     end
     render :nothing => true
   end

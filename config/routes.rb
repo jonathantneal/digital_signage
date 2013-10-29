@@ -3,6 +3,9 @@ SignManager::Application.routes.draw do
 
   resources :users, except: [:new]
   resources :slides do
+    member do
+      get :show_editable_content
+    end
     collection do
       post :destroy_multiple
       put :update_multiple

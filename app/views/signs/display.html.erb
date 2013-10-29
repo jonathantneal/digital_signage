@@ -90,7 +90,12 @@
             this.play();
           }
           else {
-            if (nextSlideElement.contentWindow && (typeof nextSlideElement.contentWindow.beforeHook == 'function')) { nextSlideElement.contentWindow.beforeHook(); }
+            try {
+              if (nextSlideElement.contentWindow && (typeof nextSlideElement.contentWindow.beforeHook == 'function')) { nextSlideElement.contentWindow.beforeHook(); }
+            }
+            catch(error) {
+              // console.log(error); // Maybe a different origin issue...
+            }
 
             var timeout = parseInt($(this).data('interval')) * 1000;
             if (timeout < 3000 || isNaN(timeout)) { timeout = 3000; }
@@ -99,7 +104,10 @@
           }
         },
         after: function(currSlideElement, nextSlideElement, options, forwardFlag){
-          if (currSlideElement.contentWindow && (typeof currSlideElement.contentWindow.afterHook == 'function')) { currSlideElement.contentWindow.afterHook(); }
+          try {
+            if (currSlideElement.contentWindow && (typeof currSlideElement.contentWindow.afterHook == 'function')) { currSlideElement.contentWindow.afterHook(); }
+          } catch(error) {
+          }
         },
         end: function(){
           if (refreshSlides) { location.reload(); }

@@ -24,6 +24,23 @@ body.slides {
 //**********************//
 // Shared between pages //
 //**********************//
+
+// This gets extended further down.
+.show_editable_content { height: 100%; padding: 20px; font-size:60px; line-height: 120%; color: #333;
+  p, ul, ol, li, blockquote, code, div { font-size: 60px; line-height: 120%; }
+  h1, h2, h3, h4, h5, h6 { line-height: 120%; }
+  h1 { font-size:140px }
+  h2 { font-size:100px }
+  h3 { font-size:80px }
+  h4 { font-size:60px }
+  h5 { font-size:60px }
+  h6 { font-size:60px }
+  h1 { text-shadow:0 0 6px rgba(0,0,0,0.2) }
+  ol, ul { padding-left: 2em; }
+}
+
+
+
 #slide-upload-dropzone { min-height: 400px; padding: 20px;
   &.dz-drag-hover { background-color: rgb(186, 226, 253); opacity: 0.5; } // rgb(237, 249, 255); }
   .dz-message { text-align: center; margin-top: 20px; font-weight: bold; }
@@ -73,25 +90,10 @@ body.slides {
     iframe { width: 100%; height: 100%; border: none;  }
 
 
-
-    .redactor_box, .custom_html_slide { width: 100%; height: 100%; position: absolute; top: 0;
-      .redactor_editor, .custom_html_slide_content { height: 100%; text-align: left; padding: 20px;
-        font-size:60px; line-height: 120%; color: #333;
-
-        // font-family:"Lato",sans-serif; font-size:60px ; font-weight:200; letter-spacing:-.02em;
-
-        p, ul, ol, li, blockquote, code, div { font-size: 60px; line-height: 120%; }
-        h1, h2, h3, h4, h5, h6 { line-height: 120%; }
-        h1 { font-size:140px }
-        h2 { font-size:100px }
-        h3 { font-size:80px }
-        h4 { font-size:60px }
-        h5 { font-size:60px }
-        h6 { font-size:60px }
-        h1 { text-shadow:0 0 6px rgba(0,0,0,0.2) }
-        ol, ul { padding-left: 2em; }
-        // section, section p, section div, section a.roll { line-height:1.3em}
-
+    #editor_container { position: absolute; top: 0;}
+    .redactor_box, .custom_html_slide { width: 100%; height: 100%; position: absolute; top: 0; background: none;
+      .redactor_editor, .custom_html_slide_content { text-align: left; background: none;
+        @extend .show_editable_content;
       }
       .custom_html_slide_content { overflow: hidden; }
     }

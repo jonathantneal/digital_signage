@@ -9,3 +9,7 @@ email:
     auth_type: login
     username: user@example.com
     password: '****************'
+
+
+redis:
+  url: "redis://localhost:6379/0"

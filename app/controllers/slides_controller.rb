@@ -1,5 +1,5 @@
 class SlidesController < ApplicationController
-  filter_resource_access additional_collection: [:destroy_multiple, :edit_multiple, :update_multiple, :add_to_signs, :drop_create]
+  filter_resource_access additional_collection: [:destroy_multiple, :edit_multiple, :update_multiple, :add_to_signs, :drop_create], additional_member: [:show_editable_content]
   respond_to :html, except: [:destroy_multiple]
   respond_to :js, only: [:index, :destroy, :destroy_multiple]
 
@@ -24,6 +24,10 @@ class SlidesController < ApplicationController
   def show
   end
 
+  def show_editable_content
+    render :layout => false
+  end
+
   def new
     @slottable_signs = Sign.with_permissions_to(:update).order('signs.title')
 
@@ -46,6 +50,7 @@ class SlidesController < ApplicationController
     when 'link'
       @slide.content = nil
     when 'editor'
+      @slide.is_editor = true
       @slide.html_url = ''
       @slide.content = nil
     end
@@ -129,8 +134,9 @@ class SlidesController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def slide_params
       params.require(:slide).permit(
-        :title, :interval, :color, :department_id, :publish_at, :unpublish_at,
+        :title, :interval, :department_id, :publish_at, :unpublish_at,
         :html_url, :content, :content_cache, :editable_content,
+        :is_editor, :background_color, :overlay_color,
         schedules_attributes: [:when, :active, :id, :_destroy], slots_attributes: [:sign_id, :id, :_destroy]
       )
     end

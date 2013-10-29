@@ -10,16 +10,30 @@
       .form-group
         = form.label :html_url, 'URL'
         = form.text_field :html_url, class: 'form-control'
+    - if @slide.editable_content?
+      .form-group
+        =form.label :content, 'Background Image'
+        =form.file_field :content
     .form-group
       = form.label :department_id, 'Department'
       = form.collection_select :department_id, Department.with_permissions_to(:show), :id, :title, {}, class: 'date form-control'
     .form-group
       = form.label :interval
       = form.number_field :interval, class: 'form-control'
-    - if @slide.image? || @slide.video?
+    - if @slide.image? || @slide.video? || @slide.editable_content?
       .form-group
-        = form.label :color
-        = form.text_field :color, style: "color:##{@slide.color}; background-color:##{@slide.color};", class: 'form-control'
+        = form.label :background_color, 'Background Color'
+        #cp-background.input-group.colorpicker-component data-color=@slide.background_color data-color-format='rgba'
+          = form.text_field :background_color, class: 'form-control'
+          span.input-group-addon
+            i
+    - if @slide.editable_content?
+      .form-group
+        = form.label :overlay_color, 'Overlay Color'
+        #cp-overlay.input-group.colorpicker-component data-color=@slide.overlay_color data-color-format='rgba'
+          = form.text_field :overlay_color, class: 'form-control'
+          span.input-group-addon
+            i
     .form-group
       = form.label :publish_at
       = form.text_field :publish_at, :value => @slide.publish_at.try(:to_formatted_s, :long), class: 'date form-control'

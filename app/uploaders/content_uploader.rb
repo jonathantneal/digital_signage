@@ -30,7 +30,7 @@ class ContentUploader < CarrierWave::Uploader::Base
   # end
 
   # Create different versions of your uploaded files:
-  version :preview, :if => :image? do
+  version :preview, :unless => :video? do
     process :resize_to_limit => [336, 189]
   end
 

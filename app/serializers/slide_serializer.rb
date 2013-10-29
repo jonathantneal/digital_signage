@@ -3,7 +3,7 @@ class SlideSerializer < ActiveModel::Serializer
   attribute :type, key: :content_type
 
   def color
-    '#' + object.color
+    object.background_color
   end
   def uri
     object.url

@@ -15,6 +15,8 @@ This application is used for managing a collection of digital signs.
 ### Requirements
 
 * CAS server for authentication (*we would like to support o-auth in the future as an alternative*)
+* Redis Server *for handling background sidekiq jobs to process url thumbnail previews*
+* rvmsudo imgkit --install-wkhtmltoimage
 * Pubnub account (optional) *This is used for pushing alerts to the signs*
 
 
@@ -40,6 +42,9 @@ This application is used for managing a collection of digital signs.
    *(in staging or production only)*
    *(`RAILS_RELATIVE_URL_ROOT` is only needed if the site does not have it's own domain)*
    `bundle exec rake assets:precompile RAILS_RELATIVE_URL_ROOT=/signage`
+
+8. Install wkhtmltoimage (only the first time)
+   `rvmsudo imgkit --install-wkhtmltoimage`
 
 
 ## Testing

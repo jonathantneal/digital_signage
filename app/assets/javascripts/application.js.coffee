@@ -1,14 +1,16 @@
 #= require jquery
 #= require jquery_ujs
 #= require jquery_extensions
+#= require jquery.ui.sortable
 #
 # Vendor Assets
 #= require bootstrap
-#= require colorpicker
+#= require bootstrap-colorpicker
 #= require dropzone
 #= require jquery.cycle
 #= require slideshow.min
-#=  require redactor
+#= require redactor
+#= require redactor-fontcolor
 #
 #= require_self
 #= require_tree ./shared

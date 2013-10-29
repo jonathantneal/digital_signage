@@ -2,7 +2,7 @@
 
 app:
   name: &app_name Signage
-  host: your.server.tld
+  host: localhost:3000
   relative_url_root: /signage # or blank if no relative root
 
 # Overwrite this in settings.local.yml  -> rake secret
@@ -13,6 +13,10 @@ urn_namespaces:
 - "urn:biola:apps:all:"
 
 base_entitlement: "urn:biola:apps:sign-manager:"
+
+redis:
+  # This is overridden in config/settings/[staging|production].yml
+  url: "redis://localhost:6379/0"
 
 cas:
   url: 'https://login.biola.edu/cas'

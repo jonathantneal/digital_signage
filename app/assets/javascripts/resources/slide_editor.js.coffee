@@ -1,5 +1,23 @@
 if ($('body.slides.show').length > 0) && ($('#editable_content').length > 0)
 
+
+  # Initialize color picker
+  colorize = [
+    control: '#cp-background'
+    target: '#background_color_target'
+  ,
+    control: '#cp-overlay'
+    target: '#editor_container'
+  ]
+  $.each colorize, (index, options) ->
+    $(options.control).colorpicker().on 'changeColor', (ev) ->
+      $(options.target).css 'background-color', ev.color.toRGBstring()
+
+
+
+
+
+
   ###
     Handle resizing editor frame to match the display size
   ###
@@ -9,7 +27,7 @@ if ($('body.slides.show').length > 0) && ($('#editable_content').length > 0)
     container_width = $('#slide_preview').width()
     zoom_factor = container_width / display_width
 
-    editor = $('#slide_preview .slide_preview')
+    editor = $('#editor_container')
 
     # should only do this once on load
     editor.width(display_width)

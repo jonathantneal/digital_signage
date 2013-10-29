@@ -12,7 +12,7 @@ module SlidesHelper
 
     return nil if slide.nil?
 
-    url = Addressable::URI.parse(path_to_image(slide.url(version).to_s))
+    url = Addressable::URI.parse(path_to_image(slide.content_url(version).to_s))
     if defined? request
       url.scheme = request.scheme
       url.host = request.host
@@ -26,7 +26,7 @@ module SlidesHelper
 
     return nil if slide.nil?
 
-    url = Addressable::URI.parse(path_to_image(slide.url.to_s))
+    url = Addressable::URI.parse(path_to_image(slide.content_url.to_s))
     url.to_s
   end
 
