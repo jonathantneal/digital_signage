@@ -10,7 +10,7 @@
       .form-group
         = form.label :html_url, 'URL'
         = form.text_field :html_url, class: 'form-control'
-    - if @slide.editable_content?
+    - if @slide.editor?
       .form-group
         =form.label :content, 'Background Image'
         =form.file_field :content
@@ -20,7 +20,7 @@
     .form-group
       = form.label :interval
       = form.number_field :interval, class: 'form-control'
-    - if @slide.image? || @slide.video? || @slide.editable_content?
+    - if @slide.image? || @slide.video? || @slide.editor?
       .form-group
         = form.label :background_color, 'Background Color'
         = form.text_field :background_color, class: 'form-control', 'data-color'=>@slide.background_color

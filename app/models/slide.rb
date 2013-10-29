@@ -215,8 +215,8 @@ class Slide < ActiveRecord::Base
 
     def schedule_url_screengrab
       if html_url.present?
-        # UrlImageWorker.perform_async(self)
-        save_url_preview_image if content.blank?
+        UrlImageWorker.perform_async(self.id) if content.blank?
+        # save_url_preview_image if content.blank?
       end
     end
 

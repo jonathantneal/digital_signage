@@ -44,7 +44,7 @@ class SlidesController < ApplicationController
   def create
     @slide.publish_at ||= Time.now
 
-    case params[:option]
+    case params[:options]
     when 'upload'
       @slide.html_url = ''
     when 'link'
@@ -137,6 +137,7 @@ class SlidesController < ApplicationController
       params.require(:slide).permit(
         :title, :interval, :department_id, :publish_at, :unpublish_at,
         :html_url, :content, :content_cache, :editable_content,
+        :sign_ids,  # for creating a new slide from the sign page.
         :is_editor, :background_color, :overlay_color,
         schedules_attributes: [:when, :active, :id, :_destroy], slots_attributes: [:sign_id, :id, :_destroy]
       )
