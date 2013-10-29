@@ -10,7 +10,7 @@ module SlidesHelper
   def slide_file_url(slide, version=nil)
     require 'addressable/uri'
 
-    return nil if slide.nil?
+    return nil if slide.nil? || slide.content.blank?
 
     url = Addressable::URI.parse(path_to_image(slide.content_url(version).to_s))
     if defined? request

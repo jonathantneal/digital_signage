@@ -53,6 +53,7 @@ class SlidesController < ApplicationController
       @slide.is_editor = true
       @slide.html_url = ''
       @slide.content = nil
+      @slide.background_color = 'rgba(255,255,255,1)'
     end
 
     if @slide.save

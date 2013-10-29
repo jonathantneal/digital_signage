@@ -76,7 +76,7 @@ body.slides {
 }
 
 .slide_thumbnail, .slide_preview { display: inline-block; position: relative; width: 100%; min-width: 250px;
-  &.editor .constraint { background-color: white !important; }
+  &.editor .constraint { background-color: white; }
 
   .slide_status { position: absolute; top: 2px; left: 4px; z-index: 10 }
   .constraint { background-color: black; width: 100%; padding-top: 56.25%; }

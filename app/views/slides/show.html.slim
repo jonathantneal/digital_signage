@@ -23,17 +23,11 @@
     - if @slide.image? || @slide.video? || @slide.editable_content?
       .form-group
         = form.label :background_color, 'Background Color'
-        #cp-background.input-group.colorpicker-component data-color=@slide.background_color data-color-format='rgba'
-          = form.text_field :background_color, class: 'form-control'
-          span.input-group-addon
-            i
+        = form.text_field :background_color, class: 'form-control', 'data-color'=>@slide.background_color
     - if @slide.editable_content?
       .form-group
         = form.label :overlay_color, 'Overlay Color'
-        #cp-overlay.input-group.colorpicker-component data-color=@slide.overlay_color data-color-format='rgba'
-          = form.text_field :overlay_color, class: 'form-control'
-          span.input-group-addon
-            i
+        = form.text_field :overlay_color, class: 'form-control', 'data-color'=>@slide.overlay_color
     .form-group
       = form.label :publish_at
       = form.text_field :publish_at, :value => @slide.publish_at.try(:to_formatted_s, :long), class: 'date form-control'

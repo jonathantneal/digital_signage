@@ -209,6 +209,7 @@ class Slide < ActiveRecord::Base
     def defaults
       if new_record?
         self.interval ||= Settings.defaults.slide.interval
+        self.background_color ||= Settings.defaults.slide.background_color
       end
     end
 
