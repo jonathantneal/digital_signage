@@ -13,7 +13,7 @@ class Slide < ActiveRecord::Base
   accepts_nested_attributes_for :slots, :allow_destroy => true
 
   after_initialize :defaults
-  before_save :schedule_url_screengrab
+  after_save :schedule_url_screengrab
 
   mount_uploader :content, ContentUploader
 
@@ -193,13 +193,12 @@ class Slide < ActiveRecord::Base
   #### Class Methods
 
   def self.from_drop(file, department)
-    unless slide = Slide.find_by_title(file.original_filename)
-      slide = Slide.new
-      slide.content     = file
-      slide.title       = file.original_filename
-      slide.department  = department
-      slide.publish_at  = Time.now
-    end
+    # unless slide = Slide.find_by_title(file.original_filename)
+    slide = Slide.new
+    slide.content     = file
+    slide.title       = file.original_filename
+    slide.department  = department
+    slide.publish_at  = Time.now
     slide
   end
 
@@ -216,7 +215,6 @@ class Slide < ActiveRecord::Base
     def schedule_url_screengrab
       if html_url.present?
         UrlImageWorker.perform_async(self.id) if content.blank?
-        # save_url_preview_image if content.blank?
       end
     end
 

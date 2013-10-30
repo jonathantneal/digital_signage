@@ -9,7 +9,7 @@ $(document).ready ->
 
   if $('body.signs.show').exists()
 
-    $('.remove_slide_link').click ->
+    $('.link.remove_slide').click ->
       $(this).parents('li.slot').remove()
 
     $('ol.slots.sortable').sortable

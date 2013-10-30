@@ -1,3 +1,5 @@
+/ Don't pass a form object to this partial if the user is not authorized to edit this slide.
+
 - if slide.editor?
   #editor_toolbar
 
@@ -16,15 +18,20 @@ div class="slide_preview #{slide_type(slide)}"
     -if slide.editor?
 
       #editor_container style="background-color: #{@slide.overlay_color}"
-        = form.text_area :editable_content, id: 'editable_content'
+        - if defined?(form) && form.present?
+          = form.text_area :editable_content, id: 'editable_content'
 
 
-        = content_for(:foot) do
-          coffee:
-            $('#editable_content').redactor
-              focus: true
-              linebreaks: true
-              toolbarExternal: '#editor_toolbar'
-              buttons: ['html', '|', 'formatting', '|', 'bold', 'italic', 'underline', '|', 'alignleft', 'aligncenter', 'alignright', '|', 'horizontalrule']
-              formattingTags: ['p', 'h1', 'h2', 'h3']
-              plugins: ['fontcolor']
+          = content_for(:foot) do
+            coffee:
+              $('#editable_content').redactor
+                focus: true
+                linebreaks: true
+                toolbarExternal: '#editor_toolbar'
+                buttons: ['html', '|', 'formatting', '|', 'bold', 'italic', 'underline', '|', 'alignleft', 'aligncenter', 'alignright', '|', 'horizontalrule']
+                formattingTags: ['p', 'h1', 'h2', 'h3']
+                plugins: ['fontcolor']
+
+        - else
+          .redactor_box
+            .redactor_editor#editable_content == slide.editable_content

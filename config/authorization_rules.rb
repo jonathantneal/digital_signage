@@ -1,6 +1,5 @@
 authorization do
   role :developer do
-    has_omnipotence
     includes :admin
 
     has_permission_on :users, to: [:impersonate]
@@ -8,13 +7,12 @@ authorization do
 
   role :admin do
     includes :user
-    # has_permission_on [:signs, :slides, :slots, :departments, :users] do
-    #   to :administrate
-    # end
-    # has_permission_on :slots, to: [:sort, :destroy]
-    # has_permission_on :slides, to: [:show_editable_content, :destroy_multiple, :edit_multiple, :update_multiple, :add_to_signs, :drop_create]  #TODO: give managers permission to do this too, but permissions will probably have to happen in the controller.
 
-    # includes :manager
+    has_permission_on [:departments, :users, :signs], to: [:administrate]
+  end
+
+  role :employee do
+    includes :user
   end
 
   role :student do
@@ -43,7 +41,7 @@ authorization do
     has_permission_on :users, to: :show do
       if_attribute id: is {user.id}
     end
-    has_permission_on :signs, to: [:read]
+    has_permission_on [:signs, :slides], to: [:read]
   end
 
   # Permissions for users who are in a given department
@@ -56,16 +54,14 @@ authorization do
       if_attribute department: { users: contains {user} }
     end
 
-    has_permission_on :slides, :to => [:read, :create]
-    # has_permission_on :slides, :to => :update do
-    #   if_permitted_to :show, :department
-    # end
-
+    has_permission_on :slides, to: [:create, :fork]
+    has_permission_on :slides, to: [:update, :destroy] do
+      if_attribute department: { users: contains {user} }
+    end
 
     has_permission_on :departments, to: :show do
       if_attribute users: contains {user}
     end
-
   end
 
 

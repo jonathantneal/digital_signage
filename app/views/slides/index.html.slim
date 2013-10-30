@@ -1,8 +1,7 @@
 - if permitted_to?(:create, :slides)
   = content_for :extra_nav_links do
     li.dropdown.new_form_dropdown
-      a.dropdown-toggle data-toggle="dropdown" href="#"
-        i.fa.fa-plus
+      a.dropdown-toggle data-toggle="dropdown" href="#" = fa_icon('plus')
       .dropdown-menu
         = render 'min_form'
 
@@ -14,20 +13,20 @@
         '
         =link_to fa_icon('th-large', text: 'Add To Sign'), "#", id: "add-to-sign-button", class: "btn btn-primary multi_slide_button"
         '
-        =link_to fa_icon('edit', text: 'Edit'), "#", id: "edit-slide-button", class: "btn btn-default multi_slide_button"
+        =link_to fa_icon('info-circle', text: 'Info'), "#", id: "edit-slide-button", class: "btn btn-default multi_slide_button"
         '
         =link_to fa_icon('trash-o', text: 'Delete'), "#", id: "remove-slide-button", class: "btn btn-default multi_slide_button"
         #thumb_size_slider
 
       .form-group>
         =f.label :signs_id_eq, 'Sign', class: "sr-only"
-        =f.collection_select :signs_id_eq, Sign.with_permissions_to(:index).order('signs.title'), :id, :title, {:include_blank=>'Sign'}, class: 'form-control'
+        =f.collection_select :signs_id_eq, Sign.with_permissions_to(:index).order('signs.title'), :id, :title, {:include_blank=>'All Signs'}, class: 'form-control'
       .form-group>
         =f.label :department_id_eq, 'Department', class: "sr-only"
-        =f.collection_select :department_id_eq, Department.order('departments.title'), :id, :title, {:include_blank=>'Dept'}, class: 'form-control'
+        =f.collection_select :department_id_eq, Department.order('departments.title'), :id, :title, {:include_blank=>'All Depts'}, class: 'form-control'
       .form-group>
         =f.label :published_status, 'Published', class: "sr-only"
-        =select_tag :published_status, options_for_select(Slide::PUBLISHED_STATUS.map{|s| [s, s]}), prompt: 'Status', class: 'form-control'
+        =select_tag :published_status, options_for_select(Slide::PUBLISHED_STATUS.map{|s| [s, s]}, selected: params[:published_status]), prompt: 'Status', class: 'form-control'
       .form-group>
         =f.submit 'Filter', class: 'btn btn-primary'
 
@@ -43,7 +42,7 @@
         .modal-header
           h4.modal-title Add to selected signs
         .modal-body
-          - Sign.with_permissions_to(:index).order('signs.title').each do |sign|
+          - Sign.with_permissions_to(:edit_slots).order('signs.title').each do |sign|
             = label_tag do
               = check_box_tag 'sign_ids[]', sign.id
               '

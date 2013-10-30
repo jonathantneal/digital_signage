@@ -17,4 +17,4 @@
     -@departments.each do |department|
       tr
         td = link_to department.title, department
-        td = department.signs.join(', ')
+        td = department.signs.map{|s| link_to(s, s) }.join(', ').html_safe

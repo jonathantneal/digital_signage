@@ -37,7 +37,7 @@ if $('#slide-upload-dropzone').length > 0
   Dropzone.options.slideUploadDropzone = {
     clickable: false
     createImageThumbnails: false
-    dictDefaultMessage: "Drag and drop files to upload"
+    dictDefaultMessage: "<i class='fa fa-cloud-upload'></i> Drag and drop files to upload"
 
     addedfile: ->
       $('#page-spinner').show()

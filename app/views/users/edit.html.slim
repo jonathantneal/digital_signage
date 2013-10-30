@@ -5,9 +5,10 @@
   = form_for(@user) do |f|
 
     .departments
-      - Department.with_permissions_to(:show).each do |department|
+      - Department.order(:title).each do |department|
         .checkbox
           = label_tag do
+            = hidden_field_tag 'user[department_ids][]'
             = check_box_tag :department_ids, department.id, @user.departments.include?(department), name: 'user[department_ids][]'
             = department.title
 

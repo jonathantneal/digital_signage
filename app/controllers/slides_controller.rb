@@ -1,27 +1,33 @@
 class SlidesController < ApplicationController
-  filter_resource_access additional_collection: [:destroy_multiple, :edit_multiple, :update_multiple, :add_to_signs, :drop_create], additional_member: [:show_editable_content]
+  filter_resource_access additional_collection: [:destroy_multiple, :edit_multiple, :update_multiple, :add_to_signs, :drop_create], additional_member: [:show_editable_content, :fork]
   respond_to :html, except: [:destroy_multiple]
   respond_to :js, only: [:index, :destroy, :destroy_multiple]
 
   def index
-    if params[:q].blank?
-      # params[:search] = {published_status: :published}  # Default to only showing published slides
-    end
-
-    @q = Slide.search(params[:q])
-    @slides = @q.result(distinct: true).published_status(params[:published_status]).includes(:department).page(params[:page]).per(20)
-
-    # create new slide for dropdown form.
-    @slide = Slide.new
-
-    respond_with(@slides) do |format|
-      format.js do
-        render partial: 'slides' unless params["_"] # Otherwise if infinites scroll render index.js.erb
+    if current_user.departments.count > 0
+      if params[:q].blank?
+        # params[:search] = {published_status: :published}  # Default to only showing published slides
       end
+
+      @q = Slide.search(params[:q])
+      @slides = @q.result(distinct: true).published_status(params[:published_status]).includes(:department).page(params[:page]).per(20)
+
+      # create new slide for dropdown form.
+      @slide = Slide.new
+
+      respond_with(@slides) do |format|
+        format.js do
+          render partial: 'slides' unless params["_"] # Otherwise if infinites scroll render index.js.erb
+        end
+      end
+    else
+      flash[:danger] = 'You do not have access to that page'
+      redirect_to signs_path
     end
   end
 
   def show
+    render :edit if permitted_to?(:edit, @slide)
   end
 
   def show_editable_content
@@ -38,7 +44,8 @@ class SlidesController < ApplicationController
   end
 
   def edit
-    @slottable_signs = Sign.with_permissions_to(:update).order('signs.title')
+    redirect_to @slide
+    # @slottable_signs = Sign.with_permissions_to(:update).order('signs.title')
   end
 
   def create
@@ -60,6 +67,19 @@ class SlidesController < ApplicationController
       flash[:notice] = 'Slide created'
     end
     respond_with @slide
+  end
+
+  def fork
+    new_slide = @slide.dup
+    new_slide.content = @slide.content
+    new_slide.department = current_user.departments.first
+    if new_slide.save
+      flash[:info] = 'Slide was forked!'
+      redirect_to new_slide
+    else
+      flash[:error] = 'There was a problem forking this slide.'
+      redirect_to @slide
+    end
   end
 
   def update
