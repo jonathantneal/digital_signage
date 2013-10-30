@@ -123,6 +123,7 @@ GEM
     polyglot (0.3.3)
     port-a-query (0.1.1)
     posix-spawn (0.3.6)
+    pretender (0.0.3)
     pry (0.9.6)
       coderay (>= 0.9.8)
       method_source (>= 0.6.5)
@@ -247,6 +248,7 @@ DEPENDENCIES
   mysql2
   newrelic_rpm
   port-a-query
+  pretender
   pry
   rack-cas
   rails (= 4.0.0)

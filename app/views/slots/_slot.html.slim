@@ -1,5 +1,10 @@
 li.slot.slide id="slot_#{slot.id}"
-  = link_to 'X', sign_slot_url(@sign, slot), method: :delete, class: 'remove_slide_link', title: 'Remove this slide from sign', remote: true
 
-  = link_to slot.slide do
+  - if permitted_to? :edit_slots, @sign
+    = link_to 'X', sign_slot_url(@sign, slot), method: :delete, class: 'remove_slide_link', title: 'Remove this slide from sign', remote: true
+
+    = link_to slot.slide do
+      =render "shared/thumbnail", slide: slot.slide
+
+  - else
     =render "shared/thumbnail", slide: slot.slide

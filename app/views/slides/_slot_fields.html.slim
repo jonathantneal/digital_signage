@@ -1,6 +1,6 @@
--if permitted_to?(:edit, f.object.sign)
+-if permitted_to?(:edit_slots, f.object.sign) || !f.object.persisted?
   tr
-    td.slot = f.collection_select(:sign_id, @slottable_signs ||= Sign.with_permissions_to(:update), :id, :title)
+    td.slot = f.collection_select(:sign_id, @slottable_signs ||= Sign.with_permissions_to(:edit_slots), :id, :title)
     td.remove
       = f.label :_destroy, class: :delete do
         i.fa.fa-times
@@ -8,6 +8,6 @@
 
 -else
   tr
-    td.slot = f.object.sign.title
+    td.slot = f.object.sign.try(:title)
     = f.hidden_field :sign_id
     td Not Authorized

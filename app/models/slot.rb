@@ -2,6 +2,7 @@ class Slot < ActiveRecord::Base
 
   belongs_to :sign
   belongs_to :slide
+  has_one :department, through: :slide
 
   default_scope order('`order`')
   scope :published_status, ->(status) {

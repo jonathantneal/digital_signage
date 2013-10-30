@@ -24,7 +24,7 @@
         =f.collection_select :signs_id_eq, Sign.with_permissions_to(:index).order('signs.title'), :id, :title, {:include_blank=>'Sign'}, class: 'form-control'
       .form-group>
         =f.label :department_id_eq, 'Department', class: "sr-only"
-        =f.collection_select :department_id_eq, Department.with_permissions_to(:show).order('departments.title'), :id, :title, {:include_blank=>'Dept'}, class: 'form-control'
+        =f.collection_select :department_id_eq, Department.order('departments.title'), :id, :title, {:include_blank=>'Dept'}, class: 'form-control'
       .form-group>
         =f.label :published_status, 'Published', class: "sr-only"
         =select_tag :published_status, options_for_select(Slide::PUBLISHED_STATUS.map{|s| [s, s]}), prompt: 'Status', class: 'form-control'

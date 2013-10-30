@@ -5,6 +5,7 @@ table.table
     th Roles
     th Departments
     th Last login
+    th
 
   - @users.each do |user|
     tr
@@ -12,5 +13,8 @@ table.table
       td = user.roles.join(', ')
       td = user.departments.join(', ')
       td = time_ago_in_words(user.last_login_at) unless user.last_login_at.nil?
+      td
+        - if (permitted_to? :impersonate, user) && (current_user != user)
+          = link_to fa_icon('sign-in', text: 'Impersonate'), impersonate_user_path(user), class: 'text-warning impersonate secret'
 
 = paginate(@users)

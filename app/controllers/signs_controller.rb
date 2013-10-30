@@ -1,7 +1,7 @@
 class SignsController < ApplicationController
-  filter_resource_access additional_member: [:check_in, :display, :drop_on]
-  respond_to :html, except: :check_in
-  respond_to :json, only: [:show, :check_in]
+  filter_resource_access additional_member: [:check_in, :display, :drop_on, :sort]
+  respond_to :html, except: [:check_in, :sort]
+  respond_to :json, only: [:show, :check_in, :sort]
 
   def index
     @signs = Sign.with_permissions_to(:index).order('signs.title')
@@ -66,6 +66,7 @@ class SignsController < ApplicationController
     render :layout => false
   end
 
+  # for drag and drop upload
   def drop_on
     slide = Slide.from_drop params[:file], @sign.department
 
@@ -77,6 +78,13 @@ class SignsController < ApplicationController
       flash[:danger] = "There was a problem adding the slide"
       render :json => { result: 'error' }
     end
+  end
+
+  def sort
+    params[:slot].each_with_index do |id, index|
+      Slot.where(id: id, sign_id: @sign.id).update_all(order: index+1)
+    end
+    render :nothing => true
   end
 
   protected

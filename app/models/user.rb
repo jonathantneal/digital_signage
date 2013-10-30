@@ -2,9 +2,10 @@ class User < ActiveRecord::Base
   include Humanity::Base
 
   alias_attribute :netid, :username
-  validates :username, :presence => true, :uniqueness => true
+  validates :username, presence: true, uniqueness: true
   has_many :department_users
-  has_many :departments, :through => :department_users
+  has_many :departments, through: :department_users
+  has_many :signs, through: :departments
 
   scope :custom_search, -> query {
     where('username LIKE ? OR first_name LIKE ? OR last_name LIKE ?', *(["%#{query}%"]*3)) unless query.blank?

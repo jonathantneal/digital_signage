@@ -4,12 +4,17 @@ class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
   helper_method :current_user, :user_logged_in?
 
-  before_filter :set_current_user
+  before_filter :set_current_user, :find_user_signs
 
   protected
 
   def set_current_user
     Authorization.current_user = current_user
+  end
+
+  def find_user_signs
+    # Eventually I want to sort by most used
+    @current_user_signs = current_user.signs.limit(10)
   end
 
   def current_user
@@ -36,6 +41,7 @@ class ApplicationController < ActionController::Base
       end
     end
   end
+  impersonates :user  # must be defined after current_user
 
   def user_logged_in?
     current_user.present?

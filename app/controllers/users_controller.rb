@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  filter_resource_access
+  filter_resource_access additional_member: :impersonate, additional_collection: :stop_impersonating
   respond_to :html
   respond_to :js, :only=>:index
 
@@ -46,6 +46,21 @@ class UsersController < ApplicationController
       flash[:notice] = 'User deleted'
     end
     respond_with @user
+  end
+
+  def impersonate
+    if current_user.has_role? :developer
+      impersonate_user @user
+      redirect_to root_url
+    else
+      flash[:error] = "You don't have access to impersonate #{@user.first_name}"
+      redirect_to admin_users_path
+    end
+  end
+
+  def stop_impersonating
+    stop_impersonating_user
+    redirect_to admin_users_path
   end
 
   private

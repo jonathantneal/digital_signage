@@ -1,7 +1,10 @@
 SignManager::Application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
 
-  resources :users, except: [:new]
+  resources :users, except: [:new] do
+    get :impersonate, on: :member
+    get :stop_impersonating, on: :collection
+  end
   resources :slides do
     member do
       get :show_editable_content
@@ -20,6 +23,7 @@ SignManager::Application.routes.draw do
       get :check_in
       get :display
       post :drop_on
+      put :sort
     end
   end
   resources :slots, only: [:create, :update] do
