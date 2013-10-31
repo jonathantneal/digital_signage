@@ -4,7 +4,7 @@ class Slot < ActiveRecord::Base
   belongs_to :slide
   has_one :department, through: :slide
 
-  default_scope { order('slots.order') }
+  default_scope { order('`order`') }
   scope :published_status, ->(status) {
     # Slide status is defined in Slide::PUBLISHED_STATUS
     case status
