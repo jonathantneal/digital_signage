@@ -14,7 +14,9 @@ class ApplicationController < ActionController::Base
 
   def find_user_signs
     # Eventually I want to sort by most used
-    @current_user_signs = current_user.signs.limit(10)
+    if current_user
+      @current_user_signs = current_user.signs.limit(10)
+    end
   end
 
   def current_user
