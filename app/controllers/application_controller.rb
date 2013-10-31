@@ -4,9 +4,15 @@ class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
   helper_method :current_user, :user_logged_in?
 
-  before_filter :set_current_user, :find_user_signs
+  before_filter :set_current_user, :find_user_signs, :force_http
 
   protected
+
+  def force_http
+    if request.ssl? && (Rails.env.production? || Rails.env.staging?)
+      redirect_to params.merge(protocol: 'http://'), status: :moved_permanently
+    end
+  end
 
   def set_current_user
     Authorization.current_user = current_user
