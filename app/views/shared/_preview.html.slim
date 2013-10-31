@@ -7,7 +7,7 @@ div class="slide_preview #{slide_type(slide)}"
   #background_color_target.constraint style="background-color:#{slide.background_color};"
   .element
 
-    -if slide.content.present?
+    -if slide.has_content?
       =image_tag slide_file_url(slide), :alt=>"#{slide.title} thumbnail"
     -elsif slide.video?
       =image_tag "video_thumbnail.jpg", :alt=>"#{slide.title} video"

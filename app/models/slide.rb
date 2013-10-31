@@ -69,7 +69,7 @@ class Slide < ActiveRecord::Base
 
 
   def filename
-    content.file.original_filename if content.present?
+    content.file.original_filename if has_content?
   end
 
   def url(version=nil)
@@ -108,6 +108,10 @@ class Slide < ActiveRecord::Base
     Rails.application.routes.url_helpers.show_editable_content_slide_url(self, host: Settings.app.host) if self.is_editor
   end
 
+  def has_content?
+    # for some reason, content.blank? on staging returns false even when there is content available
+    !content.file.nil?
+  end
 
 
 
@@ -214,7 +218,7 @@ class Slide < ActiveRecord::Base
 
     def schedule_url_screengrab
       if html_url.present?
-        UrlImageWorker.perform_async(self.id) if content.blank?
+        UrlImageWorker.perform_async(self.id) unless self.has_content?
       end
     end
 
