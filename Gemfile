@@ -73,6 +73,7 @@ end
 
 group :staging, :production do
   gem 'mysql2'
+  gem 'rack-ssl'
 end
 
 group :production do
