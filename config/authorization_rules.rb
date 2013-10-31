@@ -54,8 +54,8 @@ authorization do
       if_attribute department: { users: contains {user} }
     end
 
-    has_permission_on :slides, to: [:create, :fork]
-    has_permission_on :slides, to: [:update, :destroy] do
+    has_permission_on :slides, to: [:create, :fork, :edit_multiple, :update_multiple, :destroy_multiple, :add_to_signs, :drop_create] # per slide permissions will have to happen in the controller
+    has_permission_on :slides, to: [:edit, :update, :destroy] do
       if_attribute department: { users: contains {user} }
     end
 
@@ -68,6 +68,7 @@ authorization do
   # The 'guest' role is applied to everyone, including anonymous users.
   role :guest do
     has_permission_on :signs, to: [:show, :check_in, :display]
+    has_permission_on :slides, to: [:show_editable_content]
   end
 end
 
