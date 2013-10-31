@@ -47,9 +47,28 @@ group :development do
 end
 
 group :development, :test do
-  gem 'sqlite3-ruby', :require => 'sqlite3'
+  gem 'sqlite3'
   gem 'pry'
+  gem 'rspec-rails'
   gem 'thin'
+end
+
+group :test do
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'factory_girl_rails'
+  gem 'faker'
+  gem 'guard', '>= 2.2.2'
+  gem 'guard-rspec'
+  # gem 'guard-spork'
+  gem 'launchy'
+  gem 'shoulda-matchers'
+  # gem 'spork-rails', '~> 4.0.0'
+
+  # For notifications
+  gem 'rb-inotify', :require => false
+  gem 'rb-fsevent', :require => false
+  gem 'terminal-notifier-guard', :require => false # sends guard notifications to the OS X Notification Center.
 end
 
 group :staging, :production do

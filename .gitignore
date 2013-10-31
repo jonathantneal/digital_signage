@@ -18,3 +18,4 @@ Vagrantfile
 .sass-cache
 *.output
 blazing.rb
+dump.rdb

@@ -1,9 +1,0 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-
-one:
-  department: one
-  user: manager_one
-  
-two:
-  department: two
-  user: manager_two

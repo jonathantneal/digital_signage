@@ -2,7 +2,9 @@
 
 app:
   name: &app_name Signage
-  host: localhost:3000
+  scheme: http
+  host: localhost
+  port: 3000
   relative_url_root: /signage # or blank if no relative root
 
 # Overwrite this in settings.local.yml  -> rake secret

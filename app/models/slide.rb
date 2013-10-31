@@ -17,7 +17,7 @@ class Slide < ActiveRecord::Base
 
   mount_uploader :content, ContentUploader
 
-  validates_presence_of :title, :interval, :color, :department_id
+  validates_presence_of :title, :interval, :department_id
   validates_integrity_of :content
   validates_each :unpublish_at, :allow_nil => true do |record, attr, value|
     if record.publish_at.to_i > value.to_i
