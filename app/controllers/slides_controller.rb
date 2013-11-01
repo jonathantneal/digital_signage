@@ -99,11 +99,11 @@ class SlidesController < ApplicationController
   end
 
   def edit_multiple
-    @slides = Slide.with_permissions_to(:edit).find(params[:s_ids])
+    @slides = current_user.slides.find(params[:s_ids])
     @slottable_signs = current_user.signs
   end
   def update_multiple
-    @slides = Slide.find(params[:slide_ids])
+    @slides = current_user.slides.find(params[:slide_ids])
     @slides.each do |slide|
       slide.update_attributes!(slide_params.reject {|k,v| v.blank? }) # only update values that aren't blank
     end
@@ -112,8 +112,8 @@ class SlidesController < ApplicationController
   end
 
   def add_to_signs
-    signs = Sign.with_permissions_to(:edit).find(params[:sign_ids])  # signs already come as an array
-    slides = Slide.with_permissions_to(:index).find(params[:slide_ids].split(','))  # slides come as a comma seperated string
+    signs = current_user.signs.find(params[:sign_ids])  # signs already come as an array
+    slides = Slide.find(params[:slide_ids].split(','))  # slides come as a comma seperated string
 
     # Add new slides to each selected sign
     signs.each do |sign|
