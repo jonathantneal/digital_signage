@@ -59,4 +59,7 @@
   - unless (url_for(:back).match(/slides\/\d/))  # I don't want to redirect to a slide show page, only the slide index page or a sign show page.
     = link_to 'Cancel', :back, class: 'btn'
   '
-  .pull-right= link_to fa_icon('trash-o', text: 'Delete Slide'), @slide, method: :delete, class: 'btn btn-danger', title: 'Delete this slide', data: { confirm: "Are you sure? This will remove the slide from all signs as well." }
+  .pull-right
+    = link_to fa_icon('code-fork', text: 'Fork It'), [:fork, @slide], class: 'btn bs-tooltip', title: 'Creates a new copy.'
+    '
+    = link_to fa_icon('trash-o', text: 'Delete Slide'), @slide, method: :delete, class: 'btn btn-danger', title: 'Delete this slide', data: { confirm: "Are you sure? This will remove the slide from all signs as well." }
