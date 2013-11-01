@@ -16,7 +16,7 @@
         =form.file_field :content
     .form-group
       = form.label :department_id, 'Department'
-      = form.collection_select :department_id, Department.with_permissions_to(:show), :id, :title, {}, class: 'date form-control'
+      = form.collection_select :department_id, current_user.departments, :id, :title, {}, class: 'date form-control'
     .form-group
       = form.label :interval
       = form.number_field :interval, class: 'form-control'

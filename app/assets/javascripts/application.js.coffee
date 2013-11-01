@@ -50,3 +50,8 @@ alertClass = (type) ->
     when 'notice' then 'info'
     when 'error' then 'danger'
     else type
+
+
+
+$('.bs-tooltip[title]').tooltip
+  container: 'body'

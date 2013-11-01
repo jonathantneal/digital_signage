@@ -19,16 +19,27 @@
         #thumb_size_slider
 
       .form-group>
-        =f.label :signs_id_eq, 'Sign', class: "sr-only"
-        =f.collection_select :signs_id_eq, Sign.with_permissions_to(:index).order('signs.title'), :id, :title, {:include_blank=>'All Signs'}, class: 'form-control'
+        =f.label :title_cont, 'Title', class: "sr-only"
+        =f.text_field :title_cont, class: 'form-control', placeholder: 'Search'
+      / .form-group>
+      /   =f.label :signs_id_eq, 'Sign', class: "sr-only"
+      /   =f.collection_select :signs_id_eq, Sign.with_permissions_to(:index).order('signs.title'), :id, :title, {:include_blank=>'All Signs'}, class: 'form-control'
+      / .form-group>
+      /   =f.label :department_id_eq, 'Department', class: "sr-only"
+      /   =f.collection_select :department_id_eq, Department.order('departments.title'), :id, :title, {:include_blank=>'All Depts'}, class: 'form-control'
       .form-group>
-        =f.label :department_id_eq, 'Department', class: "sr-only"
-        =f.collection_select :department_id_eq, Department.order('departments.title'), :id, :title, {:include_blank=>'All Depts'}, class: 'form-control'
+        = hidden_field_tag :all_signs, params[:all_signs]
+        .btn-group
+          = link_to 'My Signs', params.merge({all_signs: nil}), class: "btn btn-default #{'active' if params[:all_signs].blank?}"
+          = link_to 'All Signs', params.merge({all_signs: true}), class: "btn btn-default #{'active' if params[:all_signs].present?}"
+
       .form-group>
-        =f.label :published_status, 'Published', class: "sr-only"
-        =select_tag :published_status, options_for_select(Slide::PUBLISHED_STATUS.map{|s| [s, s]}, selected: params[:published_status]), prompt: 'Status', class: 'form-control'
-      .form-group>
-        =f.submit 'Filter', class: 'btn btn-primary'
+        = hidden_field_tag :published_status, params[:published_status]
+        .btn-group
+          == publish_status_filters
+
+      / .form-group>
+      /   =f.submit 'Filter', class: 'btn btn-primary'
 
 .search_results
   =render('slides')

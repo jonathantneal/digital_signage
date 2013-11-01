@@ -1,8 +1,9 @@
-li.slide id="slide_#{slide.id}" data-edit-url=slide_url(slide) data-slide-id=slide.id
+li.slide id="slide_#{slide.id}" data-edit-url=slide_url(slide) data-slide-id=slide.id class=('deletable' if permitted_to?(:destroy, slide))
   .links
     = link_to fa_icon('info-circle'), slide, class: 'link slide_info'
-    - if permitted_to? :destroy, slide
-      = link_to fa_icon('trash-o'), slide, method: :delete, class: 'link remove_slide', title: 'Delete this slide', data: { confirm: "Are you sure? This will remove the slide from all signs as well." }, remote: true
+
+    / Gets hidden by css. Unauthorized users can't delete even if they could see and click the link
+    = link_to fa_icon('trash-o'), slide, method: :delete, class: 'link remove_slide', title: 'Delete this slide', data: { confirm: "Are you sure? This will remove the slide from all signs as well." }, remote: true
   = render "shared/thumbnail", slide: slide
   p.title
     = slide.title.truncate(25)

@@ -5,3 +5,6 @@ li.slot.slide id="slot_#{slot.id}"
 
   = link_to slot.slide do
     =render "shared/thumbnail", slide: slot.slide
+  p.title
+    = slot.slide.title.truncate(25)
+    em.text-muted.pull-right = slot.slide.department

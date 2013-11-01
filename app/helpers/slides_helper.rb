@@ -30,4 +30,30 @@ module SlidesHelper
     url.to_s
   end
 
+  def publish_status_icon(status, is_active_status)
+    text = is_active_status ? status.titleize : nil
+    case status
+    when 'published'
+      fa_icon 'check-circle-o', text: text
+    when 'unpublished'
+      fa_icon 'circle-o', text: text
+    when 'expired'
+      fa_icon 'exclamation-circle', text: text
+    end
+  end
+
+  def publish_status_filters
+    Slide::PUBLISHED_STATUS.map do |status|
+      classes = ['btn', 'btn-default', 'bs-tooltip']
+      new_status = status
+
+      if is_active_status = (params[:published_status] == status)
+        classes.push('active')
+        new_status = nil
+      end
+
+      link_to publish_status_icon(status, is_active_status), params.merge({published_status: new_status}), class: classes.join(' '), title: status.titleize, 'data-placement'=>'bottom'
+    end.join(' ')
+  end
+
 end

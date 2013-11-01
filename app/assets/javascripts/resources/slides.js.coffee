@@ -12,11 +12,6 @@ $(document).ready ->
 
 
   if $('body.slides.index').exists()
-    # window.refresh_preview_size = ->
-    #   $("ul.slides li div.thumbnail").css "width", (localStorage.slidervalue or 336)
-    #   $("ul.slides li div.thumbnail").css "height", ($("ul.slides li div.thumbnail").width() * 113 / 200)
-    #   $("ul.slides li div.thumbnail").css "line-height", ($("ul.slides li div.thumbnail").width() * 113 / 200 - 3)+"px"
-
     refresh_endless_scroll = ->
       if $('.pagination').length
         $(window).scroll ->
@@ -33,20 +28,6 @@ $(document).ready ->
       refresh_endless_scroll()
 
 
-
-    # $("#thumb_size_slider").slider
-    #   value: (localStorage.slidervalue or 336)
-    #   min: 175
-    #   max: 336
-    #   step: 1
-    #   slide: (event, ui) ->
-    #     $("ul.slides li div.thumbnail").css "width", ui.value
-    #     $("ul.slides li div.thumbnail").css "height", (ui.value * 113 / 200.0)
-    #     $("ul.slides li div.thumbnail").css "line-height", (ui.value * 113 / 200.0 - 3)+"px"
-    #   change: (event, ui) ->
-    #     localStorage.slidervalue = ui.value
-    # # Initiate width when page loads
-    # refresh_preview_size()
 
     # ****  Enable Multi Select  ******    TODO, you may want to break this off into a jQuery plugin eventually
     $(document).on "click", "ul.slides li", (e) ->
@@ -99,24 +80,35 @@ $(document).ready ->
 
     # *****  Remove slides or multiple selected slides at the same time  ******
     removeSlides = (slides) ->
-      r = confirm("Are you sure you would like to delete these " + slides.length + " slides? This action is irreversible.")
-      return  unless r
+      safe_slides = slides.filter(':not(.deletable)')
+      deletable_slides = slides.filter('.deletable')
+      message = "Are you sure you would like to delete these #{slides.length} slides? This action is irreversible."
 
-      # Serialize slide id's
-      str = []
-      $(slides).each ->
-        if slide_id = $(this).data("slide-id")
-          str.push "slide[]="+slide_id
-      str = str.join("&")
+      if safe_slides.length > 0
+        message = "#{safe_slides.length} slides cannot be deleted by you.\n\nWould you like to delete the remaining #{deletable_slides.length} slides? This action is irreversible."
 
-      # Delete slides via AJAX and then remove them from the DOM on success
-      $.ajax
-        type: "POST"
-        url: ROOT_URL + "slides/destroy_multiple"
-        data: str
-        dataType: "script"
-        success: (data) ->
-          slides.remove()
+      if deletable_slides.length == 0
+        message = "None of the selected slides can be deleted by you."
+        alert message
+      else
+        r = confirm message
+        return  unless r
+
+        # Serialize slide id's
+        str = []
+        $(deletable_slides).each ->
+          if slide_id = $(this).data("slide-id")
+            str.push "slide[]="+slide_id
+        str = str.join("&")
+
+        # Delete slides via AJAX and then remove them from the DOM on success
+        $.ajax
+          type: "POST"
+          url: ROOT_URL + "slides/destroy_multiple"
+          data: str
+          dataType: "script"
+          success: (data) ->
+            deletable_slides.remove()
 
     # ****** Edit multiple slides  *****
     editSlides = (slides) ->

@@ -21,7 +21,7 @@
             = f.text_field :height, placeholder: 'height', class: "form-control"
       .form-group.col-md-6
         = f.label :department_id, 'Department'
-        = f.collection_select :department_id, Department.with_permissions_to(:show), :id, :title, {}, class: 'form-control'
+        = f.collection_select :department_id, current_user.departments, :id, :title, {}, class: 'form-control'
     hr
     .row
       .form-group.col-xs-6

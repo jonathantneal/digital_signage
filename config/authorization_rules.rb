@@ -47,7 +47,7 @@ authorization do
   # Permissions for users who are in a given department
   role :department_user do
     has_permission_on :slots, to: [:administrate, :sort] do
-      if_attribute department: { users: contains {user} }
+      if_attribute sign: { department: { users: contains {user} } }
     end
 
     has_permission_on :signs, to: [:edit_slots, :sort, :drop_on] do

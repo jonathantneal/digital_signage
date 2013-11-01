@@ -10,7 +10,13 @@ class SlidesController < ApplicationController
       end
 
       @q = Slide.search(params[:q])
-      @slides = @q.result(distinct: true).published_status(params[:published_status]).includes(:department).page(params[:page]).per(20)
+      @slides = @q.result(distinct: true).published_status(params[:published_status]).includes(:department)
+
+      if params[:all_signs].blank?
+        @slides = @slides.joins(department: :department_users).where('department_users.user_id = ?', current_user.id)
+      end
+
+      @slides = @slides.page(params[:page]).per(20)
 
       # create new slide for dropdown form.
       @slide = Slide.new
