@@ -43,17 +43,19 @@ module SlidesHelper
   end
 
   def publish_status_filters
-    Slide::PUBLISHED_STATUS.map do |status|
-      classes = ['btn', 'btn-default', 'bs-tooltip']
-      new_status = status
+    content_tag :div, class: 'btn-group' do
+      Slide::PUBLISHED_STATUS.map do |status|
+        classes = ['btn', 'btn-default', 'bs-tooltip']
+        new_status = status
 
-      if is_active_status = (params[:published_status] == status)
-        classes.push('active')
-        new_status = nil
-      end
+        if is_active_status = (params[:published_status] == status)
+          classes.push('active')
+          new_status = nil
+        end
 
-      link_to publish_status_icon(status, is_active_status), params.merge({published_status: new_status}), class: classes.join(' '), title: status.titleize, 'data-placement'=>'bottom'
-    end.join(' ')
+        link_to publish_status_icon(status, is_active_status), params.merge({published_status: new_status}), class: classes.join(' '), title: status.titleize, 'data-placement'=>'bottom'
+      end.join(' ').html_safe
+    end
   end
 
 end

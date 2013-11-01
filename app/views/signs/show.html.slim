@@ -5,10 +5,9 @@
         #slide_options
           #thumb_size_slider
 
-        .form-group>
-          =f.label :published_status, 'Published', class: 'sr-only'
-          =select_tag :published_status, options_for_select(Slide::PUBLISHED_STATUS.map{|s| [s, s]}), prompt: 'Status', class: 'form-control'
-        =f.submit 'Filter', class: 'btn btn-primary'
+        .form-group
+          == publish_status_filters
+        / =f.submit 'Filter', class: 'btn btn-primary'
 
 
   = content_for :extra_nav_links do

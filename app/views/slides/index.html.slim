@@ -35,8 +35,7 @@
 
       .form-group>
         = hidden_field_tag :published_status, params[:published_status]
-        .btn-group
-          == publish_status_filters
+        == publish_status_filters
 
       / .form-group>
       /   =f.submit 'Filter', class: 'btn btn-primary'

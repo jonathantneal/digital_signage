@@ -1,7 +1,7 @@
-li.slot.slide id="slot_#{slot.id}"
-  - if permitted_to? :edit_slots, @sign
-    .links
-      = link_to fa_icon('times'), sign_slot_url(@sign, slot), method: :delete, class: 'link remove_slide', title: 'Remove this slide from sign', remote: true
+li.slot.slide id="slot_#{slot.id}" class=('deletable' if permitted_to?(:edit_slots, @sign))
+  .links
+    / Gets hidden by css. Unauthorized users can't delete even if they could see and click the link
+    = link_to fa_icon('times'), sign_slot_url(@sign, slot), method: :delete, class: 'link remove_slide', title: 'Remove this slide from sign', remote: true
 
   = link_to slot.slide do
     =render "shared/thumbnail", slide: slot.slide
