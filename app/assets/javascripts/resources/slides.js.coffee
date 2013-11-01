@@ -44,11 +44,11 @@ $(document).ready ->
       $(this).addClass "last_selected"
 
       if $("ul.slides li.selected").length > 1
-        $(".single_slide_button").hide()
+        $("#slide_options").attr('slides_selected', 'multiple')
       else if $("ul.slides li.selected").length is 1
-        $("#slide_options .btn").show()
+        $("#slide_options").attr('slides_selected', 'one')
       else
-        $("#slide_options .btn").hide()
+        $("#slide_options").attr('slides_selected', 'none')
       e.stopPropagation()
 
 
@@ -56,26 +56,28 @@ $(document).ready ->
     $(document).on "click", "body", (e) ->
       unless $(this).hasClass('modal-open')
         $(".selected").removeClass "selected"
-        $("#slide_options .btn").hide()
+        $("#slide_options").attr('slides_selected', 'none')
 
     $("#add-to-sign-button").click (e) ->
       selected_slides = $("ul.slides li.selected")
       addSlidesToSign selected_slides
       e.stopPropagation()
 
-    $("#edit-slide-button").click (e) ->
+    $('#info-slide-button').click (e) ->
       selected_slides = $("ul.slides li.selected")
-      if selected_slides.length == 1
-        window.location = (selected_slides.first().data("edit-url"))
-      if selected_slides.length > 1
+      window.location = (selected_slides.first().data("edit-url"))
+
+    $("#edit-slide-button").click (e) ->
+      selected_slides = $("ul.slides li.selected.editable")
+      if selected_slides.length > 0
         editSlides selected_slides
+      else
+        alert 'You do not have permission to edit any of these slides'
       e.stopPropagation()
 
     $("#remove-slide-button").click (e) ->
       removeSlides $("ul.slides li.selected")
       e.stopPropagation()
-
-    $("#slide_options .btn").hide()  # hide all the option buttons on page load
 
 
     # *****  Remove slides or multiple selected slides at the same time  ******
@@ -88,7 +90,7 @@ $(document).ready ->
         message = "#{safe_slides.length} slides cannot be deleted by you.\n\nWould you like to delete the remaining #{deletable_slides.length} slides? This action is irreversible."
 
       if deletable_slides.length == 0
-        message = "None of the selected slides can be deleted by you."
+        message = "You do not have permission to delete any of these slides."
         alert message
       else
         r = confirm message

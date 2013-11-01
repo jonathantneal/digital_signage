@@ -37,21 +37,12 @@ class SlidesController < ApplicationController
   end
 
   def show_editable_content
+    # This is the page where editable content is dislayed to the signage client
     render :layout => false
-  end
-
-  def new
-    @slottable_signs = Sign.with_permissions_to(:update).order('signs.title')
-
-    # Add all available slots
-    @slottable_signs.each do |sign|
-      @slide.slots << Slot.new({:sign=>sign})
-    end
   end
 
   def edit
     redirect_to @slide
-    # @slottable_signs = Sign.with_permissions_to(:update).order('signs.title')
   end
 
   def create
@@ -108,12 +99,13 @@ class SlidesController < ApplicationController
   end
 
   def edit_multiple
-    @slides = Slide.find(params[:s_ids])
+    @slides = Slide.with_permissions_to(:edit).find(params[:s_ids])
+    @slottable_signs = current_user.signs
   end
   def update_multiple
     @slides = Slide.find(params[:slide_ids])
     @slides.each do |slide|
-      slide.update_attributes!(params[:slide].reject {|k,v| v.blank? }) # only update values that aren't blank
+      slide.update_attributes!(slide_params.reject {|k,v| v.blank? }) # only update values that aren't blank
     end
     flash[:notice] = "Updated slides!"
     redirect_to slides_path

@@ -1,4 +1,5 @@
-li.slide id="slide_#{slide.id}" data-edit-url=slide_url(slide) data-slide-id=slide.id class=('deletable' if permitted_to?(:destroy, slide))
+li.slide id="slide_#{slide.id}" data-edit-url=slide_url(slide) data-slide-id=slide.id class=('editable deletable' if permitted_to?(:destroy, slide))
+  .permission_warning You don't have permission to edit this. You may add it to your signs however.
   .links
     = link_to fa_icon('info-circle'), slide, class: 'link slide_info'
 

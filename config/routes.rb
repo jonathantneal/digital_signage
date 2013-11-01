@@ -5,7 +5,7 @@ SignManager::Application.routes.draw do
     get :impersonate, on: :member
     get :stop_impersonating, on: :collection
   end
-  resources :slides do
+  resources :slides, except: [:new] do
     member do
       get :show_editable_content
       get :fork

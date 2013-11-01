@@ -6,17 +6,18 @@
       li
         =hidden_field_tag "slide_ids[]", slide.id
         =slide.title
+        em.text-muted< = "(#{slide.department})"
 
   hr
 
   .row
     .form-group.col-lg-4
+      =f.label(:department_id, 'Department')
+      =f.collection_select :department_id, current_user.departments, :id, :title, {include_blank: true}, { class: 'form-control' }
+    .form-group.col-lg-4
       =f.label(:interval)
       small<> in seconds
       =f.text_field :interval, value: nil, class: 'form-control'
-    .form-group.col-lg-4
-      =f.label(:color)
-      =f.text_field :color, value: nil, class: 'form-control'
   .row
     .form-group.col-lg-4
       =f.label(:publish_at)
@@ -25,14 +26,11 @@
       =f.label(:unpublish_at)
       =f.text_field :unpublish_at, class: 'date form-control', value: nil
   .row
-    .form-group.col-lg-4
-      =f.label(:department_id, 'Department')
-      =f.collection_select :department_id, current_user.departments, :id, :title, {include_blank: true}, { class: 'form-control' }
 
   hr
   .slots
     h3 Add Slots
-    em Existing slots will not be removed
+    em.text-muted Existing slots will not be removed
     table.table#slots.slots
       tr
         th.name Name
@@ -43,7 +41,7 @@
 
   .schedule
     h3 Schedule
-    em Existing schedules will not be removed
+    em.text-muted Existing schedules will not be removed
     table.table#schedules.schedules
       tr
         th.time Time

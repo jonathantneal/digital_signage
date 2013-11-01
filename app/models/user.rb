@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   has_many :department_users
   has_many :departments, through: :department_users
   has_many :signs, through: :departments
+  has_many :slides, through: :departments
 
   scope :custom_search, -> query {
     where('username LIKE ? OR first_name LIKE ? OR last_name LIKE ?', *(["%#{query}%"]*3)) unless query.blank?

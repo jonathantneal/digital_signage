@@ -9,13 +9,15 @@
 #filter_wrapper
   =search_form_for @q, html: { class: 'filter form-inline'} do |f|
     fieldset
-      #slide_options.form-group.pull-right>
+      #slide_options.form-group.pull-right> slides_selected='none' editable_slides_selected='none'
         '
-        =link_to fa_icon('th-large', text: 'Add To Sign'), "#", id: "add-to-sign-button", class: "btn btn-primary multi_slide_button"
+        =link_to fa_icon('th-large', text: 'Add To Sign'), "#", id: "add-to-sign-button", class: "btn btn-primary single_slide_btn multi_slide_btn"
         '
-        =link_to fa_icon('info-circle', text: 'Info'), "#", id: "edit-slide-button", class: "btn btn-default multi_slide_button"
+        =link_to fa_icon('edit', text: 'Bulk Edit'), "#", id: "edit-slide-button", class: "btn btn-default multi_slide_btn"
         '
-        =link_to fa_icon('trash-o', text: 'Delete'), "#", id: "remove-slide-button", class: "btn btn-default multi_slide_button"
+        =link_to fa_icon('info-circle', text: 'Info'), "#", id: "info-slide-button", class: "btn btn-default single_slide_btn"
+        '
+        =link_to fa_icon('trash-o', text: 'Delete'), "#", id: "remove-slide-button", class: "btn btn-default single_slide_btn multi_slide_btn"
         #thumb_size_slider
 
       .form-group>
@@ -30,8 +32,8 @@
       .form-group>
         = hidden_field_tag :all_signs, params[:all_signs]
         .btn-group
-          = link_to 'My Signs', params.merge({all_signs: nil}), class: "btn btn-default #{'active' if params[:all_signs].blank?}"
-          = link_to 'All Signs', params.merge({all_signs: true}), class: "btn btn-default #{'active' if params[:all_signs].present?}"
+          = link_to 'My Slides', params.merge({all_signs: nil}), class: "btn btn-default #{'active' if params[:all_signs].blank?}"
+          = link_to 'All Slides', params.merge({all_signs: true}), class: "btn btn-default #{'active' if params[:all_signs].present?}"
 
       .form-group>
         = hidden_field_tag :published_status, params[:published_status]
