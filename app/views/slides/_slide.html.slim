@@ -1,11 +1,12 @@
 li.slide id="slide_#{slide.id}" data-edit-url=slide_url(slide) data-slide-id=slide.id class=('editable deletable' if permitted_to?(:destroy, slide))
-  .permission_warning You don't have permission to edit this. You may add it to your signs however.
-  .links
-    = link_to fa_icon('info-circle'), slide, class: 'link slide_info'
+  .slide_wrapper
+    .permission_warning You don't have permission to edit this. You may add it to your signs however.
+    .links
+      = link_to fa_icon('info-circle'), slide, class: 'link slide_info'
 
-    / Gets hidden by css. Unauthorized users can't delete even if they could see and click the link
-    = link_to fa_icon('trash-o'), slide, method: :delete, class: 'link remove_slide', title: 'Delete this slide', data: { confirm: "Are you sure? This will remove the slide from all signs as well." }, remote: true
-  = render "shared/thumbnail", slide: slide
-  p.title
-    = slide.title.truncate(25)
-    em.text-muted.pull-right = slide.department
+      / Gets hidden by css. Unauthorized users can't delete even if they could see and click the link
+      = link_to fa_icon('trash-o'), slide, method: :delete, class: 'link remove_slide', title: 'Delete this slide', data: { confirm: "Are you sure? This will remove the slide from all signs as well." }, remote: true
+    = render "shared/thumbnail", slide: slide
+    p.title
+      = slide.title.truncate(25)
+      em.text-muted.pull-right = slide.department
