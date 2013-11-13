@@ -18,6 +18,8 @@ class SlidesController < ApplicationController
 
       @slides = @slides.page(params[:page]).per(20)
 
+      @signs = Sign.with_permissions_to(:edit_slots).order('signs.title')
+
       # create new slide for dropdown form.
       @slide = Slide.new
 

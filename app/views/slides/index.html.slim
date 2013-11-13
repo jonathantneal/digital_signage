@@ -18,17 +18,10 @@
         =link_to fa_icon('info-circle', text: 'Info'), "#", id: "info-slide-button", class: "btn btn-default single_slide_btn"
         '
         =link_to fa_icon('trash-o', text: 'Delete'), "#", id: "remove-slide-button", class: "btn btn-default single_slide_btn multi_slide_btn"
-        #thumb_size_slider
 
       .form-group>
         =f.label :title_cont, 'Title', class: "sr-only"
         =f.text_field :title_cont, class: 'form-control', placeholder: 'Search'
-      / .form-group>
-      /   =f.label :signs_id_eq, 'Sign', class: "sr-only"
-      /   =f.collection_select :signs_id_eq, Sign.with_permissions_to(:index).order('signs.title'), :id, :title, {:include_blank=>'All Signs'}, class: 'form-control'
-      / .form-group>
-      /   =f.label :department_id_eq, 'Department', class: "sr-only"
-      /   =f.collection_select :department_id_eq, Department.order('departments.title'), :id, :title, {:include_blank=>'All Depts'}, class: 'form-control'
       .form-group>
         = hidden_field_tag :all_signs, params[:all_signs]
         .btn-group
@@ -54,12 +47,20 @@
         .modal-header
           h4.modal-title Add to selected signs
         .modal-body
-          - Sign.with_permissions_to(:edit_slots).order('signs.title').each do |sign|
+          - if @signs.length > 1
+            div
+              ' Select:
+              a#select_all_signs_link href="#" All
+              = ' | '
+              a#select_no_signs_link href="#" None
+          br
+          - @signs.each do |sign|
             = label_tag do
-              = check_box_tag 'sign_ids[]', sign.id
+              = check_box_tag 'sign_ids[]', sign.id, false, class: "add_to_sign_checkbox"
               '
               = sign.title
             br
+
         .modal-footer
           button.btn.btn-default data-dismiss="modal" type="button" Cancel
           = submit_tag 'Add to signs', class: 'button btn btn-primary'

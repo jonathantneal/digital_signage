@@ -131,9 +131,8 @@ $(document).ready ->
       $('#signSelectModal').modal('show')
 
 
-
-
-
+    $('#select_all_signs_link').on 'click', -> $('input.add_to_sign_checkbox').prop('checked', true)
+    $('#select_no_signs_link').on 'click',  -> $('input.add_to_sign_checkbox').prop('checked', false)
 
 
   #########  Shared Javascript

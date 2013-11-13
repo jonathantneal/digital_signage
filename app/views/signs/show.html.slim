@@ -2,9 +2,6 @@
   #filter_wrapper
     = search_form_for @q, url: url_for(@sign), html: { class: 'filter form-inline'} do |f|
       fieldset
-        #slide_options
-          #thumb_size_slider
-
         .form-group
           == publish_status_filters
         / =f.submit 'Filter', class: 'btn btn-primary'
