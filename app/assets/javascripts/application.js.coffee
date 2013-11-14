@@ -3,6 +3,9 @@
 #= require jquery_extensions
 #= require jquery.ui.sortable
 #
+# Gem Dependencies
+#= require chronic_ping
+#
 # Vendor Assets
 #= require bootstrap
 #= require bootstrap-colorpicker

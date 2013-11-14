@@ -30,10 +30,10 @@
         = form.text_field :overlay_color, class: 'form-control', 'data-color'=>@slide.overlay_color
     .form-group
       = form.label :publish_at
-      = form.text_field :publish_at, :value => @slide.publish_at.try(:to_formatted_s, :long), class: 'date form-control'
+      = form.text_field :chronic_publish_at, :value => @slide.publish_at.try(:to_formatted_s, :long), class: 'date form-control chronic_ping'
     .form-group
       = form.label :unpublish_at
-      = form.text_field :unpublish_at, :value => @slide.unpublish_at.try(:to_formatted_s, :long), class: 'date form-control'
+      = form.text_field :chronic_unpublish_at, :value => @slide.unpublish_at.try(:to_formatted_s, :long), class: 'date form-control chronic_ping'
 
 
     hr

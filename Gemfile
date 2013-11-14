@@ -9,6 +9,7 @@ gem 'blazing'
 gem 'biola_deploy'
 gem 'carrierwave', '~> 0.7.1' # Test actual display page (on site with relative_url_root) before updating that the image links aren't broken
 gem 'chronic'
+gem 'chronic_ping', '>= 0.3.1'
 gem 'daemons', '~> 1.1.9'
 gem 'declarative_authorization'
 gem 'font-awesome-rails'
