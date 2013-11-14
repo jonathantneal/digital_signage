@@ -52,20 +52,24 @@ class SlidesController < ApplicationController
 
     case params[:options]
     when 'upload'
+      @slide.slide_type = Slide::UPLOAD
       @slide.html_url = ''
     when 'link'
+      @slide.slide_type = Slide::LINK
       @slide.content = nil
     when 'editor'
-      @slide.is_editor = true
+      @slide.slide_type = Slide::EDITOR
       @slide.html_url = ''
       @slide.content = nil
-      @slide.background_color = 'rgba(255,255,255,1)'
     end
 
     if @slide.save
       flash[:notice] = 'Slide created'
+      respond_with @slide
+    else
+      flash[:error] = @slide.errors.messages[:content].first
+      redirect_to :back
     end
-    respond_with @slide
   end
 
   def fork
@@ -129,8 +133,7 @@ class SlidesController < ApplicationController
 
   def drop_create
     slide = Slide.from_drop params[:file], current_user.departments.first
-
-    message = "Slide with title already exists" if slide.persisted?
+    slide.slide_type = Slide::UPLOAD
 
     if slide.save
       flash[:notice] = message || "Slide has been created"

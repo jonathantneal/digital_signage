@@ -30,14 +30,14 @@ class ContentUploader < CarrierWave::Uploader::Base
   # end
 
   # Create different versions of your uploaded files:
-  version :preview, :unless => :video? do
+  version :preview, :if => :image? do
     process :resize_to_limit => [336, 189]
   end
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   def extension_white_list
-    %w(jpg jpeg gif png mp4 m4v html)
+    %w(jpg jpeg gif png mp4 m4v html ogv)
   end
 
   # Override the filename of the uploaded files:

@@ -3,7 +3,13 @@ class Slide < ActiveRecord::Base
   extend Memoist
   PUBLISHED_STATUS = ['published', 'unpublished', 'expired']
 
-  store :settings, accessors: [:is_editor, :background_color, :overlay_color]
+  # Slide Types
+  UPLOAD = 'upload'
+  LINK = 'link'
+  EDITOR = 'editor'
+  SLIDE_TYPES = [UPLOAD, LINK, EDITOR]
+
+  store :settings, accessors: [:slide_type, :background_color, :overlay_color]
 
   belongs_to :department
   has_many :schedules, :dependent => :destroy
@@ -19,6 +25,7 @@ class Slide < ActiveRecord::Base
 
   validates_presence_of :title, :interval, :department_id
   validates_integrity_of :content
+  validates :slide_type, inclusion: { in: SLIDE_TYPES }
   validates_each :unpublish_at, :allow_nil => true do |record, attr, value|
     if record.publish_at.to_i > value.to_i
       record.errors.add :publish_at, "can't be after the unpublish date"
@@ -77,7 +84,7 @@ class Slide < ActiveRecord::Base
   end
 
   def type
-    if editor?
+    if editor? || link?
       "text/html"
     else
       content_type || "text/html"
@@ -93,19 +100,19 @@ class Slide < ActiveRecord::Base
   end
 
   def upload?
-    image? || video?
+    (slide_type == UPLOAD) || (!link? & !editor?)
   end
 
   def link?
-    html_url.present? && !upload?
+    slide_type == LINK
   end
 
   def editor?
-    is_editor
+    slide_type == EDITOR
   end
 
   def editable_content_url
-    Rails.application.routes.url_helpers.show_editable_content_slide_url(self, host: Settings.app.host, port: Settings.app.port, script_name: Settings.app.relative_url_root) if self.is_editor
+    Rails.application.routes.url_helpers.show_editable_content_slide_url(self, host: Settings.app.host, port: Settings.app.port, script_name: Settings.app.relative_url_root) if self.editor?
   end
 
   def has_content?
@@ -212,13 +219,20 @@ class Slide < ActiveRecord::Base
     def defaults
       if new_record?
         self.interval ||= Settings.defaults.slide.interval
+        self.background_color ||= 'rgba(255,255,255,1)' if self.editor?   # default editor background to white
         self.background_color ||= Settings.defaults.slide.background_color
+        self.slide_type ||= UPLOAD if self.has_content?
+        self.slide_type ||= EDITOR
       end
     end
 
     def schedule_url_screengrab
       if html_url.present?
-        UrlImageWorker.perform_async(self.id) unless self.has_content?
+        begin
+          UrlImageWorker.perform_async(self.id) unless self.has_content?
+        rescue Exception=>e
+          # Redis may not be on. So just skip this for now.
+        end
       end
     end
 

@@ -10,9 +10,16 @@
       .form-group
         = form.label :html_url, 'URL'
         = form.text_field :html_url, class: 'form-control'
-    - if @slide.editor?
+      .form-group
+        =form.label :content, 'Preview Image'
+        =form.file_field :content
+    - elsif @slide.editor?
       .form-group
         =form.label :content, 'Background Image'
+        =form.file_field :content
+    - elsif @slide.upload?
+      .form-group
+        =form.label :content, 'Image or Video'
         =form.file_field :content
     .form-group
       = form.label :department_id, 'Department'
