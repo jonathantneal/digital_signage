@@ -105,7 +105,7 @@ class Slide < ActiveRecord::Base
   end
 
   def editable_content_url
-    Rails.application.routes.url_helpers.show_editable_content_slide_url(self, host: Settings.app.host, script_name: Settings.app.relative_url_root) if self.is_editor
+    Rails.application.routes.url_helpers.show_editable_content_slide_url(self, host: Settings.app.host, port: Settings.app.port, script_name: Settings.app.relative_url_root) if self.is_editor
   end
 
   def has_content?
