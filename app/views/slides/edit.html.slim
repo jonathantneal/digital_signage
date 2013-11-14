@@ -30,10 +30,10 @@
         = form.text_field :overlay_color, class: 'form-control', 'data-color'=>@slide.overlay_color
     .form-group
       = form.label :publish_at
-      = form.text_field :chronic_publish_at, :value => @slide.publish_at.try(:to_formatted_s, :long), class: 'date form-control chronic_ping'
+      = form.text_field :publish_at, :value => @slide.publish_at.try(:to_formatted_s, :long), class: 'date form-control chronic_ping'
     .form-group
       = form.label :unpublish_at
-      = form.text_field :chronic_unpublish_at, :value => @slide.unpublish_at.try(:to_formatted_s, :long), class: 'date form-control chronic_ping'
+      = form.text_field :unpublish_at, :value => @slide.unpublish_at.try(:to_formatted_s, :long), class: 'date form-control chronic_ping'
 
 
     hr
@@ -54,7 +54,7 @@
 
   hr
 
-  = form.submit 'Save', class: 'btn btn-primary'
+  = link_to fa_icon('trash-o', text: 'Delete Slide'), @slide, method: :delete, class: 'btn btn-danger', title: 'Delete this slide', data: { confirm: "Are you sure? This will remove the slide from all signs as well." }
   '
   - unless (url_for(:back).match(/slides\/\d/))  # I don't want to redirect to a slide show page, only the slide index page or a sign show page.
     = link_to 'Cancel', :back, class: 'btn'
@@ -62,4 +62,4 @@
   .pull-right
     = link_to fa_icon('code-fork', text: 'Fork It'), [:fork, @slide], class: 'btn bs-tooltip', title: 'Creates a new copy.'
     '
-    = link_to fa_icon('trash-o', text: 'Delete Slide'), @slide, method: :delete, class: 'btn btn-danger', title: 'Delete this slide', data: { confirm: "Are you sure? This will remove the slide from all signs as well." }
+    = form.submit 'Save', class: 'btn btn-primary'
