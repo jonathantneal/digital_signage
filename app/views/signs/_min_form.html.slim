@@ -14,7 +14,7 @@
       | 1920 x 1080
     .form-group
       = f.label :department_id, 'Department'
-      = f.collection_select :department_id, current_user.departments, :id, :title, {}, class: "form-control"
+      = f.collection_select :department_id, current_user.all_departments, :id, :title, {}, class: "form-control"
     .form-group
       = f.label :email, "Email when sign is down"
       = f.text_field :email, class: "form-control"

@@ -12,6 +12,15 @@ class User < ActiveRecord::Base
     where('username LIKE ? OR first_name LIKE ? OR last_name LIKE ?', *(["%#{query}%"]*3)) unless query.blank?
   }
 
+  # Sometimes admins and developers still need access to all departments
+  def all_departments
+    if admin? || developer?
+      Department.all
+    else
+      self.departments
+    end
+  end
+
   def affiliations
     @affiliations ||= roles.where(Humanity::Assignment.by_source(:affilation))
   end
