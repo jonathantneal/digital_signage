@@ -23,4 +23,17 @@
         td
           =time_ago_in_words(sign.last_check_in)+" ago" if sign.checked_in?
 
+  hr
 
+  h3 Users
+  table.table
+    tr
+      th Name
+      th Roles
+      th Last login
+
+    - @users.each do |user|
+      tr
+        td = user.name.presence || user.username
+        td = user.roles.join(', ')
+        td = time_ago_in_words(user.last_login_at) unless user.last_login_at.nil?

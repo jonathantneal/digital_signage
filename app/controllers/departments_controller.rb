@@ -11,6 +11,7 @@ class DepartmentsController < ApplicationController
 
   def show
     @signs = @department.signs.order('signs.title')
+    @users = @department.users.order('username')
   end
 
   def new
