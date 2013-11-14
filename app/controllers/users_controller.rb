@@ -54,13 +54,13 @@ class UsersController < ApplicationController
       redirect_to root_url
     else
       flash[:error] = "You don't have access to impersonate #{@user.first_name}"
-      redirect_to admin_users_path
+      redirect_to users_path
     end
   end
 
   def stop_impersonating
     stop_impersonating_user
-    redirect_to admin_users_path
+    redirect_to users_path
   end
 
   private

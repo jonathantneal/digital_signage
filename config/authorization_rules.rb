@@ -41,6 +41,7 @@ authorization do
     has_permission_on :users, to: :show do
       if_attribute id: is {user.id}
     end
+    has_permission_on :users, to: :stop_impersonating
     has_permission_on [:signs, :slides], to: [:read]
   end
 
