@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="../shared_assets/fontawesome/css/font-awesome.min.css">
     <style>
       body {
-        margin: 0 20px; 
+        margin: 0 20px;
         font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
         font-size: 1.5em;
         text-align: center;
@@ -35,7 +35,7 @@
 
       div.tweet div.message_wrap { position: relative; margin-left: 90px; }
 
-      div.tweet div.message_wrap div.time_ago { float: right; color: #999; }      
+      div.tweet div.message_wrap div.time_ago { float: right; color: #999; }
 
       div.tweet div.message_wrap div.profile_name { font-weight: bold; color: #333; font-size: 1.2em; }
       div.tweet div.message_wrap div.profile_name span.handle { font-size: 0.9em; color: #999; font-weight: normal; padding-left: 8px; }
@@ -69,7 +69,7 @@
         // Get api url
         var api_screen_name = url_query('screen_name') || "biolau";
         var api_count = url_query('count') || "5";
-        var api_url = (url_query('custom_url') || "http://api.twitter.com/1/statuses/user_timeline.json") + "?include_rts=1&";
+        var api_url = (url_query('custom_url') || "http://api.biola.edu/twitter/user_timeline") + "?include_rts=1&";
         if (api_screen_name) api_url += "screen_name="+api_screen_name+"&";
         if (api_count) api_url += "count="+api_count+"&";
 
@@ -117,7 +117,7 @@
             retweet = tweet.retweeted_status;
           }
           var user = (retweet || tweet).user
-          
+
           // Initialize new tweet tag
           var new_tweet = $("<div class='tweet'></div>");
           new_tweet.append(
