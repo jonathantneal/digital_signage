@@ -49,7 +49,7 @@ class ContentUploader < CarrierWave::Uploader::Base
   protected
 
   def image?(new_file)
-    @is_image ||= new_file.content_type =~ /^image\//
+    @is_image ||= new_file.content_type.try(:match, /^image\//) || new_file.file.try(:match, /jpe?g|gif|png/)
   end
 
   def set_content_type

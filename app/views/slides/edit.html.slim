@@ -9,6 +9,8 @@
     - if @slide.link?
       .form-group
         = form.label :html_url, 'URL'
+        .pull-right
+          = link_to 'Preview', @slide.html_url, target: '_blank'
         = form.text_field :html_url, class: 'form-control'
       .form-group
         =form.label :content, 'Preview Image'
