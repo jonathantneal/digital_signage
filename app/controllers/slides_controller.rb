@@ -67,7 +67,7 @@ class SlidesController < ApplicationController
       flash[:notice] = 'Slide created'
       respond_with @slide
     else
-      flash[:error] = @slide.errors.messages[:content].first
+      flash[:error] = @slide.errors.full_messages.first
       redirect_to :back
     end
   end

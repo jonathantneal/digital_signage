@@ -69,6 +69,7 @@ class SignsController < ApplicationController
   # for drag and drop upload
   def drop_on
     slide = Slide.from_drop params[:file], @sign.department
+    slide.slide_type = Slide::UPLOAD
 
     if slide.save
       @sign.slides << slide
