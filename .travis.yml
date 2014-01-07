@@ -4,5 +4,5 @@ rvm:
   - 2.0.0
 before_script:
   - cp config/database.yml.example config/database.yml
-  - rake db:migrate db:test:prepare
+  - bundle exec rake db:migrate db:test:prepare
 script: bundle exec rspec spec
