@@ -136,7 +136,7 @@ class SlidesController < ApplicationController
     slide.slide_type = Slide::UPLOAD
 
     if slide.save
-      flash[:notice] = message || "Slide has been created"
+      flash[:notice] = "Slide has been created"
       render :json => { result: 'success' }
     else
       flash[:danger] = "There was a problem creating the slide"
