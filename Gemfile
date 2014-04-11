@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '4.0.0'
+gem 'rails', '4.0.4'
 
 gem 'action_links'
 gem 'active_model_serializers'
@@ -25,6 +25,7 @@ gem 'memoist'
 gem 'mini_magick'
 gem 'newrelic_rpm'
 gem 'port-a-query'
+gem 'pinglish'
 gem 'pretender'
 gem 'rails_config'
 gem 'rack-cas'
